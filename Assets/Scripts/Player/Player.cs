@@ -18,7 +18,7 @@ class Player : MonoBehaviour
     Vector2 MoveTowards(Vector2 curr, Vector2 target, float amount)
     {
         Vector2 diff = target - curr;
-        Vector2 change = diff.normalized * force;
+        Vector2 change = diff.normalized * amount;
         // clamp value based to the difference
         change = (diff.sqrMagnitude < change.sqrMagnitude ? diff : change);
         return curr + change;
