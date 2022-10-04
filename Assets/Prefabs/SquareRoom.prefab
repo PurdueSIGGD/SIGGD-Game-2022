@@ -403,7 +403,7 @@ GameObject:
   - component: {fileID: 4792265337791135148}
   - component: {fileID: 5198038995622769491}
   m_Layer: 0
-  m_Name: Square Room
+  m_Name: SquareRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
