@@ -5,12 +5,14 @@ using UnityEngine.InputSystem;
 
 class Player : MonoBehaviour
 {
-    private const float MAX_SPEED = 10;
-    private const float FRICTION = 100;
-    private const float ACCELERATION = 100;
+    [SerializeField] private float MaxSpeed = 10;
+    [SerializeField] private float Friction = 100;
+    [SerializeField] private float Acceleration = 100;
 
-    private Vector2 Input;
-    private Vector2 Velocity;
+    private Vector2 input;
+    private Vector2 velocity;
+
+    private new Rigidbody rigidbody;
 
     /// <summary>
     /// Moves a vector2 towards a target vector2 by a given amount
@@ -26,27 +28,29 @@ class Player : MonoBehaviour
 
     void Start()
     {
-        
+        rigidbody = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (Input.Equals(Vector2.zero))
+        if (input.Equals(Vector2.zero))
         {
-            Velocity = MoveTowards(Velocity, Vector2.zero, FRICTION * Time.deltaTime);
+            // if no input, slow down
+            velocity = MoveTowards(velocity, Vector2.zero, Friction * Time.deltaTime);
         }
         else
         {
-            Velocity = MoveTowards(Velocity, Input * MAX_SPEED, ACCELERATION * Time.deltaTime);
+            // if input, accelerate
+            velocity = MoveTowards(velocity, input * MaxSpeed, Acceleration * Time.deltaTime);
         }
         
-        Vector3 movement = new Vector3(Velocity.x, 0, Velocity.y) * Time.deltaTime;
-        this.transform.Translate(movement);
+        Vector3 movement = new Vector3(velocity.x, 0, velocity.y) * Time.deltaTime;
+        rigidbody.MovePosition(rigidbody.position + movement);
     }
 
     void OnMove(InputValue movementValue)
     {
-        Input = movementValue.Get<Vector2>();
+        input = movementValue.Get<Vector2>();
         // Debug.Log(Input);
     }
 
