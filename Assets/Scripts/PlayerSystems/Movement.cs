@@ -8,7 +8,19 @@ public class Movement : MonoBehaviour
     [SerializeField] private float Friction = 100;
     [SerializeField] private float Acceleration = 100;
 
+    private new Rigidbody rigidbody;
+    private Vector2 input;
     private Vector2 velocity;
+
+    void OnStart()
+    {
+        rigidbody = GetComponent<Rigidbody>();
+    }
+
+    public void SetInput(Vector2 input)
+    {
+        this.input = input;
+    }
 
     /// <summary>
     /// Moves a vector2 towards a target vector2 by a given amount
@@ -22,21 +34,21 @@ public class Movement : MonoBehaviour
         return curr + change;
     }
 
-    public Vector3 GetMovement(Vector2 input, float deltaTime)
+    public void MovePlayer()
     {
         if (input.Equals(Vector2.zero))
         {
             // if no input, slow down
-            velocity = MoveTowards(velocity, Vector2.zero, Friction * deltaTime);
+            velocity = MoveTowards(velocity, Vector2.zero, Friction * Time.fixedDeltaTime);
         }
         else
         {
             // if input, accelerate
-            velocity = MoveTowards(velocity, input * MaxSpeed, Acceleration * deltaTime);
+            velocity = MoveTowards(velocity, input * MaxSpeed, Acceleration * Time.fixedDeltaTime);
         }
         
-        Vector3 movement = new Vector3(velocity.x, 0, velocity.y) * deltaTime;
-        return movement;
+        Vector3 movement = new Vector3(velocity.x, 0, velocity.y) * Time.fixedDeltaTime;
+        rigidbody.MovePosition(rigidbody.position + movement);
     }
 
 }

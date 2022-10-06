@@ -14,13 +14,8 @@ class Player : MonoBehaviour
     private Inventory inventory;
     private Stamina stamina;
 
-    // private variables
-    private Vector2 input;
-
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
-
         // Player Systems
         movement = GetComponent<Movement>();
         inventory = GetComponent<Inventory>();
@@ -29,13 +24,12 @@ class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        rigidbody.MovePosition(rigidbody.position + movement.GetMovement(input, Time.fixedDeltaTime));
+        movement.MovePlayer();
     }
 
     void OnMove(InputValue movementValue)
     {
-        input = movementValue.Get<Vector2>();
-        // Debug.Log(Input);
+        movement.SetInput(movementValue.Get<Vector2>());
     }
 
 }
