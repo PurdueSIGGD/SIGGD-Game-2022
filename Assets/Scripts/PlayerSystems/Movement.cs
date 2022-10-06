@@ -12,7 +12,7 @@ public class Movement : MonoBehaviour
     private Vector2 input;
     private Vector2 velocity;
 
-    void OnStart()
+    void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
     }
@@ -48,6 +48,7 @@ public class Movement : MonoBehaviour
         }
         
         Vector3 movement = new Vector3(velocity.x, 0, velocity.y) * Time.fixedDeltaTime;
+        Debug.Log(movement);
         rigidbody.MovePosition(rigidbody.position + movement);
     }
 
