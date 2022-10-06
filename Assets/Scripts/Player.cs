@@ -3,49 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Movement))]
+[RequireComponent(typeof(Inventory))]
+[RequireComponent(typeof(Stamina))]
 class Player : MonoBehaviour
 {
-    [SerializeField] private float MaxSpeed = 10;
-    [SerializeField] private float Friction = 100;
-    [SerializeField] private float Acceleration = 100;
-
-    private Vector2 input;
-    private Vector2 velocity;
-
     private new Rigidbody rigidbody;
+    // Player Systems
+    private Movement movement;
+    private Inventory inventory;
+    private Stamina stamina;
 
-    /// <summary>
-    /// Moves a vector2 towards a target vector2 by a given amount
-    /// </summary>
-    Vector2 MoveTowards(Vector2 curr, Vector2 target, float amount)
-    {
-        Vector2 diff = target - curr;
-        Vector2 change = diff.normalized * amount;
-        // clamp value based to the difference
-        change = (diff.sqrMagnitude < change.sqrMagnitude ? diff : change);
-        return curr + change;
-    }
+    // private variables
+    private Vector2 input;
 
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+
+        // Player Systems
+        movement = GetComponent<Movement>();
+        inventory = GetComponent<Inventory>();
+        stamina = GetComponent<Stamina>();
     }
 
     void FixedUpdate()
     {
-        if (input.Equals(Vector2.zero))
-        {
-            // if no input, slow down
-            velocity = MoveTowards(velocity, Vector2.zero, Friction * Time.deltaTime);
-        }
-        else
-        {
-            // if input, accelerate
-            velocity = MoveTowards(velocity, input * MaxSpeed, Acceleration * Time.deltaTime);
-        }
-        
-        Vector3 movement = new Vector3(velocity.x, 0, velocity.y) * Time.deltaTime;
-        rigidbody.MovePosition(rigidbody.position + movement);
+        rigidbody.MovePosition(rigidbody.position + movement.GetMovement(input, Time.fixedDeltaTime));
     }
 
     void OnMove(InputValue movementValue)
