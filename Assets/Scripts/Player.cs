@@ -8,7 +8,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Stamina))]
 class Player : MonoBehaviour
 {
-    private new Rigidbody rigidbody;
     // Player Systems
     private Movement movement;
     private Inventory inventory;
