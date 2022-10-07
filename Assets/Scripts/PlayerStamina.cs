@@ -8,29 +8,45 @@ using UnityEngine;
 public class PlayerStamina : MonoBehaviour
 {
 
-    private int stamina;
+    private int stamina; //An integer to track stamina
 
-    // Start is called before the first frame update
+    private bool isClimbing; //A boolean to see if the player is climbing
+
+    private int framesClimbed; //An integer to keep track of the number of frames the user has climbed, used to calculate stamina loss
+
+    // Start is called before the first frame update. As of 10/7/22, 100 is an arbitrary number
     void Start()
     {
         stamina = 100;
     }
 
-    // Update is called once per frame. As of 10/5/22, stamina won't regen when standing still. Could change in future.
+    /* Update is called once per frame. As of 10/5/22, stamina won't regen when standing still. Could change in future.
+       
+       The climbing portion means every 6 frames of climbing, a person loses one stamina, or loss of 10 stamina per second of climbing.
+       As of 10/7/22, this number if arbitrary. The sound / animation comments are only in there as reminders, they could go somewhere else
+    */
+
     void Update()
     {
-        
+        while(isClimbing) {
+           framesClimbed++;
+           if(framesClimbed % 6 == 0) {
+            stamina -= 1;
+            //play climbing sound here
+            //play climbing animation here
+           }
+        }
     }
 
     /*
-      Gets stamina for other classes
+      Stamina getter, for testing
     */
-    int getStamina() {
+    int GetStamina() {
         return stamina;
     }
 
     /*
-       Dashes, plays sound / animation, and subtracts stamina for dash, if the player has stamina for it. If  AS OF 10/5/22, 20 IS AN ARBITRARY NUMBER
+       Dashes, plays sound / animation, and subtracts stamina for dash, if the player has stamina for it. If  As of 10/7/22, 20 is an arbitrary number
     */
     void Dash() {
         
@@ -42,23 +58,31 @@ public class PlayerStamina : MonoBehaviour
     }
 
     /*
-       Heavy attacks, plays sound / animation, and subtracts stamina for attack, if the player has stamina for it. If  AS OF 10/5/22, 20 IS AN ARBITRARY NUMBER
+       Heavy attacks, plays sound / animation, and subtracts stamina for attack, if the player has stamina for it. As of 10/7/22, 25 is an arbitrary number
     */
     void HeavyAttack() {
-        //play heavy attack animation here
-        //play heaavy attack sound here
         if (stamina >= 25) {
+            //play heavy attack animation here
+            //play heaavy attack sound here
             stamina -= 25;
             }
     }
 
     /*
-      Changes stamina using a parameter. Mostly just for testing as of 10/5/2022
+      Changes stamina using a parameter. Used for items that buff / increase stamina, or decrease it for other bonuses if an item like
+      that exists. Needs reasonable limits
     */
-    void changeStamina(int stamina) {
+    void ChangeStamina(int stamina) {
          if(this.stamina > stamina) {
-            this.stamina -= stamina;
+            this.stamina += stamina;
          }
          
+    }
+
+    /*
+      This is used to change the boolean that keeps track of if the user is climbing
+    */
+    void ChangeIsClimbing(bool isClimbing) {
+        this.isClimbing = isClimbing;
     }
 }
