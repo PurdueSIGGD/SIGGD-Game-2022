@@ -58,18 +58,20 @@ public class ProceduralGenerator : MonoBehaviour
         do
         {
             RoomsOverlap = false;
-            for (int current = 0; current < RoomRects.Count - 1; current++)
+            for (int current = 0; current < RoomRects.Count; current++)
             {
-                for (int other = 0; other < RoomRects.Count - 1; other++)
+                for (int other = 0; other < RoomRects.Count; other++)
                 {
                     //Don't run if the other room is the current room
                     //or if the two rooms do not overlap with Rect.Overlaps()
                     if (current == other || !RoomRects[current].Overlaps(RoomRects[other])) continue;
 
+                    RoomsOverlap = true;
+
                     //Check edge case where two rooms are identical in size and location
                     if (RoomRects[current] == RoomRects[other])
                     {
-                        //RoomRects.RemoveAt(other);
+                        RoomRects.RemoveAt(other);
                         continue;
                     }
 
@@ -84,8 +86,6 @@ public class ProceduralGenerator : MonoBehaviour
 
                     RoomRects[current] = curRoomRect;
                     RoomRects[other] = otherRoomRect;
-
-                    RoomsOverlap = true;
                 }
             }
         } while (RoomsOverlap == true);
@@ -98,6 +98,21 @@ public class ProceduralGenerator : MonoBehaviour
             GameObject testFloor = Instantiate(floor, new Vector3(rect.center.x, 0, rect.center.y), Quaternion.identity);
             testFloor.transform.localScale = (new Vector3(rect.width, 1, rect.height)) / 10;
         }
+    }
+
+    //UNUSED
+    //Checks if any of the rectangles in RoomRects overlap
+    private bool CheckCollisions()
+    {
+        for (int i = 0; i < RoomRects.Count; i++)
+        {
+            for (int j = i + 1; j < RoomRects.Count; j++)
+            {
+                if (RoomRects[i].Overlaps(RoomRects[j])) return true;
+            }
+        }
+
+        return false;
     }
 
 
