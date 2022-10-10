@@ -73,9 +73,14 @@ public class PlayerStamina : MonoBehaviour
     }
 
     /*
-      This is used to change the boolean that keeps track of if the user is climbing
+      This is used to change the boolean that keeps track of if the user is climbing. Every time the user starts to climb or stops climbing, the
+      number of frames climbed resets to 0. This ensures that stamina is subtracted properly. For example, if the user starts climbing while the
+      remainder when framesClimbed is divided by 6 is 5(or framesClimbed % 6 = 5), they will instantly lose stamina on the next frame of climbing, which
+      isn't what we want if we plan on having the player lose stamina every 6 frames of climbing. This setting it to 0 every time the isClimbing boolean
+      is changed fixes that error. For an more in depth explination, dm Bryce L. on discord
     */
     void ChangeIsClimbing(bool isClimbing) {
         this.isClimbing = isClimbing;
+        framesClimbed = 0;
     }
 }
