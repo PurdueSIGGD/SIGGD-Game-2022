@@ -65,9 +65,10 @@ public class PlayerStamina : MonoBehaviour
       Changes stamina using a parameter. Used for items that buff / increase stamina, or decrease it for other bonuses if an item like
       that exists. Needs reasonable limits
     */
-    void ChangeStamina(int stamina) {
-         if(this.stamina > stamina) {
-            this.stamina += stamina;
+    void AddStamina(int stamina) {
+         this.stamina += stamina;
+         if (this.stamina >= 100) {
+            this.stamina = 100;
          }
          
     }
