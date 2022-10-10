@@ -39,13 +39,6 @@ public class PlayerStamina : MonoBehaviour
     }
 
     /*
-      Stamina getter, for testing
-    */
-    int GetStamina() {
-        return stamina;
-    }
-
-    /*
        Dashes, plays sound / animation, and subtracts stamina for dash, if the player has stamina for it. If  As of 10/7/22, 20 is an arbitrary number
     */
     void Dash() {
