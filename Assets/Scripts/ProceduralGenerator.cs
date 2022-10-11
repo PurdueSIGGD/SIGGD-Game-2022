@@ -11,11 +11,19 @@ public class ProceduralGenerator : MonoBehaviour
     private int MinRoomWidth, MinRoomDepth, MaxRoomWidth, MaxRoomDepth, TileSize;
 
     [SerializeField]
-    private GameObject randomObject, floor;
+    private bool RoundToTileSize;
+
+    [SerializeField]
+    private GameObject floor;
+
+    [SerializeField]
+    Material DefaultFloorMaterial, MainRoomMaterial;
 
     private float inRadius = 10;
 
     private List<Rect> RoomRects;
+
+    //TODO: MinSeperation and https://en.wikipedia.org/wiki/Gabriel_graph
 
     // Start is called before the first frame update
     void Awake()
@@ -30,28 +38,44 @@ public class ProceduralGenerator : MonoBehaviour
 
             //Randomly select room width and depth in range [MinRoom, MaxRoom] inclusively.
             //Width and Depth are both integers.
-            int roomWidth = Random.Range(MinRoomWidth, MaxRoomWidth + 1);
-            int roomDepth = Random.Range(MinRoomDepth, MaxRoomDepth + 1);
+            int roomWidth = Random.Range(MinRoomWidth, MaxRoomWidth + 1) * TileSize;
+            int roomDepth = Random.Range(MinRoomDepth, MaxRoomDepth + 1) * TileSize;
 
             //Initialize the room with a Rect data structure for easy manipulation.
             //The final display will convert the Rects into 3D rooms.
             RoomRects.Add(new Rect(randomPoint.x, randomPoint.y, roomWidth, roomDepth));
         }
         Seperate();
+        SortByArea();
     }
 
+    //Calls DrawRooms() to visualize the output of the procedural algorithm.
     void Start()
     {
-        DrawRooms();
+        DrawRooms(RoomRects.GetRange(FinalRoomCount, RoomRects.Count - FinalRoomCount), DefaultFloorMaterial);
+        DrawRooms(RoomRects.GetRange(0, FinalRoomCount), MainRoomMaterial);
     }
 
+    //Uniformly generates a psuedo-random point in a circle of radius maxRadius.
     public Vector2 getRandomPointInCircle(float maxRadius)
     {
         float radius = Mathf.Sqrt(Random.Range(0.0f, maxRadius));
         float theta = Random.Range(0.0f, 2 * Mathf.PI);
-        return new Vector2(Mathf.Round(radius * Mathf.Cos(theta)), Mathf.Round(radius * Mathf.Sin(theta)));
+
+        //Convert from polar coordinates to cartesian
+        float pointX = radius * Mathf.Cos(theta);
+        float pointY = radius * Mathf.Sin(theta);
+        if (RoundToTileSize)
+        {
+            pointX = Mathf.Round(pointX / TileSize) * TileSize;
+            pointY = Mathf.Round(pointY / TileSize) * TileSize;
+        }
+
+        return new Vector2(pointX, pointY);
     }
 
+    //Iterates through all of the rooms pushing any overlapping rooms apart
+    //until none of the rooms overlap each other.
     private void Seperate()
     {
         bool RoomsOverlap;
@@ -66,8 +90,6 @@ public class ProceduralGenerator : MonoBehaviour
                     //or if the two rooms do not overlap with Rect.Overlaps()
                     if (current == other || !RoomRects[current].Overlaps(RoomRects[other])) continue;
 
-                    RoomsOverlap = true;
-
                     //Check edge case where two rooms are identical in size and location
                     if (RoomRects[current] == RoomRects[other])
                     {
@@ -80,48 +102,53 @@ public class ProceduralGenerator : MonoBehaviour
                     Rect curRoomRect = RoomRects[current];
                     Rect otherRoomRect = RoomRects[other];
 
+                    //direction has a magnitude of 1 pointing in the direction to move the current room
                     Vector2 direction = (RoomRects[current].center - RoomRects[other].center).normalized;
+
+                    //Move the 'current' and 'other' rooms in opposite directions
                     curRoomRect.position = curRoomRect.position + (direction * TileSize);
                     otherRoomRect.position = otherRoomRect.position + ((-direction) * TileSize);
 
+                    //Reset reference to the rectangle in the RoomRects List<Rect>
                     RoomRects[current] = curRoomRect;
                     RoomRects[other] = otherRoomRect;
+
+                    RoomsOverlap = true;
                 }
             }
         } while (RoomsOverlap == true);
     }
 
-    private void DrawRooms()
+    //Visualize the RoomRects List<Rect> as Unity GameObjects
+    //Floor is some form of plane representing a room.
+    private void DrawRooms(List<Rect> rooms, Material roomColor)
     {
-        foreach (Rect rect in RoomRects)
+        foreach (Rect rect in rooms)
         {
             GameObject testFloor = Instantiate(floor, new Vector3(rect.center.x, 0, rect.center.y), Quaternion.identity);
+            
+            //Divide by 10 because the scale of planes is 10. Can be abstracted as a variable if floor is changed
             testFloor.transform.localScale = (new Vector3(rect.width, 1, rect.height)) / 10;
-        }
-    }
 
-    //UNUSED
-    //Checks if any of the rectangles in RoomRects overlap
-    private bool CheckCollisions()
-    {
-        for (int i = 0; i < RoomRects.Count; i++)
-        {
-            for (int j = i + 1; j < RoomRects.Count; j++)
+            if (roomColor != null)
             {
-                if (RoomRects[i].Overlaps(RoomRects[j])) return true;
+                foreach (Renderer planeRend in testFloor.GetComponentsInChildren<Renderer>())
+                {
+                    planeRend.material = roomColor;
+                }
             }
         }
-
-        return false;
     }
 
-
-    // display a rectangle
-    /*void OnGUI()
+    private void SortByArea()
     {
-        foreach (Rect rect in RoomRects)
+        RoomRects.Sort(delegate (Rect x, Rect y)
         {
-            GUI.Box(rect, "");
-        }
-    }*/
+            float xArea = x.width * x.height;
+            float yArea = y.width * y.height;
+            if (xArea < yArea) return 1;
+            else if (xArea > yArea) return -1;
+            else return 0;
+        });
+    }
 }

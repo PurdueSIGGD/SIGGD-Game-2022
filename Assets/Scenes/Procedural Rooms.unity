@@ -268,15 +268,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FinalRoomCount: 10
-  TotalRoomCount: 30
-  MinRoomWidth: 1
-  MinRoomDepth: 1
+  TotalRoomCount: 100
+  MinRoomWidth: 3
+  MinRoomDepth: 3
   MaxRoomWidth: 10
   MaxRoomDepth: 10
   TileSize: 1
-  randomObject: {fileID: 8589429555824726281, guid: 85c2c4d4fb957eb41954382615b2616a,
-    type: 3}
+  RoundToTileSize: 1
   floor: {fileID: 556802070665314663, guid: 6b78b48d381ee8a488f4f1e859793cfa, type: 3}
+  DefaultFloorMaterial: {fileID: 2100000, guid: ae627514e28ffb24f9e761d6c0511d0f,
+    type: 2}
+  MainRoomMaterial: {fileID: 2100000, guid: 9c4ec128f1645944fb15148abfc47ec8, type: 2}
 --- !u!4 &1020557253
 Transform:
   m_ObjectHideFlags: 0
