@@ -26,9 +26,13 @@ class Player : MonoBehaviour
         movement.MovePlayer();
     }
 
+    void Update()
+    {
+
+    }
+
     void OnMove(InputValue movementValue)
     {
         movement.SetInput(movementValue.Get<Vector2>());
     }
-
 }
