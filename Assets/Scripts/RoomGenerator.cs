@@ -14,23 +14,17 @@ public class RoomGenerator : MonoBehaviour
     private float floorLength;
 
     // The unique objects to spawn in the rooms
-    private GameObject[] objects;
+    public GameObject pillar;
     // Start is called before the first frame update
-
-    /*
-     * Takes the UNIQUE obstacles for the room
-     */
-    public RoomGenerator(int obstacleNum) {
-        objects = new GameObject[obstacleNum];
-        generateObstacles();
-    }
-
     void Start()
     {
         room = transform;
         floor = room.GetChild(0);
         floorWidth = floor.transform.localScale.x * DEFAULT_PLANE_SIZE;
         floorLength = floor.transform.localScale.x * DEFAULT_PLANE_SIZE;
+
+        // objects = new GameObject[obstacleNum];
+        generateObstacles();
     }
 
     // Update is called once per frame
@@ -40,11 +34,11 @@ public class RoomGenerator : MonoBehaviour
     }
 
     private void generateObstacles() {
-        for (int i = 0; i < objects.Length; i++) {
+        for (int i = 0; i < 5; i++) {
             float x = Random.Range(-floorLength / 2, floorLength / 2);
             float z = Random.Range(-floorWidth / 2, floorWidth / 2);
             Vector3 position = transform.position + new Vector3(x, 0, z);
-            Instantiate(objects[i], position, Quaternion.identity);
+            Instantiate(pillar, position, Quaternion.identity);
         }
     }
 }

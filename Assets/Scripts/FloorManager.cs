@@ -5,13 +5,14 @@ using UnityEngine;
 // This class will generate the the whole floor
 public class FloorManager : MonoBehaviour
 {
-    public GameObject room;
-    RoomGenerator[] roomGenerators;
+    public GameObject squareRoom;
+
+    private const int NUM_ROOMS = 5;
+
     // Start is called before the first frame update
     void Start()
     {
-        int numFloors = GenerateFloor(/* There would normally be stuff in here */);
-        roomGenerators = new RoomGenerator[numFloors];
+        GenerateFloor(/* There would normally be stuff in here */);
         initFloorGenerators();
     }
 
@@ -26,20 +27,21 @@ public class FloorManager : MonoBehaviour
     /*
      * Generates the floor and returns the number of floors generated
      */
-    int GenerateFloor(/* list of things to put in the rooms and their frequencies */) {
+    void GenerateFloor(/* list of things to put in the rooms and their frequencies */) {
         // Temporary test
         int positionRange = 50;
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < NUM_ROOMS; i++) {
             Vector3 position = new Vector3(Random.Range(-positionRange, positionRange), 0, Random.Range(-positionRange, positionRange));
-            Instantiate(room, position, Quaternion.identity);
+            GameObject room = Instantiate(squareRoom, position, Quaternion.identity);
+            RoomGenerator generator = room.GetComponent<RoomGenerator>();
+            //generator.setBudget();
         }
-        return 5; // 
     }
 
     void initFloorGenerators() {
-        for (int i = 0; i < roomGenerators.Length; i++) {
+        for (int i = 0; i < NUM_ROOMS; i++) {
             // Do random stuff
-            roomGenerators[i] = new RoomGenerator(1);
+            
         }
     }
 }
