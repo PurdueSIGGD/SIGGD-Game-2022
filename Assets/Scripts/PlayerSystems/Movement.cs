@@ -46,10 +46,10 @@ public class Movement : MonoBehaviour
             // if input, accelerate
             velocity = MoveTowards(velocity, input * MaxSpeed, Acceleration * Time.fixedDeltaTime);
         }
+
+        Vector3 move = new Vector3(velocity.x, 0, velocity.y);
         
-        Vector3 movement = new Vector3(velocity.x, 0, velocity.y) * Time.fixedDeltaTime;
-        Debug.Log(movement);
-        rigidbody.MovePosition(rigidbody.position + movement);
+        rigidbody.velocity = move;
     }
 
 }
