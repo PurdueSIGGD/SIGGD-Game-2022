@@ -76,6 +76,17 @@ public class Stamina : MonoBehaviour
     }
 
     /*
+      Opens a door using stamina if the player has enough, play the sound and animation. As of 10/12/22, 15 is an arbitrary number
+    */
+    public void OpenDoor() {
+       if (stamina >= 15) {
+        //play animation here
+        //play sound here
+        stamina -= 15;
+       }
+    }
+
+    /*
       This is used to change the boolean that keeps track of if the user is climbing. Every time the user starts to climb or stops climbing, the
       number of frames climbed resets to 0. This ensures that stamina is subtracted properly. For example, if the user starts climbing while the
       remainder when framesClimbed is divided by 6 is 5(or framesClimbed % 6 = 5), they will instantly lose stamina on the next frame of climbing, which
