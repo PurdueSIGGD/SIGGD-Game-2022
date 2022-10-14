@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class ProceduralGenerator : MonoBehaviour
 {
     [SerializeField]
     public int FinalRoomCount, TotalRoomCount;
 
     [SerializeField]
-    private int MinRoomWidth, MinRoomDepth, MaxRoomWidth, MaxRoomDepth, TileSize;
+    private int MinRoomWidth, MinRoomDepth, MaxRoomWidth, MaxRoomDepth, TileSize, MinRoomSeparation;
 
     [SerializeField]
     private bool RoundToTileSize;
@@ -22,38 +26,21 @@ public class ProceduralGenerator : MonoBehaviour
     private float inRadius = 10;
 
     private List<Rect> RoomRects;
+    private GameObject RoomParent;
 
     //TODO: MinSeperation and https://en.wikipedia.org/wiki/Gabriel_graph
 
     // Start is called before the first frame update
     void Awake()
     {
-        RoomRects = new List<Rect>();
-        for (int i = 0; i < TotalRoomCount; i++)
-        {
-            Vector2 randomPoint = getRandomPointInCircle(inRadius);
-
-            //Debug display of the room points as 3D Spheres.
-            //Instantiate(randomObject, new Vector3(randomPoint.x, 0, randomPoint.y), Quaternion.identity);
-
-            //Randomly select room width and depth in range [MinRoom, MaxRoom] inclusively.
-            //Width and Depth are both integers.
-            int roomWidth = Random.Range(MinRoomWidth, MaxRoomWidth + 1) * TileSize;
-            int roomDepth = Random.Range(MinRoomDepth, MaxRoomDepth + 1) * TileSize;
-
-            //Initialize the room with a Rect data structure for easy manipulation.
-            //The final display will convert the Rects into 3D rooms.
-            RoomRects.Add(new Rect(randomPoint.x, randomPoint.y, roomWidth, roomDepth));
-        }
-        Seperate();
-        SortByArea();
+        GenerateDungeon();
+        ClearScene();
+        DrawFloor();
     }
 
     //Calls DrawRooms() to visualize the output of the procedural algorithm.
     void Start()
     {
-        DrawRooms(RoomRects.GetRange(FinalRoomCount, RoomRects.Count - FinalRoomCount), DefaultFloorMaterial);
-        DrawRooms(RoomRects.GetRange(0, FinalRoomCount), MainRoomMaterial);
     }
 
     //Uniformly generates a psuedo-random point in a circle of radius maxRadius.
@@ -71,7 +58,51 @@ public class ProceduralGenerator : MonoBehaviour
             pointY = Mathf.Round(pointY / TileSize) * TileSize;
         }
 
-        return new Vector2(pointX, pointY);
+        return new Vector2(pointX - (MinRoomSeparation / 2), pointY - (MinRoomSeparation / 2));
+    }
+
+    public void GenerateDungeon()
+    {
+        RoomParent = this.gameObject.transform.GetChild(0).gameObject;
+        RoomRects = new List<Rect>();
+        for (int i = 0; i < TotalRoomCount; i++)
+        {
+            Vector2 randomPoint = getRandomPointInCircle(inRadius);
+
+            //Debug display of the room points as 3D Spheres.
+            //Instantiate(randomObject, new Vector3(randomPoint.x, 0, randomPoint.y), Quaternion.identity);
+
+            //Randomly select room width and depth in range [MinRoom, MaxRoom] inclusively.
+            //Width and Depth are both integers.
+            int roomWidth = Random.Range(MinRoomWidth, MaxRoomWidth + 1) * TileSize + MinRoomSeparation;
+            int roomDepth = Random.Range(MinRoomDepth, MaxRoomDepth + 1) * TileSize + MinRoomSeparation;
+
+            //Initialize the room with a Rect data structure for easy manipulation.
+            //The final display will convert the Rects into 3D rooms.
+            RoomRects.Add(new Rect(randomPoint.x, randomPoint.y, roomWidth, roomDepth));
+        }
+        Seperate();
+        SortByArea();
+    }
+
+    public void ClearScene()
+    {
+        if (RoomParent == null)
+        {
+            RoomParent = this.gameObject.transform.GetChild(0).gameObject;
+        }
+        for (int i = RoomParent.transform.childCount; i > 0; i--)
+        {
+            DestroyImmediate(RoomParent.transform.GetChild(0).gameObject);
+        }
+    }
+
+    public void DrawFloor()
+    {
+        if (RoomRects == null) GenerateDungeon();
+
+        DrawRooms(RoomRects.GetRange(FinalRoomCount, RoomRects.Count - FinalRoomCount), DefaultFloorMaterial);
+        DrawRooms(RoomRects.GetRange(0, FinalRoomCount), MainRoomMaterial);
     }
 
     //Iterates through all of the rooms pushing any overlapping rooms apart
@@ -125,10 +156,10 @@ public class ProceduralGenerator : MonoBehaviour
     {
         foreach (Rect rect in rooms)
         {
-            GameObject testFloor = Instantiate(floor, new Vector3(rect.center.x, 0, rect.center.y), Quaternion.identity);
+            GameObject testFloor = Instantiate(floor, new Vector3(rect.center.x, 0, rect.center.y), Quaternion.identity, RoomParent.transform);
             
             //Divide by 10 because the scale of planes is 10. Can be abstracted as a variable if floor is changed
-            testFloor.transform.localScale = (new Vector3(rect.width, 1, rect.height)) / 10;
+            testFloor.transform.localScale = (new Vector3(rect.width - MinRoomSeparation, 1, rect.height - MinRoomSeparation)) / 10;
 
             if (roomColor != null)
             {
@@ -137,6 +168,7 @@ public class ProceduralGenerator : MonoBehaviour
                     planeRend.material = roomColor;
                 }
             }
+
         }
     }
 
@@ -144,11 +176,31 @@ public class ProceduralGenerator : MonoBehaviour
     {
         RoomRects.Sort(delegate (Rect x, Rect y)
         {
-            float xArea = x.width * x.height;
-            float yArea = y.width * y.height;
+            float xArea = x.width * x.height - MinRoomSeparation + (MinRoomSeparation * MinRoomSeparation);
+            float yArea = y.width * y.height - MinRoomSeparation + (MinRoomSeparation * MinRoomSeparation);
             if (xArea < yArea) return 1;
             else if (xArea > yArea) return -1;
             else return 0;
         });
     }
 }
+
+#if UNITY_EDITOR
+[CustomEditor (typeof(ProceduralGenerator))]
+public class TrainingEditor : Editor {
+	public override void OnInspectorGUI () {
+		ProceduralGenerator progen = (ProceduralGenerator)target;
+		if(GUILayout.Button("Generate")){
+            progen.GenerateDungeon();
+		}
+		if(GUILayout.Button("Draw Floor")){
+            progen.ClearScene();
+            progen.DrawFloor();
+		}
+		if(GUILayout.Button("Clear Floor")){
+            progen.ClearScene();
+		}
+		DrawDefaultInspector ();
+	}
+}
+#endif
