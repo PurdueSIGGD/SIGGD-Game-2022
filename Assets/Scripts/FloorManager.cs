@@ -33,8 +33,11 @@ public class FloorManager : MonoBehaviour
         for(int i = 0; i < NUM_ROOMS; i++) {
             Vector3 position = new Vector3(Random.Range(-positionRange, positionRange), 0, Random.Range(-positionRange, positionRange));
             GameObject room = Instantiate(squareRoom, position, Quaternion.identity);
-            RoomGenerator generator = room.GetComponent<RoomGenerator>();
-            //generator.setBudget();
+
+            // Set up the room
+            RoomGenerator roomGenerator = room.GetComponent<RoomGenerator>();
+            roomGenerator.setRoomScale(new Vector3(Random.Range(0.5f, 1.5f), Random.Range(0.5f, 1.5f)));
+            roomGenerator.generateObstacles(/* budget parameter */);
         }
     }
 
