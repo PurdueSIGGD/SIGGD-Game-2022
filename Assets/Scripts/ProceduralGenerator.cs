@@ -27,6 +27,8 @@ public class ProceduralGenerator : MonoBehaviour
 
     private List<Rect> RoomRects;
     private GameObject RoomParent;
+    private List<Vector3> GabrielEdges;
+    private bool DrawGizmos;
 
     //TODO: MinSeperation and https://en.wikipedia.org/wiki/Gabriel_graph
 
@@ -83,6 +85,7 @@ public class ProceduralGenerator : MonoBehaviour
         }
         Seperate();
         SortByArea();
+        GabrielEdges = GabrielGraph(RoomRects.GetRange(0, FinalRoomCount));
     }
 
     public void ClearScene()
@@ -95,6 +98,8 @@ public class ProceduralGenerator : MonoBehaviour
         {
             DestroyImmediate(RoomParent.transform.GetChild(0).gameObject);
         }
+
+        DrawGizmos = false;
     }
 
     public void DrawFloor()
@@ -103,6 +108,8 @@ public class ProceduralGenerator : MonoBehaviour
 
         DrawRooms(RoomRects.GetRange(FinalRoomCount, RoomRects.Count - FinalRoomCount), DefaultFloorMaterial);
         DrawRooms(RoomRects.GetRange(0, FinalRoomCount), MainRoomMaterial);
+
+        DrawGizmos = true;
     }
 
     //Iterates through all of the rooms pushing any overlapping rooms apart
@@ -183,7 +190,54 @@ public class ProceduralGenerator : MonoBehaviour
             else return 0;
         });
     }
+
+    private List<Vector3> GabrielGraph(List<Rect> rooms)
+    {
+        List<Vector3> FinalEdges = new List<Vector3>();
+
+        for (int i = 0; i < rooms.Count - 1; i++) 
+        {
+            for (int j = i + 1; j < rooms.Count; j++)
+            {
+                Vector2 mid = (rooms[i].center + rooms[j].center) / 2;
+                float radius = Vector2.Distance(mid, rooms[i].center);
+
+                bool isValidEdge = true;
+                for (int k = 0; k < rooms.Count; k++)
+                {
+                    if ((k == i) || (k == j)) continue;
+
+                    if (Vector2.Distance(mid, rooms[k].center) < radius)
+                    {
+                        isValidEdge = false;
+                        break;
+                    }
+                }
+
+                if (isValidEdge)
+                {
+                    FinalEdges.Add(new Vector3(rooms[i].center.x, 0, rooms[i].center.y));
+                    FinalEdges.Add(new Vector3(rooms[j].center.x, 0, rooms[j].center.y));
+                }
+            }
+        }
+
+        return FinalEdges;
+    }
+
+    void OnDrawGizmos()
+    {
+        if (GabrielEdges != null && DrawGizmos)
+        {
+            Gizmos.color = Color.blue;
+            for (int i = 0; i < GabrielEdges.Count / 2; i++)
+            {
+                Gizmos.DrawLine(GabrielEdges[i * 2], GabrielEdges[i * 2 + 1]);
+            }
+        }
+    }
 }
+
 
 #if UNITY_EDITOR
 [CustomEditor (typeof(ProceduralGenerator))]
