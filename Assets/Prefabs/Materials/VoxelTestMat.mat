@@ -144,7 +144,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Pallete_Map:
-        m_Texture: {fileID: 2800000, guid: 26d6d86d7a0970845914491dad4433bf, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7033324a92a6f7b45a072950720a6880, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
@@ -212,7 +212,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D:
-        m_Texture: {fileID: 2800000, guid: c767ffdd46976a54e9994c61fcc18ae2, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6a644151750e4214bb4eff011a9b6fa0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D_1:
@@ -248,7 +248,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D_4:
-        m_Texture: {fileID: 2800000, guid: 0df86dd05504eab4a8ae081ba4d112ee, type: 3}
+        m_Texture: {fileID: 2800000, guid: 637e78c370f490046a41f25de20f7bdd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D_5:
@@ -264,7 +264,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D_8:
-        m_Texture: {fileID: 10309, guid: 0000000000000000f000000000000000, type: 0}
+        m_Texture: {fileID: 2800000, guid: 6848bda2747add34e9fae07f64ecdc74, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D_9:
@@ -320,6 +320,7 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
+    - _Pixels_Voxel: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -330,6 +331,7 @@ Material:
     - _SrcBlend: 1
     - _Surface: 0
     - _TextureRes: 48
+    - _Voxels_Meter: 10
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:

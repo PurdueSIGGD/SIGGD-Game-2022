@@ -64,7 +64,7 @@ public class Movement : MonoBehaviour
             //velocity = MoveTowards(velocity, input * MaxSpeed, Acceleration * Time.fixedDeltaTime);
         }
 
-        //copies the y velocity so that velocity due to gravity is not removed
+        //copies the y velocity so that velocity due to gravity is not removedth 
         //Note that this causes some wierd behavior when going up ramps, but this can be fixed i the future if found to be a problem
         Vector3 move = new Vector3(velocity.x, rigidbody.velocity.y, velocity.y);
         
