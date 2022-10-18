@@ -20,7 +20,7 @@ public class Stamina : MonoBehaviour
         stamina = 100;
     }
 
-    void UpdateStamina()
+    public void UpdateStamina()
     {
         climbTime += Time.deltaTime;
         if (isClimbing)
@@ -38,7 +38,7 @@ public class Stamina : MonoBehaviour
     /*
        Dashes, plays sound / animation, and subtracts stamina for dash, if the player has stamina for it. If  As of 10/7/22, 20 is an arbitrary number
     */
-    void Dash()
+    public void Dash()
     {
         if (stamina >= 20)
         {
@@ -51,7 +51,7 @@ public class Stamina : MonoBehaviour
     /*
        Heavy attacks, plays sound / animation, and subtracts stamina for attack, if the player has stamina for it. As of 10/7/22, 25 is an arbitrary number
     */
-    void HeavyAttack()
+    public void HeavyAttack()
     {
         if (stamina >= 25)
         {
@@ -65,7 +65,7 @@ public class Stamina : MonoBehaviour
       Changes stamina using a parameter. Used for items that buff / increase stamina, or decrease it for other bonuses if an item like
       that exists. Needs reasonable limits
     */
-    void AddStamina(int stamina)
+    public void AddStamina(int stamina)
     {
         this.stamina += stamina;
         if (this.stamina >= 100)
@@ -73,6 +73,17 @@ public class Stamina : MonoBehaviour
             this.stamina = 100;
         }
 
+    }
+
+    /*
+      Opens a door using stamina if the player has enough, play the sound and animation. As of 10/12/22, 15 is an arbitrary number
+    */
+    public void OpenDoor() {
+       if (stamina >= 15) {
+        //play animation here
+        //play sound here
+        stamina -= 15;
+       }
     }
 
     /*
@@ -84,7 +95,7 @@ public class Stamina : MonoBehaviour
 
       changed to reset time
     */
-    void SetIsClimbing(bool isClimbing)
+    public void SetIsClimbing(bool isClimbing)
     {
         this.isClimbing = isClimbing;
         climbTime = 0;
