@@ -206,6 +206,9 @@
         },
         {
             "m_Id": "3f92d768453440feb69cd860b8aa6c98"
+        },
+        {
+            "m_Id": "09f76042089b4e139b73577ad0e2ca59"
         }
     ],
     "m_GroupDatas": [],
@@ -1069,6 +1072,41 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.SamplerStateNode",
+    "m_ObjectId": "09f76042089b4e139b73577ad0e2ca59",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Sampler State",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -2186.400146484375,
+            "y": -120.79998779296875,
+            "width": 145.60009765625,
+            "height": 135.1999969482422
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "230601e286ea4be4930ed944716fff96"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_filter": 0,
+    "m_wrap": 0,
+    "m_aniso": 0
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "0d0705b8797e4096b146801c23bb1989",
     "m_Id": 0,
@@ -1383,6 +1421,19 @@
         "m_SerializableColors": []
     },
     "m_SerializedDescriptor": "VertexDescription.Tangent"
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.SamplerStateMaterialSlot",
+    "m_ObjectId": "230601e286ea4be4930ed944716fff96",
+    "m_Id": 0,
+    "m_DisplayName": "Out",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_BareResource": false
 }
 
 {
@@ -2662,10 +2713,10 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "62f48df3068e40909c1e09ec6e9eac88",
     "m_Id": 1,
-    "m_DisplayName": "Out_Vector4",
+    "m_DisplayName": "OutColor",
     "m_SlotType": 1,
     "m_Hidden": false,
-    "m_ShaderOutputName": "OutVector4",
+    "m_ShaderOutputName": "OutColor",
     "m_StageCapability": 2,
     "m_Value": {
         "x": 0.0,
@@ -2994,9 +3045,9 @@
         "m_Position": {
             "serializedVersion": "2",
             "x": -2532.0,
-            "y": 141.60000610351563,
-            "width": 253.599853515625,
-            "height": 1045.599853515625
+            "y": 158.40000915527345,
+            "width": 235.199951171875,
+            "height": 1045.5999755859375
         }
     },
     "m_Slots": [
