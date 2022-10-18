@@ -35,4 +35,9 @@ class Player : MonoBehaviour
     {
         movement.SetInput(movementValue.Get<Vector2>());
     }
+
+    void OnLook(InputValue lookValue)
+    {
+        movement.SetLookInput(lookValue.Get<Vector2>());
+    }
 }
