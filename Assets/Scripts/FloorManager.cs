@@ -36,7 +36,6 @@ public class FloorManager : MonoBehaviour
 
             // Set up the room
             RoomGenerator roomGenerator = room.GetComponent<RoomGenerator>();
-            roomGenerator.setRoomScale(new Vector3(Random.Range(0.5f, 1.5f), Random.Range(0.5f, 1.5f)));
             roomGenerator.generateObstacles(/* budget parameter */);
         }
     }
