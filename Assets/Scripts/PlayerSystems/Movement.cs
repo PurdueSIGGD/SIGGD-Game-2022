@@ -47,7 +47,6 @@ public class Movement : MonoBehaviour
     public void MovePlayer()
     {
         //Movement
-
         if (input.Equals(Vector2.zero))
         {
             // if no input, slow down
@@ -65,11 +64,8 @@ public class Movement : MonoBehaviour
         }
 
         //copies the y velocity so that velocity due to gravity is not removed
-        //Note that this causes some wierd behavior when going up ramps, but this can be fixed i the future if found to be a problem
         Vector3 move = new Vector3(velocity.x, rigidbody.velocity.y, velocity.y);
-        
-        
-        rigidbody.velocity = move;
+        rigidbody.MovePosition(rigidbody.position + move * Time.fixedDeltaTime);
 
         //Rotation
 
