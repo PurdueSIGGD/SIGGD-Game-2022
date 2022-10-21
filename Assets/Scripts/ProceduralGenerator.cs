@@ -30,7 +30,7 @@ public class ProceduralGenerator : MonoBehaviour
     private List<Vector3> GabrielEdges;
     private bool DrawGizmos;
 
-    //TODO: MinSeperation and https://en.wikipedia.org/wiki/Gabriel_graph
+    //TODO: Hallway generation
 
     // Start is called before the first frame update
     void Awake()
@@ -155,6 +155,14 @@ public class ProceduralGenerator : MonoBehaviour
                 }
             }
         } while (RoomsOverlap == true);
+
+        for (int i = 0; i < RoomRects.Count; i++)
+        {
+            Rect roundedRoom = RoomRects[i];
+            roundedRoom.position = new Vector2(Mathf.Ceil(roundedRoom.position.x), 
+                                               Mathf.Ceil(roundedRoom.position.y));
+            RoomRects[i] = roundedRoom;
+        }
     }
 
     //Visualize the RoomRects List<Rect> as Unity GameObjects
@@ -166,7 +174,8 @@ public class ProceduralGenerator : MonoBehaviour
             GameObject testFloor = Instantiate(floor, new Vector3(rect.center.x, 0, rect.center.y), Quaternion.identity, RoomParent.transform);
             
             //Divide by 10 because the scale of planes is 10. Can be abstracted as a variable if floor is changed
-            testFloor.transform.localScale = (new Vector3(rect.width - MinRoomSeparation, 1, rect.height - MinRoomSeparation)) / 10;
+            testFloor.transform.localScale = (new Vector3(rect.width - MinRoomSeparation, 1, rect.height - MinRoomSeparation)) / 8;
+            testFloor.transform.Translate(new Vector3(0.5f, 0, 0.5f));
 
             if (roomColor != null)
             {
