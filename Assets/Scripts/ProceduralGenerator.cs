@@ -27,6 +27,7 @@ public class ProceduralGenerator : MonoBehaviour
 
     private List<Rect> RoomRects;
     private GameObject RoomParent;
+
     private List<Vector3> GabrielEdges;
     private bool DrawGizmos;
 
@@ -176,6 +177,10 @@ public class ProceduralGenerator : MonoBehaviour
             //Divide by 10 because the scale of planes is 10. Can be abstracted as a variable if floor is changed
             testFloor.transform.localScale = (new Vector3(rect.width - MinRoomSeparation, 1, rect.height - MinRoomSeparation)) / 8;
             testFloor.transform.Translate(new Vector3(0.5f, 0, 0.5f));
+
+            // Tell the roomGenerators to generate each room
+            RoomGenerator roomGenerator = testFloor.GetComponent<RoomGenerator>();
+            roomGenerator.generateObstacles(/* budget parameter */);
 
             if (roomColor != null)
             {
