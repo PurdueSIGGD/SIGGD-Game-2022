@@ -35,55 +35,17 @@ public class Stamina : MonoBehaviour
         }
     }
 
-    /*
-       Dashes, plays sound / animation, and subtracts stamina for dash, if the player has stamina for it. If  As of 10/7/22, 20 is an arbitrary number
-    */
-    public void Dash()
-    {
-        if (stamina >= 20)
-        {
-            //play dash animation here
-            //play dash sound here
-            stamina -= 20;
+    public bool DecreaseStamina(int amount) {
+        if (stamina >= amount) {
+            stamina -= amount;
+            return true;
+            
         }
+        return false;
     }
 
-    /*
-       Heavy attacks, plays sound / animation, and subtracts stamina for attack, if the player has stamina for it. As of 10/7/22, 25 is an arbitrary number
-    */
-    public void HeavyAttack()
-    {
-        if (stamina >= 25)
-        {
-            //play heavy attack animation here
-            //play heaavy attack sound here
-            stamina -= 25;
-        }
-    }
-
-    /*
-      Changes stamina using a parameter. Used for items that buff / increase stamina, or decrease it for other bonuses if an item like
-      that exists. Needs reasonable limits
-    */
-    public void AddStamina(int stamina)
-    {
-        this.stamina += stamina;
-        if (this.stamina >= 100)
-        {
-            this.stamina = 100;
-        }
-
-    }
-
-    /*
-      Opens a door using stamina if the player has enough, play the sound and animation. As of 10/12/22, 15 is an arbitrary number
-    */
-    public void OpenDoor() {
-       if (stamina >= 15) {
-        //play animation here
-        //play sound here
-        stamina -= 15;
-       }
+    public int GetStamina() {
+        return stamina;
     }
 
     /*
