@@ -21,6 +21,9 @@ public class RoomGenerator : MonoBehaviour
     [SerializeField]
     private GameObject pillarObject;
 
+    [SerializeField]
+    private int pillarCost;
+
 
     void Awake() {
         room = transform;
@@ -39,14 +42,15 @@ public class RoomGenerator : MonoBehaviour
         
     }
 
-    public void generateObstacles() {
+    public void generateObstacles(int budget) {
+        // TODO: Incorporate budget when making pillars
         for (int i = 0; i < GENERATION_POINT_NUM; i++) {
-            if (Random.Range(0, 1) == 0) { continue; }
+            if (Random.Range(0, 2) == 0) { continue; }
             Transform point = generationPoints[i];
-            Vector3 position = transform.position + new Vector3(point.position.x, 0, point.position.z);
+
             // TODO: Uncomment below line and continue next meeting
-            // GameObject pillar = Instantiate(pillarObject, position, Quaternion.identity);
-            // pillar.transform.SetParent(gameObject.transform);
+            GameObject pillar = Instantiate(pillarObject, point.transform.position, Quaternion.identity);
+            pillar.transform.SetParent(point);
         }
     }
 

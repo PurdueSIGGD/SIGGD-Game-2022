@@ -15,6 +15,9 @@ public class ProceduralGenerator : MonoBehaviour
     private int MinRoomWidth, MinRoomDepth, MaxRoomWidth, MaxRoomDepth, TileSize, MinRoomSeparation;
 
     [SerializeField]
+    private int FloorBudget;
+
+    [SerializeField]
     private bool RoundToTileSize;
 
     [SerializeField]
@@ -174,13 +177,14 @@ public class ProceduralGenerator : MonoBehaviour
         {
             GameObject testFloor = Instantiate(floor, new Vector3(rect.center.x, 0, rect.center.y), Quaternion.identity, RoomParent.transform);
             
-            //Divide by 10 because the scale of planes is 10. Can be abstracted as a variable if floor is changed
-            testFloor.transform.localScale = (new Vector3(rect.width - MinRoomSeparation, 1, rect.height - MinRoomSeparation)) / 8;
+            // Divide by 10 because the scale of planes is 10. Can be abstracted as a variable if floor is changed
+            float standardRoomSize = 8.0f;
+            testFloor.transform.localScale = (new Vector3(rect.width - MinRoomSeparation, standardRoomSize, rect.height - MinRoomSeparation)) / standardRoomSize;
             testFloor.transform.Translate(new Vector3(0.5f, 0, 0.5f));
 
             // Tell the roomGenerators to generate each room
             RoomGenerator roomGenerator = testFloor.GetComponent<RoomGenerator>();
-            roomGenerator.generateObstacles(/* budget parameter */);
+            roomGenerator.generateObstacles(FloorBudget / rooms.Count);
 
             if (roomColor != null)
             {
