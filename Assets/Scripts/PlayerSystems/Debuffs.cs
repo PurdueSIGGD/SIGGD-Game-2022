@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using 
 
 public class Debuffs : MonoBehaviour
 {
@@ -64,4 +65,50 @@ public class Debuffs : MonoBehaviour
         }
 
     }
+
+    // This code slows the player down for a little bit. Will implement the restonce the Player has its movement completed.
+    public void Slow(int duration) {
+        double timeSlowed = 0.0
+        bool slow = true;
+        // slow down the player
+        while(slow) {
+            timeSlowed += Time.deltaTime;
+            if (timeSlowed >= duration) {
+                slow = false;
+                // increase player speed again
+            }
+        }
+    }
+
+    // This code makes the player knocked down, at which point they will need to manually get back up.
+    public void knockedDown() {
+        bool knockedDown = true;
+        input one = /*(keyboard input)*/;
+        input two = /*(different keyboard input)*/;
+        input three = /*(final keyboard input)*/;
+        bool firstkey = false;
+        bool secondkey = false;
+        while(knockedDown) {
+            // stop all actions. My (Neel) idea is to make the player input 3 random inputs in quick sucession on their keyboard in order to get back up.
+            if(one) {
+                firstkey = true;
+                if(firstkey) {
+                    if(two) {
+                        secondkey = true;
+                    } else {
+                        firstkey = false;
+                    }
+                    if(firstkey && secondkey) {
+                        if(three) {
+                            knockedDown = false;
+                        } else {
+                            firstkey = false;
+                            secondkey = false;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 }
