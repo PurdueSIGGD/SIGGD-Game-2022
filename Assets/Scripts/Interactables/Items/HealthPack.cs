@@ -10,5 +10,6 @@ public class HealthPack : Item
     {
         // heals player
         //Player.instance.Heal(healAmount);
+        base.Use();
     }
 }
