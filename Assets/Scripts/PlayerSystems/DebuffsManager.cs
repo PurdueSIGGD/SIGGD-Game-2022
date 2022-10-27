@@ -4,40 +4,79 @@ using UnityEngine;
 
 public class DebuffsManager : MonoBehaviour
 {
-    private Player player;
-
     private List<Debuff> debuffs;
 
-    // Start is called before the first frame update
     void Start()
     {
-        player = GetComponent<Player>();
+        debuffs = new List<Debuff>();
     }
 
-    void AddDebuff(Debuff debuff)
+    public void AddDebuff(Debuff debuff)
     {
-        debuff.SetPlayer(player);
-        debuff.StartDebuff();
         debuffs.Add(debuff);
     }
 
-    // we can have a temporary variable what we values we want to change
-    // at the start of a frame, we save the original values of the variables we are about to change,
-    // apply debuffs to temporary variables
-    // then set the temporary variable to the actual values
-    // then before the start of the next frame, get the original values and reapply the debuffs
+    private void ResetDebuffs() {
+        Slow.DebuffPercent = 1f;
+    }
+
     public void UpdateDebuffs()
     {
-        for (int i = 0; i < debuffs.Count; i++) {
+        for (int i = 0; i < debuffs.Count; i++)
+        {
             Debuff debuff = debuffs[i];
-            if (debuff.HasEnded()) {
-                debuff.EndDebuff();
+            debuff.UpdateDebuff(Time.deltaTime);
+            if (debuff.HasEnded())
+            {
                 debuffs.RemoveAt(i);
                 i--;
             }
         }
-        foreach (Debuff debuff in debuffs) {
-            debuff.UpdateDebuff();
+
+        ResetDebuffs();
+        foreach (Debuff debuff in debuffs)
+        {
+            debuff.ApplyDebuff();
         }
     }
+
+    public Vector2 ApplySlow(Vector2 velocity)
+    {
+        return Slow.DebuffPercent * velocity;
+    }
 }
+
+
+// Old Code
+// This code makes the player knocked down, at which point they will need to manually get back up.
+// public void knockedDown() {
+//     bool knockedDown = true;
+//     // input one = /*(keyboard input)*/;
+//     // input two = /*(different keyboard input)*/;
+//     // input three = /*(final keyboard input)*/;
+//     bool firstkey = false;
+//     bool secondkey = false;
+//     while(knockedDown) {
+//         // stop all actions. My (Neel) idea is to make the player input 3 random inputs in quick sucession on their keyboard in order to get back up.
+//         if(one) {
+//             firstkey = true;
+//             if(firstkey) {
+//                 if(two) {
+//                     secondkey = true;
+//                 } else {
+//                     firstkey = false;
+//                 }
+//                 if(firstkey && secondkey) {
+//                     if(three) {
+//                         knockedDown = false;
+//                     } else {
+//                         firstkey = false;
+//                         secondkey = false;
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+
+

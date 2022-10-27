@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] public float MaxSpeed = 10;
+    [SerializeField] private float MaxSpeed = 10;
     [SerializeField] private float Friction = 100;
     [SerializeField] private float Acceleration = 100;
     [SerializeField] private float CamRotXSpeed = 0.2f;
     [SerializeField] private float CamRotYSpeed = 0.2f;
 
     private new Rigidbody rigidbody;
+    private DebuffsManager debuffs;
     private Transform camHolderTransform;
     private Vector2 input;
     private Vector2 lookInput;
@@ -19,6 +20,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        debuffs = GetComponent<DebuffsManager>();
         camHolderTransform = GetComponentInChildren<Camera>().transform.parent;
     }
 
@@ -30,17 +32,6 @@ public class Movement : MonoBehaviour
     public void SetLookInput(Vector2 lookInput)
     {
         this.lookInput = lookInput;
-    }
-
-    public float GetMaxSpeed() {
-        return MaxSpeed;
-    }
-
-    public void SetMaxSpeed(float speed) {
-        if (speed < 0) {
-            // Debug.LogError("Speed should not be less than 0", )
-        }
-        MaxSpeed = speed;
     }
 
     /// <summary>
@@ -75,11 +66,10 @@ public class Movement : MonoBehaviour
         }
 
         //copies the y velocity so that velocity due to gravity is not removed
-        //Note that this causes some wierd behavior when going up ramps, but this can be fixed i the future if found to be a problem
-        Vector3 move = new Vector3(velocity.x, rigidbody.velocity.y, velocity.y);
-        
-        
-        rigidbody.velocity = move;
+        Vector2 debuffedVelocity = debuffs.ApplySlow(velocity);
+        Debug.Log(debuffedVelocity);
+        Vector3 move = new Vector3(debuffedVelocity.x, rigidbody.velocity.y, debuffedVelocity.y) * Time.fixedDeltaTime;
+        rigidbody.MovePosition(rigidbody.position + move);
 
         //Rotation
 

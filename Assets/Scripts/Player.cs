@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
         // Player Systems
         movement = GetComponent<Movement>();
         inventory = GetComponent<Inventory>();
+        debuffsManager = GetComponent<DebuffsManager>();
     }
 
     void FixedUpdate()
@@ -40,5 +41,11 @@ public class Player : MonoBehaviour
     void OnLook(InputValue lookValue)
     {
         movement.SetLookInput(lookValue.Get<Vector2>());
+    }
+
+    // test slow debuff
+    void OnFire()
+    {
+        debuffsManager.AddDebuff(new Slow(3f, 0.5f));
     }
 }

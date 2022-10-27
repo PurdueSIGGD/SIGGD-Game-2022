@@ -1,20 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class Slow : Debuff
 {
-    private int percentageSlow;
-
-    public Slow(float duration, int percentageSlow) : base (duration) {
-       this.percentageSlow = percentageSlow;
+    public static float _debuffPercent;
+    public static float DebuffPercent
+    {
+        get { return _debuffPercent; }
+        set
+        {
+            _debuffPercent = value;
+            if (_debuffPercent <= 0f)
+            {
+                _debuffPercent = 0f;
+            }
+        }
     }
-     
-    public override void StartDebuff() {
-        player.Movement.SetMaxSpeed(player.Movement.GetMaxSpeed() * percentageSlow / 100f);
-    } 
 
-    public override void EndDebuff() {
-        player.Movement.SetMaxSpeed(player.Movement.GetMaxSpeed() * 100 / percentageSlow);
+    private float percentageSlow;
+
+    public Slow(float duration, float percentageSlow) : base(duration)
+    {
+        this.percentageSlow = percentageSlow;
+    }
+
+    public override void ApplyDebuff()
+    {
+        DebuffPercent -= percentageSlow;
     }
 }
