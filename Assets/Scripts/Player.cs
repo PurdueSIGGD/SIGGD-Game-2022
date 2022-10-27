@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     private Inventory inventory;
     private DebuffsManager debuffsManager;
 
+    public Movement Movement => movement;
+
     void Start()
     {
         // Player Systems
