@@ -5,20 +5,20 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(Inventory))]
-[RequireComponent(typeof(Stamina))]
+[RequireComponent(typeof(Debuffs))]
 class Player : MonoBehaviour
 {
     // Player Systems
     private Movement movement;
     private Inventory inventory;
-    private Stamina stamina;
+    private Debuffs debuffs;
 
     void Start()
     {
         // Player Systems
         movement = GetComponent<Movement>();
         inventory = GetComponent<Inventory>();
-        stamina = GetComponent<Stamina>();
+        debuffs = GetComponent<Debuffs>();
     }
 
     void FixedUpdate()
