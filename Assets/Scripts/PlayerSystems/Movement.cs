@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] private float MaxSpeed = 10;
+    [SerializeField] public float MaxSpeed = 10;
     [SerializeField] private float Friction = 100;
     [SerializeField] private float Acceleration = 100;
     [SerializeField] private float CamRotXSpeed = 0.2f;
@@ -32,6 +32,17 @@ public class Movement : MonoBehaviour
         this.lookInput = lookInput;
     }
 
+    public float GetMaxSpeed() {
+        return MaxSpeed;
+    }
+
+    public void SetMaxSpeed(float speed) {
+        if (speed < 0) {
+            // Debug.LogError("Speed should not be less than 0", )
+        }
+        MaxSpeed = speed;
+    }
+
     /// <summary>
     /// Moves a vector2 towards a target vector2 by a given amount
     /// </summary>
@@ -46,8 +57,7 @@ public class Movement : MonoBehaviour
 
     public void MovePlayer()
     {
-        //Movement
-
+        // Movement
         if (input.Equals(Vector2.zero))
         {
             // if no input, slow down

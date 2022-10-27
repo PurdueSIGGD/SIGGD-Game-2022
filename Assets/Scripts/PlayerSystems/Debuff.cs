@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Debuff : MonoBehaviour
 {
-    private Player player;
+    protected Player player;
     private float duration;
     private float time;
 

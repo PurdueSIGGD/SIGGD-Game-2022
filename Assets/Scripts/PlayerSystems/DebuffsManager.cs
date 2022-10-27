@@ -21,7 +21,11 @@ public class DebuffsManager : MonoBehaviour
         debuffs.Add(debuff);
     }
 
-    // Update is called once per frame
+    // we can have a temporary variable what we values we want to change
+    // at the start of a frame, we save the original values of the variables we are about to change,
+    // apply debuffs to temporary variables
+    // then set the temporary variable to the actual values
+    // then before the start of the next frame, get the original values and reapply the debuffs
     public void UpdateDebuffs()
     {
         for (int i = 0; i < debuffs.Count; i++) {

@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Slow : Debuff
 {
-    public Slow(float duration) : base(duration) {
+    private float percentage;
+
+    public Slow(float duration, float percentage) : base(duration) {
+        this.percentage = percentage;
     }
 
     public override void StartDebuff() {
-
+        
     }
 
     public override void EndDebuff() {
