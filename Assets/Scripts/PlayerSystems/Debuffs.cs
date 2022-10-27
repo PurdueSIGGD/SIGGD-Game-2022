@@ -111,4 +111,9 @@ public class Debuffs : MonoBehaviour
         }
     }
 
+    // This code gives the player bad luck; essentially, if something random happens, the worst possible result will happen.
+    public void badLuck() {
+        bool badLuck = true;
+    }
+
 }
