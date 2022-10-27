@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BadLuck : Debuffs
+public class BadLuck : Debuff
 {
-    bool badLuck = true;
+    public override startDebuff(){}
+
+    public override stopDebuff(){}
 }
