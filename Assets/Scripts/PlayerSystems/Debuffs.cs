@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Debuffs : MonoBehaviour
+public class Debuff : MonoBehaviour
 {
     private Movement movement;
 
