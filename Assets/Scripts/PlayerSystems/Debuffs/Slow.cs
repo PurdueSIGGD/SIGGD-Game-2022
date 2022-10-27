@@ -1,18 +1,6 @@
 public class Slow : Debuff
 {
-    public static float _debuffPercent;
-    public static float DebuffPercent
-    {
-        get { return _debuffPercent; }
-        set
-        {
-            _debuffPercent = value;
-            if (_debuffPercent <= 0f)
-            {
-                _debuffPercent = 0f;
-            }
-        }
-    }
+    public static float DebuffPercent { get; private set; }
 
     private float percentageSlow;
 
@@ -24,5 +12,9 @@ public class Slow : Debuff
     public override void ApplyDebuff()
     {
         DebuffPercent -= percentageSlow;
+        if (DebuffPercent < 0)
+        {
+            DebuffPercent = 0;
+        }
     }
 }
