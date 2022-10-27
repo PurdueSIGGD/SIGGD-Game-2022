@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class Slow : Debuff
 {
-    private float percentage;
+    private int percentageSlow;
 
-    public Slow(float duration, float percentage) : base(duration) {
-        this.percentage = percentage;
+    public Slow(float duration, int percentageSlow) : base (duration) {
+       this.percentageSlow = percentageSlow;
     }
-
+     
     public override void StartDebuff() {
-        
-    }
+        player.Movement.SetMaxSpeed(player.Movement.GetMaxSpeed() * percentageSlow / 100f);
+    } 
 
     public override void EndDebuff() {
-
+        player.Movement.SetMaxSpeed(player.Movement.GetMaxSpeed() * 100 / percentageSlow);
     }
 }
