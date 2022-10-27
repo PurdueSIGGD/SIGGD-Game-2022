@@ -6,8 +6,8 @@ public class BadLuck : Debuff
 {
     public BadLuck(float duration) : base(duration) {
     }
-    
-    public override startDebuff(){}
 
-    public override stopDebuff(){}
+    public override StartDebuff(){}
+
+    public override EndDebuff(){}
 }

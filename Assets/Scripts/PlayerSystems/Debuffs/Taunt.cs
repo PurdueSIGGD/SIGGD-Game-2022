@@ -7,8 +7,8 @@ public class Taunt : Debuff
     public Taunt(float duration) : base(duration) {
     }
 
-    public override startDebuff(){}
+    public override StartDebuff(){}
 
-    public override stopDebuff(){}
+    public override EndDebuff(){}
     
 }

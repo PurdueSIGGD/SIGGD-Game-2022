@@ -7,7 +7,7 @@ public class Banished : Debuff
     public Banished(float duration) : base(duration) {
     }
 
-    public override startDebuff(){}
+    public override StartDebuff(){}
 
-    public override stopDebuff(){}
+    public override EndDebuff(){}
 }
