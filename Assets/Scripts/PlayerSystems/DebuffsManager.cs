@@ -17,7 +17,7 @@ public class DebuffsManager : MonoBehaviour
     }
 
     private void ResetDebuffs() {
-        Slow.DebuffPercent = 1f;
+        Slow.Reset();
     }
 
     public void UpdateDebuffs()

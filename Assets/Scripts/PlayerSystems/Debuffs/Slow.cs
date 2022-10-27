@@ -9,6 +9,11 @@ public class Slow : Debuff
         this.percentageSlow = percentageSlow;
     }
 
+    public static void Reset()
+    {
+        DebuffPercent = 1f;
+    }
+
     public override void ApplyDebuff()
     {
         DebuffPercent -= percentageSlow;
