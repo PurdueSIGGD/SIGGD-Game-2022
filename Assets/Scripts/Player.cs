@@ -5,20 +5,19 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(Inventory))]
-[RequireComponent(typeof(Debuffs))]
-class Player : MonoBehaviour
+[RequireComponent(typeof(DebuffsManager))]
+public class Player : MonoBehaviour
 {
     // Player Systems
     private Movement movement;
     private Inventory inventory;
-    private Debuffs debuffs;
+    private DebuffsManager debuffsManager;
 
     void Start()
     {
         // Player Systems
         movement = GetComponent<Movement>();
         inventory = GetComponent<Inventory>();
-        debuffs = GetComponent<Debuffs>();
     }
 
     void FixedUpdate()
@@ -28,7 +27,7 @@ class Player : MonoBehaviour
 
     void Update()
     {
-
+        debuffsManager.UpdateDebuffs();
     }
 
     void OnMove(InputValue movementValue)
