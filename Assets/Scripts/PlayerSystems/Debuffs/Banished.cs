@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Banished : Debuff
 {
+    public Banished(float duration) : base(duration) {
+    }
+
     public override startDebuff(){}
 
     public override stopDebuff(){}
