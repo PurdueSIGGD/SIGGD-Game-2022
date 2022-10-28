@@ -61,4 +61,9 @@ public class RoomGenerator : MonoBehaviour
         Transform pt4 = gameObject.transform.Find("Random Spawn 4");
         return new Transform[GENERATION_POINT_NUM] {pt1, pt2, pt3, pt4};
     }
+
+    public void EditorAwake() {
+        room = transform;
+        generationPoints = getGenerationPoints();
+    }
 }
