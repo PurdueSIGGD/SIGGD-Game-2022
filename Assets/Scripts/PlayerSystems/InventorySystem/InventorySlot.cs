@@ -110,6 +110,8 @@ public class InventorySlot : MonoBehaviour
         int removeIndex = stack.Count - 1;
         Item item = stack[removeIndex];
 
+        item.Use();
+
         // if forcing an item remove by not removing a charge     or     if charges == 0
         if (!shouldRemoveCharge || item.removeCharge())
             stack.RemoveAt(removeIndex);
