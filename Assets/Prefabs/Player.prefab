@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 2339231554921583061}
   - component: {fileID: 2339231554921583062}
   - component: {fileID: 6299116096705303048}
-  - component: {fileID: 7557110429926041442}
   - component: {fileID: 8028695752240734996}
   m_Layer: 0
   m_Name: Player
@@ -359,18 +358,6 @@ MonoBehaviour:
   Acceleration: 40
   CamRotXSpeed: 0.2
   CamRotYSpeed: 0.2
---- !u!114 &7557110429926041442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2339231554921583063}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0e8b15d496804b27bb466aa8c047bb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8028695752240734996
 MonoBehaviour:
   m_ObjectHideFlags: 0

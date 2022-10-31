@@ -4,13 +4,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Movement))]
-[RequireComponent(typeof(Inventory))]
 [RequireComponent(typeof(DebuffsManager))]
 public class Player : MonoBehaviour
 {
     // Player Systems
     private Movement movement;
-    private Inventory inventory;
     private DebuffsManager debuffsManager;
 
     public Movement Movement => movement;
@@ -19,7 +17,6 @@ public class Player : MonoBehaviour
     {
         // Player Systems
         movement = GetComponent<Movement>();
-        inventory = GetComponent<Inventory>();
         debuffsManager = GetComponent<DebuffsManager>();
     }
 
