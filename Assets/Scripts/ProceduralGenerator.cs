@@ -249,10 +249,20 @@ public class ProceduralGenerator : MonoBehaviour
     {
         if (GabrielEdges != null && DrawGizmos)
         {
+            // Direct connections from room to room
             Gizmos.color = Color.blue;
             for (int i = 0; i < GabrielEdges.Count / 2; i++)
             {
                 Gizmos.DrawLine(GabrielEdges[i * 2], GabrielEdges[i * 2 + 1]);
+            }
+            // 90 degree hallways from room to room
+            Gizmos.color = Color.green;
+            for (int i = 0; i < GabrielEdges.Count / 2; i++)
+            {
+                float deltaX = GabrielEdges[i * 2].x - GabrielEdges[i * 2 + 1].x;
+                float deltaZ = GabrielEdges[i * 2].z - GabrielEdges[i * 2 + 1].z;
+                Gizmos.DrawLine(GabrielEdges[i * 2], GabrielEdges[i * 2] + Vector3.left * deltaX);
+                Gizmos.DrawLine(GabrielEdges[i * 2 + 1], GabrielEdges[i * 2 + 1] + Vector3.forward * deltaZ);
             }
         }
     }
