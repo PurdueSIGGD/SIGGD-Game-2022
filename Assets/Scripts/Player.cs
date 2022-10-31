@@ -4,18 +4,18 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Movement))]
-[RequireComponent(typeof(Inventory))]
+//[RequireComponent(typeof(Inventory))]
 class Player : MonoBehaviour
 {
     // Player Systems
     private Movement movement;
-    private Inventory inventory;
+    //private Inventory inventory;
 
     void Start()
     {
         // Player Systems
         movement = GetComponent<Movement>();
-        inventory = GetComponent<Inventory>();
+        //inventory = GetComponent<Inventory>();
     }
 
     void FixedUpdate()

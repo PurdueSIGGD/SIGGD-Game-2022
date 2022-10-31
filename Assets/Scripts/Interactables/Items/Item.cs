@@ -22,7 +22,9 @@ public class Item : MonoBehaviour, IInteractable
 
     // serializable fields
     [SerializeField] string itemName;
-    [SerializeField] int stackSize = 1;
+    [SerializeField] ItemType type = ItemType.GENERAL;
+    [SerializeField] int maxStackSize = 1;
+    [SerializeField] int currentNumCharges = 1;
     [SerializeField] bool isShiny;
     [SerializeField] string description;
 
@@ -49,7 +51,7 @@ public class Item : MonoBehaviour, IInteractable
     /// Handles all logic for when the player picks up an item.
     /// </summary>
     public void Grab()
-    {
+    {        
         if (inInventory)
         {
             Debug.LogError($"Tried to grab item \"{itemName}\" when it's already in player's inventory.");
@@ -82,12 +84,12 @@ public class Item : MonoBehaviour, IInteractable
         else
             transform.position = mainCam.transform.position;
 
+        gameObject.SetActive(true);
         transform.parent = null;
         transform.localScale = startLocalScale;
 
         // add to ground
         processInteract(false);
-        Debug.Log($"{itemName} released");
     }
 
     /// <summary>
@@ -98,7 +100,6 @@ public class Item : MonoBehaviour, IInteractable
     {
         // remove from ground
         processInteract(true);
-        Debug.Log($"{itemName} grabbed");
     }
 
     // handles things that are adjusted for both grabbing and releasing
@@ -133,16 +134,48 @@ public class Item : MonoBehaviour, IInteractable
         Debug.Log($"{itemName} was activated");
     }
 
+    public bool isStackable()
+    {
+        return maxStackSize > 1;
+    }
+
     public void DestroyItem()
     {
         Debug.Log($"destroying {itemName}");
         Destroy(gameObject);
     }
 
+    public string getItemName()
+    {
+        return itemName;
+    }
+
+    public int getStackSize()
+    {
+        return maxStackSize;
+    }
+
+    public int getCurrentNumCharges()
+    {
+        return currentNumCharges;
+    }
+
+    public bool removeCharge()
+    {
+        return --currentNumCharges <= 0;
+    }
+
+    public bool isType(ItemType itemType)
+    {
+        return type.Equals(itemType);
+    }
+
     void OnCollisionEnter(Collision collision)
-    {        
+    {
         // ensures this is a valid item to be picked up, and the player is touching this
         if (collision != null && gameObject != null && !inInventory && collision.gameObject.tag.Equals(PLAYER_TAG))
             Grab();
     }
 }
+
+public enum ItemType { TOOL, GENERAL, KEY }

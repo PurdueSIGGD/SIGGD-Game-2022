@@ -21,18 +21,10 @@ public class InventorySystem : MonoBehaviour {
     // The height at which items are dropped at before falling toward the ground
     public const float ITEM_DROP_HEIGHT = 1f;
 
-    private static int NUMBER_OF_GENERAL_SLOTS = 3;
-    private static int MAX_STACKS = 3;
-    private static int NUMBER_OF_KEY_SLOTS = 1;
-    private static int NUMBER_OF_TOOL_SLOTS = 1;
-    private static int INDEX_OF_KEY = NUMBER_OF_GENERAL_SLOTS;
-    private static int INDEX_OF_TOOL = NUMBER_OF_GENERAL_SLOTS + NUMBER_OF_KEY_SLOTS;
-    private static int MAX_SLOTS = NUMBER_OF_GENERAL_SLOTS + NUMBER_OF_KEY_SLOTS + NUMBER_OF_TOOL_SLOTS;
 
     [SerializeField] private GameObject slotHolder;
 
-    private InventorySlot[] inventory = new InventorySlot[MAX_SLOTS];
-    private int[] itemsPerSlot = new int[MAX_SLOTS];
+    private InventorySlot[] inventory;
 
     // the index of the current selected slot
     private int selectedSlotNum = 0;
@@ -41,7 +33,8 @@ public class InventorySystem : MonoBehaviour {
         instance = this;
 
         // Grabs all children InventorySlots to base the inventory array on the InventoryCanvas prefab
-        inventory = slotHolder.GetComponentsInChildren<InventorySlot>();
+        // ASSUMES that all slots are ordered in the hierarchy top->bottom = left->right in the HUD
+        inventory = GetComponentsInChildren<InventorySlot>();
     }
 
     // Start is called before the first frame update
@@ -59,7 +52,7 @@ public class InventorySystem : MonoBehaviour {
     {
         // process drop
         if (Keyboard.current.qKey.wasPressedThisFrame)
-            Drop();
+            Drop(false);
 
 
         // process use
@@ -75,53 +68,31 @@ public class InventorySystem : MonoBehaviour {
             int slotChange = (scrollValue < 0) ? 1 : -1;
 
             // changes the selected slot accordingly
-            selectedSlotNum = (selectedSlotNum + MAX_SLOTS + slotChange) % MAX_SLOTS;
+            // scrolling up selects right slot, scrolling down selects right slot
+            selectedSlotNum = (selectedSlotNum + inventory.Length + slotChange) % inventory.Length;
             inventory[prevSelectedSlotNum].setSelected(false);
             inventory[selectedSlotNum].setSelected(true);
         }
     }
 
-    private int CalculateEmptyGeneralSlots() {
+    private int CalculateEmptySlots(ItemType type) {
         int slots = 0;
-        for (int i = 0; i < INDEX_OF_KEY; i++) {
-            if (inventory[i] == null) {
+        for (int i = 0; i < inventory.Length; i++)
+        {
+            if (inventory[i].isStackType(type))
                 slots++;
-            }
         }
         return slots;
     }
 
-    private int CalculateEmptyKeySlots() {
-        int slots = 0;
-        for (int i = INDEX_OF_KEY; i < INDEX_OF_TOOL; i++) {
-            if (inventory[i] == null) {
-                slots++;
-            }
-        }
-        return slots;
-    }
-
-    private int CalculateEmptyToolSlots() {
-        int slots = 0;
-        for (int i = INDEX_OF_TOOL; i < MAX_SLOTS; i++) {
-            if (inventory[i] == null) {
-                slots++;
-            }
-        }
-        return slots;
-    }
-
+    // don't think we ever will need  this
     private int FindIndexOf(Item item) {
-        for (int i = 0; i < MAX_SLOTS; i++) {
-            if (inventory[i] == item) {
+        for (int i = 0; i < inventory.Length; i++) {
+            if (inventory[i].stackName == item.getItemName()) {
                 return i;
             }
         }
         return -1;
-    }
-
-    void Display() {
-        //I don't know if we need this method or how to imp it
     }
 
     /// <summary>
@@ -131,36 +102,37 @@ public class InventorySystem : MonoBehaviour {
     /// <param name="item"> The Item script of the item GameObject that should be picked up. </param>
     /// <returns>True if there was room to pick up the item</returns>
     public void Add(Item item) {
-        int slot = CalculateEmptyGeneralSlots();
-        if (slot == 0) {
-            Choose(item);
-        }
-        else if (slot > 0 && slot < (MAX_SLOTS + 1))
-        {
-            for (int i = 0; i < MAX_SLOTS; i++)
+        bool addSucceeded = false;
+
+        for (int i = 0; i < inventory.Length; i++)
+        {            
+            // places the item into the inventory slot
+            bool stackAddSuccessful = inventory[i].addToStack(item);
+
+            // finishes the item's state change to being in the UI
+            if (stackAddSuccessful)
+                item.onInventoryAddSuccess();
+
+            if (stackAddSuccessful)
             {
-                if (inventory[i].getHeldItem() == null)
-                {
-                    // places the item into the inventory slot
-                    inventory[i].setHeldItem(item);
-
-                    // finishes the item's state change to being in the UI
-                    item.onInventoryAddSuccess();
-
-                    // ends search for open slot
-                    break;
-                }
+                // ends search for open slot
+                addSucceeded = stackAddSuccessful;
+                break;
             }
-        } else {
-            Debug.Log("INVENTORY SIZE ERROR::InventorySystem::Add(InventoryItem)");
         }
+
+        if (!addSucceeded)
+            Choose(item);
     }
 
     void Add(Item item, string anotherVar) { //Second var is so it doesn't complain
+        /*   // commented out because of compiler errors
+
         int slots = -1;
         string type = ""; //Empty String so the code doesn't error before we have a method to determine what type of item it is
         // string type = item.GetItemType();
 
+        
         if (type.Equals("General")) {
             slots = CalculateEmptyGeneralSlots();
             for (int i = 0; i < INDEX_OF_KEY; i++) {
@@ -207,45 +179,42 @@ public class InventorySystem : MonoBehaviour {
 
             Choose(item);
         }
-
+        */
     }
 
     /// <summary>
     /// Uses the item in the currently selected inventory slot.  Then, the item is destroyed and removed from the inventory.
     /// </summary>
     public void Use() {
-        Item curItem = inventory[selectedSlotNum].getHeldItem();
+        // drops an item if there is one in the current inventory slot      
+        Item droppedItem = Drop(true);
 
-        if (curItem != null)
-        {
-            int index = FindIndexOf(curItem);
-            int stacks = itemsPerSlot[index];
-            curItem.Use();
+        if (droppedItem == null)
+            return;
 
-            // drops item
-            if (stacks <= 1) {
-                Drop();
-            } else {
-                itemsPerSlot[index]--;
-            }
+        // uses the item
+        droppedItem.Use();
 
-            // destroys dropped item
-            curItem.DestroyItem();
-        }
+        // destroys dropped item        
+        droppedItem.DestroyItem();
     }
 
     /// <summary>
     /// Drops the item in the currently selected inventory slot in from of the player.  
     /// The distance from the player is determined by the vertical angle of the camera.
     /// </summary>
-    public void Drop() {
-        Item curItem = inventory[selectedSlotNum].getHeldItem();
+    public Item Drop(bool shouldRemoveCharge) {
+        InventorySlot curSlot = inventory[selectedSlotNum];
 
+        // can't drop tool ammo or drop from an empty stack
+        if (!curSlot.hasStack || (!shouldRemoveCharge && !curSlot.isStackType(ItemType.GENERAL)))
+            return null;
+
+        Item curItem = curSlot.removeCharge(shouldRemoveCharge);
         if (curItem != null)
-        {
             curItem.Release();
-            inventory[selectedSlotNum].setHeldItem(null);
-        }
+
+        return curItem;
     }
 
     void Choose(Item item) {
@@ -263,6 +232,51 @@ public class InventorySystem : MonoBehaviour {
         string type = "";
         // string type = item.GetItemType();
 
+
+
+
+
+        // ---------- [NOTE]    -    PLEASE READ    -    UNITY ESSENTIALS ----------
+        //
+        //
+        //
+        //
+        // In Unity, you do *NOT* want to use while loops like this where you wait for input.        
+        //
+        //     We do have access to writing main() in Unity, so we don't have complete control over every function call made during the running of our game.
+        //     Instead, when we need it, we have a class extend MonoBehaviour, and then we can use certain reserved functions like Awake(), Start(), and Update().
+        //     Unity will call these functions from its internal running of the game, which is how the code we write is accessed.  The ONLY way to have any of your
+        //     code is run is by having execution start in one of the functions that Unity calls, including those mentioned above.  You can then call code that is
+        //     outside of those functions, and even use classes that aren't MonoBehaviours and resemble classes you would write normally outside of Unity.
+        //
+        //     Extending MonoBehaviour makes the class you write a Component, which is something that can be added to GameObjects in Unity.
+        //     Everything you see in the Unity Editor heirarchy is a GameObject with various Components or nested GameObjects attached.
+        //
+        //     In our code, we use Awake() and Start() for doing any additional setup for the GameObject our MonoBehaviour is attached to,
+        //     including any Component on that GameObjec, including the MonoBeviour script we wrote.  This setup is done once during the beginning of the
+        //     GameObject's lifetime, and we typically use Update() if changes may need to be made over a GameObject's lifetime.
+        //
+        //     Every frame, Unity's internals will call every Update() using a singular thread.  This means that all the code in all of the Update() functions
+        //     that are used in the game Scene at the current moment, are all trying to be executed by Unity within one single frame (often 1/60 of a second).
+        //     So, if our code takes too long to execute, it will lag the game since the code that's supposed to fit within one frame is not actually being
+        //     completed within one frame.  In fact, the game will freeze until all of the Update() functions have been completed for that frame.
+        //
+        //     This means that if, on a given frame, Choose() is called, the entire thread that is calling every MonoBehaviour's Update()
+        //     will be stuck in this while loop, freezing the entire game, and almost definitely crashing it.  A new "frame" will not be reached internally
+        //     by Unity because Choose() is never left.
+        //     
+        //     You want to implement while loop functionality like this by setting a boolean field, and moving the contents of this loop to an
+        //         if (boolean) {
+        //           loop internals ...
+        //           return;
+        //         }
+        //
+        //     It looks like this functionality is unfinished since the type of item is checked for, yet the same operations are done in each case.
+        //     We can discuss what sort of functionality we want here.
+        //     I think there can be an easier solution that doesn't take the player out of the game world and into a menu.
+
+
+        /*        // commented out because this function will crash the game, see below NOTE for explanation
         while (true) {
             if (type.Equals("General")) {
                 if (Keyboard.current.qKey.wasPressedThisFrame) {
@@ -290,6 +304,7 @@ public class InventorySystem : MonoBehaviour {
                 }
             }
         }
+        */
     }
 
 
