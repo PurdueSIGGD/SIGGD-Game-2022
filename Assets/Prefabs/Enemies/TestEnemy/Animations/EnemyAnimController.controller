@@ -30,7 +30,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Idle
-  m_Speed: 1
+  m_Speed: 0.0625
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 5056948521289355264}
@@ -104,7 +104,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Move
-  m_Speed: 1
+  m_Speed: 0.0625
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -6981751078686286700}
@@ -304,7 +304,7 @@ BlendTree:
   m_Name: Move
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 4b9538e2906ca1e4fbda10058d78bc3f, type: 2}
+    m_Motion: {fileID: 7400000, guid: 2000524fbb2600a49b3d10647bc14c54, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -312,7 +312,7 @@ BlendTree:
     m_DirectBlendParameter: Direction
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 2000524fbb2600a49b3d10647bc14c54, type: 2}
+    m_Motion: {fileID: 7400000, guid: a82f2fda58bc2fc4393bd9f79448d38a, type: 2}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -320,7 +320,7 @@ BlendTree:
     m_DirectBlendParameter: Direction
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: a82f2fda58bc2fc4393bd9f79448d38a, type: 2}
+    m_Motion: {fileID: 7400000, guid: 652980646bb657d4d8f5f05c581132eb, type: 2}
     m_Threshold: 2
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -328,7 +328,7 @@ BlendTree:
     m_DirectBlendParameter: Direction
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 652980646bb657d4d8f5f05c581132eb, type: 2}
+    m_Motion: {fileID: 7400000, guid: 4b9538e2906ca1e4fbda10058d78bc3f, type: 2}
     m_Threshold: 3
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -375,7 +375,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Attack
-  m_Speed: 1
+  m_Speed: 0.0625
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 514991724566710785}

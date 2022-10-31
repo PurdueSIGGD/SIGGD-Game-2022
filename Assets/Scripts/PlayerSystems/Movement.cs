@@ -80,7 +80,7 @@ public class Movement : MonoBehaviour
             // if statement used to stop camera from going upside down
             float vertRotation = - lookInput.y * CamRotYSpeed;
             if ((camHolderTransform.localRotation.eulerAngles.x + vertRotation < 90) || camHolderTransform.localRotation.eulerAngles.x + vertRotation > 270) {
-                Debug.Log(camHolderTransform.localRotation.eulerAngles.x);
+                //Debug.Log(camHolderTransform.localRotation.eulerAngles.x);
                 camHolderTransform.Rotate(new Vector3(vertRotation, 0, 0), Space.Self);
             }
         }
