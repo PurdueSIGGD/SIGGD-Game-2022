@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/enemyStateMachineTesting.unity
+    guid: d98375e2c95935542bed343a50e2251b
+  - enabled: 1
     path: Assets/Scenes/VoxelTesting.unity
     guid: a897f3fd63f009540affa971361d057c
   m_configObjects:

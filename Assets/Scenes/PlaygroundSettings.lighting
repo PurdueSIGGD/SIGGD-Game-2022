@@ -21,7 +21,7 @@ LightingSettings:
   m_BakeResolution: 16
   m_Padding: 2
   m_LightmapCompression: 3
-  m_AO: 0
+  m_AO: 1
   m_AOMaxDistance: 1
   m_CompAOExponent: 0.4
   m_CompAOExponentDirect: 0.4
