@@ -123,6 +123,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &33315832 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2339231554921583057, guid: 6dcd489471c074e12ac23453e6194f84,
+    type: 3}
+  m_PrefabInstance: {fileID: 601839183}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &168964144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -593,7 +599,7 @@ PrefabInstance:
     - target: {fileID: 2339231554921583057, guid: 6dcd489471c074e12ac23453e6194f84,
         type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 2339231554921583057, guid: 6dcd489471c074e12ac23453e6194f84,
         type: 3}
@@ -799,7 +805,7 @@ PrefabInstance:
     - target: {fileID: 8345070699079395522, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8345070699079395522, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
         type: 3}
@@ -937,7 +943,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 33315832}
     m_Modifications:
     - target: {fileID: 1860287262080920814, guid: c27aa4513076e2a45a8fd865d186b1bb,
         type: 3}
@@ -982,7 +988,7 @@ PrefabInstance:
     - target: {fileID: 1860287262435412905, guid: c27aa4513076e2a45a8fd865d186b1bb,
         type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1860287262435412905, guid: c27aa4513076e2a45a8fd865d186b1bb,
         type: 3}
@@ -1876,7 +1882,7 @@ PrefabInstance:
     - target: {fileID: 232863479882676078, guid: ffa59d6d5d0b8594fa9da49af58b9ba5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 232863479882676078, guid: ffa59d6d5d0b8594fa9da49af58b9ba5,
         type: 3}
