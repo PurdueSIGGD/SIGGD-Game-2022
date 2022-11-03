@@ -241,36 +241,35 @@ public class ProceduralGenerator : MonoBehaviour
                 }
             }
         }
-
         return FinalEdges;
     }
 
-    Vector2 getRoomXBounds() {
-        float minX = RoomRects[0].xMax;
-        float maxX = minX;
+    /**
+     * Returns [(minX, maxX), (minY, maxY)]
+     */
+    Vector2[] getRoomBounds() {
+        // Make default bounds
+        float[] minDims = new float[] {RoomRects[0].xMin, RoomRects[0].yMin};
+        float[] maxDims = new float[] {RoomRects[0].xMax, RoomRects[0].yMax};
+        // Loop over each room
         foreach (Rect room in RoomRects) {
-            if (room.xMax > maxX) {
-                maxX = room.xMax;
+            // Get dimensions for the room
+            float[] roomMinDims = new float[] {room.xMin, room.yMin};
+            float[] roomMaxDims = new float[] {room.xMin, room.yMin};
+            // Test max for x and y
+            for (int i = 0; i < roomMaxDims.Length; i++) {
+                if (roomMaxDims[i] > maxDims[i]) {
+                    maxDims[i] = roomMaxDims[i];
+                }
             }
-            else if (room.xMin < minX) {
-                minX = room.xMin;
+            // Test min for x and y
+            for (int i = 0; i < roomMaxDims.Length; i++) {
+                if (roomMaxDims[i] > maxDims[i]) {
+                    maxDims[i] = roomMaxDims[i];
+                }
             }
         }
-        return new Vector2(minX, maxX);
-    }
-
-    Vector2 getRoomYBounds() {
-        float minY = RoomRects[0].yMax;
-        float maxY = minY;
-        foreach (Rect room in RoomRects) {
-            if (room.yMax > maxY) {
-                maxY = room.yMax;
-            }
-            else if (room.yMin < minY) {
-                minY = room.yMin;
-            }
-        }
-        return new Vector2(minY, maxY);
+        return new Vector2[] {new Vector2(minDims[0], maxDims[0]), new Vector2(minDims[1], maxDims[1])};
     }
 
     void OnDrawGizmos()
