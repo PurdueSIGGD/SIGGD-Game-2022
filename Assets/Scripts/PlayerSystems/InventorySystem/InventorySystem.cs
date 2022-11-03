@@ -28,6 +28,8 @@ public class InventorySystem : MonoBehaviour {
 
     // the index of the current selected slot
     private int selectedSlotNum = 0;
+    private boolean chooseLock = false;
+    private Item chooseItem = null;
 
     void Awake() {
         instance = this;
@@ -51,13 +53,36 @@ public class InventorySystem : MonoBehaviour {
     void Update()
     {
         // process drop
-        if (Keyboard.current.qKey.wasPressedThisFrame)
+        if (Keyboard.current.qKey.wasPressedThisFrame) 
+        {
             Drop(false);
-
+            if (chooseItem != null) {
+                Add(chooseItem);
+                chooseItem = null;
+            }
+        }
 
         // process use
         if (Keyboard.current.eKey.wasPressedThisFrame)
-            Use();        
+        {
+            Use();
+        }
+
+        // get rid of the item that would have overflowed the inventory
+        if (Keyboard.current.rKey.wasPressedThisFrame)
+        {
+            if (chooseItem != null) {
+                Drop(chooseItem); //2nd drop to manage dropping an item not in the inventory
+                chooseItem = null;
+            }
+        }
+
+        // End player stun and change the chooseLock variable
+        if (chooseLock && chooseItem == null)
+        {
+            EndChoose();
+        }
+
 
         // process scroll selected slot
         int prevSelectedSlotNum = selectedSlotNum;
@@ -113,7 +138,7 @@ public class InventorySystem : MonoBehaviour {
             if (stackAddSuccessful)
                 item.onInventoryAddSuccess();
 
-            if (stackAddSuccessful)
+            if (stackAddSuccessful) // Do these need to be different if statements?
             {
                 // ends search for open slot
                 addSucceeded = stackAddSuccessful;
@@ -123,63 +148,6 @@ public class InventorySystem : MonoBehaviour {
 
         if (!addSucceeded)
             Choose(item);
-    }
-
-    void Add(Item item, string anotherVar) { //Second var is so it doesn't complain
-        /*   // commented out because of compiler errors
-
-        int slots = -1;
-        string type = ""; //Empty String so the code doesn't error before we have a method to determine what type of item it is
-        // string type = item.GetItemType();
-
-        
-        if (type.Equals("General")) {
-            slots = CalculateEmptyGeneralSlots();
-            for (int i = 0; i < INDEX_OF_KEY; i++) {
-                if (inventory[i].Equals(item)) {
-                    if (item.isStackable()) { //Need a way to check if it is stackable
-                        if (itemsPerSlot[i] < MAX_STACKS) {
-                            itemsPerSlot[i]++;
-                            return;
-                        }
-                    }
-                }
-            }
-
-            if (slots != 0) {
-                for (int i = 0; i < INDEX_OF_KEY; i++) {
-                    if (inventory[i] ==  null) {
-                        inventory[i] = item;
-                        itemsPerSlot[i] = 1;
-                        break;
-                    }
-                }
-            }
-
-            Choose(item);
-        } else if (type.Equals("Key")) { // Assumes that keys aren't stackable
-            slots = CalculateEmptyKeySlots();
-            if (slots != 0) {
-                for (int i = INDEX_OF_KEY; i < INDEX_OF_TOOL; i++) {
-                    if (inventory[i] == null) {
-                        inventory[i] = item;
-                        return;
-                    }
-                }
-            }
-
-            Choose(item);
-        } else if (type.Equals("Tool")) { // Assumes that tools are not stackable
-            for (int i = INDEX_OF_TOOL; i < MAX_SLOTS; i++) {
-                if (inventory[i] == null) {
-                    inventory[i] = item;
-                    return;
-                }
-            }
-
-            Choose(item);
-        }
-        */
     }
 
     /// <summary>
@@ -217,94 +185,19 @@ public class InventorySystem : MonoBehaviour {
         return curItem;
     }
 
+    public void Drop(Item item) {
+        item.Release();
+    }
+
     void Choose(Item item) {
-        //Choose when the inventory is full
-        //I dont know how to implement at this moment [Just brainstorming here]
-        //Open the inventory 
-        //Display what item do you want to drop
-        //Key press to not pick up the item
-        //If they want to keep the item, they select the item that they want to drop
-        //Press a key if they want to drop the currently selected item
+        chooseLock = true;
+        chooseItem = item;
+        // ENABLE PLAYER STUN (either with this method or with calls to chooseLock (make that variable public))
+    }
 
-        // Q to drop new item
-        // R to drop selected item to replace it
-
-        string type = "";
-        // string type = item.GetItemType();
-
-
-
-
-
-        // ---------- [NOTE]    -    PLEASE READ    -    UNITY ESSENTIALS ----------
-        //
-        //
-        //
-        //
-        // In Unity, you do *NOT* want to use while loops like this where you wait for input.        
-        //
-        //     We do have access to writing main() in Unity, so we don't have complete control over every function call made during the running of our game.
-        //     Instead, when we need it, we have a class extend MonoBehaviour, and then we can use certain reserved functions like Awake(), Start(), and Update().
-        //     Unity will call these functions from its internal running of the game, which is how the code we write is accessed.  The ONLY way to have any of your
-        //     code is run is by having execution start in one of the functions that Unity calls, including those mentioned above.  You can then call code that is
-        //     outside of those functions, and even use classes that aren't MonoBehaviours and resemble classes you would write normally outside of Unity.
-        //
-        //     Extending MonoBehaviour makes the class you write a Component, which is something that can be added to GameObjects in Unity.
-        //     Everything you see in the Unity Editor heirarchy is a GameObject with various Components or nested GameObjects attached.
-        //
-        //     In our code, we use Awake() and Start() for doing any additional setup for the GameObject our MonoBehaviour is attached to,
-        //     including any Component on that GameObjec, including the MonoBeviour script we wrote.  This setup is done once during the beginning of the
-        //     GameObject's lifetime, and we typically use Update() if changes may need to be made over a GameObject's lifetime.
-        //
-        //     Every frame, Unity's internals will call every Update() using a singular thread.  This means that all the code in all of the Update() functions
-        //     that are used in the game Scene at the current moment, are all trying to be executed by Unity within one single frame (often 1/60 of a second).
-        //     So, if our code takes too long to execute, it will lag the game since the code that's supposed to fit within one frame is not actually being
-        //     completed within one frame.  In fact, the game will freeze until all of the Update() functions have been completed for that frame.
-        //
-        //     This means that if, on a given frame, Choose() is called, the entire thread that is calling every MonoBehaviour's Update()
-        //     will be stuck in this while loop, freezing the entire game, and almost definitely crashing it.  A new "frame" will not be reached internally
-        //     by Unity because Choose() is never left.
-        //     
-        //     You want to implement while loop functionality like this by setting a boolean field, and moving the contents of this loop to an
-        //         if (boolean) {
-        //           loop internals ...
-        //           return;
-        //         }
-        //
-        //     It looks like this functionality is unfinished since the type of item is checked for, yet the same operations are done in each case.
-        //     We can discuss what sort of functionality we want here.
-        //     I think there can be an easier solution that doesn't take the player out of the game world and into a menu.
-
-
-        /*        // commented out because this function will crash the game, see below NOTE for explanation
-        while (true) {
-            if (type.Equals("General")) {
-                if (Keyboard.current.qKey.wasPressedThisFrame) {
-                    return;
-                } else if (Keyboard.current.rKey.wasPressedThisFrame) {
-                    Drop();
-                    Add(item, ""); //Get rid of string when the version of Add() is selected
-                    return;
-                }
-            } else if (type.Equals("Key")) {
-                if (Keyboard.current.qKey.wasPressedThisFrame) {
-                    return;
-                } else if (Keyboard.current.rKey.wasPressedThisFrame) {
-                    Drop();
-                    Add(item, ""); //Get rid of string when the version of Add() is selected
-                    return;   
-                }
-            } else if (type.Equals("Tool")) {
-                if (Keyboard.current.qKey.wasPressedThisFrame) {
-                    return;
-                } else if (Keyboard.current.rKey.wasPressedThisFrame) {
-                    Drop();
-                    Add(item, ""); //Get rid of string when the version of Add() is selected
-                    return;
-                }
-            }
-        }
-        */
+    void EndChoose() {
+        chooseLock = false;
+        // DISABLE PLAYER STUN (either with this method or with calls to chooseLock (make that variable public))
     }
 
 
