@@ -34,6 +34,15 @@ public class ProceduralGenerator : MonoBehaviour
     private List<Rect> GabrielEdges;
     private bool DrawGizmos;
 
+    enum GridPoint
+    {
+        Empty,
+        Room,
+        Hallway
+    }
+
+    GridPoint[][] grid;
+
     //TODO: Hallway generation
 
     // Start is called before the first frame update
