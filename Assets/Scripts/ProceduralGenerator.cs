@@ -245,6 +245,34 @@ public class ProceduralGenerator : MonoBehaviour
         return FinalEdges;
     }
 
+    Vector2 getRoomXBounds() {
+        float minX = RoomRects[0].xMax;
+        float maxX = minX;
+        foreach (Rect room in RoomRects) {
+            if (room.xMax > maxX) {
+                maxX = room.xMax;
+            }
+            else if (room.xMin < minX) {
+                minX = room.xMin;
+            }
+        }
+        return new Vector2(minX, maxX);
+    }
+
+    Vector2 getRoomYBounds() {
+        float minY = RoomRects[0].yMax;
+        float maxY = minY;
+        foreach (Rect room in RoomRects) {
+            if (room.yMax > maxY) {
+                maxY = room.yMax;
+            }
+            else if (room.yMin < minY) {
+                minY = room.yMin;
+            }
+        }
+        return new Vector2(minY, maxY);
+    }
+
     void OnDrawGizmos()
     {
         if (GabrielEdges != null && DrawGizmos)
