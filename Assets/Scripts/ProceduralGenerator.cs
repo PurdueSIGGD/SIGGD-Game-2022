@@ -246,30 +246,28 @@ public class ProceduralGenerator : MonoBehaviour
     }
 
     Vector2 getRoomXBounds() {
-        float minX = RoomRects[0].x;
+        float minX = RoomRects[0].xMax;
         float maxX = minX;
         foreach (Rect room in RoomRects) {
-            float x = room.x;
-            if (x > maxX) {
-                maxX = x;
+            if (room.xMax > maxX) {
+                maxX = room.xMax;
             }
-            else if (x < minX) {
-                minX = x;
+            else if (room.xMin < minX) {
+                minX = room.xMin;
             }
         }
         return new Vector2(minX, maxX);
     }
 
     Vector2 getRoomYBounds() {
-        float minY = RoomRects[0].y;
+        float minY = RoomRects[0].yMax;
         float maxY = minY;
         foreach (Rect room in RoomRects) {
-            float y = room.y;
-            if (y > maxY) {
-                maxY = y;
+            if (room.yMax > maxY) {
+                maxY = room.yMax;
             }
-            else if (y < minY) {
-                minY = y;
+            else if (room.yMin < minY) {
+                minY = room.yMin;
             }
         }
         return new Vector2(minY, maxY);
