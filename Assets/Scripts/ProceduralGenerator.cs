@@ -31,8 +31,17 @@ public class ProceduralGenerator : MonoBehaviour
     private List<Rect> RoomRects;
     private GameObject RoomParent;
 
-    private List<Vector3> GabrielEdges;
+    private List<Rect> GabrielEdges;
     private bool DrawGizmos;
+
+    enum GridPoint
+    {
+        Empty,
+        Room,
+        Hallway
+    }
+
+    GridPoint[][] grid;
 
     //TODO: Hallway generation
 
@@ -211,9 +220,9 @@ public class ProceduralGenerator : MonoBehaviour
         });
     }
 
-    private List<Vector3> GabrielGraph(List<Rect> rooms)
+    private List<Rect> GabrielGraph(List<Rect> rooms)
     {
-        List<Vector3> FinalEdges = new List<Vector3>();
+        List<Rect> FinalEdges = new List<Rect>();
 
         for (int i = 0; i < rooms.Count - 1; i++) 
         {
@@ -236,8 +245,8 @@ public class ProceduralGenerator : MonoBehaviour
 
                 if (isValidEdge)
                 {
-                    FinalEdges.Add(new Vector3(rooms[i].center.x, 0, rooms[i].center.y));
-                    FinalEdges.Add(new Vector3(rooms[j].center.x, 0, rooms[j].center.y));
+                    FinalEdges.Add(rooms[i]);
+                    FinalEdges.Add(rooms[j]);
                 }
             }
         }
@@ -277,19 +286,18 @@ public class ProceduralGenerator : MonoBehaviour
         if (GabrielEdges != null && DrawGizmos)
         {
             // Direct connections from room to room
-            Gizmos.color = Color.blue;
             for (int i = 0; i < GabrielEdges.Count / 2; i++)
             {
-                Gizmos.DrawLine(GabrielEdges[i * 2], GabrielEdges[i * 2 + 1]);
-            }
-            // 90 degree hallways from room to room
-            Gizmos.color = Color.green;
-            for (int i = 0; i < GabrielEdges.Count / 2; i++)
-            {
-                float deltaX = GabrielEdges[i * 2].x - GabrielEdges[i * 2 + 1].x;
-                float deltaZ = GabrielEdges[i * 2].z - GabrielEdges[i * 2 + 1].z;
-                Gizmos.DrawLine(GabrielEdges[i * 2], GabrielEdges[i * 2] + Vector3.left * deltaX);
-                Gizmos.DrawLine(GabrielEdges[i * 2 + 1], GabrielEdges[i * 2 + 1] + Vector3.forward * deltaZ);
+                Gizmos.color = Color.blue;
+                Vector3 vectA = new Vector3(GabrielEdges[i * 2].center.x, 0, GabrielEdges[i * 2].center.y);
+                Vector3 vectB = new Vector3(GabrielEdges[i * 2 + 1].center.x, 0, GabrielEdges[i * 2 + 1].center.y);
+                Gizmos.DrawLine(vectA, vectB);
+
+                Gizmos.color = Color.green;
+                float deltaX = vectA.x - vectB.x;
+                float deltaZ = vectA.z - vectB.z;
+                Gizmos.DrawLine(vectA, vectA + Vector3.left * deltaX);
+                Gizmos.DrawLine(vectB, vectB + Vector3.forward * deltaZ);
             }
         }
     }
