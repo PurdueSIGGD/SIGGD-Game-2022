@@ -28,7 +28,7 @@ public class InventorySystem : MonoBehaviour {
 
     // the index of the current selected slot
     private int selectedSlotNum = 0;
-    private boolean chooseLock = false;
+    private bool chooseLock = false;
     private Item chooseItem = null;
 
     void Awake() {
