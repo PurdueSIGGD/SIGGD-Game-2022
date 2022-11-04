@@ -45,7 +45,11 @@ public class InventorySlot : MonoBehaviour
     void Update()
     {
         if (hasStack && !stackType.Equals(ItemType.TOOL))
+        {
+            stack[0].transform.position = transform.position + transform.forward * -DIST_FRONT_OF_INV + transform.up * VERT_OFFSET;
+
             stack[0].transform.Rotate(Vector3.one * ROTATE_SPEED * Time.deltaTime);
+        }
     }
 
     /// <summary>
