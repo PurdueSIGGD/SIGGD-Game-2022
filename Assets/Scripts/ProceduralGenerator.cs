@@ -41,7 +41,7 @@ public class ProceduralGenerator : MonoBehaviour
         Hallway
     }
 
-    GridPoint[][] grid;
+    GridPoint[,] grid;
 
     //TODO: Hallway generation
 
@@ -99,6 +99,7 @@ public class ProceduralGenerator : MonoBehaviour
         Seperate();
         SortByArea();
         GabrielEdges = GabrielGraph(RoomRects.GetRange(0, FinalRoomCount));
+        GenerateGrid();
     }
 
     public void ClearScene()
@@ -256,7 +257,7 @@ public class ProceduralGenerator : MonoBehaviour
     /**
      * Returns [(minX, maxX), (minY, maxY)]
      */
-    Vector2[] getRoomBounds() {
+    Vector2[] GetRoomBounds() {
         // Make default bounds
         float[] minDims = new float[] {RoomRects[0].xMin, RoomRects[0].yMin};
         float[] maxDims = new float[] {RoomRects[0].xMax, RoomRects[0].yMax};
@@ -264,7 +265,7 @@ public class ProceduralGenerator : MonoBehaviour
         foreach (Rect room in RoomRects) {
             // Get dimensions for the room
             float[] roomMinDims = new float[] {room.xMin, room.yMin};
-            float[] roomMaxDims = new float[] {room.xMin, room.yMin};
+            float[] roomMaxDims = new float[] {room.xMax, room.yMax};
             // Test max for x and y
             for (int i = 0; i < roomMaxDims.Length; i++) {
                 if (roomMaxDims[i] > maxDims[i]) {
@@ -272,32 +273,64 @@ public class ProceduralGenerator : MonoBehaviour
                 }
             }
             // Test min for x and y
-            for (int i = 0; i < roomMaxDims.Length; i++) {
-                if (roomMaxDims[i] > maxDims[i]) {
-                    maxDims[i] = roomMaxDims[i];
+            for (int i = 0; i < roomMinDims.Length; i++) {
+                if (roomMaxDims[i] < minDims[i]) {
+                    minDims[i] = roomMinDims[i];
                 }
             }
         }
         return new Vector2[] {new Vector2(minDims[0], maxDims[0]), new Vector2(minDims[1], maxDims[1])};
     }
 
+    void GenerateGrid() {
+        // Returns [(minX, maxX), (minY, maxY)]
+        // Initialize the grid, with the size proportional to tileSize
+        Vector2[] bounds = GetRoomBounds();
+        int xSize = (int) ((Mathf.Abs(bounds[0][0]) + Mathf.Abs(bounds[0][1])) / TileSize);
+        int ySize = (int) ((Mathf.Abs(bounds[1][0]) + Mathf.Abs(bounds[1][1])) / TileSize);
+        grid = new GridPoint[xSize, ySize];
+
+        // Uh oh: n^3 algo
+        float xMin = bounds[0][0];
+        float yMin = bounds[1][0];
+        for (int i = 0; i < grid.GetLength(0); i++) {
+            for (int j = 0; j < grid.GetLength(1); j++) {
+                for (int k = 0; k < RoomRects.Count; k++) {
+                    Vector2 position = new Vector2(xMin + (i * TileSize), yMin + (j * TileSize));
+                    grid[i, j] = RoomRects[k].Contains(position) ? GridPoint.Room : GridPoint.Empty;
+                }
+            }
+        }
+    }
+
     void OnDrawGizmos()
     {
-        if (GabrielEdges != null && DrawGizmos)
+        if (DrawGizmos)
         {
-            // Direct connections from room to room
-            for (int i = 0; i < GabrielEdges.Count / 2; i++)
-            {
-                Gizmos.color = Color.blue;
-                Vector3 vectA = new Vector3(GabrielEdges[i * 2].center.x, 0, GabrielEdges[i * 2].center.y);
-                Vector3 vectB = new Vector3(GabrielEdges[i * 2 + 1].center.x, 0, GabrielEdges[i * 2 + 1].center.y);
-                Gizmos.DrawLine(vectA, vectB);
+            if (GabrielEdges != null) {
+                // Direct connections from room to room
+                for (int i = 0; i < GabrielEdges.Count / 2; i++)
+                {
+                    Gizmos.color = Color.blue;
+                    Vector3 vectA = new Vector3(GabrielEdges[i * 2].center.x, 0, GabrielEdges[i * 2].center.y);
+                    Vector3 vectB = new Vector3(GabrielEdges[i * 2 + 1].center.x, 0, GabrielEdges[i * 2 + 1].center.y);
+                    Gizmos.DrawLine(vectA, vectB);
 
-                Gizmos.color = Color.green;
-                float deltaX = vectA.x - vectB.x;
-                float deltaZ = vectA.z - vectB.z;
-                Gizmos.DrawLine(vectA, vectA + Vector3.left * deltaX);
-                Gizmos.DrawLine(vectB, vectB + Vector3.forward * deltaZ);
+                    Gizmos.color = Color.green;
+                    float deltaX = vectA.x - vectB.x;
+                    float deltaZ = vectA.z - vectB.z;
+                    Gizmos.DrawLine(vectA, vectA + Vector3.left * deltaX);
+                    Gizmos.DrawLine(vectB, vectB + Vector3.forward * deltaZ);
+                }
+            }
+            Vector2[] bounds = GetRoomBounds();
+            float xMin = bounds[0][0];
+            float yMin = bounds[1][0];
+            for (int i = 0; i < grid.GetLength(0); i++) {
+                for (int j = 0; j < grid.GetLength(1); j++) {
+                    Gizmos.color = grid[i, j] == GridPoint.Room ? Color.red : Color.blue;
+                    Gizmos.DrawSphere(new Vector3(xMin + (i * TileSize), 0, yMin + (j * TileSize)), 0.3f);
+                }
             }
         }
     }
