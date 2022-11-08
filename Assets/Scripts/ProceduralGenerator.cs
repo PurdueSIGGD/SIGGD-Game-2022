@@ -168,13 +168,16 @@ public class ProceduralGenerator : MonoBehaviour
                     RoomsOverlap = true;
                 }
             }
-        } while (RoomsOverlap == true);
+        } while (RoomsOverlap);
 
         for (int i = 0; i < RoomRects.Count; i++)
         {
             Rect roundedRoom = RoomRects[i];
             roundedRoom.position = new Vector2(Mathf.Ceil(roundedRoom.position.x), 
                                                Mathf.Ceil(roundedRoom.position.y));
+            // Now discard the extra dimensions for room separation                                   
+            roundedRoom.height = roundedRoom.height - (MinRoomSeparation * 2);
+            roundedRoom.width = roundedRoom.width - (MinRoomSeparation * 2);
             RoomRects[i] = roundedRoom;
         }
     }
@@ -191,8 +194,8 @@ public class ProceduralGenerator : MonoBehaviour
             #endif
             // Divide by 10 because the scale of planes is 10. Can be abstracted as a variable if floor is changed
             float standardRoomSize = 8.0f;
-            testFloor.transform.localScale = (new Vector3(rect.width - MinRoomSeparation, standardRoomSize, rect.height - MinRoomSeparation)) / standardRoomSize;
-            testFloor.transform.Translate(new Vector3(0.5f, 0, 0.5f));
+            testFloor.transform.localScale = (new Vector3(rect.width, standardRoomSize, rect.height)) / standardRoomSize;
+            testFloor.transform.Translate(new Vector3(-0.5f, 0, -0.5f));
 
             // Tell the roomGenerators to generate each room
             RoomGenerator roomGenerator = testFloor.GetComponent<RoomGenerator>();
@@ -282,6 +285,14 @@ public class ProceduralGenerator : MonoBehaviour
         return new Vector2[] {new Vector2(minDims[0], maxDims[0]), new Vector2(minDims[1], maxDims[1])};
     }
 
+    // Rooms are diagonal if the x or y center of a room lies within another room
+    private bool AreRoomsDiagonal(Rect room1, Rect room2) {
+        Vector2 intPoint1 = new Vector2(room2.center.x, room1.center.y);
+        Vector2 intPoint2 = new Vector2(room1.center.x, room2.center.y);
+        return room1.Contains(intPoint1) || room1.Contains(intPoint2) || 
+               room2.Contains(intPoint1) || room2.Contains(intPoint2);
+    }
+
     void GenerateGrid() {
         // Returns [(minX, maxX), (minY, maxY)]
         // Initialize the grid, with the size proportional to tileSize
@@ -295,9 +306,12 @@ public class ProceduralGenerator : MonoBehaviour
         float yMin = bounds[1][0];
         for (int i = 0; i < grid.GetLength(0); i++) {
             for (int j = 0; j < grid.GetLength(1); j++) {
-                for (int k = 0; k < RoomRects.Count; k++) {
+                grid[i, j] = GridPoint.Empty;
+                for (int k = 0; k < GabrielEdges.Count; k++) {
                     Vector2 position = new Vector2(xMin + (i * TileSize), yMin + (j * TileSize));
-                    grid[i, j] = RoomRects[k].Contains(position) ? GridPoint.Room : GridPoint.Empty;
+                    if (GabrielEdges[k].Contains(position)) {
+                        grid[i, j] = GridPoint.Room;
+                    }
                 }
             }
         }
@@ -311,25 +325,33 @@ public class ProceduralGenerator : MonoBehaviour
                 // Direct connections from room to room
                 for (int i = 0; i < GabrielEdges.Count / 2; i++)
                 {
-                    Gizmos.color = Color.blue;
-                    Vector3 vectA = new Vector3(GabrielEdges[i * 2].center.x, 0, GabrielEdges[i * 2].center.y);
-                    Vector3 vectB = new Vector3(GabrielEdges[i * 2 + 1].center.x, 0, GabrielEdges[i * 2 + 1].center.y);
+                    Rect room1 = GabrielEdges[i * 2];
+                    Rect room2 = GabrielEdges[i * 2 + 1];
+                    Gizmos.color = AreRoomsDiagonal(room1, room2) ? Color.blue : Color.magenta;
+                    Vector3 vectA = new Vector3(room1.center.x, 0, room1.center.y);
+                    Vector3 vectB = new Vector3(room2.center.x, 0, room2.center.y);
                     Gizmos.DrawLine(vectA, vectB);
 
-                    Gizmos.color = Color.green;
-                    float deltaX = vectA.x - vectB.x;
-                    float deltaZ = vectA.z - vectB.z;
-                    Gizmos.DrawLine(vectA, vectA + Vector3.left * deltaX);
-                    Gizmos.DrawLine(vectB, vectB + Vector3.forward * deltaZ);
+                    // Jank hallway generation turned off for now
+                    if (false) {
+                        Gizmos.color = Color.green;
+                        float deltaX = vectA.x - vectB.x;
+                        float deltaZ = vectA.z - vectB.z;
+                        Gizmos.DrawLine(vectA, vectA + Vector3.left * deltaX);
+                        Gizmos.DrawLine(vectB, vectB + Vector3.forward * deltaZ);
+                    }
                 }
             }
-            Vector2[] bounds = GetRoomBounds();
-            float xMin = bounds[0][0];
-            float yMin = bounds[1][0];
-            for (int i = 0; i < grid.GetLength(0); i++) {
-                for (int j = 0; j < grid.GetLength(1); j++) {
-                    Gizmos.color = grid[i, j] == GridPoint.Room ? Color.red : Color.blue;
-                    Gizmos.DrawSphere(new Vector3(xMin + (i * TileSize), 0, yMin + (j * TileSize)), 0.3f);
+            // Can be changed like on/off switch
+            if (false) {
+                Vector2[] bounds = GetRoomBounds();
+                float xMin = bounds[0][0];
+                float yMin = bounds[1][0];
+                for (int i = 0; i < grid.GetLength(0); i++) {
+                    for (int j = 0; j < grid.GetLength(1); j++) {
+                        Gizmos.color = grid[i, j] == GridPoint.Room ? Color.red : Color.blue;
+                        Gizmos.DrawSphere(new Vector3(xMin + (i * TileSize), 0, yMin + (j * TileSize)), 0.3f);
+                    }
                 }
             }
         }
