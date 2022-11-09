@@ -168,7 +168,7 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _Pixels_Voxel: 1
+    - _Pixels_Voxel: 8
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -179,7 +179,7 @@ Material:
     - _SrcBlend: 1
     - _Surface: 0
     - _TextureRes: 0
-    - _Voxels_Meter: 56.47059
+    - _Voxels_Meter: 7.058824
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
