@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     private Movement movement;
     private DebuffsManager debuffsManager;
 
-    public Movement Movement => movement;
+    public DebuffsManager Debuffs => debuffsManager;
 
     void Start()
     {
@@ -43,6 +43,6 @@ public class Player : MonoBehaviour
     // test slow debuff
     void OnFire()
     {
-        /* debuffsManager.AddDebuff(new Slow(3f, 0.5f)); */
+        debuffsManager.AddDebuff(new Slow(3f, 0.5f));
     }
 }
