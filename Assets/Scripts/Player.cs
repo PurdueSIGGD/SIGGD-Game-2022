@@ -4,20 +4,19 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Movement))]
-[RequireComponent(typeof(DebuffsManager))]
+[RequireComponent(typeof(SEManager))]
 public class Player : MonoBehaviour
 {
     // Player Systems
     private Movement movement;
-    private DebuffsManager debuffsManager;
+    private SEManager _SEManager;
 
-    public DebuffsManager Debuffs => debuffsManager;
-
+    public SEManager SEManager => _SEManager;
     void Start()
     {
         // Player Systems
         movement = GetComponent<Movement>();
-        debuffsManager = GetComponent<DebuffsManager>();
+        _SEManager = GetComponent<SEManager>();
     }
 
     void FixedUpdate()
@@ -27,7 +26,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        debuffsManager.UpdateDebuffs();
+        _SEManager.UpdateStatusEffects();
     }
 
     void OnMove(InputValue movementValue)
@@ -43,6 +42,6 @@ public class Player : MonoBehaviour
     // test slow debuff
     void OnFire()
     {
-        debuffsManager.AddDebuff(new Slow(3f, 0.5f));
+        _SEManager.AddDebuff(new MovementSE(3f, 0.3f));
     }
 }

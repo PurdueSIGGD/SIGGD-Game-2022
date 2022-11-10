@@ -11,7 +11,6 @@ public class Movement : MonoBehaviour
     [SerializeField] private float CamRotYSpeed = 0.2f;
 
     private new Rigidbody rigidbody;
-    private DebuffsManager debuffs;
     private Transform camHolderTransform;
     private Vector2 input;
     private Vector2 lookInput;
@@ -20,7 +19,6 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
-        debuffs = GetComponent<DebuffsManager>();
         camHolderTransform = GetComponentInChildren<Camera>().transform.parent;
     }
 
@@ -66,7 +64,7 @@ public class Movement : MonoBehaviour
         }
 
         //copies the y velocity so that velocity due to gravity is not removed
-        Vector2 debuffedVelocity = debuffs.ApplySlow(velocity);
+        Vector2 debuffedVelocity = SEManager.ApplyMovement(velocity);
         Debug.Log(debuffedVelocity);
         Vector3 move = new Vector3(debuffedVelocity.x, rigidbody.velocity.y, debuffedVelocity.y) * Time.fixedDeltaTime;
         rigidbody.MovePosition(rigidbody.position + move);

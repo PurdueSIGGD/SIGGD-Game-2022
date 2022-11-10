@@ -2,30 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DebuffsManager : MonoBehaviour
+public class SEManager : MonoBehaviour
 {
-    private List<Debuff> debuffs;
+    private List<StatusEffect> debuffs;
 
     void Start()
     {
-        debuffs = new List<Debuff>();
+        debuffs = new List<StatusEffect>();
     }
 
-    public void AddDebuff(Debuff debuff)
+    public void AddBuff(StatusEffect debuff)
     {
         debuffs.Add(debuff);
+        debuff.IsBuff = true;
     }
 
-    private void ResetDebuffs() {
+    public void AddDebuff(StatusEffect debuff)
+    {
+        debuffs.Add(debuff);
+        debuff.IsBuff = false;
+    }
+
+    private void ResetStatusEffects() {
         MovementSE.Reset();
     }
 
-    public void UpdateDebuffs()
+    public void UpdateStatusEffects()
     {
         for (int i = 0; i < debuffs.Count; i++)
         {
-            Debuff debuff = debuffs[i];
-            debuff.UpdateDebuff(Time.deltaTime);
+            StatusEffect debuff = debuffs[i];
+            debuff.UpdateStatusEffect(Time.deltaTime);
             if (debuff.HasEnded())
             {
                 debuffs.RemoveAt(i);
@@ -33,14 +40,14 @@ public class DebuffsManager : MonoBehaviour
             }
         }
 
-        ResetDebuffs();
-        foreach (Debuff debuff in debuffs)
+        ResetStatusEffects();
+        foreach (StatusEffect debuff in debuffs)
         {
-            debuff.ApplyDebuff();
+            debuff.ApplyStatusEffect();
         }
     }
 
-    public Vector2 ApplySlow(Vector2 velocity)
+    public static Vector2 ApplyMovement(Vector2 velocity)
     {
         return MovementSE.SEPercent * velocity;
     }
