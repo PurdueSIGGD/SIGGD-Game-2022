@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5090515544576324914
+--- !u!1 &622781770615338706
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,68 +8,69 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2679986429069081301}
-  - component: {fileID: 4260233223676128163}
-  - component: {fileID: 6763135281201947592}
-  - component: {fileID: 6755927282950771678}
-  - component: {fileID: 4802620772777379802}
-  - component: {fileID: -1038586547980794204}
+  - component: {fileID: 7723828559710091573}
+  - component: {fileID: 6961739153207200375}
+  - component: {fileID: 1430684422284959784}
+  - component: {fileID: 1423230131147132990}
+  - component: {fileID: 911946452513588282}
+  - component: {fileID: 4582279974258853188}
   m_Layer: 0
-  m_Name: HealthPack
+  m_Name: Deployer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2679986429069081301
+--- !u!4 &7723828559710091573
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5090515544576324914}
+  m_GameObject: {fileID: 622781770615338706}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -7.04, y: 0.98, z: 5.09}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4260233223676128163
+--- !u!114 &6961739153207200375
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5090515544576324914}
+  m_GameObject: {fileID: 622781770615338706}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70213439c298c9044849dbf874a76368, type: 3}
+  m_Script: {fileID: 11500000, guid: 4255336a37274274f83f6c1c6ac562c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: HealthPack
+  itemName: Deployer
   type: 1
-  maxStackSize: 1
+  maxStackSize: 10
   currentNumCharges: 1
   isShiny: 0
   description: 
-  healAmount: 1
---- !u!33 &6763135281201947592
+  objectToDeploy: {fileID: 5237452597032423327, guid: 9a2ecabb86874bf48850d3ffa2ec3647,
+    type: 3}
+--- !u!33 &1430684422284959784
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5090515544576324914}
+  m_GameObject: {fileID: 622781770615338706}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &6755927282950771678
+--- !u!23 &1423230131147132990
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5090515544576324914}
+  m_GameObject: {fileID: 622781770615338706}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -105,26 +106,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4802620772777379802
+--- !u!65 &911946452513588282
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5090515544576324914}
+  m_GameObject: {fileID: 622781770615338706}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &-1038586547980794204
+--- !u!54 &4582279974258853188
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5090515544576324914}
+  m_GameObject: {fileID: 622781770615338706}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0

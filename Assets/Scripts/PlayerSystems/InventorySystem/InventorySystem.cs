@@ -21,6 +21,8 @@ public class InventorySystem : MonoBehaviour {
     // The height at which items are dropped at before falling toward the ground
     public const float ITEM_DROP_HEIGHT = 1f;
 
+    // tracks whether or not there is a stun gun projectile out so player can't spam
+    public bool hasNotReCapturedProjectile;
 
     [SerializeField] private GameObject slotHolder;
 
@@ -140,12 +142,11 @@ public class InventorySystem : MonoBehaviour {
             // places the item into the inventory slot
             bool stackAddSuccessful = inventory[i].addToStack(item);
 
-            // finishes the item's state change to being in the UI
             if (stackAddSuccessful)
+            {
+                // finishes the item's state change to being in the UI
                 item.onInventoryAddSuccess();
 
-            if (stackAddSuccessful) // Do these need to be different if statements?
-            {
                 // ends search for open slot
                 addSucceeded = stackAddSuccessful;
                 break;
@@ -157,9 +158,33 @@ public class InventorySystem : MonoBehaviour {
     }
 
     /// <summary>
-    /// Uses the item in the currently selected inventory slot.  Then, the item is destroyed and removed from the inventory.
+    /// Uses the item in the currently selected inventory slot.  If the current slot is not the Stun Gun, the item is destroyed and removed from the inventory.
     /// </summary>
     public void Use() {
+        // determines if the player is trying to use their stun gun ammo or not
+        bool isUsingStunGun = inventory[selectedSlotNum].isStackType(ItemType.TOOL);
+
+        // uses the appropriate item
+        if (isUsingStunGun)
+            UseStunGun();
+        else
+            UseItem();
+    }
+
+    // For Using Stun Gun Ammo
+    void UseStunGun()
+    {
+        // makes sure player can't spam projectiles
+        if (hasNotReCapturedProjectile)
+            return;
+
+        // uses the stun gun ammo
+        inventory[selectedSlotNum].useStackItem();
+    }
+
+    // For Using items other than the Stun Gun Ammo
+    void UseItem()
+    {
         // drops an item if there is one in the current inventory slot      
         Item droppedItem = Drop(true);
 
@@ -191,8 +216,54 @@ public class InventorySystem : MonoBehaviour {
         return curItem;
     }
 
-    public void Drop(Item item) {
+    // NOTE - This function doesn't do anything.  Examine Item.Release() to see why this just prints out an error when called.
+    //
+    //        "Dropping" is a concept strictly within the inventory system.  This means that if an item isn't in the inventory, there is nothing to drop.
+    //        In order to do what I think you're trying to do, we need to make separate functionality from the inventory that allows you to hold an object outside
+    //        of your inventory.  Then, here, we will call some functionality to put down that extra object (again, separate from the actual inventory).
+    /*public*/ void Drop(Item item) {
         item.Release();
+    }
+
+    /// <summary>
+    /// Removes one stun gun ammo from the inventory.  Should only be called when a stun gun projectile hits an enemy.
+    /// </summary>
+    public void decrementStunGunAmmo()
+    {
+        // stores slotNum for resetting after this removal of ammo
+        int prevSelectedSlotNum = selectedSlotNum;
+        bool succeeded = false;
+
+        // iterates through slots until one with stun gun ammo is reached {
+        for (int i = 0; i < inventory.Length; i++)
+        {
+            InventorySlot curSlot = inventory[i];
+
+            // removes 1 ammo from the Stun Gun Ammo stack, if found
+            if (curSlot.isStackType(ItemType.TOOL) && curSlot.hasStack)
+            {
+                // set so Drop() works as intended
+                selectedSlotNum = i;
+
+                // drops an ammo from the stun gun ammo slot     
+                Item droppedItem = Drop(true);
+
+                if (droppedItem == null)
+                    return;
+
+                // destroys dropped item        
+                droppedItem.DestroyItem();
+
+                succeeded = true;
+                break;
+            }                
+        }
+
+        if (!succeeded)
+            Debug.LogError("Found no Stun Gun Ammo to decrement");
+
+        // reset selected slot num
+        selectedSlotNum = prevSelectedSlotNum;
     }
 
     void Choose(Item item) {

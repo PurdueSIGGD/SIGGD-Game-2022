@@ -29,6 +29,7 @@ public class Item : MonoBehaviour, IInteractable
     [SerializeField] string description;
 
     // cached fields
+    Transform playerTrans;
     Rigidbody rb;
     Collider col;
     Camera mainCam;
@@ -41,6 +42,7 @@ public class Item : MonoBehaviour, IInteractable
 
     void Start()
     {
+        playerTrans = FindObjectOfType<Player>().gameObject.transform;
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
         startLocalScale = transform.localScale;
@@ -63,7 +65,7 @@ public class Item : MonoBehaviour, IInteractable
     }
 
     /// <summary>
-    /// Handles most logic for when the player drops an item.
+    /// Handles most logic for when the player drops an item that's currently in their inventory.
     /// The InventorySystem should remove this item from its inventory
     /// </summary>
     public void Release()
@@ -74,15 +76,8 @@ public class Item : MonoBehaviour, IInteractable
             return;
         }
 
-        // move to cursor pos     
-        RaycastHit hit;
-        /*Vector2Control mouseScreenPosControl = Mouse.current.position;
-        Vector2 mouseScreenPos = new Vector2(mouseScreenPosControl.x.ReadValue(), mouseScreenPosControl.y.ReadValue());
-        Vector3 directionToMousePos = mainCam.transform.position - mainCam.ScreenToWorldPoint(mouseScreenPos);*/
-        if (Physics.Raycast(mainCam.transform.position + mainCam.transform.up, mainCam.transform.forward, out hit, Mathf.Infinity, LayerMask.GetMask("Default")))        
-            transform.position = hit.point + Vector3.up * InventorySystem.ITEM_DROP_HEIGHT;
-        else
-            transform.position = mainCam.transform.position;
+        // move to cursor pos             
+        transform.position = playerTrans.position + playerTrans.forward * 2 - playerTrans.up * .3f; //getMouseWorldPosition();
 
         gameObject.SetActive(true);
         transform.parent = null;
@@ -124,7 +119,7 @@ public class Item : MonoBehaviour, IInteractable
     }
 
     /// <summary>
-    /// Handles all logic for when the player uses an item.
+    /// Handles all logic for when the player uses an item.  The InventorySystem should remove this Item, and destroy it if applicable.
     /// </summary>
 
     // can be overridden in subclasses with the "override" keyword
@@ -141,7 +136,7 @@ public class Item : MonoBehaviour, IInteractable
 
     public void DestroyItem()
     {
-        Debug.Log($"destroying {itemName}");
+        //Debug.Log($"destroying {itemName}");
         Destroy(gameObject);
     }
 
@@ -168,6 +163,20 @@ public class Item : MonoBehaviour, IInteractable
     public bool isType(ItemType itemType)
     {
         return type.Equals(itemType);
+    }
+
+    Vector3 getMouseWorldPosition()
+    {
+        /*Vector2Control mouseScreenPosControl = Mouse.current.position;
+        Vector2 mouseScreenPos = new Vector2(mouseScreenPosControl.x.ReadValue(), mouseScreenPosControl.y.ReadValue());
+        Vector3 directionToMousePos = mainCam.transform.position - mainCam.ScreenToWorldPoint(mouseScreenPos);*/
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(mainCam.transform.position + mainCam.transform.up, mainCam.transform.forward, out hit, Mathf.Infinity, LayerMask.GetMask("Default")))
+            return hit.point + Vector3.up * InventorySystem.ITEM_DROP_HEIGHT;
+        else
+            return mainCam.transform.position;
     }
 
     void OnCollisionEnter(Collision collision)

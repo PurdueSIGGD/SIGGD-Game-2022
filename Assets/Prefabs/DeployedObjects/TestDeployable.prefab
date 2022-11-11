@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5090515544576324914
+--- !u!1 &5237452597032423327
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,68 +8,62 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2679986429069081301}
-  - component: {fileID: 4260233223676128163}
-  - component: {fileID: 6763135281201947592}
-  - component: {fileID: 6755927282950771678}
-  - component: {fileID: 4802620772777379802}
-  - component: {fileID: -1038586547980794204}
+  - component: {fileID: 5237452597032423322}
+  - component: {fileID: 5237452597032423326}
+  - component: {fileID: 5237452597032423323}
+  - component: {fileID: 5237452597032423324}
+  - component: {fileID: 5237452597032423325}
+  - component: {fileID: 3848619496855986591}
   m_Layer: 0
-  m_Name: HealthPack
+  m_Name: TestDeployable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2679986429069081301
+--- !u!4 &5237452597032423322
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5090515544576324914}
+  m_GameObject: {fileID: 5237452597032423327}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.04, y: 0.74, z: 4.59}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4260233223676128163
+--- !u!114 &5237452597032423326
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5090515544576324914}
+  m_GameObject: {fileID: 5237452597032423327}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70213439c298c9044849dbf874a76368, type: 3}
+  m_Script: {fileID: 11500000, guid: fe97b462262de7243b7ab63b41dc3c76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: HealthPack
-  type: 1
-  maxStackSize: 1
-  currentNumCharges: 1
-  isShiny: 0
-  description: 
-  healAmount: 1
---- !u!33 &6763135281201947592
+  timeUntilDestruction: 5
+--- !u!33 &5237452597032423323
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5090515544576324914}
+  m_GameObject: {fileID: 5237452597032423327}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &6755927282950771678
+--- !u!23 &5237452597032423324
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5090515544576324914}
+  m_GameObject: {fileID: 5237452597032423327}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -105,26 +99,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4802620772777379802
+--- !u!65 &5237452597032423325
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5090515544576324914}
+  m_GameObject: {fileID: 5237452597032423327}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &-1038586547980794204
+--- !u!54 &3848619496855986591
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5090515544576324914}
+  m_GameObject: {fileID: 5237452597032423327}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -132,5 +126,5 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0

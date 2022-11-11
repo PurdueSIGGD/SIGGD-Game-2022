@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 232863479882676078}
-  - component: {fileID: 747651791459177434}
+  - component: {fileID: 8337968983564784764}
   - component: {fileID: 8921928657805700723}
   - component: {fileID: 8920387852663021157}
   - component: {fileID: 6312998178061667103}
@@ -36,7 +36,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &747651791459177434
+--- !u!114 &8337968983564784764
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6966876786177456265}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5671952cf5f07d14eb4c0b4590db7bab, type: 3}
+  m_Script: {fileID: 11500000, guid: 4255336a37274274f83f6c1c6ac562c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Ammo
@@ -54,6 +54,8 @@ MonoBehaviour:
   currentNumCharges: 1
   isShiny: 0
   description: 
+  objectToDeploy: {fileID: 1721840539210694629, guid: 3407bbb6964d28d43ad0cab0cc7cbed3,
+    type: 3}
 --- !u!33 &8921928657805700723
 MeshFilter:
   m_ObjectHideFlags: 0

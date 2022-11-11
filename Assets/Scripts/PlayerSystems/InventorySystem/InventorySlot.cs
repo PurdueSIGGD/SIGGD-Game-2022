@@ -114,8 +114,6 @@ public class InventorySlot : MonoBehaviour
         int removeIndex = stack.Count - 1;
         Item item = stack[removeIndex];
 
-        item.Use();
-
         // if forcing an item remove by not removing a charge     or     if charges == 0
         if (!shouldRemoveCharge || item.removeCharge())
             stack.RemoveAt(removeIndex);
@@ -174,6 +172,18 @@ public class InventorySlot : MonoBehaviour
             result += i.getCurrentNumCharges();
 
         return result;
+    }
+
+    /// <summary>
+    /// Uses the item at the top of the stack, if there is one.
+    /// Should only be used if the item is not also being removed, likely only with Stun Gun Ammo.
+    /// </summary>
+    public void useStackItem()
+    {
+        if (!hasStack)
+            return;
+
+        stack[stack.Count - 1].Use();
     }
 
     // highlights the item slot's background if it is selected
