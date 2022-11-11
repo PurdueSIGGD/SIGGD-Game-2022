@@ -77,7 +77,7 @@ public class Item : MonoBehaviour, IInteractable
         }
 
         // move to cursor pos             
-        transform.position = playerTrans.position + playerTrans.forward * 2 - playerTrans.up * .3f; //getMouseWorldPosition();
+        transform.position = playerTrans.position + playerTrans.forward * 2.5f - playerTrans.up * .3f; //getMouseWorldPosition();
 
         gameObject.SetActive(true);
         transform.parent = null;
