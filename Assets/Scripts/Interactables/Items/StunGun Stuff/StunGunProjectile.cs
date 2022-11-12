@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.VisualScripting;
 
 public class StunGunProjectile : MonoBehaviour
 {
@@ -72,7 +73,8 @@ public class StunGunProjectile : MonoBehaviour
 
     void hitEnemy(Collision collision)
     {
-        Destroy(collision.gameObject);
+        CustomEvent.Trigger(collision.gameObject, "stun");
+        //destroy(collision.gameObject);
         InventorySystem.instance.decrementStunGunAmmo();
 
         startReturningToPlayer();
