@@ -41,6 +41,31 @@ public class ProceduralGenerator : MonoBehaviour
         Hallway
     }
 
+    public struct Room {
+        public GameObject physicalRoom;
+        public Rect roomRect;
+        public int rotation;
+        int gridX;
+        int gridY;
+
+        public Room(GameObject roomObj, Rect roomRect, int rotation) {
+            this.physicalRoom = roomObj;
+            this.roomRect = roomRect;
+            this.rotation = rotation;
+            gridX = -1;
+            gridY = -1;
+        }
+
+        public void SetGridPoint(Vector2 gridPoint) {
+            this.gridX = (int) gridPoint.x;
+            this.gridY = (int) gridPoint.y;
+        }
+    }
+
+    [SerializeField]
+    RoomScriptableObject[] FloorRooms;
+
+
     GridPoint[,] grid;
 
     //TODO: Hallway generation
@@ -69,11 +94,11 @@ public class ProceduralGenerator : MonoBehaviour
         float pointY = radius * Mathf.Sin(theta);
         if (RoundToTileSize)
         {
-            pointX = Mathf.Round(pointX / TileSize) * TileSize;
-            pointY = Mathf.Round(pointY / TileSize) * TileSize;
+            pointX = Mathf.Round(pointX);
+            pointY = Mathf.Round(pointY);
         }
 
-        return new Vector2(pointX - (MinRoomSeparation / 2), pointY - (MinRoomSeparation / 2));
+        return new Vector2(pointX, pointY);
     }
 
     public void GenerateDungeon()
@@ -89,8 +114,8 @@ public class ProceduralGenerator : MonoBehaviour
 
             //Randomly select room width and depth in range [MinRoom, MaxRoom] inclusively.
             //Width and Depth are both integers.
-            int roomWidth = Random.Range(MinRoomWidth, MaxRoomWidth + 1) * TileSize + MinRoomSeparation;
-            int roomDepth = Random.Range(MinRoomDepth, MaxRoomDepth + 1) * TileSize + MinRoomSeparation;
+            int roomWidth = Random.Range(MinRoomWidth, MaxRoomWidth + 1) + MinRoomSeparation;
+            int roomDepth = Random.Range(MinRoomDepth, MaxRoomDepth + 1) + MinRoomSeparation;
 
             //Initialize the room with a Rect data structure for easy manipulation.
             //The final display will convert the Rects into 3D rooms.
@@ -158,8 +183,8 @@ public class ProceduralGenerator : MonoBehaviour
                     Vector2 direction = (RoomRects[current].center - RoomRects[other].center).normalized;
 
                     //Move the 'current' and 'other' rooms in opposite directions
-                    curRoomRect.position = curRoomRect.position + (direction * TileSize);
-                    otherRoomRect.position = otherRoomRect.position + ((-direction) * TileSize);
+                    curRoomRect.position = curRoomRect.position + direction;
+                    otherRoomRect.position = otherRoomRect.position - direction;
 
                     //Reset reference to the rectangle in the RoomRects List<Rect>
                     RoomRects[current] = curRoomRect;
@@ -277,7 +302,7 @@ public class ProceduralGenerator : MonoBehaviour
             }
             // Test min for x and y
             for (int i = 0; i < roomMinDims.Length; i++) {
-                if (roomMaxDims[i] < minDims[i]) {
+                if (roomMinDims[i] < minDims[i]) {
                     minDims[i] = roomMinDims[i];
                 }
             }
@@ -297,8 +322,8 @@ public class ProceduralGenerator : MonoBehaviour
         // Returns [(minX, maxX), (minY, maxY)]
         // Initialize the grid, with the size proportional to tileSize
         Vector2[] bounds = GetRoomBounds();
-        int xSize = (int) ((Mathf.Abs(bounds[0][0]) + Mathf.Abs(bounds[0][1])) / TileSize);
-        int ySize = (int) ((Mathf.Abs(bounds[1][0]) + Mathf.Abs(bounds[1][1])) / TileSize);
+        int xSize = (int) (Mathf.Abs(bounds[0][0]) + Mathf.Abs(bounds[0][1]));
+        int ySize = (int) (Mathf.Abs(bounds[1][0]) + Mathf.Abs(bounds[1][1]));
         grid = new GridPoint[xSize, ySize];
 
         // Uh oh: n^3 algo
@@ -308,7 +333,7 @@ public class ProceduralGenerator : MonoBehaviour
             for (int j = 0; j < grid.GetLength(1); j++) {
                 grid[i, j] = GridPoint.Empty;
                 for (int k = 0; k < GabrielEdges.Count; k++) {
-                    Vector2 position = new Vector2(xMin + (i * TileSize), yMin + (j * TileSize));
+                    Vector2 position = new Vector2(xMin + i, yMin + j);
                     if (GabrielEdges[k].Contains(position)) {
                         grid[i, j] = GridPoint.Room;
                     }
@@ -333,24 +358,24 @@ public class ProceduralGenerator : MonoBehaviour
                 if (room1.center.x > room2.center.x) {
                     while (x >= room2.center.x) {
                         path1Points.Add(new Vector2(x, y));
-                        x -= TileSize;
+                        x -= 1;
                     }
                 } else {
                     while (x <= room2.center.x) {
                         path1Points.Add(new Vector2(x, y));
-                        x += TileSize;
+                        x += 1;
                     }
                 }
                 // Y direction
                 if (room1.center.y > room2.center.y) {
                     while (y >= room2.center.y) {
                         path1Points.Add(new Vector2(x, y));
-                        y -= TileSize;
+                        y -= 1;
                     }
                 } else {
                     while (y <= room2.center.y) {
                         path1Points.Add(new Vector2(x, y));
-                        y += TileSize;
+                        y += 1;
                     }
                 }
 
@@ -362,8 +387,8 @@ public class ProceduralGenerator : MonoBehaviour
                 int magY = (int) Mathf.Abs(bounds[0].y);
                 for (int j = 0; j < path1Points.Count; j++) {
                     Vector2 point = path1Points[j];
-                    int gridX = (int) ((magX + point.x) / TileSize);
-                    int gridY = (int) ((magY + point.y) / TileSize);
+                    int gridX = (int) (magX + point.x);
+                    int gridY = (int) (magY + point.y);
                     grid[gridX, gridY] = GridPoint.Hallway;
                 }
             }
@@ -403,23 +428,24 @@ public class ProceduralGenerator : MonoBehaviour
                 for (int i = 0; i < grid.GetLength(0); i++) {
                     for (int j = 0; j < grid.GetLength(1); j++) {
                         Gizmos.color = getGridColor(grid[i, j]);
-                        Gizmos.DrawSphere(new Vector3(xMin + (i * TileSize), 0, yMin + (j * TileSize)), 0.3f);
+                        Gizmos.DrawSphere(new Vector3(xMin + i, 0, yMin + j), 0.3f);
                     }
                 }
             }
         }
     }
+
     Color getGridColor(GridPoint point) {
-    switch(point) {
-        case GridPoint.Empty:
-            return Color.blue;
-        case GridPoint.Hallway:
-            return Color.green;
-        case GridPoint.Room:
-            return Color.red;
+        switch(point) {
+            case GridPoint.Empty:
+                return Color.blue;
+            case GridPoint.Hallway:
+                return Color.green;
+            case GridPoint.Room:
+                return Color.red;
+        }
+        return Color.black;
     }
-    return Color.black;
-}
 }
 
 
