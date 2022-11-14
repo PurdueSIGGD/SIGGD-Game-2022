@@ -29,6 +29,7 @@ public class ProceduralGenerator : MonoBehaviour
     private float inRadius = 10;
 
     private List<Rect> RoomRects;
+    private Room[] FinalRoomPlan;
     private GameObject RoomParent;
 
     private List<Rect> GabrielEdges;
@@ -47,13 +48,44 @@ public class ProceduralGenerator : MonoBehaviour
         public int rotation;
         int gridX;
         int gridY;
+        Vector3[] hallways;
 
-        public Room(GameObject roomObj, Rect roomRect, int rotation) {
-            this.physicalRoom = roomObj;
-            this.roomRect = roomRect;
+        public Room(RoomScriptableObject roomObj, int rotation) {
+            this.physicalRoom = roomObj.room;
             this.rotation = rotation;
             gridX = -1;
             gridY = -1;
+            roomRect = new Rect(20, 20, 20, 20);
+
+            hallways = new Vector3[roomObj.hallways.Length];
+            Vector3 halfRoom = new Vector3(roomObj.dimensions.x / 2, 0, roomObj.dimensions.z / 2);
+            Vector3 rotHalfRoom = new Vector3(roomObj.dimensions.z / 2, 0, roomObj.dimensions.x / 2);
+            for (int i = 0; i < hallways.Length; i++) {
+                switch(rotation) {
+                    case 0:
+                        this.hallways[i] = roomObj.hallways[i];
+                        break;
+                    case 1:
+                        this.hallways[i] = roomObj.hallways[i] - halfRoom;
+                        this.hallways[i] = new Vector3(hallways[i].z, hallways[i].y, -1 * hallways[i].x);
+                        this.hallways[i] += rotHalfRoom;
+                        break;
+                    case 2:
+                        this.hallways[i] = roomObj.hallways[i] - halfRoom;
+                        this.hallways[i] = new Vector3(-1 * hallways[i].x, hallways[i].y, -1 * hallways[i].z);
+                        this.hallways[i] += halfRoom;
+                        break;
+                    case 3:
+                        this.hallways[i] = roomObj.hallways[i] - halfRoom;
+                        this.hallways[i] = new Vector3(-1 * hallways[i].z, hallways[i].y, hallways[i].x);
+                        this.hallways[i] += rotHalfRoom;
+                        break;
+                }
+            }
+        }
+
+        public void SetRect(Rect room) {
+            this.roomRect = room;
         }
 
         public void SetGridPoint(Vector2 gridPoint) {
@@ -105,7 +137,7 @@ public class ProceduralGenerator : MonoBehaviour
     {
         RoomParent = this.gameObject.transform.GetChild(0).gameObject;
         RoomRects = new List<Rect>();
-        for (int i = 0; i < TotalRoomCount; i++)
+        for (int i = 0; i < TotalRoomCount - FinalRoomCount; i++)
         {
             Vector2 randomPoint = getRandomPointInCircle(inRadius);
 
@@ -119,8 +151,27 @@ public class ProceduralGenerator : MonoBehaviour
 
             //Initialize the room with a Rect data structure for easy manipulation.
             //The final display will convert the Rects into 3D rooms.
-            RoomRects.Add(new Rect(randomPoint.x, randomPoint.y, roomWidth, roomDepth));
+            RoomRects.Add(new Rect(randomPoint.x - (roomWidth / 2), randomPoint.y - (roomDepth / 2), roomWidth, roomDepth));
         }
+
+        FinalRoomPlan = new Room[FinalRoomCount];
+        for (int i = 0; i < FinalRoomCount; i++) {
+            Vector2 randomPoint = getRandomPointInCircle(inRadius);
+
+            RoomScriptableObject roomType = FloorRooms[Random.Range(0, FloorRooms.Length)];
+            int rotation = Random.Range(0, 4);
+            int roomWidth = (int) roomType.dimensions.x;
+            int roomDepth = (int) roomType.dimensions.z;
+            if (rotation % 2 == 1) {
+                int temp = roomWidth;
+                roomWidth = roomDepth;
+                roomDepth = temp;
+            }
+
+            FinalRoomPlan[i] = new Room(roomType, rotation);
+            RoomRects.Add(new Rect(randomPoint.x - (roomWidth / 2), randomPoint.y - (roomDepth / 2), roomWidth, roomDepth));
+        }
+
         Seperate();
         SortByArea();
         GabrielEdges = GabrielGraph(RoomRects.GetRange(0, FinalRoomCount));
@@ -146,7 +197,7 @@ public class ProceduralGenerator : MonoBehaviour
         if (RoomRects == null) GenerateDungeon();
 
         DrawRooms(RoomRects.GetRange(FinalRoomCount, RoomRects.Count - FinalRoomCount), DefaultFloorMaterial);
-        DrawRooms(RoomRects.GetRange(0, FinalRoomCount), MainRoomMaterial);
+        DrawRooms(FinalRoomPlan, MainRoomMaterial);
 
         DrawGizmos = true;
     }
@@ -225,6 +276,29 @@ public class ProceduralGenerator : MonoBehaviour
             // Tell the roomGenerators to generate each room
             RoomGenerator roomGenerator = testFloor.GetComponent<RoomGenerator>();
             roomGenerator.generateObstacles(FloorBudget / rooms.Count);
+
+            if (roomColor != null)
+            {
+                foreach (Renderer planeRend in testFloor.GetComponentsInChildren<Renderer>())
+                {
+                    planeRend.material = roomColor;
+                }
+            }
+
+        }
+    }
+
+    private void DrawRooms(Room[] rooms, Material roomColor) {
+        for (int i = 0; i < FinalRoomCount; i++) {
+            rooms[i].SetRect(RoomRects[i + TotalRoomCount - FinalRoomCount]);
+        }
+        foreach (Room finalRoom in rooms)
+        {
+            GameObject testFloor = Instantiate(finalRoom.physicalRoom, new Vector3(finalRoom.roomRect.center.x, 0, finalRoom.roomRect.center.y), Quaternion.identity, RoomParent.transform);
+            #if UNITY_EDITOR
+                //testFloor.GetComponent<RoomGenerator>().EditorAwake();
+            #endif
+            testFloor.transform.Translate(new Vector3(-0.5f, 0, -0.5f));
 
             if (roomColor != null)
             {
