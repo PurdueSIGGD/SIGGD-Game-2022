@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0, g: 0, b: 0, a: 1}
+  m_AmbientSkyColor: {r: 0.0627451, g: 0.0627451, b: 0.0627451, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -97,8 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 9ff8d65687ae1db46ae095d72fadd463,
-    type: 2}
+  m_LightingDataAsset: {fileID: 0}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 3b3f7400d3526e9429c39d03afb714b3,
     type: 2}
 --- !u!196 &4
@@ -375,6 +374,10 @@ PrefabInstance:
     - target: {fileID: 1542263325, guid: 6dcd489471c074e12ac23453e6194f84, type: 3}
       propertyPath: m_LocalPosition.z
       value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542263327, guid: 6dcd489471c074e12ac23453e6194f84, type: 3}
+      propertyPath: m_Antialiasing
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1542263329, guid: 6dcd489471c074e12ac23453e6194f84, type: 3}
       propertyPath: field of view
@@ -854,7 +857,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!114 &645684072
 MonoBehaviour:
@@ -870,7 +873,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 1
   m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 1
+  m_AdditionalLightsShadowResolutionTier: 2
   m_LightLayerMask: 1
   m_CustomShadowLayers: 0
   m_ShadowLayerMask: 1
@@ -889,12 +892,12 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 0.99842757, b: 0.89056605, a: 1}
   m_Intensity: 16
-  m_Range: 64
+  m_Range: 16
   m_SpotAngle: 114.44864
   m_InnerSpotAngle: 71.04562
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -927,7 +930,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -1436,7 +1439,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!114 &902509927
 MonoBehaviour:
@@ -1452,7 +1455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 1
   m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 1
+  m_AdditionalLightsShadowResolutionTier: 2
   m_LightLayerMask: 1
   m_CustomShadowLayers: 0
   m_ShadowLayerMask: 1
@@ -1471,12 +1474,12 @@ Light:
   m_Shape: 0
   m_Color: {r: 0.95152056, g: 1, b: 0.94716984, a: 1}
   m_Intensity: 2
-  m_Range: 64
+  m_Range: 24
   m_SpotAngle: 90
   m_InnerSpotAngle: 90
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -1509,7 +1512,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -1969,17 +1972,17 @@ PrefabInstance:
     - target: {fileID: 2679986429069081301, guid: 8d1414a439a4d114db8ba80c1f7adf3c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.1756997
+      value: 3.55
       objectReference: {fileID: 0}
     - target: {fileID: 2679986429069081301, guid: 8d1414a439a4d114db8ba80c1f7adf3c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.82
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2679986429069081301, guid: 8d1414a439a4d114db8ba80c1f7adf3c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.9150105
+      value: 4.794
       objectReference: {fileID: 0}
     - target: {fileID: 2679986429069081301, guid: 8d1414a439a4d114db8ba80c1f7adf3c,
         type: 3}
@@ -2210,7 +2213,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!114 &1067545272
 MonoBehaviour:
@@ -2226,7 +2229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 1
   m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 1
+  m_AdditionalLightsShadowResolutionTier: 2
   m_LightLayerMask: 1
   m_CustomShadowLayers: 0
   m_ShadowLayerMask: 1
@@ -2245,12 +2248,12 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 0.6924528, b: 0.6924528, a: 1}
   m_Intensity: 4
-  m_Range: 64
+  m_Range: 32
   m_SpotAngle: 107.64258
   m_InnerSpotAngle: 30.209126
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -2283,7 +2286,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -2404,12 +2407,12 @@ PrefabInstance:
     - target: {fileID: 2679986429069081301, guid: 8d1414a439a4d114db8ba80c1f7adf3c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.5295808
+      value: 2.18
       objectReference: {fileID: 0}
     - target: {fileID: 2679986429069081301, guid: 8d1414a439a4d114db8ba80c1f7adf3c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2
+      value: -0.15
       objectReference: {fileID: 0}
     - target: {fileID: 2679986429069081301, guid: 8d1414a439a4d114db8ba80c1f7adf3c,
         type: 3}
@@ -2564,17 +2567,17 @@ PrefabInstance:
     - target: {fileID: 2679986429069081301, guid: 8d1414a439a4d114db8ba80c1f7adf3c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.0518856
+      value: 6.425
       objectReference: {fileID: 0}
     - target: {fileID: 2679986429069081301, guid: 8d1414a439a4d114db8ba80c1f7adf3c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.09
+      value: -1.14
       objectReference: {fileID: 0}
     - target: {fileID: 2679986429069081301, guid: 8d1414a439a4d114db8ba80c1f7adf3c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.094718
+      value: 3.1
       objectReference: {fileID: 0}
     - target: {fileID: 2679986429069081301, guid: 8d1414a439a4d114db8ba80c1f7adf3c,
         type: 3}
