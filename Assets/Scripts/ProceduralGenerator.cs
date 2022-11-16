@@ -143,13 +143,23 @@ public class ProceduralGenerator : MonoBehaviour
     public void GenerateDungeon()
     {
         RoomParent = this.gameObject.transform.GetChild(0).gameObject;
+
+        InitializeRooms();
+        Seperate();
+        GabrielEdges = GabrielGraph(FinalRoomPlan);
+        GenerateGrid();
+    }
+
+    public void InitializeRooms()
+    {
         RoomRects = new List<Rect>();
         FinalRoomPlan = new Room[FinalRoomCount];
         int remainingFinalRooms = FinalRoomCount;
         int remainingNormRooms = TotalRoomCount - FinalRoomCount;
         for (int i = 0; i < TotalRoomCount; i++)
         {
-            if (Random.Range(0, remainingNormRooms + remainingFinalRooms) < remainingNormRooms) {
+            if (Random.Range(0, remainingNormRooms + remainingFinalRooms) < remainingNormRooms)
+            {
                 remainingNormRooms--;
                 Vector2 randomPoint = getRandomPointInCircle(inRadius);
 
@@ -164,15 +174,18 @@ public class ProceduralGenerator : MonoBehaviour
                 //Initialize the room with a Rect data structure for easy manipulation.
                 //The final display will convert the Rects into 3D rooms.
                 RoomRects.Add(new Rect(randomPoint.x - (roomWidth / 2), randomPoint.y - (roomDepth / 2), roomWidth, roomDepth));
-            } else {
+            }
+            else
+            {
                 remainingFinalRooms--;
                 Vector2 randomPoint = getRandomPointInCircle(inRadius);
 
                 RoomScriptableObject roomType = FloorRooms[Random.Range(0, FloorRooms.Length)];
                 int rotation = Random.Range(0, 4);
-                float roomWidth = (int) roomType.dimensions.x + MinRoomSeparation;
-                float roomDepth = (int) roomType.dimensions.z + MinRoomSeparation;
-                if (rotation % 2 == 1) {
+                float roomWidth = (int)roomType.dimensions.x + MinRoomSeparation;
+                float roomDepth = (int)roomType.dimensions.z + MinRoomSeparation;
+                if (rotation % 2 == 1)
+                {
                     float temp = roomWidth;
                     roomWidth = roomDepth;
                     roomDepth = temp;
@@ -182,10 +195,6 @@ public class ProceduralGenerator : MonoBehaviour
                 RoomRects.Add(new Rect(randomPoint.x - (roomWidth / 2), randomPoint.y - (roomDepth / 2), roomWidth, roomDepth));
             }
         }
-
-        Seperate();
-        GabrielEdges = GabrielGraph(FinalRoomPlan);
-        GenerateGrid();
     }
 
     public void ClearScene()
@@ -374,13 +383,13 @@ public class ProceduralGenerator : MonoBehaviour
      */
     Vector2[] GetRoomBounds() {
         // Make default bounds
-        float[] minDims = new float[] {RoomRects[0].xMin, RoomRects[0].yMin};
-        float[] maxDims = new float[] {RoomRects[0].xMax, RoomRects[0].yMax};
+        float[] minDims = new float[] {FinalRoomPlan[0].roomRect.xMin, FinalRoomPlan[0].roomRect.yMin};
+        float[] maxDims = new float[] { FinalRoomPlan[0].roomRect.xMax, FinalRoomPlan[0].roomRect.yMax};
         // Loop over each room
-        foreach (Rect room in RoomRects) {
+        foreach (Room room in FinalRoomPlan) {
             // Get dimensions for the room
-            float[] roomMinDims = new float[] {room.xMin, room.yMin};
-            float[] roomMaxDims = new float[] {room.xMax, room.yMax};
+            float[] roomMinDims = new float[] {room.roomRect.xMin, room.roomRect.yMin};
+            float[] roomMaxDims = new float[] {room.roomRect.xMax, room.roomRect.yMax};
             // Test max for x and y
             for (int i = 0; i < roomMaxDims.Length; i++) {
                 if (roomMaxDims[i] > maxDims[i]) {
@@ -395,14 +404,6 @@ public class ProceduralGenerator : MonoBehaviour
             }
         }
         return new Vector2[] {new Vector2(minDims[0], maxDims[0]), new Vector2(minDims[1], maxDims[1])};
-    }
-
-    // Rooms are diagonal if the x or y center of a room lies within another room
-    private bool AreRoomsDiagonal(Rect room1, Rect room2) {
-        Vector2 intPoint1 = new Vector2(room2.center.x, room1.center.y);
-        Vector2 intPoint2 = new Vector2(room1.center.x, room2.center.y);
-        return room1.Contains(intPoint1) || room1.Contains(intPoint2) || 
-               room2.Contains(intPoint1) || room2.Contains(intPoint2);
     }
 
     void GenerateGrid() {
@@ -434,53 +435,8 @@ public class ProceduralGenerator : MonoBehaviour
 
     void GenerateHallwayGrid() {
         // Now try to make hallways
-        for (int i = 0; i < GabrielEdges.Count / 2; i++) {
-            Rect room1 = GabrielEdges[i * 2];
-            Rect room2 = GabrielEdges[i * 2 + 1];
-            if (AreRoomsDiagonal(room1, room2)) {
-                // Try both paths starting with room1
-                List<Vector2> path1Points = new List<Vector2>();
-                float x = room1.center.x;
-                float y = room1.center.y;
-                // X direction
-                if (room1.center.x > room2.center.x) {
-                    while (x >= room2.center.x) {
-                        path1Points.Add(new Vector2(x, y));
-                        x -= 1;
-                    }
-                } else {
-                    while (x <= room2.center.x) {
-                        path1Points.Add(new Vector2(x, y));
-                        x += 1;
-                    }
-                }
-                // Y direction
-                if (room1.center.y > room2.center.y) {
-                    while (y >= room2.center.y) {
-                        path1Points.Add(new Vector2(x, y));
-                        y -= 1;
-                    }
-                } else {
-                    while (y <= room2.center.y) {
-                        path1Points.Add(new Vector2(x, y));
-                        y += 1;
-                    }
-                }
 
-                // TODO: Now try starting from room2
 
-                // Fill in grid with hallway points
-                Vector2[] bounds = GetRoomBounds();
-                int magX = (int) Mathf.Abs(bounds[0].x);
-                int magY = (int) Mathf.Abs(bounds[0].y);
-                for (int j = 0; j < path1Points.Count; j++) {
-                    Vector2 point = path1Points[j];
-                    int gridX = (int) (magX + point.x);
-                    int gridY = (int) (magY + point.y);
-//                    grid[gridX, gridY] = GridPoint.Hallway;
-                }
-            }
-        }
     }
 
     void OnDrawGizmos()
@@ -493,7 +449,7 @@ public class ProceduralGenerator : MonoBehaviour
                 {
                     Rect room1 = GabrielEdges[i * 2];
                     Rect room2 = GabrielEdges[i * 2 + 1];
-                    Gizmos.color = AreRoomsDiagonal(room1, room2) ? Color.blue : Color.magenta;
+                    Gizmos.color = Color.blue;
                     Vector3 vectA = new Vector3(room1.center.x, 0, room1.center.y);
                     Vector3 vectB = new Vector3(room2.center.x, 0, room2.center.y);
                     Gizmos.DrawLine(vectA, vectB);
