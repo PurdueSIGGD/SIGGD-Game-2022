@@ -299,13 +299,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FinalRoomCount: 10
-  TotalRoomCount: 50
-  MinRoomWidth: 3
-  MinRoomDepth: 3
-  MaxRoomWidth: 10
-  MaxRoomDepth: 10
-  TileSize: 2
-  MinRoomSeparation: 1
+  TotalRoomCount: 30
+  MinRoomWidth: 15
+  MinRoomDepth: 15
+  MaxRoomWidth: 26
+  MaxRoomDepth: 26
+  TileSize: 0
+  MinRoomSeparation: 2
   FloorBudget: 0
   RoundToTileSize: 1
   floor: {fileID: 556802070665314663, guid: 6b78b48d381ee8a488f4f1e859793cfa, type: 3}

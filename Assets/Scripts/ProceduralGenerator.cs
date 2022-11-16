@@ -12,7 +12,10 @@ public class ProceduralGenerator : MonoBehaviour
     public int FinalRoomCount, TotalRoomCount;
 
     [SerializeField]
-    private int MinRoomWidth, MinRoomDepth, MaxRoomWidth, MaxRoomDepth, TileSize, MinRoomSeparation;
+    private int MinRoomWidth, MinRoomDepth, MaxRoomWidth, MaxRoomDepth, TileSize;
+
+    [SerializeField]
+    private float MinRoomSeparation;
 
     [SerializeField]
     private int FloorBudget;
@@ -46,16 +49,18 @@ public class ProceduralGenerator : MonoBehaviour
         public GameObject physicalRoom;
         public Rect roomRect;
         public int rotation;
+        public int rectPointer;
         int gridX;
         int gridY;
         Vector3[] hallways;
 
-        public Room(RoomScriptableObject roomObj, int rotation) {
+        public Room(RoomScriptableObject roomObj, int rotation, int rectPointer) {
             this.physicalRoom = roomObj.room;
             this.rotation = rotation;
+            this.rectPointer = rectPointer;
             gridX = -1;
             gridY = -1;
-            roomRect = new Rect(20, 20, 20, 20);
+            roomRect = new Rect();
 
             hallways = new Vector3[roomObj.hallways.Length];
             Vector3 halfRoom = new Vector3(roomObj.dimensions.x / 2, 0, roomObj.dimensions.z / 2);
@@ -88,9 +93,11 @@ public class ProceduralGenerator : MonoBehaviour
             this.roomRect = room;
         }
 
-        public void SetGridPoint(Vector2 gridPoint) {
-            this.gridX = (int) gridPoint.x;
-            this.gridY = (int) gridPoint.y;
+        public void SetGridPoint(int xPos, int yPos) {
+            if (this.gridX != -1) return;
+
+            this.gridX = xPos;
+            this.gridY = yPos;
         }
     }
 
@@ -137,44 +144,47 @@ public class ProceduralGenerator : MonoBehaviour
     {
         RoomParent = this.gameObject.transform.GetChild(0).gameObject;
         RoomRects = new List<Rect>();
-        for (int i = 0; i < TotalRoomCount - FinalRoomCount; i++)
-        {
-            Vector2 randomPoint = getRandomPointInCircle(inRadius);
-
-            //Debug display of the room points as 3D Spheres.
-            //Instantiate(randomObject, new Vector3(randomPoint.x, 0, randomPoint.y), Quaternion.identity);
-
-            //Randomly select room width and depth in range [MinRoom, MaxRoom] inclusively.
-            //Width and Depth are both integers.
-            int roomWidth = Random.Range(MinRoomWidth, MaxRoomWidth + 1) + MinRoomSeparation;
-            int roomDepth = Random.Range(MinRoomDepth, MaxRoomDepth + 1) + MinRoomSeparation;
-
-            //Initialize the room with a Rect data structure for easy manipulation.
-            //The final display will convert the Rects into 3D rooms.
-            RoomRects.Add(new Rect(randomPoint.x - (roomWidth / 2), randomPoint.y - (roomDepth / 2), roomWidth, roomDepth));
-        }
-
         FinalRoomPlan = new Room[FinalRoomCount];
-        for (int i = 0; i < FinalRoomCount; i++) {
-            Vector2 randomPoint = getRandomPointInCircle(inRadius);
+        int remainingFinalRooms = FinalRoomCount;
+        int remainingNormRooms = TotalRoomCount - FinalRoomCount;
+        for (int i = 0; i < TotalRoomCount; i++)
+        {
+            if (Random.Range(0, remainingNormRooms + remainingFinalRooms) < remainingNormRooms) {
+                remainingNormRooms--;
+                Vector2 randomPoint = getRandomPointInCircle(inRadius);
 
-            RoomScriptableObject roomType = FloorRooms[Random.Range(0, FloorRooms.Length)];
-            int rotation = Random.Range(0, 4);
-            int roomWidth = (int) roomType.dimensions.x;
-            int roomDepth = (int) roomType.dimensions.z;
-            if (rotation % 2 == 1) {
-                int temp = roomWidth;
-                roomWidth = roomDepth;
-                roomDepth = temp;
+                //Debug display of the room points as 3D Spheres.
+                //Instantiate(randomObject, new Vector3(randomPoint.x, 0, randomPoint.y), Quaternion.identity);
+
+                //Randomly select room width and depth in range [MinRoom, MaxRoom] inclusively.
+                //Width and Depth are both integers.
+                float roomWidth = Random.Range(MinRoomWidth, MaxRoomWidth + 1) + MinRoomSeparation;
+                float roomDepth = Random.Range(MinRoomDepth, MaxRoomDepth + 1) + MinRoomSeparation;
+
+                //Initialize the room with a Rect data structure for easy manipulation.
+                //The final display will convert the Rects into 3D rooms.
+                RoomRects.Add(new Rect(randomPoint.x - (roomWidth / 2), randomPoint.y - (roomDepth / 2), roomWidth, roomDepth));
+            } else {
+                remainingFinalRooms--;
+                Vector2 randomPoint = getRandomPointInCircle(inRadius);
+
+                RoomScriptableObject roomType = FloorRooms[Random.Range(0, FloorRooms.Length)];
+                int rotation = Random.Range(0, 4);
+                float roomWidth = (int) roomType.dimensions.x + MinRoomSeparation;
+                float roomDepth = (int) roomType.dimensions.z + MinRoomSeparation;
+                if (rotation % 2 == 1) {
+                    float temp = roomWidth;
+                    roomWidth = roomDepth;
+                    roomDepth = temp;
+                }
+
+                FinalRoomPlan[remainingFinalRooms] = new Room(roomType, rotation, i);
+                RoomRects.Add(new Rect(randomPoint.x - (roomWidth / 2), randomPoint.y - (roomDepth / 2), roomWidth, roomDepth));
             }
-
-            FinalRoomPlan[i] = new Room(roomType, rotation);
-            RoomRects.Add(new Rect(randomPoint.x - (roomWidth / 2), randomPoint.y - (roomDepth / 2), roomWidth, roomDepth));
         }
 
         Seperate();
-        SortByArea();
-        GabrielEdges = GabrielGraph(RoomRects.GetRange(0, FinalRoomCount));
+        GabrielEdges = GabrielGraph(FinalRoomPlan);
         GenerateGrid();
     }
 
@@ -196,7 +206,7 @@ public class ProceduralGenerator : MonoBehaviour
     {
         if (RoomRects == null) GenerateDungeon();
 
-        DrawRooms(RoomRects.GetRange(FinalRoomCount, RoomRects.Count - FinalRoomCount), DefaultFloorMaterial);
+        DrawRooms(RoomRects.GetRange(0, RoomRects.Count - FinalRoomCount), DefaultFloorMaterial);
         DrawRooms(FinalRoomPlan, MainRoomMaterial);
 
         DrawGizmos = true;
@@ -252,9 +262,14 @@ public class ProceduralGenerator : MonoBehaviour
             roundedRoom.position = new Vector2(Mathf.Ceil(roundedRoom.position.x), 
                                                Mathf.Ceil(roundedRoom.position.y));
             // Now discard the extra dimensions for room separation                                   
-            roundedRoom.height = roundedRoom.height - (MinRoomSeparation * 2);
-            roundedRoom.width = roundedRoom.width - (MinRoomSeparation * 2);
+            roundedRoom.height = roundedRoom.height - MinRoomSeparation;
+            roundedRoom.width = roundedRoom.width - MinRoomSeparation;
             RoomRects[i] = roundedRoom;
+        }
+
+        
+        for (int i = 0; i < FinalRoomCount; i++) {
+            FinalRoomPlan[i].SetRect(RoomRects[FinalRoomPlan[i].rectPointer]);
         }
     }
 
@@ -289,9 +304,6 @@ public class ProceduralGenerator : MonoBehaviour
     }
 
     private void DrawRooms(Room[] rooms, Material roomColor) {
-        for (int i = 0; i < FinalRoomCount; i++) {
-            rooms[i].SetRect(RoomRects[i + TotalRoomCount - FinalRoomCount]);
-        }
         foreach (Room finalRoom in rooms)
         {
             GameObject testFloor = Instantiate(finalRoom.physicalRoom, new Vector3(finalRoom.roomRect.center.x, 0, finalRoom.roomRect.center.y), Quaternion.identity, RoomParent.transform);
@@ -299,6 +311,7 @@ public class ProceduralGenerator : MonoBehaviour
                 //testFloor.GetComponent<RoomGenerator>().EditorAwake();
             #endif
             testFloor.transform.Translate(new Vector3(-0.5f, 0, -0.5f));
+            testFloor.transform.Rotate(new Vector3(0, 90, 0) * finalRoom.rotation);
 
             if (roomColor != null)
             {
@@ -323,23 +336,23 @@ public class ProceduralGenerator : MonoBehaviour
         });
     }
 
-    private List<Rect> GabrielGraph(List<Rect> rooms)
+    private List<Rect> GabrielGraph(Room[] rooms)
     {
         List<Rect> FinalEdges = new List<Rect>();
 
-        for (int i = 0; i < rooms.Count - 1; i++) 
+        for (int i = 0; i < rooms.Length - 1; i++) 
         {
-            for (int j = i + 1; j < rooms.Count; j++)
+            for (int j = i + 1; j < rooms.Length; j++)
             {
-                Vector2 mid = (rooms[i].center + rooms[j].center) / 2;
-                float radius = Vector2.Distance(mid, rooms[i].center);
+                Vector2 mid = (rooms[i].roomRect.center + rooms[j].roomRect.center) / 2;
+                float radius = Vector2.Distance(mid, rooms[i].roomRect.center);
 
                 bool isValidEdge = true;
-                for (int k = 0; k < rooms.Count; k++)
+                for (int k = 0; k < rooms.Length; k++)
                 {
                     if ((k == i) || (k == j)) continue;
 
-                    if (Vector2.Distance(mid, rooms[k].center) < radius)
+                    if (Vector2.Distance(mid, rooms[k].roomRect.center) < radius)
                     {
                         isValidEdge = false;
                         break;
@@ -348,8 +361,8 @@ public class ProceduralGenerator : MonoBehaviour
 
                 if (isValidEdge)
                 {
-                    FinalEdges.Add(rooms[i]);
-                    FinalEdges.Add(rooms[j]);
+                    FinalEdges.Add(rooms[i].roomRect);
+                    FinalEdges.Add(rooms[j].roomRect);
                 }
             }
         }
@@ -406,10 +419,11 @@ public class ProceduralGenerator : MonoBehaviour
         for (int i = 0; i < grid.GetLength(0); i++) {
             for (int j = 0; j < grid.GetLength(1); j++) {
                 grid[i, j] = GridPoint.Empty;
-                for (int k = 0; k < GabrielEdges.Count; k++) {
+                for (int k = 0; k < FinalRoomCount; k++) {
                     Vector2 position = new Vector2(xMin + i, yMin + j);
-                    if (GabrielEdges[k].Contains(position)) {
+                    if (FinalRoomPlan[k].roomRect.Contains(position)) {
                         grid[i, j] = GridPoint.Room;
+                        FinalRoomPlan[k].SetGridPoint(i, j);
                     }
                 }
             }
@@ -463,7 +477,7 @@ public class ProceduralGenerator : MonoBehaviour
                     Vector2 point = path1Points[j];
                     int gridX = (int) (magX + point.x);
                     int gridY = (int) (magY + point.y);
-                    grid[gridX, gridY] = GridPoint.Hallway;
+//                    grid[gridX, gridY] = GridPoint.Hallway;
                 }
             }
         }

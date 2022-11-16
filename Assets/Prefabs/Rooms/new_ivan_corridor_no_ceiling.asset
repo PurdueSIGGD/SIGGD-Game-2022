@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef9cf795a290b744a60444fd431d559, type: 3}
   m_Name: new_ivan_corridor_no_ceiling
   m_EditorClassIdentifier: 
-  room: {fileID: 1127559717959038644, guid: 95d22fac11e913248a5d70c0b56ebb3e, type: 3}
+  room: {fileID: 8833626483516230512, guid: 65b1d22b664128d419e257fe3fe48446, type: 3}
   dimensions: {x: 32, y: 8, z: 32}
   hallways:
   - {x: 32, y: 1, z: 29}
-  - {x: 3, y: 4, z: 0}
+  - {x: 3, y: 1, z: 0}
