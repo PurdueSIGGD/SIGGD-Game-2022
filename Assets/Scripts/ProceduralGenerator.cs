@@ -521,175 +521,59 @@ public class ProceduralGenerator : MonoBehaviour
                 return;
             }
             // Add this vertex to the closed list
-            Debug.Log(string.Join(",", p));
             i = (int) p[1];
             j = (int) p[2];
             closedList[i, j] = true;
 
             // To store the 'g', 'h' and 'f' of the 8 successors
             double gNew, hNew, fNew;
-            
-            // Only process this cell if this is a valid one
-            // NORTH
-            if (isValid(i - 1, j) == true) {
-                // If the destination cell is the same as the
-                // current successor
-                if (isDestination(i - 1, j, points[1]) == true) {
-                    // Set the Parent of the destination cell
-                    cellDetails[i - 1, j].parent_i = i;
-                    cellDetails[i - 1, j].parent_j = j;
-                    tracePath(cellDetails, points[1]);
-                    foundDest = true;
-                    return;
-                } else if (closedList[i - 1, j] == false
-                        && isUnBlocked(i - 1, j) == true) {
-                    gNew = cellDetails[i, j].g + 1.0;
-                    hNew = calculateHValue(i - 1, j, points[1]);
-                    fNew = gNew + hNew;
-    
-                    // If it isn’t on the open list, add it to
-                    // the open list. Make the current square
-                    // the parent of this square. Record the
-                    // f, g, and h costs of the square cell
-                    //                OR
-                    // If it is on the open list already, check
-                    // to see if this path to that square is
-                    // better, using 'f' cost as the measure.
-                    if (cellDetails[i - 1, j].f == float.MaxValue
-                        || cellDetails[i - 1, j].f > fNew) {
-                        openList.Add(new double[]{fNew, i - 1, j});
-    
-                        // Update the details of this cell
-                        cellDetails[i - 1, j].f = fNew;
-                        cellDetails[i - 1, j].g = gNew;
-                        cellDetails[i - 1, j].h = hNew;
-                        cellDetails[i - 1, j].parent_i = i;
-                        cellDetails[i - 1, j].parent_j = j;
-                    }
-                }
-            }
-            // Only process this cell if this is a valid one
-            // SOUTH
-            if (isValid(i + 1, j) == true) {
-                // If the destination cell is the same as the
-                // current successor
-                if (isDestination(i + 1, j, points[1]) == true) {
-                    // Set the Parent of the destination cell
-                    cellDetails[i + 1, j].parent_i = i;
-                    cellDetails[i + 1, j].parent_j = j;
-                    tracePath(cellDetails, points[1]);
-                    foundDest = true;
-                    return;
-                } else if (closedList[i + 1, j] == false
-                        && isUnBlocked(i + 1, j) == true) {
-                    gNew = cellDetails[i, j].g + 1.0;
-                    hNew = calculateHValue(i + 1, j, points[1]);
-                    fNew = gNew + hNew;
-    
-                    // If it isn’t on the open list, add it to
-                    // the open list. Make the current square
-                    // the parent of this square. Record the
-                    // f, g, and h costs of the square cell
-                    //                OR
-                    // If it is on the open list already, check
-                    // to see if this path to that square is
-                    // better, using 'f' cost as the measure.
-                    if (cellDetails[i + 1, j].f == float.MaxValue
-                        || cellDetails[i + 1, j].f > fNew) {
-                        openList.Add(new double[]{fNew, i + 1, j});
-    
-                        // Update the details of this cell
-                        cellDetails[i + 1, j].f = fNew;
-                        cellDetails[i + 1, j].g = gNew;
-                        cellDetails[i + 1, j].h = hNew;
-                        cellDetails[i + 1, j].parent_i = i;
-                        cellDetails[i + 1, j].parent_j = j;
-                    }
-                }
-            }
-            
-            // Only process this cell if this is a valid one
-            // EAST
-            if (isValid(i, j + 1) == true) {
-                // If the destination cell is the same as the
-                // current successor
-                if (isDestination(i, j + 1, points[1]) == true) {
-                    // Set the Parent of the destination cell
-                    cellDetails[i, j + 1].parent_i = i;
-                    cellDetails[i, j + 1].parent_j = j;
-                    tracePath(cellDetails, points[1]);
-                    foundDest = true;
-                    return;
-                } else if (closedList[i, j + 1] == false
-                        && isUnBlocked(i, j + 1) == true) {
-                    gNew = cellDetails[i, j + 1].g + 1.0;
-                    hNew = calculateHValue(i, j + 1, points[1]);
-                    fNew = gNew + hNew;
-    
-                    // If it isn’t on the open list, add it to
-                    // the open list. Make the current square
-                    // the parent of this square. Record the
-                    // f, g, and h costs of the square cell
-                    //                OR
-                    // If it is on the open list already, check
-                    // to see if this path to that square is
-                    // better, using 'f' cost as the measure.
-                    if (cellDetails[i, j + 1].f == float.MaxValue
-                        || cellDetails[i, j + 1].f > fNew) {
-                        openList.Add(new double[]{fNew, i, j + 1});
-    
-                        // Update the details of this cell
-                        cellDetails[i, j + 1].f = fNew;
-                        cellDetails[i, j + 1].g = gNew;
-                        cellDetails[i, j + 1].h = hNew;
-                        cellDetails[i, j + 1].parent_i = i;
-                        cellDetails[i, j + 1].parent_j = j;
-                    }
-                }
-            }
-            
-            // Only process this cell if this is a valid one
-            // WEST
-            if (isValid(i, j - 1) == true) {
-                // If the destination cell is the same as the
-                // current successor
-                if (isDestination(i, j - 1, points[1]) == true) {
-                    // Set the Parent of the destination cell
-                    cellDetails[i, j - 1].parent_i = i;
-                    cellDetails[i, j - 1].parent_j = j;
-                    tracePath(cellDetails, points[1]);
-                    foundDest = true;
-                    return;
-                } else if (closedList[i, j - 1] == false
-                        && isUnBlocked(i, j - 1) == true) {
-                    gNew = cellDetails[i, j - 1].g + 1.0;
-                    hNew = calculateHValue(i, j - 1, points[1]);
-                    fNew = gNew + hNew;
-    
-                    // If it isn’t on the open list, add it to
-                    // the open list. Make the current square
-                    // the parent of this square. Record the
-                    // f, g, and h costs of the square cell
-                    //                OR
-                    // If it is on the open list already, check
-                    // to see if this path to that square is
-                    // better, using 'f' cost as the measure.
-                    if (cellDetails[i, j - 1].f == float.MaxValue
-                        || cellDetails[i, j - 1].f > fNew) {
-                        openList.Add(new double[]{fNew, i, j - 1});
-    
-                        // Update the details of this cell
-                        cellDetails[i, j - 1].f = fNew;
-                        cellDetails[i, j - 1].g = gNew;
-                        cellDetails[i, j - 1].h = hNew;
-                        cellDetails[i, j - 1].parent_i = i;
-                        cellDetails[i, j - 1].parent_j = j;
+
+            // Used to loop over north, south, east, and west surrounding points
+            int[] xIndices = new int[] {i - 1, i + 1, 0, 0};
+            int[] yIndices = new int[] {0, 0, j - 1, j + 1};
+
+            for (int k = 0; k < xIndices.Length; k++) {
+                int x = xIndices[k];
+                int y = yIndices[k];
+                if (isValid(x, y)) {
+                    // If the destination cell is the same as the
+                    // current successor
+                    if (isDestination(x, y, points[1])) {
+                        // Set the Parent of the destination cell
+                        cellDetails[x, y].parent_i = i;
+                        cellDetails[x, y].parent_j = j;
+                        tracePath(cellDetails, points[1]);
+                        foundDest = true;
+                        return;
+                    } else if (!closedList[x, y] && isUnBlocked(x, y)) {
+                        gNew = cellDetails[i, j].g + 1.0;
+                        hNew = calculateHValue(x, y, points[1]);
+                        fNew = gNew + hNew;
+        
+                        // If it isn’t on the open list, add it to 
+                        // the open list. Make the current square
+                        // the parent of this square. Record the
+                        // f, g, and h costs of the square cell
+                        //                OR
+                        // If it is on the open list already, check
+                        // to see if this path to that square is
+                        // better, using 'f' cost as the measure.
+                        if (cellDetails[x, y].f == float.MaxValue
+                            || cellDetails[x, y].f > fNew) {
+                            openList.Add(new double[]{fNew, x, y});
+        
+                            // Update the details of this cell
+                            cellDetails[x, y].f = fNew;
+                            cellDetails[x, y].g = gNew;
+                            cellDetails[x, y].h = hNew;
+                            cellDetails[x, y].parent_i = i;
+                            cellDetails[x, y].parent_j = j;
+                        }
                     }
                 }
             }
         }
-        if (foundDest == false) Debug.Log("A* Failed to Find Destination");
-
+        if (!foundDest) Debug.Log("A* Failed to Find Destination");
         return;
     }
 
@@ -719,10 +603,7 @@ public class ProceduralGenerator : MonoBehaviour
     // been reached or not
     bool isDestination(int row, int col, int[] dest)
     {
-        if (row == dest[0] && col == dest[1])
-            return (true);
-        else
-            return (false);
+        return row == dest[0] && col == dest[1];
     }
     
     // A Utility Function to calculate the 'h' heuristics.
@@ -755,8 +636,6 @@ public class ProceduralGenerator : MonoBehaviour
             int[] p = Path.Pop();
             grid[p[0], p[1]] = GridPoint.Hallway;
         }
-    
-        return;
     }
 
     void OnDrawGizmos()
