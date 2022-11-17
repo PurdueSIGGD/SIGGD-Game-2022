@@ -35,14 +35,23 @@ public class ProceduralGenerator : MonoBehaviour
     private Room[] FinalRoomPlan;
     private GameObject RoomParent;
 
-    private List<Rect> GabrielEdges;
+    private List<Room[]> GabrielEdges;
     private bool DrawGizmos;
 
-    enum GridPoint
+    public enum GridPoint
     {
         Empty,
         Room,
-        Hallway
+        Hallway,
+        Doorway
+    }
+
+    public struct cell {
+        // Row and Column index of its parent
+        // Note that 0 <= i <= ROW-1 & 0 <= j <= COL-1
+        public int parent_i, parent_j;
+        // f = g + h
+        public double f, g, h;
     }
 
     public struct Room {
@@ -50,8 +59,8 @@ public class ProceduralGenerator : MonoBehaviour
         public Rect roomRect;
         public int rotation;
         public int rectPointer;
-        int gridX;
-        int gridY;
+        public int gridX;
+        public int gridY;
         Vector3[] hallways;
 
         public Room(RoomScriptableObject roomObj, int rotation, int rectPointer) {
@@ -93,11 +102,42 @@ public class ProceduralGenerator : MonoBehaviour
             this.roomRect = room;
         }
 
-        public void SetGridPoint(int xPos, int yPos) {
+        public void SetGridPoint(int xPos, int yPos, GridPoint[,] grid) {
             if (this.gridX != -1) return;
 
             this.gridX = xPos;
             this.gridY = yPos;
+
+            for (int i = 0; i < hallways.Length; i++) {
+                grid[xPos + Mathf.RoundToInt(hallways[i].x), yPos + Mathf.RoundToInt(hallways[i].z)] = GridPoint.Doorway;
+            }
+        }
+
+        public int[][] ClosestHallways(Room other) {
+            int[] localClosestHallway = new int[2];
+            int[] remoteClosestHallway = new int[2];
+            float distance = 10000;
+            for (int i = 0; i < this.hallways.Length; i++) {
+                float tempDist = Vector3.Distance(this.hallways[i] + new Vector3(gridX, 0, gridY), other.roomRect.center);
+                if (tempDist < distance) {
+                    distance = tempDist;
+                    localClosestHallway = new int[]{Mathf.RoundToInt(this.hallways[i].x + gridX), Mathf.RoundToInt(this.hallways[i].z + gridY)};
+                }
+            }
+            distance = 10000;
+            for (int i = 0; i < other.hallways.Length; i++) {
+                float tempDist = Vector3.Distance(other.hallways[i] + new Vector3(gridX, 0, gridY), this.roomRect.center);
+                if (tempDist < distance) {
+                    distance = tempDist;
+                    remoteClosestHallway = new int[]{Mathf.RoundToInt(other.hallways[i].x + gridX), Mathf.RoundToInt(other.hallways[i].z + gridY)};
+                }
+            }
+
+            if (localClosestHallway[0] < 0) localClosestHallway[0] = 0;
+            if (localClosestHallway[1] < 0) localClosestHallway[1] = 0;
+            if (remoteClosestHallway[0] < 0) remoteClosestHallway[0] = 0;
+            if (remoteClosestHallway[1] < 0) remoteClosestHallway[1] = 0;
+            return new int[][]{localClosestHallway, remoteClosestHallway};
         }
     }
 
@@ -105,9 +145,8 @@ public class ProceduralGenerator : MonoBehaviour
     RoomScriptableObject[] FloorRooms;
 
 
-    GridPoint[,] grid;
+    public GridPoint[,] grid;
 
-    //TODO: Hallway generation
 
     // Start is called before the first frame update
     void Awake()
@@ -215,7 +254,9 @@ public class ProceduralGenerator : MonoBehaviour
     {
         if (RoomRects == null) GenerateDungeon();
 
-        DrawRooms(RoomRects.GetRange(0, RoomRects.Count - FinalRoomCount), DefaultFloorMaterial);
+        //Draws the temporary rooms. Unneeded in final design,
+        //and currently does not work due to RoomRects randomization changes.
+        //DrawRooms(RoomRects.GetRange(0, RoomRects.Count - FinalRoomCount), DefaultFloorMaterial);
         DrawRooms(FinalRoomPlan, MainRoomMaterial);
 
         DrawGizmos = true;
@@ -345,9 +386,9 @@ public class ProceduralGenerator : MonoBehaviour
         });
     }
 
-    private List<Rect> GabrielGraph(Room[] rooms)
+    private List<Room[]> GabrielGraph(Room[] rooms)
     {
-        List<Rect> FinalEdges = new List<Rect>();
+        List<Room[]> FinalEdges = new List<Room[]>();
 
         for (int i = 0; i < rooms.Length - 1; i++) 
         {
@@ -370,8 +411,7 @@ public class ProceduralGenerator : MonoBehaviour
 
                 if (isValidEdge)
                 {
-                    FinalEdges.Add(rooms[i].roomRect);
-                    FinalEdges.Add(rooms[j].roomRect);
+                    FinalEdges.Add(new Room[]{rooms[i], rooms[j]});
                 }
             }
         }
@@ -409,9 +449,10 @@ public class ProceduralGenerator : MonoBehaviour
     void GenerateGrid() {
         // Returns [(minX, maxX), (minY, maxY)]
         // Initialize the grid, with the size proportional to tileSize
+        int gridPadding = 2;
         Vector2[] bounds = GetRoomBounds();
-        int xSize = (int) (Mathf.Abs(bounds[0][0]) + Mathf.Abs(bounds[0][1]));
-        int ySize = (int) (Mathf.Abs(bounds[1][0]) + Mathf.Abs(bounds[1][1]));
+        int xSize = (int) (Mathf.Abs(bounds[0][0]) + Mathf.Abs(bounds[0][1])) + gridPadding * 2;
+        int ySize = (int) (Mathf.Abs(bounds[1][0]) + Mathf.Abs(bounds[1][1])) + gridPadding * 2;
         grid = new GridPoint[xSize, ySize];
 
         // Uh oh: n^3 algo
@@ -419,12 +460,13 @@ public class ProceduralGenerator : MonoBehaviour
         float yMin = bounds[1][0];
         for (int i = 0; i < grid.GetLength(0); i++) {
             for (int j = 0; j < grid.GetLength(1); j++) {
+                if (grid[i, j] == GridPoint.Doorway) continue;
                 grid[i, j] = GridPoint.Empty;
                 for (int k = 0; k < FinalRoomCount; k++) {
                     Vector2 position = new Vector2(xMin + i, yMin + j);
                     if (FinalRoomPlan[k].roomRect.Contains(position)) {
                         grid[i, j] = GridPoint.Room;
-                        FinalRoomPlan[k].SetGridPoint(i, j);
+                        FinalRoomPlan[k].SetGridPoint(i, j, grid);
                     }
                 }
             }
@@ -435,8 +477,286 @@ public class ProceduralGenerator : MonoBehaviour
 
     void GenerateHallwayGrid() {
         // Now try to make hallways
+        for (int i = 0; i < GabrielEdges.Count; i++) {
+            // Run A* with the start and end points
+            aStarSearch(GabrielEdges[i][0].ClosestHallways(GabrielEdges[i][1]));
+        }
+    }
 
+    void aStarSearch(int[][] points) {
+        bool[,] closedList = new bool[grid.GetLength(0), grid.GetLength(1)];
+        cell[,] cellDetails = new cell[grid.GetLength(0), grid.GetLength(1)];
+        int i, j;
+        for (i = 0; i < grid.GetLength(0); i++) {
+            for (j = 0; j < grid.GetLength(1); j++) {
+                cellDetails[i,j].f = float.MaxValue;
+                cellDetails[i,j].g = float.MaxValue;
+                cellDetails[i,j].h = float.MaxValue;
+                cellDetails[i,j].parent_i = -1;
+                cellDetails[i,j].parent_j = -1;
+            }
+        }
 
+        i = points[0][0];
+        j = points[0][1];
+
+        cellDetails[i, j].f = float.MaxValue;
+        cellDetails[i, j].g = float.MaxValue;
+        cellDetails[i, j].h = float.MaxValue;
+        cellDetails[i, j].parent_i = -1;
+        cellDetails[i, j].parent_j = -1;
+
+        HashSet<double[]> openList = new HashSet<double[]>();
+        // Put the starting cell on the open list and set its
+        // 'f' as 0
+        openList.Add(new double[]{0.0, i, j});
+        bool foundDest = false;
+
+        while (openList.Count > 0) {
+            HashSet<double[]>.Enumerator hashEnumerator= openList.GetEnumerator();
+            hashEnumerator.MoveNext();
+            double[] p = hashEnumerator.Current;
+            if (openList.Remove(hashEnumerator.Current) == false) {
+                Debug.Log("Removal Failed");
+                return;
+            }
+            // Add this vertex to the closed list
+            Debug.Log(string.Join(",", p));
+            i = (int) p[1];
+            j = (int) p[2];
+            closedList[i, j] = true;
+
+            // To store the 'g', 'h' and 'f' of the 8 successors
+            double gNew, hNew, fNew;
+            
+            // Only process this cell if this is a valid one
+            // NORTH
+            if (isValid(i - 1, j) == true) {
+                // If the destination cell is the same as the
+                // current successor
+                if (isDestination(i - 1, j, points[1]) == true) {
+                    // Set the Parent of the destination cell
+                    cellDetails[i - 1, j].parent_i = i;
+                    cellDetails[i - 1, j].parent_j = j;
+                    tracePath(cellDetails, points[1]);
+                    foundDest = true;
+                    return;
+                } else if (closedList[i - 1, j] == false
+                        && isUnBlocked(i - 1, j) == true) {
+                    gNew = cellDetails[i, j].g + 1.0;
+                    hNew = calculateHValue(i - 1, j, points[1]);
+                    fNew = gNew + hNew;
+    
+                    // If it isn’t on the open list, add it to
+                    // the open list. Make the current square
+                    // the parent of this square. Record the
+                    // f, g, and h costs of the square cell
+                    //                OR
+                    // If it is on the open list already, check
+                    // to see if this path to that square is
+                    // better, using 'f' cost as the measure.
+                    if (cellDetails[i - 1, j].f == float.MaxValue
+                        || cellDetails[i - 1, j].f > fNew) {
+                        openList.Add(new double[]{fNew, i - 1, j});
+    
+                        // Update the details of this cell
+                        cellDetails[i - 1, j].f = fNew;
+                        cellDetails[i - 1, j].g = gNew;
+                        cellDetails[i - 1, j].h = hNew;
+                        cellDetails[i - 1, j].parent_i = i;
+                        cellDetails[i - 1, j].parent_j = j;
+                    }
+                }
+            }
+            // Only process this cell if this is a valid one
+            // SOUTH
+            if (isValid(i + 1, j) == true) {
+                // If the destination cell is the same as the
+                // current successor
+                if (isDestination(i + 1, j, points[1]) == true) {
+                    // Set the Parent of the destination cell
+                    cellDetails[i + 1, j].parent_i = i;
+                    cellDetails[i + 1, j].parent_j = j;
+                    tracePath(cellDetails, points[1]);
+                    foundDest = true;
+                    return;
+                } else if (closedList[i + 1, j] == false
+                        && isUnBlocked(i + 1, j) == true) {
+                    gNew = cellDetails[i, j].g + 1.0;
+                    hNew = calculateHValue(i + 1, j, points[1]);
+                    fNew = gNew + hNew;
+    
+                    // If it isn’t on the open list, add it to
+                    // the open list. Make the current square
+                    // the parent of this square. Record the
+                    // f, g, and h costs of the square cell
+                    //                OR
+                    // If it is on the open list already, check
+                    // to see if this path to that square is
+                    // better, using 'f' cost as the measure.
+                    if (cellDetails[i + 1, j].f == float.MaxValue
+                        || cellDetails[i + 1, j].f > fNew) {
+                        openList.Add(new double[]{fNew, i + 1, j});
+    
+                        // Update the details of this cell
+                        cellDetails[i + 1, j].f = fNew;
+                        cellDetails[i + 1, j].g = gNew;
+                        cellDetails[i + 1, j].h = hNew;
+                        cellDetails[i + 1, j].parent_i = i;
+                        cellDetails[i + 1, j].parent_j = j;
+                    }
+                }
+            }
+            
+            // Only process this cell if this is a valid one
+            // EAST
+            if (isValid(i, j + 1) == true) {
+                // If the destination cell is the same as the
+                // current successor
+                if (isDestination(i, j + 1, points[1]) == true) {
+                    // Set the Parent of the destination cell
+                    cellDetails[i, j + 1].parent_i = i;
+                    cellDetails[i, j + 1].parent_j = j;
+                    tracePath(cellDetails, points[1]);
+                    foundDest = true;
+                    return;
+                } else if (closedList[i, j + 1] == false
+                        && isUnBlocked(i, j + 1) == true) {
+                    gNew = cellDetails[i, j + 1].g + 1.0;
+                    hNew = calculateHValue(i, j + 1, points[1]);
+                    fNew = gNew + hNew;
+    
+                    // If it isn’t on the open list, add it to
+                    // the open list. Make the current square
+                    // the parent of this square. Record the
+                    // f, g, and h costs of the square cell
+                    //                OR
+                    // If it is on the open list already, check
+                    // to see if this path to that square is
+                    // better, using 'f' cost as the measure.
+                    if (cellDetails[i, j + 1].f == float.MaxValue
+                        || cellDetails[i, j + 1].f > fNew) {
+                        openList.Add(new double[]{fNew, i, j + 1});
+    
+                        // Update the details of this cell
+                        cellDetails[i, j + 1].f = fNew;
+                        cellDetails[i, j + 1].g = gNew;
+                        cellDetails[i, j + 1].h = hNew;
+                        cellDetails[i, j + 1].parent_i = i;
+                        cellDetails[i, j + 1].parent_j = j;
+                    }
+                }
+            }
+            
+            // Only process this cell if this is a valid one
+            // WEST
+            if (isValid(i, j - 1) == true) {
+                // If the destination cell is the same as the
+                // current successor
+                if (isDestination(i, j - 1, points[1]) == true) {
+                    // Set the Parent of the destination cell
+                    cellDetails[i, j - 1].parent_i = i;
+                    cellDetails[i, j - 1].parent_j = j;
+                    tracePath(cellDetails, points[1]);
+                    foundDest = true;
+                    return;
+                } else if (closedList[i, j - 1] == false
+                        && isUnBlocked(i, j - 1) == true) {
+                    gNew = cellDetails[i, j - 1].g + 1.0;
+                    hNew = calculateHValue(i, j - 1, points[1]);
+                    fNew = gNew + hNew;
+    
+                    // If it isn’t on the open list, add it to
+                    // the open list. Make the current square
+                    // the parent of this square. Record the
+                    // f, g, and h costs of the square cell
+                    //                OR
+                    // If it is on the open list already, check
+                    // to see if this path to that square is
+                    // better, using 'f' cost as the measure.
+                    if (cellDetails[i, j - 1].f == float.MaxValue
+                        || cellDetails[i, j - 1].f > fNew) {
+                        openList.Add(new double[]{fNew, i, j - 1});
+    
+                        // Update the details of this cell
+                        cellDetails[i, j - 1].f = fNew;
+                        cellDetails[i, j - 1].g = gNew;
+                        cellDetails[i, j - 1].h = hNew;
+                        cellDetails[i, j - 1].parent_i = i;
+                        cellDetails[i, j - 1].parent_j = j;
+                    }
+                }
+            }
+        }
+        if (foundDest == false) Debug.Log("A* Failed to Find Destination");
+
+        return;
+    }
+
+    // A Utility Function to check whether given cell (row, col)
+    // is a valid cell or not.
+    bool isValid(int row, int col)
+    {
+        // Returns true if row number and column number
+        // is in range
+        return (row >= 0) && (row < grid.GetLength(0)) && (col >= 0)
+            && (col < grid.GetLength(1));
+    }
+    
+    // A Utility Function to check whether the given cell is
+    // blocked or not
+    bool isUnBlocked(int row, int col)
+    {
+        // Returns true if the cell is not blocked else false
+        // if (grid[row, col] == 1)
+        //     return (true);
+        // else
+        //     return (false);
+        return true;
+    }
+    
+    // A Utility Function to check whether destination cell has
+    // been reached or not
+    bool isDestination(int row, int col, int[] dest)
+    {
+        if (row == dest[0] && col == dest[1])
+            return (true);
+        else
+            return (false);
+    }
+    
+    // A Utility Function to calculate the 'h' heuristics.
+    double calculateHValue(int row, int col, int[] dest)
+    {
+        // Return using the distance formula
+        return Mathf.Abs(row - dest[0]) + Mathf.Abs(col - dest[1]);
+    }
+    
+    // A Utility Function to trace the path from the source
+    // to destination
+    void tracePath(cell[,] cellDetails, int[] dest)
+    {
+        int row = dest[0];
+        int col = dest[1];
+    
+        Stack<int[]> Path = new Stack<int[]>();
+    
+        while (!(cellDetails[row, col].parent_i == row
+                && cellDetails[row, col].parent_j == col)) {
+            Path.Push(new int[]{row, col});
+            int temp_row = cellDetails[row, col].parent_i;
+            int temp_col = cellDetails[row, col].parent_j;
+            row = temp_row;
+            col = temp_col;
+        }
+    
+        Path.Push(new int[]{row, col});
+        while (Path.Count > 0) {
+            int[] p = Path.Pop();
+            grid[p[0], p[1]] = GridPoint.Hallway;
+        }
+    
+        return;
     }
 
     void OnDrawGizmos()
@@ -447,21 +767,12 @@ public class ProceduralGenerator : MonoBehaviour
                 // Direct connections from room to room
                 for (int i = 0; i < GabrielEdges.Count / 2; i++)
                 {
-                    Rect room1 = GabrielEdges[i * 2];
-                    Rect room2 = GabrielEdges[i * 2 + 1];
+                    Rect room1 = GabrielEdges[i][0].roomRect;
+                    Rect room2 = GabrielEdges[i][1].roomRect;
                     Gizmos.color = Color.blue;
                     Vector3 vectA = new Vector3(room1.center.x, 0, room1.center.y);
                     Vector3 vectB = new Vector3(room2.center.x, 0, room2.center.y);
                     Gizmos.DrawLine(vectA, vectB);
-
-                    // Jank hallway generation turned off for now
-                    if (false) {
-                        Gizmos.color = Color.green;
-                        float deltaX = vectA.x - vectB.x;
-                        float deltaZ = vectA.z - vectB.z;
-                        Gizmos.DrawLine(vectA, vectA + Vector3.left * deltaX);
-                        Gizmos.DrawLine(vectB, vectB + Vector3.forward * deltaZ);
-                    }
                 }
             }
             // Can be changed like on/off switch
@@ -487,6 +798,8 @@ public class ProceduralGenerator : MonoBehaviour
                 return Color.green;
             case GridPoint.Room:
                 return Color.red;
+            case GridPoint.Doorway:
+                return Color.yellow;
         }
         return Color.black;
     }
