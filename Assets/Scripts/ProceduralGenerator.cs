@@ -489,11 +489,11 @@ public class ProceduralGenerator : MonoBehaviour
         int i, j;
         for (i = 0; i < grid.GetLength(0); i++) {
             for (j = 0; j < grid.GetLength(1); j++) {
-                cellDetails[i,j].f = float.MaxValue;
-                cellDetails[i,j].g = float.MaxValue;
-                cellDetails[i,j].h = float.MaxValue;
-                cellDetails[i,j].parent_i = -1;
-                cellDetails[i,j].parent_j = -1;
+                cellDetails[i, j].f = float.MaxValue;
+                cellDetails[i, j].g = float.MaxValue;
+                cellDetails[i, j].h = float.MaxValue;
+                cellDetails[i, j].parent_i = -1;
+                cellDetails[i, j].parent_j = -1;
             }
         }
 
@@ -506,31 +506,31 @@ public class ProceduralGenerator : MonoBehaviour
         cellDetails[i, j].parent_i = -1;
         cellDetails[i, j].parent_j = -1;
 
-        HashSet<double[]> openList = new HashSet<double[]>();
+        SortedDictionary<double, int[]> openList = new SortedDictionary<double, int[]>();
         // Put the starting cell on the open list and set its
         // 'f' as 0
-        openList.Add(new double[]{0.0, i, j});
+        openList.Add(0.0, new int[]{i, j});
         bool foundDest = false;
 
         while (openList.Count > 0) {
-            HashSet<double[]>.Enumerator hashEnumerator= openList.GetEnumerator();
-            hashEnumerator.MoveNext();
-            double[] p = hashEnumerator.Current;
-            if (openList.Remove(hashEnumerator.Current) == false) {
+            SortedDictionary<double, int[]>.Enumerator dictEnumerator= openList.GetEnumerator();
+            dictEnumerator.MoveNext();
+            KeyValuePair<double, int[]> p = dictEnumerator.Current;
+            if (openList.Remove(dictEnumerator.Current.Key) == false) {
                 Debug.Log("Removal Failed");
                 return;
             }
             // Add this vertex to the closed list
-            i = (int) p[1];
-            j = (int) p[2];
+            i = (int) p.Value[0];
+            j = (int) p.Value[1];
             closedList[i, j] = true;
 
             // To store the 'g', 'h' and 'f' of the 8 successors
             double gNew, hNew, fNew;
 
             // Used to loop over north, south, east, and west surrounding points
-            int[] xIndices = new int[] {i - 1, i + 1, 0, 0};
-            int[] yIndices = new int[] {0, 0, j - 1, j + 1};
+            int[] xIndices = new int[] {i - 1, i + 1, i, i};
+            int[] yIndices = new int[] {j, j, j - 1, j + 1};
 
             for (int k = 0; k < xIndices.Length; k++) {
                 int x = xIndices[k];
@@ -560,7 +560,7 @@ public class ProceduralGenerator : MonoBehaviour
                         // better, using 'f' cost as the measure.
                         if (cellDetails[x, y].f == float.MaxValue
                             || cellDetails[x, y].f > fNew) {
-                            openList.Add(new double[]{fNew, x, y});
+                            openList.Add(fNew, new int[]{x,y});
         
                             // Update the details of this cell
                             cellDetails[x, y].f = fNew;
