@@ -52,6 +52,14 @@ public class ProceduralGenerator : MonoBehaviour
         public int parent_i, parent_j;
         // f = g + h
         public double f, g, h;
+
+        public void setValues(int pi, int pj, double f, double g, double h) {
+            parent_i = pi;
+            parent_j = pj;
+            this.f = f;
+            this.g = g;
+            this.h = h;
+        }
     }
 
     public struct Room {
@@ -489,22 +497,14 @@ public class ProceduralGenerator : MonoBehaviour
         int i, j;
         for (i = 0; i < grid.GetLength(0); i++) {
             for (j = 0; j < grid.GetLength(1); j++) {
-                cellDetails[i,j].f = float.MaxValue;
-                cellDetails[i,j].g = float.MaxValue;
-                cellDetails[i,j].h = float.MaxValue;
-                cellDetails[i,j].parent_i = -1;
-                cellDetails[i,j].parent_j = -1;
+                cellDetails[i, j].setValues(-1, -1, float.MaxValue, float.MaxValue, float.MaxValue);
             }
         }
 
         i = points[0][0];
         j = points[0][1];
 
-        cellDetails[i, j].f = float.MaxValue;
-        cellDetails[i, j].g = float.MaxValue;
-        cellDetails[i, j].h = float.MaxValue;
-        cellDetails[i, j].parent_i = -1;
-        cellDetails[i, j].parent_j = -1;
+        cellDetails[i, j].setValues(-1, -1, float.MaxValue, float.MaxValue, float.MaxValue);
 
         HashSet<double[]> openList = new HashSet<double[]>();
         // Put the starting cell on the open list and set its
@@ -529,8 +529,8 @@ public class ProceduralGenerator : MonoBehaviour
             double gNew, hNew, fNew;
 
             // Used to loop over north, south, east, and west surrounding points
-            int[] xIndices = new int[] {i - 1, i + 1, 0, 0};
-            int[] yIndices = new int[] {0, 0, j - 1, j + 1};
+            int[] xIndices = new int[] {i - 1, i + 1, i, i};
+            int[] yIndices = new int[] {j, j, j - 1, j + 1};
 
             for (int k = 0; k < xIndices.Length; k++) {
                 int x = xIndices[k];
@@ -546,7 +546,7 @@ public class ProceduralGenerator : MonoBehaviour
                         foundDest = true;
                         return;
                     } else if (!closedList[x, y] && isUnBlocked(x, y)) {
-                        gNew = cellDetails[i, j].g + 1.0;
+                        gNew = cellDetails[i, j].g + 1.0f;
                         hNew = calculateHValue(x, y, points[1]);
                         fNew = gNew + hNew;
         
@@ -563,11 +563,7 @@ public class ProceduralGenerator : MonoBehaviour
                             openList.Add(new double[]{fNew, x, y});
         
                             // Update the details of this cell
-                            cellDetails[x, y].f = fNew;
-                            cellDetails[x, y].g = gNew;
-                            cellDetails[x, y].h = hNew;
-                            cellDetails[x, y].parent_i = i;
-                            cellDetails[x, y].parent_j = j;
+                            cellDetails[i, j].setValues(i, j, fNew, gNew, hNew);
                         }
                     }
                 }
