@@ -315,6 +315,59 @@ public class ProceduralGenerator : MonoBehaviour
                 }
             }
         }
+
+        GenerateHallwayGrid();
+    }
+
+    void GenerateHallwayGrid() {
+        // Now try to make hallways
+        for (int i = 0; i < GabrielEdges.Count / 2; i++) {
+            Rect room1 = GabrielEdges[i * 2];
+            Rect room2 = GabrielEdges[i * 2 + 1];
+            if (AreRoomsDiagonal(room1, room2)) {
+                // Try both paths starting with room1
+                List<Vector2> path1Points = new List<Vector2>();
+                float x = room1.center.x;
+                float y = room1.center.y;
+                // X direction
+                if (room1.center.x > room2.center.x) {
+                    while (x >= room2.center.x) {
+                        path1Points.Add(new Vector2(x, y));
+                        x -= TileSize;
+                    }
+                } else {
+                    while (x <= room2.center.x) {
+                        path1Points.Add(new Vector2(x, y));
+                        x += TileSize;
+                    }
+                }
+                // Y direction
+                if (room1.center.y > room2.center.y) {
+                    while (y >= room2.center.y) {
+                        path1Points.Add(new Vector2(x, y));
+                        y -= TileSize;
+                    }
+                } else {
+                    while (y <= room2.center.y) {
+                        path1Points.Add(new Vector2(x, y));
+                        y += TileSize;
+                    }
+                }
+
+                // TODO: Now try starting from room2
+
+                // Fill in grid with hallway points
+                Vector2[] bounds = GetRoomBounds();
+                int magX = (int) Mathf.Abs(bounds[0].x);
+                int magY = (int) Mathf.Abs(bounds[0].y);
+                for (int j = 0; j < path1Points.Count; j++) {
+                    Vector2 point = path1Points[j];
+                    int gridX = (int) ((magX + point.x) / TileSize);
+                    int gridY = (int) ((magY + point.y) / TileSize);
+                    grid[gridX, gridY] = GridPoint.Hallway;
+                }
+            }
+        }
     }
 
     void OnDrawGizmos()
@@ -343,20 +396,33 @@ public class ProceduralGenerator : MonoBehaviour
                 }
             }
             // Can be changed like on/off switch
-            if (false) {
+            if (true) {
                 Vector2[] bounds = GetRoomBounds();
                 float xMin = bounds[0][0];
                 float yMin = bounds[1][0];
                 for (int i = 0; i < grid.GetLength(0); i++) {
                     for (int j = 0; j < grid.GetLength(1); j++) {
-                        Gizmos.color = grid[i, j] == GridPoint.Room ? Color.red : Color.blue;
+                        Gizmos.color = getGridColor(grid[i, j]);
                         Gizmos.DrawSphere(new Vector3(xMin + (i * TileSize), 0, yMin + (j * TileSize)), 0.3f);
                     }
                 }
             }
         }
     }
+    Color getGridColor(GridPoint point) {
+    switch(point) {
+        case GridPoint.Empty:
+            return Color.blue;
+        case GridPoint.Hallway:
+            return Color.green;
+        case GridPoint.Room:
+            return Color.red;
+    }
+    return Color.black;
 }
+}
+
+
 
 
 #if UNITY_EDITOR
