@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2679986429069081301}
-  - component: {fileID: 3200445507298991713}
+  - component: {fileID: 4260233223676128163}
   - component: {fileID: 6763135281201947592}
   - component: {fileID: 6755927282950771678}
   - component: {fileID: 4802620772777379802}
@@ -36,7 +36,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3200445507298991713
+--- !u!114 &4260233223676128163
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,15 +45,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5090515544576324914}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5671952cf5f07d14eb4c0b4590db7bab, type: 3}
+  m_Script: {fileID: 11500000, guid: 70213439c298c9044849dbf874a76368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: HealthPack
   type: 1
-  maxStackSize: 2
+  maxStackSize: 1
   currentNumCharges: 1
   isShiny: 0
   description: 
+  healAmount: 1
 --- !u!33 &6763135281201947592
 MeshFilter:
   m_ObjectHideFlags: 0

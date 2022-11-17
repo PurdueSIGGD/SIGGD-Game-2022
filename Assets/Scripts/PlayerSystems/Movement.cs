@@ -67,7 +67,7 @@ public class Movement : MonoBehaviour
 
         //copies the y velocity so that velocity due to gravity is not removed
         Vector2 debuffedVelocity = debuffs.ApplySlow(velocity);
-        Debug.Log(debuffedVelocity);
+        //Debug.Log(debuffedVelocity);
         Vector3 move = new Vector3(debuffedVelocity.x, rigidbody.velocity.y, debuffedVelocity.y) * Time.fixedDeltaTime;
         rigidbody.MovePosition(rigidbody.position + move);
 
