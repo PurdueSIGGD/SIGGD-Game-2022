@@ -11,11 +11,12 @@ public class GatesObj : MonoBehaviour
     // Fields
     private bool locked = false;
     private bool keyNeeded = false;
-    private bool passwordNeeded = false;
     public Item key;
+    private bool passwordNeeded = false;
+    private string password;
     private int identity = -1;
 
-    // Constructor
+    // Constructors
     public GatesObj()
     {
         locked = false;
@@ -23,7 +24,20 @@ public class GatesObj : MonoBehaviour
         passwordNeeded = false;
         identity = -1;
     }
-
+    public GatesObj(bool locked, bool keyNeeded, Item key, int identity)
+    {
+        this.locked = locked;
+        this.keyNeeded = keyNeeded;
+        this.key = key;
+        this.identity = identity;
+    }
+    public GatesObj(bool locked, bool passwordNeeded, string password, int identity)
+    {
+        this.locked = locked;
+        this.passwordNeeded = passwordNeeded;
+        this.password.Equals(password);
+        this.identity = identity;
+    }
 
     // Methods
     public bool isLocked() { return locked; }
@@ -32,14 +46,19 @@ public class GatesObj : MonoBehaviour
     public void setKeyNeeded(bool var) { keyNeeded = var; }
     public bool isPasswordNeeded() { return passwordNeeded; }
     public void setPasswordNeeded(bool var) { passwordNeeded = var; }
-    public int getIdentity() { return identity; }
-    public void setIdeneity(int var) { identity = var;  }
 
-
+    // If player tries to open the gate with a key
     public bool openObj(Item key)
     {
         if (!key.isType(ItemType.KEY)) return false;
         //if (key == identity) return true;
+        return false;
+    }
+
+    // If player tries to open the gate with the password
+    public bool openObj(string password)
+    {
+        if (this.password.Equals(password)) return true;
         return false;
     }
 }
