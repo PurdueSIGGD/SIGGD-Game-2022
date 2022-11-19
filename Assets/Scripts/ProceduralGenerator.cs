@@ -484,11 +484,15 @@ public class ProceduralGenerator : MonoBehaviour
     }
 
     void GenerateHallwayGrid() {
+
+        aStarSearch(new int[][] { new int[] {50,75}, new int[] {0,0} });
+        aStarSearch(GabrielEdges[0][0].ClosestHallways(GabrielEdges[0][1]));
         // Now try to make hallways
-        for (int i = 0; i < GabrielEdges.Count; i++) {
-            // Run A* with the start and end points
-            aStarSearch(GabrielEdges[i][0].ClosestHallways(GabrielEdges[i][1]));
-        }
+
+        // for (int i = 0; i < GabrielEdges.Count; i++) {
+        //     // Run A* with the start and end points
+        //     aStarSearch(GabrielEdges[i][0].ClosestHallways(GabrielEdges[i][1]));
+        // }
     }
 
     void aStarSearch(int[][] points) {
@@ -504,26 +508,35 @@ public class ProceduralGenerator : MonoBehaviour
         i = points[0][0];
         j = points[0][1];
 
-        cellDetails[i, j].setValues(-1, -1, float.MaxValue, float.MaxValue, float.MaxValue);
+        cellDetails[i, j].setValues(i, j, 0.0, 0.0, 0.0);
 
-        SortedDictionary<double, int[]> openList = new SortedDictionary<double, int[]>();
+        SortedDictionary<double, List<int[]>> openList = new SortedDictionary<double, List<int[]>>();
         // Put the starting cell on the open list and set its
         // 'f' as 0
-        openList.Add(0.0, new int[]{i, j});
+        openList.Add(0.0, new List<int[]>{new int[]{i, j}});
+
         bool foundDest = false;
 
         while (openList.Count > 0) {
-            SortedDictionary<double, int[]>.Enumerator dictEnumerator= openList.GetEnumerator();
-            dictEnumerator.MoveNext();
-            KeyValuePair<double, int[]> p = dictEnumerator.Current;
-            if (openList.Remove(dictEnumerator.Current.Key) == false) {
-                Debug.Log("Removal Failed");
+            SortedDictionary<double, List<int[]>>.Enumerator dictEnumerator= openList.GetEnumerator();
+
+            if (dictEnumerator.MoveNext() == false) {
+                Debug.Log("Failed to Enumerate");
                 return;
             }
+
+            KeyValuePair<double, List<int[]>> p = dictEnumerator.Current;
+
             // Add this vertex to the closed list
-            i = (int) p.Value[0];
-            j = (int) p.Value[1];
+            i = p.Value[0][0];
+            j = p.Value[0][1];
+            // Debug.Log(p.Key);
             closedList[i, j] = true;
+            
+            openList[dictEnumerator.Current.Key].RemoveAt(0);
+            if (openList[dictEnumerator.Current.Key].Count == 0) {
+                openList.Remove(dictEnumerator.Current.Key);
+            }
 
             // To store the 'g', 'h' and 'f' of the 8 successors
             double gNew, hNew, fNew;
@@ -560,10 +573,14 @@ public class ProceduralGenerator : MonoBehaviour
                         // better, using 'f' cost as the measure.
                         if (cellDetails[x, y].f == float.MaxValue
                             || cellDetails[x, y].f > fNew) {
-                            openList.Add(fNew, new int[]{x,y});
-        
+                            if (openList.ContainsKey(fNew)) {
+                                openList[fNew].Add(new int[]{x,y});
+                            } else {
+                                openList.Add(fNew, new List<int []>{new int[]{x,y}});
+                            }
                             // Update the details of this cell
-                            cellDetails[i, j].setValues(i, j, fNew, gNew, hNew);
+                            cellDetails[x, y].setValues(i, j, fNew, gNew, hNew);
+                            Debug.Log(x + " " + y);
                         }
                     }
                 }
@@ -606,7 +623,8 @@ public class ProceduralGenerator : MonoBehaviour
     double calculateHValue(int row, int col, int[] dest)
     {
         // Return using the distance formula
-        return Mathf.Abs(row - dest[0]) + Mathf.Abs(col - dest[1]);
+        return (row - dest[0]) * (row - dest[0]) + (col - dest[1]) * (col - dest[1]);
+        // return Mathf.Abs(row - dest[0]) + Mathf.Abs(col - dest[1]);
     }
     
     // A Utility Function to trace the path from the source
@@ -620,18 +638,20 @@ public class ProceduralGenerator : MonoBehaviour
     
         while (!(cellDetails[row, col].parent_i == row
                 && cellDetails[row, col].parent_j == col)) {
-            Path.Push(new int[]{row, col});
+            // Path.Push(new int[]{row, col});
             int temp_row = cellDetails[row, col].parent_i;
             int temp_col = cellDetails[row, col].parent_j;
+            grid[row, col] = GridPoint.Hallway;
             row = temp_row;
             col = temp_col;
         }
+        grid[row, col] = GridPoint.Hallway;
     
-        Path.Push(new int[]{row, col});
-        while (Path.Count > 0) {
-            int[] p = Path.Pop();
-            grid[p[0], p[1]] = GridPoint.Hallway;
-        }
+        // Path.Push(new int[]{row, col});
+        // while (Path.Count > 0) {
+        //     int[] p = Path.Pop();
+        //     grid[p[0], p[1]] = GridPoint.Hallway;
+        // }
     }
 
     void OnDrawGizmos()
