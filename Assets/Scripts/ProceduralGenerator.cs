@@ -37,6 +37,7 @@ public class ProceduralGenerator : MonoBehaviour
 
     private List<int[]> GabrielEdges;
     private bool DrawGizmos;
+    private int gridPadding = 3;
 
     public enum GridPoint
     {
@@ -242,7 +243,7 @@ public class ProceduralGenerator : MonoBehaviour
                 }
 
                 FinalRoomPlan[remainingFinalRooms] = new Room(roomType, rotation, i);
-                RoomRects.Add(new Rect(randomPoint.x - (roomWidth / 2), randomPoint.y - (roomDepth / 2), roomWidth, roomDepth));
+                RoomRects.Add(new Rect(randomPoint.x - (roomWidth / 2), randomPoint.y - (roomDepth / 2), roomWidth + 0.1f, roomDepth + 0.1f));
             }
         }
     }
@@ -347,7 +348,7 @@ public class ProceduralGenerator : MonoBehaviour
             // Divide by 10 because the scale of planes is 10. Can be abstracted as a variable if floor is changed
             float standardRoomSize = 8.0f;
             testFloor.transform.localScale = (new Vector3(rect.width, standardRoomSize, rect.height)) / standardRoomSize;
-            testFloor.transform.Translate(new Vector3(-0.5f, 0, -0.5f));
+            // testFloor.transform.Translate(new Vector3(-0.5f, 0, -0.5f));
 
             // Tell the roomGenerators to generate each room
             RoomGenerator roomGenerator = testFloor.GetComponent<RoomGenerator>();
@@ -371,7 +372,7 @@ public class ProceduralGenerator : MonoBehaviour
             #if UNITY_EDITOR
                 //testFloor.GetComponent<RoomGenerator>().EditorAwake();
             #endif
-            testFloor.transform.Translate(new Vector3(-0.5f, 0, -0.5f));
+            // testFloor.transform.Translate(new Vector3(gridPadding, 0, gridPadding));
             testFloor.transform.Rotate(new Vector3(0, 90, 0) * finalRoom.rotation);
 
             if (roomColor != null)
@@ -454,16 +455,16 @@ public class ProceduralGenerator : MonoBehaviour
                 }
             }
         }
-        return new Vector2[] {new Vector2(minDims[0], maxDims[0]), new Vector2(minDims[1], maxDims[1])};
+        return new Vector2[] {new Vector2(minDims[0] - gridPadding, maxDims[0] + gridPadding),
+                              new Vector2(minDims[1] - gridPadding, maxDims[1] + gridPadding)};
     }
 
     void GenerateGrid() {
         // Returns [(minX, maxX), (minY, maxY)]
         // Initialize the grid, with the size proportional to tileSize
-        int gridPadding = 2;
         Vector2[] bounds = GetRoomBounds();
-        int xSize = (int) (Mathf.Abs(bounds[0][0]) + Mathf.Abs(bounds[0][1])) + gridPadding * 2;
-        int ySize = (int) (Mathf.Abs(bounds[1][0]) + Mathf.Abs(bounds[1][1])) + gridPadding * 2;
+        int ySize = (int) (Mathf.Abs(bounds[1][0] - bounds[1][1]));
+        int xSize = (int) (Mathf.Abs(bounds[0][0] - bounds[0][1]));
         grid = new GridPoint[xSize, ySize];
 
         // Uh oh: n^3 algo
@@ -562,7 +563,11 @@ public class ProceduralGenerator : MonoBehaviour
                         foundDest = true;
                         return;
                     } else if (!closedList[x, y] && isUnBlocked(x, y)) {
-                        gNew = cellDetails[i, j].g + 1.0f;
+                        if (grid[i, j] == GridPoint.Hallway) {
+                            gNew = cellDetails[i, j].g + 0.6f;
+                        } else {
+                            gNew = cellDetails[i, j].g + 1.0f;
+                        }
                         hNew = calculateHValue(x, y, points[1]);
                         fNew = gNew + hNew;
         
@@ -607,11 +612,10 @@ public class ProceduralGenerator : MonoBehaviour
     bool isUnBlocked(int row, int col)
     {
         // Returns true if the cell is not blocked else false
-        // if (grid[row, col] == 1)
-        //     return (true);
-        // else
-        //     return (false);
-        return true;
+        if (grid[row, col] == GridPoint.Room)
+            return (false);
+        else
+            return (true);
     }
     
     // A Utility Function to check whether destination cell has
@@ -625,8 +629,8 @@ public class ProceduralGenerator : MonoBehaviour
     double calculateHValue(int row, int col, int[] dest)
     {
         // Return using the distance formula
-        return (row - dest[0]) * (row - dest[0]) + (col - dest[1]) * (col - dest[1]);
-        // return Mathf.Abs(row - dest[0]) + Mathf.Abs(col - dest[1]);
+        // return (row - dest[0]) * (row - dest[0]) + (col - dest[1]) * (col - dest[1]);
+        return Mathf.Abs(row - dest[0]) + Mathf.Abs(col - dest[1]);
     }
     
     // A Utility Function to trace the path from the source
@@ -635,6 +639,8 @@ public class ProceduralGenerator : MonoBehaviour
     {
         int row = dest[0];
         int col = dest[1];
+        row = cellDetails[row, col].parent_i;
+        col = cellDetails[row, col].parent_j;
     
         Stack<int[]> Path = new Stack<int[]>();
     
@@ -647,7 +653,6 @@ public class ProceduralGenerator : MonoBehaviour
             row = temp_row;
             col = temp_col;
         }
-        grid[row, col] = GridPoint.Hallway;
     
         // Path.Push(new int[]{row, col});
         // while (Path.Count > 0) {
