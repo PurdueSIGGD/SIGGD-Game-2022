@@ -35,7 +35,7 @@ public class ProceduralGenerator : MonoBehaviour
     private Room[] FinalRoomPlan;
     private GameObject RoomParent;
 
-    private List<Room[]> GabrielEdges;
+    private List<int[]> GabrielEdges;
     private bool DrawGizmos;
 
     public enum GridPoint
@@ -127,6 +127,7 @@ public class ProceduralGenerator : MonoBehaviour
             float distance = 10000;
             for (int i = 0; i < this.hallways.Length; i++) {
                 float tempDist = Vector3.Distance(this.hallways[i] + new Vector3(gridX, 0, gridY), other.roomRect.center);
+                Debug.Log(this.hallways[i] + new Vector3(gridX, 0, gridY));
                 if (tempDist < distance) {
                     distance = tempDist;
                     localClosestHallway = new int[]{Mathf.RoundToInt(this.hallways[i].x + gridX), Mathf.RoundToInt(this.hallways[i].z + gridY)};
@@ -134,10 +135,10 @@ public class ProceduralGenerator : MonoBehaviour
             }
             distance = 10000;
             for (int i = 0; i < other.hallways.Length; i++) {
-                float tempDist = Vector3.Distance(other.hallways[i] + new Vector3(gridX, 0, gridY), this.roomRect.center);
+                float tempDist = Vector3.Distance(other.hallways[i] + new Vector3(other.gridX, 0, other.gridY), this.roomRect.center);
                 if (tempDist < distance) {
                     distance = tempDist;
-                    remoteClosestHallway = new int[]{Mathf.RoundToInt(other.hallways[i].x + gridX), Mathf.RoundToInt(other.hallways[i].z + gridY)};
+                    remoteClosestHallway = new int[]{Mathf.RoundToInt(other.hallways[i].x + other.gridX), Mathf.RoundToInt(other.hallways[i].z + other.gridY)};
                 }
             }
 
@@ -145,6 +146,8 @@ public class ProceduralGenerator : MonoBehaviour
             if (localClosestHallway[1] < 0) localClosestHallway[1] = 0;
             if (remoteClosestHallway[0] < 0) remoteClosestHallway[0] = 0;
             if (remoteClosestHallway[1] < 0) remoteClosestHallway[1] = 0;
+            Debug.Log(string.Join(",", localClosestHallway));
+            Debug.Log(string.Join(",", remoteClosestHallway));
             return new int[][]{localClosestHallway, remoteClosestHallway};
         }
     }
@@ -394,9 +397,9 @@ public class ProceduralGenerator : MonoBehaviour
         });
     }
 
-    private List<Room[]> GabrielGraph(Room[] rooms)
+    private List<int[]> GabrielGraph(Room[] rooms)
     {
-        List<Room[]> FinalEdges = new List<Room[]>();
+        List<int[]> FinalEdges = new List<int[]>();
 
         for (int i = 0; i < rooms.Length - 1; i++) 
         {
@@ -419,7 +422,7 @@ public class ProceduralGenerator : MonoBehaviour
 
                 if (isValidEdge)
                 {
-                    FinalEdges.Add(new Room[]{rooms[i], rooms[j]});
+                    FinalEdges.Add(new int[]{ i, j });
                 }
             }
         }
@@ -485,14 +488,14 @@ public class ProceduralGenerator : MonoBehaviour
 
     void GenerateHallwayGrid() {
 
-        aStarSearch(new int[][] { new int[] {50,75}, new int[] {0,0} });
-        aStarSearch(GabrielEdges[0][0].ClosestHallways(GabrielEdges[0][1]));
+        // aStarSearch(new int[][] { new int[] {50,75}, new int[] {0,0} });
+        // aStarSearch(FinalRoomPlan[GabrielEdges[0][0]].ClosestHallways(FinalRoomPlan[GabrielEdges[0][1]]));
         // Now try to make hallways
 
-        // for (int i = 0; i < GabrielEdges.Count; i++) {
-        //     // Run A* with the start and end points
-        //     aStarSearch(GabrielEdges[i][0].ClosestHallways(GabrielEdges[i][1]));
-        // }
+        for (int i = 0; i < GabrielEdges.Count; i++) {
+            // Run A* with the start and end points
+            aStarSearch(FinalRoomPlan[GabrielEdges[i][0]].ClosestHallways(FinalRoomPlan[GabrielEdges[i][1]]));
+        }
     }
 
     void aStarSearch(int[][] points) {
@@ -580,7 +583,6 @@ public class ProceduralGenerator : MonoBehaviour
                             }
                             // Update the details of this cell
                             cellDetails[x, y].setValues(i, j, fNew, gNew, hNew);
-                            Debug.Log(x + " " + y);
                         }
                     }
                 }
@@ -662,8 +664,8 @@ public class ProceduralGenerator : MonoBehaviour
                 // Direct connections from room to room
                 for (int i = 0; i < GabrielEdges.Count / 2; i++)
                 {
-                    Rect room1 = GabrielEdges[i][0].roomRect;
-                    Rect room2 = GabrielEdges[i][1].roomRect;
+                    Rect room1 = FinalRoomPlan[GabrielEdges[i][0]].roomRect;
+                    Rect room2 = FinalRoomPlan[GabrielEdges[i][1]].roomRect;
                     Gizmos.color = Color.blue;
                     Vector3 vectA = new Vector3(room1.center.x, 0, room1.center.y);
                     Vector3 vectB = new Vector3(room2.center.x, 0, room2.center.y);
