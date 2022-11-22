@@ -75,7 +75,7 @@ public class GatesObj : MonoBehaviour
     public int openObj()
     {
         // somehow gets password
-        string userPass;
+        string userPass = null;
         // userPass = getPass...
         if (!locked) return 0;
         if (!password.Equals(userPass)) return 1;
