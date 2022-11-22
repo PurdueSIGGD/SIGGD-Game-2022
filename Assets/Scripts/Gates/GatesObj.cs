@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/* Creates gate objects (interactable, non-item objects) such as
-     * doors, chests, or levers
-     */
+/** Creates gate objects (interactable, non-item objects) such as doors, chests, or levers  
+ */
 
 public class GatesObj : MonoBehaviour
 {
@@ -47,18 +46,39 @@ public class GatesObj : MonoBehaviour
     public bool isPasswordNeeded() { return passwordNeeded; }
     public void setPasswordNeeded(bool var) { passwordNeeded = var; }
 
-    // If player tries to open the gate with a key
-    public bool openObj(Item key)
+    // If player tries to open the gate with an item
+    // returns 0 if the gate is unlocked or if the gate was not locked to begin with
+    // returns 1 if the password entered is incorrect
+    // returns 2 if the password is correct
+    // returns 3 if the player does not try to open the gate with a key
+    // returns 4 if the key incorrect key was inserted
+    // returns 5 if the key correct key was inserted
+    public int openObj(Item key)
     {
-        if (!key.isType(ItemType.KEY)) return false;
-        //if (key == identity) return true;
-        return false;
+        if (!locked) return 0;
+        if (!keyNeeded)
+        {
+            int i = openObj();
+            if (i == 1) return 1;
+            if (i == 2) return 2;
+        }
+        if (!key.isType(ItemType.KEY)) return 3;
+        //if (key != identity) return 4;
+        return 5;
     }
 
-    // If player tries to open the gate with the password
-    public bool openObj(string password)
+    // If player tries to open the gate with no items in hand
+    // returns 0 if the gate was not locked to begin with
+    // returns 1 if the password entered is incorrect
+    // returns 2 if the password is correct
+
+    public int openObj()
     {
-        if (this.password.Equals(password)) return true;
-        return false;
+        // somehow gets password
+        string userPass;
+        // userPass = getPass...
+        if (!locked) return 0;
+        if (!password.Equals(userPass)) return 1;
+        return 2;
     }
 }
