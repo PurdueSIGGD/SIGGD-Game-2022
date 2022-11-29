@@ -6,13 +6,13 @@ using UnityEngine;
 -   For now, we're assuming that there will be several set locations in a room where any object can spawn, so long as it isn't too
 large for that location. Eventually we can add functionality for spawning probability and constraints, but just assume that any
 object can spawn at the points for now.
--   STOPPING POINT: Work on version 3. (Big comment near bottom)
+-   STOPPING POINT: Work on version 3. Added room-specific minimums and maximums, as well as automatic resizing of all lists to the size
+    of 'spawnables,' but it isn't working correctly yet.
 */
 
-/**
-* Creates objects in the room this script is attached to at predefined points in that specific room.
-*
-*/
+/// <summary>
+/// Creates objects in the room this script is attached to at predefined points in that specific room.
+/// </summary>
 public class RoomBudgeting : MonoBehaviour {
 
     private List<GameObject> spawns;
@@ -28,8 +28,15 @@ public class RoomBudgeting : MonoBehaviour {
     [SerializeField]
     private int budget = 0;
 
+    private List<int> numSpawned = new List<int>();
+
     void Awake() {
         // Placeholder objects are stored in the Prefabs/RoomObjPlaceholders folder for now, with an Attributes script attached to each one
+
+        // Make all the serialized lists the same size as the spawnables list if their sizes don't match
+        correctListSizeInt(numSpawned); // Needed here to make sure the list can store the number of each object spawned during the choosing process
+        correctListSizeInt(maximums);
+        correctListSizeInt(minimums);
 
         int tempBudget = budget; // Used for spawning the objects because this instance will be deprecated during that, while the original instance persists
         spawns = new List<GameObject>();
@@ -50,7 +57,8 @@ public class RoomBudgeting : MonoBehaviour {
         // Implement version 2 here. It'll likely need a second list that holds references to the ignored objects or incedes to exclude them
         // from the random selection somehow.
         */
-        while (spawnables.Count != 0 /* && toSpawn.Count < spawns.Count */ ) {
+        /*
+        while (spawnables.Count != 0 /* && toSpawn.Count < spawns.Count *//* ) {
             int chosenIndex = (int) Random.Range(0, spawnables.Count);
             int objWeight = spawnables[chosenIndex].gameObject.GetComponent<Attributes>().weight;
             if (objWeight <= tempBudget) {
@@ -67,6 +75,7 @@ public class RoomBudgeting : MonoBehaviour {
         test += "with " + tempBudget + " budget left over.";
 
         Debug.Log(test);
+        */
 
 
         /* Version 3: Add the ability for devs to set constraints on how many objects can spawn in a room. Have a minimum and maximum
@@ -78,7 +87,46 @@ public class RoomBudgeting : MonoBehaviour {
         the array with the actual objects to decide the sizes of the other ones). Then, after this, add actual spawn points in the room
         and uncomment the part of the while loop conditional that stops the loop when an object has spawned in every available spawn point.
         */
+        for (int i = 0; i < spawnables.Count; i++) {
+            if (maximums[i] == 0) {
+                removeFromPool(i);
+            }
+        }
+        while (spawnables.Count > 0 /* && toSpawn.Count < spawns.Count */ ) {
+            for (int i = 0; i < spawnables.Count; i++) {
+                while (minimums[i] > 0) {
+                    if (spawnables[i].gameObject.GetComponent<Attributes>().weight <= tempBudget) {
+                        toSpawn.Add(spawnables[i]);
+                        tempBudget -= spawnables[i].gameObject.GetComponent<Attributes>().weight;
+                        numSpawned[i]++;
+                    } else {
+                        Debug.Log("Error: Can't meet the minimum spawns (" + minimums[i] + ") of " + spawnables[i].name + 
+                            " because it exceeds the room's remaining budget!");
+                        removeFromPool(i);
+                    }
+                }
+            }
+            int chosenIndex = (int) Random.Range(0, spawnables.Count);
+            int objWeight = spawnables[chosenIndex].gameObject.GetComponent<Attributes>().weight;
+            if (objWeight <= tempBudget) {
+                toSpawn.Add(spawnables[chosenIndex]);
+                tempBudget -= objWeight;
+                numSpawned[chosenIndex]++;
+                if (numSpawned[chosenIndex] >= maximums[chosenIndex]) {
+                    Debug.Log("Maximum spawns (" + maximums[chosenIndex] + ") reached for " + spawnables[chosenIndex].name + ".");
+                    removeFromPool(chosenIndex);
+                }
+            } else {
+                removeFromPool(chosenIndex);
+            }
+        }
+        string test = "With a budget of " + budget + ", spawned these objects: ";
+        foreach (Transform t in toSpawn) {
+            test += t.name + " (" + t.GetComponent<Attributes>().weight + "), ";
+        }
+        test += "with " + tempBudget + " budget left over.";
 
+        Debug.Log(test);
 
 
         /* Original object weights:
@@ -96,6 +144,41 @@ public class RoomBudgeting : MonoBehaviour {
             // Set position and stuff here and put it into the actual room in the scene
         }
         
+    }
+
+    /// <summary>
+    /// Makes the given list (one of the modifier lists for room spawns) the same size as the 'spawnables' list to prevent errors.
+    /// This shouldn't happen normally, but it's more for if a developer accidentally provides lists with mismatched sizes through the
+    /// room object's serialized fields. All the lists should be the same size, and this method makes them the same size if they're not,
+    /// and gives a warning that it was triggered.
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns>
+    /// The resized list
+    /// </returns>
+    private List<int> correctListSizeInt(List<int> input) {
+        while (input.Count < spawnables.Count) {
+            input.Add(0);
+            Debug.Log("Added an item to 'maximums' to equalize its size with that of 'spawnables'.");
+        }
+        while (input.Count > spawnables.Count) {
+            input.RemoveAt(input.Count - 1);
+            Debug.Log("Removed an item from 'maximums' to equalize its size with that of 'spawnables'.");
+        }
+        return input;
+    }
+
+    /// <summary>
+    /// Removes a spawnable object from the pool of objects that can be spawned. Removes its corresponding modifiers in the
+    /// modifier lists, as well. (Make sure each modifier list is listed inside this method's code)
+    /// </summary>
+    /// <param name="index">
+    /// </param>
+    private void removeFromPool(int index) {
+        spawnables.RemoveAt(index);
+        maximums.RemoveAt(index);
+        numSpawned.RemoveAt(index);
+        minimums.RemoveAt(index);
     }
     
 }
