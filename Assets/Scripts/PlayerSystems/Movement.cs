@@ -67,7 +67,7 @@ public class Movement : MonoBehaviour
 
         //copies the y velocity so that velocity due to gravity is not removed
         Vector2 debuffedVelocity = debuffs.ApplySlow(velocity);
-        Debug.Log(debuffedVelocity);
+        //Debug.Log(debuffedVelocity);
         Vector3 move = new Vector3(debuffedVelocity.x, rigidbody.velocity.y, debuffedVelocity.y) * Time.fixedDeltaTime;
         rigidbody.MovePosition(rigidbody.position + move);
 
@@ -80,7 +80,7 @@ public class Movement : MonoBehaviour
             // if statement used to stop camera from going upside down
             float vertRotation = - lookInput.y * CamRotYSpeed;
             if ((camHolderTransform.localRotation.eulerAngles.x + vertRotation < 90) || camHolderTransform.localRotation.eulerAngles.x + vertRotation > 270) {
-                Debug.Log(camHolderTransform.localRotation.eulerAngles.x);
+                //Debug.Log(camHolderTransform.localRotation.eulerAngles.x);
                 camHolderTransform.Rotate(new Vector3(vertRotation, 0, 0), Space.Self);
             }
         }
