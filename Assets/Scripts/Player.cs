@@ -4,21 +4,20 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Movement))]
-[RequireComponent(typeof(Inventory))]
-[RequireComponent(typeof(Stamina))]
-class Player : MonoBehaviour
+[RequireComponent(typeof(DebuffsManager))]
+public class Player : MonoBehaviour
 {
     // Player Systems
     private Movement movement;
-    private Inventory inventory;
-    private Stamina stamina;
+    private DebuffsManager debuffsManager;
+
+    public Movement Movement => movement;
 
     void Start()
     {
         // Player Systems
         movement = GetComponent<Movement>();
-        inventory = GetComponent<Inventory>();
-        stamina = GetComponent<Stamina>();
+        debuffsManager = GetComponent<DebuffsManager>();
     }
 
     void FixedUpdate()
@@ -28,7 +27,7 @@ class Player : MonoBehaviour
 
     void Update()
     {
-
+        debuffsManager.UpdateDebuffs();
     }
 
     void OnMove(InputValue movementValue)
@@ -39,5 +38,11 @@ class Player : MonoBehaviour
     void OnLook(InputValue lookValue)
     {
         movement.SetLookInput(lookValue.Get<Vector2>());
+    }
+
+    // test slow debuff
+    void OnFire()
+    {
+        /* debuffsManager.AddDebuff(new Slow(3f, 0.5f)); */
     }
 }

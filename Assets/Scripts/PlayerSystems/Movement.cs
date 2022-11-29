@@ -11,6 +11,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private float CamRotYSpeed = 0.2f;
 
     private new Rigidbody rigidbody;
+    private DebuffsManager debuffs;
     private Transform camHolderTransform;
     private Vector2 input;
     private Vector2 lookInput;
@@ -19,6 +20,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        debuffs = GetComponent<DebuffsManager>();
         camHolderTransform = GetComponentInChildren<Camera>().transform.parent;
     }
 
@@ -46,8 +48,7 @@ public class Movement : MonoBehaviour
 
     public void MovePlayer()
     {
-        //Movement
-
+        // Movement
         if (input.Equals(Vector2.zero))
         {
             // if no input, slow down
@@ -64,12 +65,11 @@ public class Movement : MonoBehaviour
             //velocity = MoveTowards(velocity, input * MaxSpeed, Acceleration * Time.fixedDeltaTime);
         }
 
-        //copies the y velocity so that velocity due to gravity is not removedth 
-        //Note that this causes some wierd behavior when going up ramps, but this can be fixed i the future if found to be a problem
-        Vector3 move = new Vector3(velocity.x, rigidbody.velocity.y, velocity.y);
-        
-        
-        rigidbody.velocity = move;
+        //copies the y velocity so that velocity due to gravity is not removed
+        Vector2 debuffedVelocity = debuffs.ApplySlow(velocity);
+        Debug.Log(debuffedVelocity);
+        Vector3 move = new Vector3(debuffedVelocity.x, rigidbody.velocity.y, debuffedVelocity.y) * Time.fixedDeltaTime;
+        rigidbody.MovePosition(rigidbody.position + move);
 
         //Rotation
 
