@@ -151,6 +151,10 @@ public class ProceduralGenerator : MonoBehaviour
             Debug.Log(string.Join(",", remoteClosestHallway));
             return new int[][]{localClosestHallway, remoteClosestHallway};
         }
+
+        public Vector3[] getHallways() {
+            return hallways;
+        }
     }
 
     [SerializeField]
@@ -688,6 +692,28 @@ public class ProceduralGenerator : MonoBehaviour
                         Gizmos.DrawSphere(new Vector3(xMin + i, 0, yMin + j), 0.3f);
                     }
                 }
+            }
+        }
+    }
+
+    private void fixOpenDoors() {
+        for (int i = 0; i < FinalRoomPlan.Length; i++) {
+            Vector3[] roomHallways = FinalRoomPlan[i].getHallways();
+            for (int j = 0; j < roomHallways.Length; j++) {
+                int x = Mathf.RoundToInt(roomHallways[j].x);
+                int y = Mathf.RoundToInt(roomHallways[j].y);
+                int[] xIndices = new int[] {x - 1, x + 1, x, x};
+                int[] yIndices = new int[] {y, y, y - 1, y + 1};
+                bool isHole = true;
+                // Check to see if there's a surrounding hallway
+                for (int k = 0; k < xIndices.Length; k++) {
+                    if (isValid(xIndices[k], yIndices[k])) {
+                        if (grid[xIndices[k], yIndices[k]] == GridPoint.Hallway) {
+                            isHole = false;
+                        }
+                    }
+                }
+                // If not, we need to fill the hole
             }
         }
     }
