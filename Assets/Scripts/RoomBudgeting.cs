@@ -6,8 +6,8 @@ using UnityEngine;
 -   For now, we're assuming that there will be several set locations in a room where any object can spawn, so long as it isn't too
 large for that location. Eventually we can add functionality for spawning probability and constraints, but just assume that any
 object can spawn at the points for now.
--   STOPPING POINT: Work on version 3. Added room-specific minimums and maximums, as well as automatic resizing of all lists to the size
-    of 'spawnables,' but it isn't working correctly yet.
+-   STOPPING POINT: I believe the mins and maxes are working, and there is a safeguard that corrects it if the min is higher than the max. Next, I should focus on
+actually finding the spawnpoints in the room and actually placing the objects there before adding any more modifiers.
 */
 
 /// <summary>
@@ -37,6 +37,7 @@ public class RoomBudgeting : MonoBehaviour {
         correctListSizeInt(numSpawned); // Needed here to make sure the list can store the number of each object spawned during the choosing process
         correctListSizeInt(maximums);
         correctListSizeInt(minimums);
+        correctMinAndMax(minimums, maximums);
 
         int tempBudget = budget; // Used for spawning the objects because this instance will be deprecated during that, while the original instance persists
         spawns = new List<GameObject>();
@@ -90,11 +91,12 @@ public class RoomBudgeting : MonoBehaviour {
         for (int i = 0; i < spawnables.Count; i++) {
             if (maximums[i] == 0) {
                 removeFromPool(i);
+                i--;
             }
         }
         while (spawnables.Count > 0 /* && toSpawn.Count < spawns.Count */ ) {
             for (int i = 0; i < spawnables.Count; i++) {
-                while (minimums[i] > 0) {
+                while (minimums[i] > numSpawned[i]) {
                     if (spawnables[i].gameObject.GetComponent<Attributes>().weight <= tempBudget) {
                         toSpawn.Add(spawnables[i]);
                         tempBudget -= spawnables[i].gameObject.GetComponent<Attributes>().weight;
@@ -103,6 +105,8 @@ public class RoomBudgeting : MonoBehaviour {
                         Debug.Log("Error: Can't meet the minimum spawns (" + minimums[i] + ") of " + spawnables[i].name + 
                             " because it exceeds the room's remaining budget!");
                         removeFromPool(i);
+                        i--;
+                        break;
                     }
                 }
             }
@@ -156,16 +160,28 @@ public class RoomBudgeting : MonoBehaviour {
     /// <returns>
     /// The resized list
     /// </returns>
-    private List<int> correctListSizeInt(List<int> input) {
+    private void correctListSizeInt(List<int> input) {
         while (input.Count < spawnables.Count) {
             input.Add(0);
-            Debug.Log("Added an item to 'maximums' to equalize its size with that of 'spawnables'.");
+            Debug.Log("Added an item to a modifier list to equalize its size with that of 'spawnables'.");
         }
         while (input.Count > spawnables.Count) {
             input.RemoveAt(input.Count - 1);
-            Debug.Log("Removed an item from 'maximums' to equalize its size with that of 'spawnables'.");
+            Debug.Log("Removed an item from a modifier list to equalize its size with that of 'spawnables'.");
         }
-        return input;
+    }
+
+    /// <summary>
+    /// Makes sure that the minimum spawns of each item is less than or equal to the maximum. If it's not, the minimum is set to the maximum.
+    /// </summary>
+    /// <param name="mins"></param>
+    /// <param name="maxes"></param>
+    private void correctMinAndMax(List<int> mins, List<int> maxes) {
+        for (int i = 0; i < spawnables.Count; i++) {
+            if (mins[i] > maxes[i]) { // This shouldn't happen. That's why we're correcting it if it does.
+                mins[i] = maxes[i]; // Sets the minimum value to the maximum value
+            }
+        }
     }
 
     /// <summary>
