@@ -23,6 +23,7 @@ public class Item : MonoBehaviour, IInteractable
     // serializable fields
     [SerializeField] string itemName;
     [SerializeField] ItemType type = ItemType.GENERAL;
+    [SerializeField] Sprite inventorySprite;
     [SerializeField] int maxStackSize = 1;
     [SerializeField] int currentNumCharges = 1;
     [SerializeField] bool isShiny;
@@ -163,6 +164,11 @@ public class Item : MonoBehaviour, IInteractable
     public bool isType(ItemType itemType)
     {
         return type.Equals(itemType);
+    }
+
+    public Sprite getSprite()
+    {
+        return inventorySprite;
     }
 
     Vector3 getMouseWorldPosition()

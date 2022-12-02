@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Time Freeze
   type: 1
+  inventorySprite: {fileID: 21300000, guid: 95c2c6f6df9aa0948945d0c04895f01e, type: 3}
   maxStackSize: 5
   currentNumCharges: 4
   isShiny: 0
