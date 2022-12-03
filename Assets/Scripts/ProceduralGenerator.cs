@@ -29,6 +29,9 @@ public class ProceduralGenerator : MonoBehaviour
     [SerializeField]
     Material DefaultFloorMaterial, MainRoomMaterial;
 
+    [SerializeField]
+    private GameObject plane;
+
     private float inRadius = 10;
 
     private List<Rect> RoomRects;
@@ -38,6 +41,7 @@ public class ProceduralGenerator : MonoBehaviour
     private List<int[]> GabrielEdges;
     private bool DrawGizmos;
     private int gridPadding = 3;
+
 
     public enum GridPoint
     {
@@ -440,7 +444,7 @@ public class ProceduralGenerator : MonoBehaviour
     Vector2[] GetRoomBounds() {
         // Make default bounds
         float[] minDims = new float[] {FinalRoomPlan[0].roomRect.xMin, FinalRoomPlan[0].roomRect.yMin};
-        float[] maxDims = new float[] { FinalRoomPlan[0].roomRect.xMax, FinalRoomPlan[0].roomRect.yMax};
+        float[] maxDims = new float[] {FinalRoomPlan[0].roomRect.xMax, FinalRoomPlan[0].roomRect.yMax};
         // Loop over each room
         foreach (Room room in FinalRoomPlan) {
             // Get dimensions for the room
@@ -701,19 +705,49 @@ public class ProceduralGenerator : MonoBehaviour
             Vector3[] roomHallways = FinalRoomPlan[i].getHallways();
             for (int j = 0; j < roomHallways.Length; j++) {
                 int x = Mathf.RoundToInt(roomHallways[j].x);
-                int y = Mathf.RoundToInt(roomHallways[j].y);
+                int y = Mathf.RoundToInt(roomHallways[j].z);
                 int[] xIndices = new int[] {x - 1, x + 1, x, x};
                 int[] yIndices = new int[] {y, y, y - 1, y + 1};
-                bool isHole = true;
+                Vector3 hallwayPoint = Vector3.positiveInfinity;
                 // Check to see if there's a surrounding hallway
                 for (int k = 0; k < xIndices.Length; k++) {
                     if (isValid(xIndices[k], yIndices[k])) {
                         if (grid[xIndices[k], yIndices[k]] == GridPoint.Hallway) {
-                            isHole = false;
+                            Vector2[] bounds = GetRoomBounds();
+                            float xMin = bounds[0][0];
+                            float yMin = bounds[1][0];
+                            hallwayPoint = new Vector3(roomHallways[j].x + xIndices[k], 0, roomHallways[j].z + yIndices[k]);
                         }
                     }
                 }
                 // If not, we need to fill the hole
+                if (hallwayPoint != Vector3.positiveInfinity) {
+                    // Find the direction in which we need to draw the plane
+                    Vector3 diff = hallwayPoint - roomHallways[j];
+                    // Plane is in y dir
+                    if (diff.x == 0) {
+                        // Place faces
+                        if (diff.y > 0) {
+
+                        // Plane faces
+                        } else {
+
+                        }
+
+                    // Plane is in x dir    
+                    } else if (diff.y == 0) {
+                        // Place faces
+                        if (diff.x > 0) {
+
+                        // Plane faces
+                        } else {
+
+                        }
+                    }
+                    Instantiate(plane);
+                    Debug.Log("gram");
+                    plane.transform.position = roomHallways[j];
+                }
             }
         }
     }
