@@ -13,6 +13,7 @@ public class StunGunProjectile : MonoBehaviour
     [SerializeField] float speed = 5;
     [SerializeField] float radius = .5f;
     [SerializeField] float maxDistance = 30;
+    [SerializeField] float stunTime = 4;
 
     InventorySystem inventorySystem;
     Transform stunGunShootPos;
@@ -73,7 +74,7 @@ public class StunGunProjectile : MonoBehaviour
 
     void hitEnemy(Collision collision)
     {
-        CustomEvent.Trigger(collision.gameObject, "stun");
+        CustomEvent.Trigger(collision.gameObject, "stun", stunTime);
         //destroy(collision.gameObject);
         InventorySystem.instance.decrementStunGunAmmo();
 
