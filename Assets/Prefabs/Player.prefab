@@ -311,6 +311,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8fa6c4505a864ee182d0edde477129a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraRaycastMask:
+    serializedVersion: 2
+    m_Bits: 2147483647
+  angleSpread: 10
+  maxCameraCastDist: 2
 --- !u!114 &6299116096705303048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,6 +331,7 @@ MonoBehaviour:
   MaxSpeed: 8
   Friction: 50
   Acceleration: 40
+  gravity: 9.8
   CamRotXSpeed: 0.2
   CamRotYSpeed: 0.2
 --- !u!114 &8028695752240734996
