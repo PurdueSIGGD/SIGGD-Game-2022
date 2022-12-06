@@ -278,6 +278,7 @@ public class ProceduralGenerator : MonoBehaviour
         //and currently does not work due to RoomRects randomization changes.
         //DrawRooms(RoomRects.GetRange(0, RoomRects.Count - FinalRoomCount), DefaultFloorMaterial);
         DrawRooms(FinalRoomPlan, MainRoomMaterial);
+        DrawHallways();
 
         DrawGizmos = true;
     }
@@ -391,6 +392,19 @@ public class ProceduralGenerator : MonoBehaviour
                 }
             }
 
+        }
+    }
+
+    private void DrawHallways()
+    {
+        for (int i = 0; i < grid.GetLength(0); i++)
+        {
+            for (int j = 0; j < grid.GetLength(1); j++)
+            {
+                if (grid[i, j] != GridPoint.Hallway) continue;
+
+                if ()
+            }
         }
     }
 
