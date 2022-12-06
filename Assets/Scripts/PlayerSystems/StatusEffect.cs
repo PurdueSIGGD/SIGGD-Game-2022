@@ -1,14 +1,14 @@
-public abstract class Debuff
+public abstract class StatusEffect
 {
     private float duration;
     private float time;
 
-    public Debuff(float duration)
+    public StatusEffect(float duration)
     {
         this.duration = duration;
     }
 
-    public void UpdateDebuff(float dt)
+    public void UpdateEffect(float dt)
     {
         time += dt;
     }
@@ -18,5 +18,5 @@ public abstract class Debuff
         return time >= duration;
     }
 
-    public abstract void ApplyDebuff();
+    public abstract void ApplyEffect();
 }

@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class DebuffsManager : MonoBehaviour
 {
-    private List<Debuff> debuffs;
+    private List<StatusEffect> debuffs;
 
     void Start()
     {
-        debuffs = new List<Debuff>();
+        debuffs = new List<StatusEffect>();
     }
 
-    public void AddDebuff(Debuff debuff)
+    public void AddDebuff(StatusEffect debuff)
     {
         debuffs.Add(debuff);
+        Debug.Log($"Debuff applied to Player");
     }
 
     private void ResetDebuffs() {
@@ -24,8 +25,8 @@ public class DebuffsManager : MonoBehaviour
     {
         for (int i = 0; i < debuffs.Count; i++)
         {
-            Debuff debuff = debuffs[i];
-            debuff.UpdateDebuff(Time.deltaTime);
+            StatusEffect debuff = debuffs[i];
+            debuff.UpdateEffect(Time.deltaTime);
             if (debuff.HasEnded())
             {
                 debuffs.RemoveAt(i);
@@ -34,16 +35,16 @@ public class DebuffsManager : MonoBehaviour
         }
 
         ResetDebuffs();
-        foreach (Debuff debuff in debuffs)
+        foreach (StatusEffect debuff in debuffs)
         {
-            debuff.ApplyDebuff();
+            debuff.ApplyEffect();
         }
     }
 
-    public Vector2 ApplySlow(Vector2 velocity)
+    /*public Vector2 ApplySlow(Vector2 velocity)
     {
         return Slow.DebuffPercent * velocity;
-    }
+    }*/
 }
 
 

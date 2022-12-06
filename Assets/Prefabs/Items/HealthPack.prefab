@@ -50,11 +50,15 @@ MonoBehaviour:
   itemName: HealthPack
   type: 1
   inventorySprite: {fileID: 21300000, guid: 2431e645b9fca60478c5838dd0dad7df, type: 3}
-  maxStackSize: 1
+  maxStackSize: 4
   currentNumCharges: 1
   isShiny: 0
   description: 
   healAmount: 1
+  impactSlowDuration: 0.8
+  impactSlowPercentage: 90
+  lingeringSlowDuration: 3
+  lingeringSlowPercentage: 40
 --- !u!33 &6763135281201947592
 MeshFilter:
   m_ObjectHideFlags: 0

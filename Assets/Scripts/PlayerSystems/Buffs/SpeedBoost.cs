@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class Slow : StatusEffect
+public class SpeedBoost : StatusEffect
 {
     public static float VelocityScalar { get; private set; }
 
-    private float percentageSlow;
+    private float percentageSpeedBoost;
 
-    public Slow(float duration, float percentageSlow) : base(duration)
+    public SpeedBoost(float duration, float percentageSpeedBoost) : base(duration)
     {
-        this.percentageSlow = percentageSlow;
+        this.percentageSpeedBoost = percentageSpeedBoost;
     }
 
     public static void Reset()
@@ -18,7 +18,7 @@ public class Slow : StatusEffect
 
     public override void ApplyEffect()
     {
-        VelocityScalar -= percentageSlow;
+        VelocityScalar += percentageSpeedBoost;
         if (VelocityScalar < 0.1f)
         {
             VelocityScalar = 0.1f;

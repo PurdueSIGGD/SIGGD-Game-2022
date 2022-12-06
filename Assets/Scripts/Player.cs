@@ -5,11 +5,13 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(DebuffsManager))]
+[RequireComponent(typeof(BuffsManager))]
 public class Player : MonoBehaviour
 {
     // Player Systems
     private Movement movement;
     private DebuffsManager debuffsManager;
+    private BuffsManager buffsManager;
 
     public Movement Movement => movement;
 
@@ -18,6 +20,7 @@ public class Player : MonoBehaviour
         // Player Systems
         movement = GetComponent<Movement>();
         debuffsManager = GetComponent<DebuffsManager>();
+        buffsManager = GetComponent<BuffsManager>();
     }
 
     void FixedUpdate()
@@ -28,6 +31,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         debuffsManager.UpdateDebuffs();
+        buffsManager.UpdateBuffs();
     }
 
     void OnMove(InputValue movementValue)
