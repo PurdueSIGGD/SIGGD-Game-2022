@@ -23,6 +23,7 @@ public class Item : MonoBehaviour, IInteractable
     // serializable fields
     [SerializeField] string itemName;
     [SerializeField] ItemType type = ItemType.GENERAL;
+    [SerializeField] Sprite inventorySprite;
     [SerializeField] int maxStackSize = 1;
     [SerializeField] int currentNumCharges = 1;
     [SerializeField] bool isShiny;
@@ -30,7 +31,7 @@ public class Item : MonoBehaviour, IInteractable
 
     // cached fields
     Transform playerTrans;
-    Rigidbody rb;
+    //Rigidbody rb;
     Collider col;
     Camera mainCam;
 
@@ -43,7 +44,7 @@ public class Item : MonoBehaviour, IInteractable
     void Start()
     {
         playerTrans = FindObjectOfType<Player>().gameObject.transform;
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
         startLocalScale = transform.localScale;
         mainCam = Camera.main;
@@ -106,7 +107,7 @@ public class Item : MonoBehaviour, IInteractable
 
         if (putInInventory)
         {
-            rb.velocity = rb.angularVelocity = Vector3.zero;            
+            //rb.velocity = rb.angularVelocity = Vector3.zero;            
         }
     }
 
@@ -114,7 +115,7 @@ public class Item : MonoBehaviour, IInteractable
     // or reactivates them if the item is being dropped onto the ground
     void bringToUI(bool toUI)
     {
-        rb.useGravity = !toUI;
+        //rb.useGravity = !toUI;
         col.enabled = !toUI;
     }
 
@@ -165,6 +166,11 @@ public class Item : MonoBehaviour, IInteractable
         return type.Equals(itemType);
     }
 
+    public Sprite getSprite()
+    {
+        return inventorySprite;
+    }
+
     Vector3 getMouseWorldPosition()
     {
         /*Vector2Control mouseScreenPosControl = Mouse.current.position;
@@ -179,10 +185,11 @@ public class Item : MonoBehaviour, IInteractable
             return mainCam.transform.position;
     }
 
-    void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("collision" + other.gameObject.name);
         // ensures this is a valid item to be picked up, and the player is touching this
-        if (collision != null && gameObject != null && !inInventory && collision.gameObject.tag.Equals(PLAYER_TAG))
+        if (other != null && gameObject != null && !inInventory && other.gameObject.tag.Equals(PLAYER_TAG))
             Grab();
     }
 }
