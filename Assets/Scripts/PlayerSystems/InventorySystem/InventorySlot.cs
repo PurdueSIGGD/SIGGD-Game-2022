@@ -15,6 +15,7 @@ public class InventorySlot : MonoBehaviour
     [SerializeField] ItemType stackType = ItemType.GENERAL;
     [SerializeField] Image border;
     [SerializeField] Image background;
+    [SerializeField] Image itemImage;
     [SerializeField] TextMeshProUGUI stackText;
 
     [SerializeField] Color selectedColor = Color.white;
@@ -96,6 +97,14 @@ public class InventorySlot : MonoBehaviour
         item.transform.parent = transform;
         item.transform.localScale *= SCALE_MULT_IN_UI;
 
+        // set 2D sprite to inventory
+        if (itemImage != null)
+        {
+            itemImage.sprite = item.getSprite();
+            itemImage.enabled = true;
+        }
+        item.gameObject.SetActive(false);
+
         // adds item to stack & updates stack counter
         stack.Add(item);
         updateStackText();
@@ -121,6 +130,10 @@ public class InventorySlot : MonoBehaviour
             item = null;
 
         updateStackText();
+
+        // removes 2D image
+        if (itemImage != null && getNumCharges() <= 0)
+            itemImage.enabled = false;
 
         return item;
     }

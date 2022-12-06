@@ -28,10 +28,9 @@ public class StunGunProjectile : MonoBehaviour
         stunGunShootPos = FindObjectOfType<StunGun>().shootPos;
         col = GetComponent<Collider>();
 
-        startPos = transform.position;
-
         // sets position to shooting position
         transform.position = stunGunShootPos.position;
+        startPos = transform.position;
 
         // rotates to face the direction the player is trying to shoot        
         transform.rotation = stunGunShootPos.rotation;
@@ -94,12 +93,6 @@ public class StunGunProjectile : MonoBehaviour
         startReturningToPlayer();
     }
 
-    bool isLayerInLayerMask(int layerToCheck, LayerMask layerMask)
-    {
-        // bitshifting to interpret the layerMask.  Don't worry if this looks confusing.
-        return layerMask.value == (layerMask.value | (1 << layerToCheck));
-    }
-
     void OnCollisionEnter(Collision collision)
     {
         // collider should be disabled when returning to player, so this case should never occur
@@ -107,9 +100,9 @@ public class StunGunProjectile : MonoBehaviour
             return;
 
         int collisionLayer = collision.gameObject.layer;        
-        if (isLayerInLayerMask(collisionLayer, enemyLayers))
+        if (IInteractable.isLayerInLayerMask(collisionLayer, enemyLayers))
             hitEnemy(collision);
-        else if (isLayerInLayerMask(collisionLayer, terrainLayers))
+        else if (IInteractable.isLayerInLayerMask(collisionLayer, terrainLayers))
             hitTerrain();
     }
 }
