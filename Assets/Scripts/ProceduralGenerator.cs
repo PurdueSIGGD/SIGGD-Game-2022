@@ -403,7 +403,6 @@ public class ProceduralGenerator : MonoBehaviour
             {
                 if (grid[i, j] != GridPoint.Hallway) continue;
 
-                if ()
             }
         }
     }
