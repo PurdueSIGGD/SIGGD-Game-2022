@@ -24,7 +24,7 @@ public class ProceduralGenerator : MonoBehaviour
     private bool RoundToTileSize;
 
     [SerializeField]
-    private GameObject floor;
+    private GameObject HallwayPrefab, floor;
 
     [SerializeField]
     Material DefaultFloorMaterial, MainRoomMaterial;
@@ -397,12 +397,16 @@ public class ProceduralGenerator : MonoBehaviour
 
     private void DrawHallways()
     {
+        Vector2[] GridBounds = GetRoomBounds();
+        Vector3 GridOffset = new Vector3(GridBounds[0][0], 0, GridBounds[1][0]);
         for (int i = 0; i < grid.GetLength(0); i++)
         {
             for (int j = 0; j < grid.GetLength(1); j++)
             {
                 if (grid[i, j] != GridPoint.Hallway) continue;
 
+                GameObject CurrentHallway = Instantiate(HallwayPrefab, new Vector3(i, 0, j) + GridOffset, Quaternion.identity, RoomParent.transform);
+                Debug.Log(GridOffset);
             }
         }
     }
