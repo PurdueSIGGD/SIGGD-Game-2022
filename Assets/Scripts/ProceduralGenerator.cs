@@ -406,7 +406,18 @@ public class ProceduralGenerator : MonoBehaviour
                 if (grid[i, j] != GridPoint.Hallway) continue;
 
                 GameObject CurrentHallway = Instantiate(HallwayPrefab, new Vector3(i, 0, j) + GridOffset, Quaternion.identity, RoomParent.transform);
-                Debug.Log(GridOffset);
+                if (i > 0 && (grid[i - 1, j] == GridPoint.Hallway)) {
+                    DestroyImmediate(CurrentHallway.transform.Find("Left").gameObject);
+                }
+                if (i < (grid.GetLength(0) - 1) && (grid[i + 1, j] == GridPoint.Hallway)) {
+                    DestroyImmediate(CurrentHallway.transform.Find("Right").gameObject);
+                }
+                if (j > 0 && (grid[i, j - 1] == GridPoint.Hallway)) {
+                    DestroyImmediate(CurrentHallway.transform.Find("Bottom").gameObject);
+                }
+                if (j < (grid.GetLength(1) - 1) && (grid[i, j + 1] == GridPoint.Hallway)) {
+                    DestroyImmediate(CurrentHallway.transform.Find("Top").gameObject);
+                }
             }
         }
     }
