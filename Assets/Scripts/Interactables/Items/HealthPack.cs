@@ -18,6 +18,7 @@ public class HealthPack : Item
         DebuffsManager debuffsManager = GameObject.Find("Player").GetComponent<DebuffsManager>();
         if (debuffsManager != null)
         {
+            //debuffsManager.AddDebuff(new Ensnared(lingeringSlowDuration));
             debuffsManager.AddDebuff(new Slow(impactSlowDuration, ((impactSlowPercentage - lingeringSlowPercentage) * 0.01f)));
             debuffsManager.AddDebuff(new Slow(lingeringSlowDuration, (lingeringSlowPercentage * 0.01f)));
             Debug.Log($"Healthpack slow was called");

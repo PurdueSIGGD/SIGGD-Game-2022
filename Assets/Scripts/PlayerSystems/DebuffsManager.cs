@@ -19,6 +19,7 @@ public class DebuffsManager : MonoBehaviour
 
     private void ResetDebuffs() {
         Slow.Reset();
+        Ensnared.Reset();
     }
 
     public void UpdateDebuffs()
