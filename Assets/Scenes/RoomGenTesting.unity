@@ -245,6 +245,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2495531318641796358, guid: 906befec8df961b42b1e253eef1a5be8,
+        type: 3}
+      propertyPath: m_TagString
+      value: RoomSpawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 5669057237994600928, guid: 906befec8df961b42b1e253eef1a5be8,
+        type: 3}
+      propertyPath: m_TagString
+      value: RoomSpawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 6690045088733248628, guid: 906befec8df961b42b1e253eef1a5be8,
+        type: 3}
+      propertyPath: m_TagString
+      value: RoomSpawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 8775127033139127565, guid: 906befec8df961b42b1e253eef1a5be8,
+        type: 3}
+      propertyPath: m_TagString
+      value: RoomSpawn
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 906befec8df961b42b1e253eef1a5be8, type: 3}
 --- !u!1 &828180331
