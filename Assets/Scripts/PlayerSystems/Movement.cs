@@ -7,19 +7,21 @@ public class Movement : MonoBehaviour
     [SerializeField] private float MaxSpeed = 10;
     [SerializeField] private float Friction = 100;
     [SerializeField] private float Acceleration = 100;
+    [SerializeField] private float gravity = 9.8f;
     [SerializeField] private float CamRotXSpeed = 0.2f;
     [SerializeField] private float CamRotYSpeed = 0.2f;
 
-    private new Rigidbody rigidbody;
     private DebuffsManager debuffs;
     private Transform camHolderTransform;
     private Vector2 input;
     private Vector2 lookInput;
-    private Vector2 velocity;
+    private Vector3 velocity;
+
+    private CharacterController charController;
 
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        charController = GetComponent<CharacterController>();
         debuffs = GetComponent<DebuffsManager>();
         camHolderTransform = GetComponentInChildren<Camera>().transform.parent;
     }
@@ -34,17 +36,9 @@ public class Movement : MonoBehaviour
         this.lookInput = lookInput;
     }
 
-    /// <summary>
-    /// Moves a vector2 towards a target vector2 by a given amount
-    /// </summary>
-    private Vector2 MoveTowards(Vector2 curr, Vector2 target, float amount)
-    {
-        Vector2 diff = target - curr;
-        Vector2 change = diff.normalized * amount;
-        // clamp value based to the difference
-        change = (diff.sqrMagnitude < change.sqrMagnitude ? diff : change);
-        return curr + change;
-    }
+    private const float GROUND_SNAP = 0.5f;
+
+
 
     public void MovePlayer()
     {
@@ -52,7 +46,7 @@ public class Movement : MonoBehaviour
         if (input.Equals(Vector2.zero))
         {
             // if no input, slow down
-            velocity = MoveTowards(velocity, Vector2.zero, Friction * Time.fixedDeltaTime);
+            velocity = Vector3.MoveTowards(velocity, Vector3.up * velocity.y, Friction * Time.fixedDeltaTime);
         }
         else
         {
@@ -60,16 +54,29 @@ public class Movement : MonoBehaviour
             //corrects the input to be in local space
             Vector3 localDir = transform.forward * input.y + transform.right * input.x;
             //corrects the 3dDir to be a 2d vector
-            Vector2 corrInput = new Vector2(localDir.x, localDir.z);
-            velocity = MoveTowards(velocity, corrInput * MaxSpeed, Acceleration * Time.fixedDeltaTime);
-            //velocity = MoveTowards(velocity, input * MaxSpeed, Acceleration * Time.fixedDeltaTime);
+            // Vector2 corrInput = new Vector2(localDir.x, localDir.z);
+            velocity = Vector3.MoveTowards(velocity, localDir * MaxSpeed + Vector3.up * velocity.y, Acceleration * Time.fixedDeltaTime);
         }
 
         //copies the y velocity so that velocity due to gravity is not removed
-        Vector2 debuffedVelocity = debuffs.ApplySlow(velocity);
-        Debug.Log(debuffedVelocity);
-        Vector3 move = new Vector3(debuffedVelocity.x, rigidbody.velocity.y, debuffedVelocity.y) * Time.fixedDeltaTime;
-        rigidbody.MovePosition(rigidbody.position + move);
+        Vector2 debuffedVelocity = debuffs.ApplySlow(new Vector2(velocity.x, velocity.z));
+        //Debug.Log(debuffedVelocity);
+        Vector3 move = new Vector3(debuffedVelocity.x, velocity.y, debuffedVelocity.y) * Time.fixedDeltaTime;
+        charController.Move(move);
+
+        { // handle ground snap
+            var savedPos = transform.position;
+            charController.Move(Vector3.down * GROUND_SNAP);
+            if (!charController.isGrounded) {
+                transform.position = savedPos;
+            }
+        }
+
+        if (charController.isGrounded) {
+            velocity.y = -0.0001f;
+        } else {
+            velocity += Vector3.down * gravity * Time.deltaTime;
+        }
 
         //Rotation
 
@@ -80,7 +87,7 @@ public class Movement : MonoBehaviour
             // if statement used to stop camera from going upside down
             float vertRotation = - lookInput.y * CamRotYSpeed;
             if ((camHolderTransform.localRotation.eulerAngles.x + vertRotation < 90) || camHolderTransform.localRotation.eulerAngles.x + vertRotation > 270) {
-                Debug.Log(camHolderTransform.localRotation.eulerAngles.x);
+                //Debug.Log(camHolderTransform.localRotation.eulerAngles.x);
                 camHolderTransform.Rotate(new Vector3(vertRotation, 0, 0), Space.Self);
             }
         }
