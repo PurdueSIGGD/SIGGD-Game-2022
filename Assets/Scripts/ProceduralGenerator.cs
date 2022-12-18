@@ -76,6 +76,8 @@ public class ProceduralGenerator : MonoBehaviour
         public int gridY;
         Vector3[] hallways;
 
+        public int yOffset;
+
         public Room(RoomScriptableObject roomObj, int rotation, int rectPointer) {
             this.physicalRoom = roomObj.room;
             this.rotation = rotation;
@@ -83,6 +85,8 @@ public class ProceduralGenerator : MonoBehaviour
             gridX = -1;
             gridY = -1;
             roomRect = new Rect();
+
+            this.yOffset = Mathf.RoundToInt(roomObj.hallways[0].y);
 
             hallways = new Vector3[roomObj.hallways.Length];
             Vector3 halfRoom = new Vector3(roomObj.dimensions.x / 2, 0, roomObj.dimensions.z / 2);
@@ -377,11 +381,12 @@ public class ProceduralGenerator : MonoBehaviour
     private void DrawRooms(Room[] rooms, Material roomColor) {
         foreach (Room finalRoom in rooms)
         {
-            GameObject testFloor = Instantiate(finalRoom.physicalRoom, new Vector3(finalRoom.roomRect.center.x, 0, finalRoom.roomRect.center.y), Quaternion.identity, RoomParent.transform);
+            Vector3 inPos = new Vector3(Mathf.RoundToInt(finalRoom.roomRect.center.x), finalRoom.yOffset, Mathf.RoundToInt(finalRoom.roomRect.center.y));
+            GameObject testFloor = Instantiate(finalRoom.physicalRoom, inPos, Quaternion.identity, RoomParent.transform);
             #if UNITY_EDITOR
                 //testFloor.GetComponent<RoomGenerator>().EditorAwake();
             #endif
-            // testFloor.transform.Translate(new Vector3(gridPadding, 0, gridPadding));
+
             testFloor.transform.Rotate(new Vector3(0, 90, 0) * finalRoom.rotation);
 
             if (roomColor != null)
@@ -406,17 +411,25 @@ public class ProceduralGenerator : MonoBehaviour
                 if (grid[i, j] != GridPoint.Hallway) continue;
 
                 GameObject CurrentHallway = Instantiate(HallwayPrefab, new Vector3(i, 0, j) + GridOffset, Quaternion.identity, RoomParent.transform);
-                if (i > 0 && (grid[i - 1, j] == GridPoint.Hallway)) {
+                if (i > 0 && (grid[i - 1, j] == GridPoint.Hallway || grid[i - 1, j] == GridPoint.Doorway)) {
                     DestroyImmediate(CurrentHallway.transform.Find("Left").gameObject);
+                    CurrentHallway.transform.localScale -= new Vector3(0.5f, 0, 0);
+                    CurrentHallway.transform.localPosition += new Vector3(0.25f, 0, 0);
                 }
-                if (i < (grid.GetLength(0) - 1) && (grid[i + 1, j] == GridPoint.Hallway)) {
+                if (i < (grid.GetLength(0) - 1) && (grid[i + 1, j] == GridPoint.Hallway || grid[i + 1, j] == GridPoint.Doorway)) {
                     DestroyImmediate(CurrentHallway.transform.Find("Right").gameObject);
+                    CurrentHallway.transform.localScale -= new Vector3(0.5f, 0, 0);
+                    CurrentHallway.transform.localPosition -= new Vector3(0.25f, 0, 0);
                 }
-                if (j > 0 && (grid[i, j - 1] == GridPoint.Hallway)) {
+                if (j > 0 && (grid[i, j - 1] == GridPoint.Hallway || grid[i, j - 1] == GridPoint.Doorway)) {
                     DestroyImmediate(CurrentHallway.transform.Find("Bottom").gameObject);
+                    CurrentHallway.transform.localScale -= new Vector3(0, 0, 0.5f);
+                    CurrentHallway.transform.localPosition += new Vector3(0, 0, 0.25f);
                 }
-                if (j < (grid.GetLength(1) - 1) && (grid[i, j + 1] == GridPoint.Hallway)) {
+                if (j < (grid.GetLength(1) - 1) && (grid[i, j + 1] == GridPoint.Hallway || grid[i, j + 1] == GridPoint.Doorway)) {
                     DestroyImmediate(CurrentHallway.transform.Find("Top").gameObject);
+                    CurrentHallway.transform.localScale -= new Vector3(0, 0, 0.5f);
+                    CurrentHallway.transform.localPosition -= new Vector3(0, 0, 0.25f);
                 }
             }
         }
@@ -675,6 +688,8 @@ public class ProceduralGenerator : MonoBehaviour
     {
         int row = dest[0];
         int col = dest[1];
+
+        // Skip over the destination Doorway
         row = cellDetails[row, col].parent_i;
         col = cellDetails[row, col].parent_j;
     
