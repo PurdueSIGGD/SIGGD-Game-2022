@@ -89,8 +89,11 @@ public class ProceduralGenerator : MonoBehaviour
             this.yOffset = Mathf.RoundToInt(roomObj.hallways[0].y);
 
             hallways = new Vector3[roomObj.hallways.Length];
+            // Use halfRoom to center the room around a new local origin. rotHalfRoom is used to assist with the off angles.
             Vector3 halfRoom = new Vector3(roomObj.dimensions.x / 2, 0, roomObj.dimensions.z / 2);
             Vector3 rotHalfRoom = new Vector3(roomObj.dimensions.z / 2, 0, roomObj.dimensions.x / 2);
+            // Depending on the set rotation set in the constructor, use basics of rotation matrices to rotate the hallways
+            // to match the desired ending location. Rotation of 0 is the identity transformation.
             for (int i = 0; i < hallways.Length; i++) {
                 switch(rotation) {
                     case 0:
@@ -350,7 +353,8 @@ public class ProceduralGenerator : MonoBehaviour
 
     //Visualize the RoomRects List<Rect> as Unity GameObjects
     //Floor is some form of plane representing a room.
-    private void DrawRooms(List<Rect> rooms, Material roomColor)
+    // This function is currently unused after the shift to using arrays to represent the rooms.
+    /* private void DrawRooms(List<Rect> rooms, Material roomColor)
     {
         foreach (Rect rect in rooms)
         {
@@ -376,7 +380,7 @@ public class ProceduralGenerator : MonoBehaviour
             }
 
         }
-    }
+    } */
 
     private void DrawRooms(Room[] rooms, Material roomColor) {
         foreach (Room finalRoom in rooms)
@@ -404,6 +408,42 @@ public class ProceduralGenerator : MonoBehaviour
     {
         Vector2[] GridBounds = GetRoomBounds();
         Vector3 GridOffset = new Vector3(GridBounds[0][0], 0, GridBounds[1][0]);
+        Stack<int[]> dfsStack = new Stack<int[]>();
+        bool[,] visited = new bool[grid.GetLength(0), grid.GetLength(1)];
+
+        // If hallways start missing make sure that FinalRoomCount is equal to the number of rooms in the scene.
+        // Goal: Iterate through all of the hallway points running depth first search.
+        // In the end the long straight paths will be one object each joined with some form of a T or L corridor.
+        // TODO: Modify the DFS algorithm to easily create long hallway objects by continually checking if the
+        // points perpendicular to the long hallway exist as a hallway branch or a doorway. When these branches 
+        // are found, add the intersection point (T, L, or X) to the stack and break out.
+        foreach (Room finalRoom in FinalRoomPlan) {
+            foreach (Vector3 localDoorway in finalRoom.getHallways()) {
+                int[] gridDoorwayPos = new int[]{finalRoom.gridX + Mathf.RoundToInt(localDoorway.x), finalRoom.gridY + Mathf.RoundToInt(localDoorway.z)};
+                if (grid[gridDoorwayPos[0] + 1, gridDoorwayPos[1]] == GridPoint.Hallway) {
+                    dfsStack.Push(new int[]{gridDoorwayPos[0] + 1, gridDoorwayPos[1]});
+                } else if (grid[gridDoorwayPos[0] - 1, gridDoorwayPos[1]] == GridPoint.Hallway) {
+                    dfsStack.Push(new int[]{gridDoorwayPos[0] - 1, gridDoorwayPos[1]});
+                } else if (grid[gridDoorwayPos[0], gridDoorwayPos[1] + 1] == GridPoint.Hallway) {
+                    dfsStack.Push(new int[]{gridDoorwayPos[0], gridDoorwayPos[1] + 1});
+                } else if (grid[gridDoorwayPos[0], gridDoorwayPos[1] + 1] == GridPoint.Hallway) {
+                    dfsStack.Push(new int[]{gridDoorwayPos[0], gridDoorwayPos[1] + 1});
+                }
+                if (dfsStack.Count != 0 && visited[dfsStack.Peek()[0], dfsStack.Peek()[1]] == true) {
+                    dfsStack.Pop();
+                }
+                
+            }
+
+            while (dfsStack.Count != 0) {
+                int[] currentPoint = dfsStack.Pop();
+                if (grid[currentPoint[0], currentPoint[1]] != GridPoint.Hallway) continue;
+                if (visited[currentPoint[0], currentPoint[1]] == true) continue;
+
+            }
+        }
+
+
         for (int i = 0; i < grid.GetLength(0); i++)
         {
             for (int j = 0; j < grid.GetLength(1); j++)
