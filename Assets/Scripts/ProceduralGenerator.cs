@@ -42,13 +42,13 @@ public class ProceduralGenerator : MonoBehaviour
     private bool DrawGizmos;
     private int gridPadding = 3;
 
-
+    [System.Flags]
     public enum GridPoint
     {
-        Empty,
-        Room,
-        Hallway,
-        Doorway
+        Empty = 1,
+        Room = 2,
+        Hallway = 4,
+        Doorway = 8
     }
 
     public struct cell {
@@ -139,7 +139,6 @@ public class ProceduralGenerator : MonoBehaviour
             float distance = 10000;
             for (int i = 0; i < this.hallways.Length; i++) {
                 float tempDist = Vector3.Distance(this.hallways[i] + new Vector3(gridX, 0, gridY), other.roomRect.center);
-                Debug.Log(this.hallways[i] + new Vector3(gridX, 0, gridY));
                 if (tempDist < distance) {
                     distance = tempDist;
                     localClosestHallway = new int[]{Mathf.RoundToInt(this.hallways[i].x + gridX), Mathf.RoundToInt(this.hallways[i].z + gridY)};
@@ -158,8 +157,6 @@ public class ProceduralGenerator : MonoBehaviour
             if (localClosestHallway[1] < 0) localClosestHallway[1] = 0;
             if (remoteClosestHallway[0] < 0) remoteClosestHallway[0] = 0;
             if (remoteClosestHallway[1] < 0) remoteClosestHallway[1] = 0;
-            Debug.Log(string.Join(",", localClosestHallway));
-            Debug.Log(string.Join(",", remoteClosestHallway));
             return new int[][]{localClosestHallway, remoteClosestHallway};
         }
 
@@ -404,6 +401,41 @@ public class ProceduralGenerator : MonoBehaviour
         }
     }
 
+    // Checks points adjacent to the input point for hallways or doorways.
+    // Returns the number of adjacent hallways and doorways.
+    private int HallwayDFSHelper(int[] point, Stack<int[]> dfsStack, ref bool isStraight) {
+        int count = 0;
+        bool isVertical = false;
+        isStraight = true;
+
+        if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[point[0] + 1, point[1]])) {
+            dfsStack.Push(new int[]{point[0] + 1, point[1]});
+            count++;
+            isVertical = true;
+        }
+        if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[point[0] - 1, point[1]])) {
+            dfsStack.Push(new int[]{point[0] - 1, point[1]});
+            count++;
+            if (isVertical == false) isStraight = false;
+            isVertical = true;
+        }
+        if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[point[0], point[1] + 1])) {
+            dfsStack.Push(new int[]{point[0], point[1] + 1});
+            count++;
+            if (isVertical == true) isStraight = false;
+        }
+        if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[point[0], point[1] - 1])) {
+            dfsStack.Push(new int[]{point[0], point[1] - 1});
+            count++;
+            if (isVertical == true) isStraight = false;
+        }
+
+        if (count != 2) isStraight = false;
+        Debug.Log(count);
+
+        return count;
+    }
+
     private void DrawHallways()
     {
         Vector2[] GridBounds = GetRoomBounds();
@@ -418,28 +450,33 @@ public class ProceduralGenerator : MonoBehaviour
         // points perpendicular to the long hallway exist as a hallway branch or a doorway. When these branches 
         // are found, add the intersection point (T, L, or X) to the stack and break out.
         foreach (Room finalRoom in FinalRoomPlan) {
+            bool isStraight = false;
             foreach (Vector3 localDoorway in finalRoom.getHallways()) {
                 int[] gridDoorwayPos = new int[]{finalRoom.gridX + Mathf.RoundToInt(localDoorway.x), finalRoom.gridY + Mathf.RoundToInt(localDoorway.z)};
-                if (grid[gridDoorwayPos[0] + 1, gridDoorwayPos[1]] == GridPoint.Hallway) {
-                    dfsStack.Push(new int[]{gridDoorwayPos[0] + 1, gridDoorwayPos[1]});
-                } else if (grid[gridDoorwayPos[0] - 1, gridDoorwayPos[1]] == GridPoint.Hallway) {
-                    dfsStack.Push(new int[]{gridDoorwayPos[0] - 1, gridDoorwayPos[1]});
-                } else if (grid[gridDoorwayPos[0], gridDoorwayPos[1] + 1] == GridPoint.Hallway) {
-                    dfsStack.Push(new int[]{gridDoorwayPos[0], gridDoorwayPos[1] + 1});
-                } else if (grid[gridDoorwayPos[0], gridDoorwayPos[1] + 1] == GridPoint.Hallway) {
-                    dfsStack.Push(new int[]{gridDoorwayPos[0], gridDoorwayPos[1] + 1});
-                }
-                if (dfsStack.Count != 0 && visited[dfsStack.Peek()[0], dfsStack.Peek()[1]] == true) {
-                    dfsStack.Pop();
+                if (HallwayDFSHelper(gridDoorwayPos, dfsStack, ref isStraight) == 0) {
+                    // There are no hallways adjacent to this doorway.
+                    // TODO: Close this doorway.
                 }
                 
             }
+            Debug.Log(dfsStack.Count);
 
+            int hallwayLength = 0;
             while (dfsStack.Count != 0) {
                 int[] currentPoint = dfsStack.Pop();
                 if (grid[currentPoint[0], currentPoint[1]] != GridPoint.Hallway) continue;
                 if (visited[currentPoint[0], currentPoint[1]] == true) continue;
+                visited[currentPoint[0], currentPoint[1]] = true;
 
+                // Check if the current hallway point is part of a long hallway or a collision point.
+                // If it is a collision point and there was a long hallway before hand, instantiate the hallway.
+                int adjCount = HallwayDFSHelper(currentPoint, dfsStack, ref isStraight);
+                if (isStraight == true) {
+                    hallwayLength++;
+                    Debug.Log(hallwayLength);
+                } else {
+                    hallwayLength = 0;
+                }
             }
         }
 
