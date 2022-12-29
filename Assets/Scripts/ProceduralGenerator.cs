@@ -431,7 +431,6 @@ public class ProceduralGenerator : MonoBehaviour
         }
 
         if (count != 2) isStraight = false;
-        Debug.Log(count);
 
         return count;
     }
@@ -459,7 +458,7 @@ public class ProceduralGenerator : MonoBehaviour
                 }
                 
             }
-            Debug.Log(dfsStack.Count);
+            //Debug.Log(dfsStack.Count);
 
             int hallwayLength = 0;
             while (dfsStack.Count != 0) {
@@ -473,7 +472,7 @@ public class ProceduralGenerator : MonoBehaviour
                 int adjCount = HallwayDFSHelper(currentPoint, dfsStack, ref isStraight);
                 if (isStraight == true) {
                     hallwayLength++;
-                    Debug.Log(hallwayLength);
+                    //Debug.Log(hallwayLength);
                 } else {
                     hallwayLength = 0;
                 }
@@ -481,32 +480,145 @@ public class ProceduralGenerator : MonoBehaviour
         }
 
 
-        for (int i = 0; i < grid.GetLength(0); i++)
+        for (int i = 1; i < grid.GetLength(0) - 1; i++)
         {
-            for (int j = 0; j < grid.GetLength(1); j++)
+            for (int j = 1; j < grid.GetLength(1) - 1; j++)
             {
                 if (grid[i, j] != GridPoint.Hallway) continue;
-
                 GameObject CurrentHallway = Instantiate(HallwayPrefab, new Vector3(i, 0, j) + GridOffset, Quaternion.identity, RoomParent.transform);
-                if (i > 0 && (grid[i - 1, j] == GridPoint.Hallway || grid[i - 1, j] == GridPoint.Doorway)) {
-                    DestroyImmediate(CurrentHallway.transform.Find("Left").gameObject);
-                    CurrentHallway.transform.localScale -= new Vector3(0.5f, 0, 0);
-                    CurrentHallway.transform.localPosition += new Vector3(0.25f, 0, 0);
+                Vector3 ParentScale = CurrentHallway.transform.localScale;
+                bool[] isSideDestroyed = new bool[4];
+                // Left
+                if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[i - 1, j])) {
+                    if (grid[i - 1, j] == GridPoint.Doorway) {
+                        DestroyImmediate(CurrentHallway.transform.Find("Left/Bottom/Wall").gameObject);
+                        DestroyImmediate(CurrentHallway.transform.Find("Left/Top/Wall").gameObject);
+                    } else {
+                        DestroyImmediate(CurrentHallway.transform.Find("Left").gameObject);
+                    }
+                    if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[i, j + 1]) || grid[i - 1, j] == GridPoint.Doorway) {
+                        DestroyImmediate(CurrentHallway.transform.Find("TopLeft/Top").gameObject);
+                        DestroyImmediate(CurrentHallway.transform.Find("TopLeft/Left").gameObject);
+                    } else if (grid[i - 1, j] == GridPoint.Doorway) {
+                        DestroyImmediate(CurrentHallway.transform.Find("TopLeft/Left").gameObject);
+                    } else {
+                        DestroyImmediate(CurrentHallway.transform.Find("TopLeft").gameObject);
+                    }
+                    if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[i, j - 1]) || grid[i - 1, j] == GridPoint.Doorway) {
+                        DestroyImmediate(CurrentHallway.transform.Find("BottomLeft/Bottom").gameObject);
+                        DestroyImmediate(CurrentHallway.transform.Find("BottomLeft/Left").gameObject);
+                    } else if (grid[i - 1, j] == GridPoint.Doorway) {
+                        DestroyImmediate(CurrentHallway.transform.Find("BottomLeft/Left").gameObject);
+                    } else {
+                        DestroyImmediate(CurrentHallway.transform.Find("BottomLeft").gameObject);
+                    }
+                    isSideDestroyed[0] = true;
                 }
-                if (i < (grid.GetLength(0) - 1) && (grid[i + 1, j] == GridPoint.Hallway || grid[i + 1, j] == GridPoint.Doorway)) {
-                    DestroyImmediate(CurrentHallway.transform.Find("Right").gameObject);
-                    CurrentHallway.transform.localScale -= new Vector3(0.5f, 0, 0);
-                    CurrentHallway.transform.localPosition -= new Vector3(0.25f, 0, 0);
+                // Right
+                if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[i + 1, j])) {
+                    if (grid[i + 1, j] == GridPoint.Doorway) {
+                        DestroyImmediate(CurrentHallway.transform.Find("Right/Bottom/Wall").gameObject);
+                        DestroyImmediate(CurrentHallway.transform.Find("Right/Top/Wall").gameObject);
+                    } else {
+                        DestroyImmediate(CurrentHallway.transform.Find("Right").gameObject);
+                    }
+                    if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[i, j + 1]) || grid[i + 1, j] == GridPoint.Doorway) {
+                        DestroyImmediate(CurrentHallway.transform.Find("TopRight/Top").gameObject);
+                        DestroyImmediate(CurrentHallway.transform.Find("TopRight/Right").gameObject);
+                    } else if (grid[i + 1, j] == GridPoint.Doorway) {
+                        DestroyImmediate(CurrentHallway.transform.Find("TopRight/Right").gameObject);
+                    } else {
+                        DestroyImmediate(CurrentHallway.transform.Find("TopRight").gameObject);
+                    }
+                    if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[i, j - 1])) {
+                        DestroyImmediate(CurrentHallway.transform.Find("BottomRight/Bottom").gameObject);
+                        DestroyImmediate(CurrentHallway.transform.Find("BottomRight/Right").gameObject);
+                    } else if (grid[i + 1, j] == GridPoint.Doorway) {
+                        DestroyImmediate(CurrentHallway.transform.Find("BottomRight/Right").gameObject);
+                    } else {
+                        DestroyImmediate(CurrentHallway.transform.Find("BottomRight").gameObject);
+                    }
+                    isSideDestroyed[2] = true;
                 }
-                if (j > 0 && (grid[i, j - 1] == GridPoint.Hallway || grid[i, j - 1] == GridPoint.Doorway)) {
-                    DestroyImmediate(CurrentHallway.transform.Find("Bottom").gameObject);
-                    CurrentHallway.transform.localScale -= new Vector3(0, 0, 0.5f);
-                    CurrentHallway.transform.localPosition += new Vector3(0, 0, 0.25f);
+                // Top
+                if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[i, j + 1])) {
+                    if (grid[i, j + 1] == GridPoint.Doorway) {
+                        DestroyImmediate(CurrentHallway.transform.Find("Top/Bottom/Wall").gameObject);
+                        DestroyImmediate(CurrentHallway.transform.Find("Top/Top/Wall").gameObject);
+                        if (!(GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[i + 1, j])) {
+                            DestroyImmediate(CurrentHallway.transform.Find("TopRight/Top").gameObject);
+                        }
+                        if (!(GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[i - 1, j])) {
+                            DestroyImmediate(CurrentHallway.transform.Find("TopLeft/Top").gameObject);
+                        }
+                    } else {
+                        DestroyImmediate(CurrentHallway.transform.Find("Top").gameObject);
+                        if (!isSideDestroyed[0]) {
+                            DestroyImmediate(CurrentHallway.transform.Find("TopLeft").gameObject);
+                        }
+                        if (!isSideDestroyed[2]) {
+                            DestroyImmediate(CurrentHallway.transform.Find("TopRight").gameObject);
+                        }
+                    }
+                    isSideDestroyed[1] = true;
                 }
-                if (j < (grid.GetLength(1) - 1) && (grid[i, j + 1] == GridPoint.Hallway || grid[i, j + 1] == GridPoint.Doorway)) {
-                    DestroyImmediate(CurrentHallway.transform.Find("Top").gameObject);
-                    CurrentHallway.transform.localScale -= new Vector3(0, 0, 0.5f);
-                    CurrentHallway.transform.localPosition -= new Vector3(0, 0, 0.25f);
+                // Bottom
+                if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[i, j - 1])) {
+                    if (grid[i, j - 1] == GridPoint.Doorway) {
+                        DestroyImmediate(CurrentHallway.transform.Find("Bottom/Bottom/Wall").gameObject);
+                        DestroyImmediate(CurrentHallway.transform.Find("Bottom/Top/Wall").gameObject);
+                        if (!(GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[i + 1, j])) {
+                            DestroyImmediate(CurrentHallway.transform.Find("BottomRight/Bottom").gameObject);
+                        }
+                        if (!(GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[i - 1, j])) {
+                            DestroyImmediate(CurrentHallway.transform.Find("BottomLeft/Bottom").gameObject);
+                        }
+                    } else {
+                        DestroyImmediate(CurrentHallway.transform.Find("Bottom").gameObject);
+                        if (!isSideDestroyed[0]) {
+                            DestroyImmediate(CurrentHallway.transform.Find("BottomLeft").gameObject);
+                        }
+                        if (!isSideDestroyed[2]) {
+                            DestroyImmediate(CurrentHallway.transform.Find("BottomRight").gameObject);
+                        }
+                    }
+                    isSideDestroyed[3] = true;
+                }
+                // TopLeft
+                if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[i - 1, j + 1])) {
+                    if (!isSideDestroyed[1]) {
+                        DestroyImmediate(CurrentHallway.transform.Find("Top/Bottom").gameObject);
+                    }
+                    if (!isSideDestroyed[0]) {
+                        DestroyImmediate(CurrentHallway.transform.Find("Left/Top").gameObject);
+                    }
+                }
+                // TopRight
+                if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[i + 1, j + 1])) {
+                    if (!isSideDestroyed[1]) {
+                        DestroyImmediate(CurrentHallway.transform.Find("Top/Top").gameObject);
+                    }
+                    if (!isSideDestroyed[2]) {
+                        DestroyImmediate(CurrentHallway.transform.Find("Right/Bottom").gameObject);
+                    }
+                }
+                // BottomRight
+                if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[i + 1, j - 1])) {
+                    if (!isSideDestroyed[3]) {
+                        DestroyImmediate(CurrentHallway.transform.Find("Bottom/Bottom").gameObject);
+                    }
+                    if (!isSideDestroyed[2]) {
+                        DestroyImmediate(CurrentHallway.transform.Find("Right/Top").gameObject);
+                    }
+                }
+                // BottomLeft
+                if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[i - 1, j - 1])) {
+                    if (!isSideDestroyed[3]) {
+                        DestroyImmediate(CurrentHallway.transform.Find("Bottom/Top").gameObject);
+                    }
+                    if (!isSideDestroyed[0]) {
+                        DestroyImmediate(CurrentHallway.transform.Find("Left/Bottom").gameObject);
+                    }
                 }
             }
         }
@@ -660,7 +772,6 @@ public class ProceduralGenerator : MonoBehaviour
             // Add this vertex to the closed list
             i = p.Value[0][0];
             j = p.Value[0][1];
-            // Debug.Log(p.Key);
             closedList[i, j] = true;
             
             openList[dictEnumerator.Current.Key].RemoveAt(0);
