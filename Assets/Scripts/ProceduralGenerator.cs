@@ -496,7 +496,7 @@ public class ProceduralGenerator : MonoBehaviour
                     } else {
                         DestroyImmediate(CurrentHallway.transform.Find("Left").gameObject);
                     }
-                    if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[i, j + 1]) || grid[i - 1, j] == GridPoint.Doorway) {
+                    if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[i, j + 1])) {
                         DestroyImmediate(CurrentHallway.transform.Find("TopLeft/Top").gameObject);
                         DestroyImmediate(CurrentHallway.transform.Find("TopLeft/Left").gameObject);
                     } else if (grid[i - 1, j] == GridPoint.Doorway) {
@@ -504,7 +504,7 @@ public class ProceduralGenerator : MonoBehaviour
                     } else {
                         DestroyImmediate(CurrentHallway.transform.Find("TopLeft").gameObject);
                     }
-                    if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[i, j - 1]) || grid[i - 1, j] == GridPoint.Doorway) {
+                    if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[i, j - 1])) {
                         DestroyImmediate(CurrentHallway.transform.Find("BottomLeft/Bottom").gameObject);
                         DestroyImmediate(CurrentHallway.transform.Find("BottomLeft/Left").gameObject);
                     } else if (grid[i - 1, j] == GridPoint.Doorway) {
@@ -522,7 +522,7 @@ public class ProceduralGenerator : MonoBehaviour
                     } else {
                         DestroyImmediate(CurrentHallway.transform.Find("Right").gameObject);
                     }
-                    if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[i, j + 1]) || grid[i + 1, j] == GridPoint.Doorway) {
+                    if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[i, j + 1])) {
                         DestroyImmediate(CurrentHallway.transform.Find("TopRight/Top").gameObject);
                         DestroyImmediate(CurrentHallway.transform.Find("TopRight/Right").gameObject);
                     } else if (grid[i + 1, j] == GridPoint.Doorway) {
@@ -796,14 +796,14 @@ public class ProceduralGenerator : MonoBehaviour
                         // Set the Parent of the destination cell
                         cellDetails[x, y].parent_i = i;
                         cellDetails[x, y].parent_j = j;
-                        tracePath(cellDetails, points[1]);
+                        tracePath(cellDetails, points);
                         foundDest = true;
                         return;
                     } else if (!closedList[x, y] && isUnBlocked(x, y)) {
                         if (grid[i, j] == GridPoint.Hallway) {
-                            gNew = cellDetails[i, j].g + 0.6f;
+                            gNew = cellDetails[i, j].g + 0.5f;
                         } else {
-                            gNew = cellDetails[i, j].g + 1.0f;
+                            gNew = cellDetails[i, j].g + 2.0f;
                         }
                         hNew = calculateHValue(x, y, points[1]);
                         fNew = gNew + hNew;
@@ -872,32 +872,23 @@ public class ProceduralGenerator : MonoBehaviour
     
     // A Utility Function to trace the path from the source
     // to destination
-    void tracePath(cell[,] cellDetails, int[] dest)
+    void tracePath(cell[,] cellDetails, int[][] points)
     {
-        int row = dest[0];
-        int col = dest[1];
-
-        // Skip over the destination Doorway
-        row = cellDetails[row, col].parent_i;
-        col = cellDetails[row, col].parent_j;
+        int row = points[1][0];
+        int col = points[1][1];
     
         Stack<int[]> Path = new Stack<int[]>();
     
-        while (!(cellDetails[row, col].parent_i == row
-                && cellDetails[row, col].parent_j == col)) {
+        while (!isDestination(row, col, points[0])) {
             // Path.Push(new int[]{row, col});
             int temp_row = cellDetails[row, col].parent_i;
             int temp_col = cellDetails[row, col].parent_j;
-            grid[row, col] = GridPoint.Hallway;
+            if (grid[row, col] != GridPoint.Doorway) {
+                grid[row, col] = GridPoint.Hallway;
+            }
             row = temp_row;
             col = temp_col;
         }
-    
-        // Path.Push(new int[]{row, col});
-        // while (Path.Count > 0) {
-        //     int[] p = Path.Pop();
-        //     grid[p[0], p[1]] = GridPoint.Hallway;
-        // }
     }
 
     void OnDrawGizmos()
