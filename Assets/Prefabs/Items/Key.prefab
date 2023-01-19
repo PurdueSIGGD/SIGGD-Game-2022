@@ -9,12 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5635299989882562586}
-  - component: {fileID: 8696516403444800380}
+  - component: {fileID: 185823294250845374}
   - component: {fileID: 3953836916633628935}
   - component: {fileID: 3946351875814015249}
   - component: {fileID: -7654017711775365417}
-  - component: {fileID: 2296275505072050332}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +35,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8696516403444800380
+--- !u!114 &185823294250845374
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,16 +44,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3287776043236239357}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70213439c298c9044849dbf874a76368, type: 3}
+  m_Script: {fileID: 11500000, guid: 5671952cf5f07d14eb4c0b4590db7bab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Key
   type: 2
+  inventorySprite: {fileID: 21300000, guid: 637e78c370f490046a41f25de20f7bdd, type: 3}
   maxStackSize: 1
   currentNumCharges: 1
   isShiny: 0
   description: 
-  healAmount: 1
 --- !u!33 &3953836916633628935
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -113,24 +112,8 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3287776043236239357}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &2296275505072050332
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3287776043236239357}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
