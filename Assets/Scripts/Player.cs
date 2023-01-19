@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(DebuffsManager))]
@@ -28,6 +29,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         debuffsManager.UpdateDebuffs();
+    }
+
+    public void kill()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void OnMove(InputValue movementValue)
