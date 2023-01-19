@@ -8,6 +8,28 @@ public abstract class StatusEffect
         this.duration = duration;
     }
 
+    public float getDuration()
+    {
+        return duration;
+    }
+
+    public void setDuration(float duration)
+    {
+        this.duration = duration;
+    }
+
+    public float getTime()
+    {
+        return time;
+    }
+
+    public void setTime(float time)
+    {
+        this.time = time;
+    }
+
+
+
     public void UpdateEffect(float dt)
     {
         time += dt;
@@ -17,6 +39,6 @@ public abstract class StatusEffect
     {
         return time >= duration;
     }
-
+    
     public abstract void ApplyEffect();
 }

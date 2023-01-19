@@ -9,12 +9,21 @@ public class StimBoost : Item
 
     public override void Use()
     {
+        //DebuffsManager debuffsManager = GameObject.Find("Player").GetComponent<DebuffsManager>();
         BuffsManager buffsManager = GameObject.Find("Player").GetComponent<BuffsManager>();
+        if (buffsManager != null )
+        {
+            //debuffsManager.Cleanse();
+            //Debug.Log($"Cleanse Called");
+            buffsManager.AddBuff(new Immune(5f));
+            Debug.Log($"Immune Buff was called");
+        }
+        /*BuffsManager buffsManager = GameObject.Find("Player").GetComponent<BuffsManager>();
         if ( buffsManager != null)
         {
             buffsManager.AddBuff(new SpeedBoost(speedBoostDuration, (speedBoostPercentage * 0.01f)));
             Debug.Log($"Stim Boost buff was called");
         }
-        base.Use();
+        base.Use(); */
     }
 }

@@ -20,6 +20,7 @@ public class BuffsManager : MonoBehaviour
     private void ResetBuffs()
     {
         SpeedBoost.Reset();
+        Immune.Reset();
     }
 
     public void UpdateBuffs()

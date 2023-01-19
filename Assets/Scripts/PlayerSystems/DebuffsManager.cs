@@ -13,8 +13,11 @@ public class DebuffsManager : MonoBehaviour
 
     public void AddDebuff(StatusEffect debuff)
     {
-        debuffs.Add(debuff);
-        Debug.Log($"Debuff applied to Player");
+        if (!Immune.isImmune())
+        {
+            debuffs.Add(debuff);
+            Debug.Log($"Debuff applied to Player");
+        }
     }
 
     private void ResetDebuffs() {
@@ -39,6 +42,15 @@ public class DebuffsManager : MonoBehaviour
         foreach (StatusEffect debuff in debuffs)
         {
             debuff.ApplyEffect();
+        }
+
+    }
+
+    public void Cleanse()
+    {
+        foreach (StatusEffect debuff in debuffs)
+        {
+            debuff.setTime(debuff.getDuration());
         }
     }
 
