@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
     // test slow debuff
     void OnFire()
     {
-        _SEManager.AddDebuff(new MovementSE(3f, 0.3f));
+        _SEManager.AddDebuff(new MovementSE(3f, 0.4f));
     }
 }
+

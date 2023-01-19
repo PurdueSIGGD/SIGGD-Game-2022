@@ -1,6 +1,6 @@
 public abstract class StatusEffect
 {
-    public bool IsBuff;
+    public bool IsBuff { get; set; }
 
     private float duration;
     private float time;
