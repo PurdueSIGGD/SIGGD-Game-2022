@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// How to use buffs and debuffs:
+// 1. Get SEManager component from player
+// 2. do SEManager.addBuff/addDebuff(new StatusEffect()) to add status effect
+// 3. in player code, apply status effects manually with SEManager.Apply'Name of Status effect'()
+
 public class SEManager : MonoBehaviour
 {
     private List<StatusEffect> debuffs;
