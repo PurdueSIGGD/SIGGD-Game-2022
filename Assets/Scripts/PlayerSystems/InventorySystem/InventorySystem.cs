@@ -55,10 +55,10 @@ public class InventorySystem : MonoBehaviour {
     void Update()
     {
         if (chooseLock) {
-            new Slow(1, 100); //Don't know if Slow duration is frame or seconds (Kyle)
+            // new Slow(1, 100); //Don't know if Slow duration is frame or seconds (Kyle)
         }
         if (!chooseLock) {
-            new Slow(0, 0); //Put this here just in case (Kyle)
+            // new Slow(0, 0); //Put this here just in case (Kyle)
         }
         // process drop
         if (Keyboard.current.qKey.wasPressedThisFrame) 

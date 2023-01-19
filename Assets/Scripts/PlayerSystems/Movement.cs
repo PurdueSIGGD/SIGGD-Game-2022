@@ -12,7 +12,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private float CamRotYSpeed = 0.2f;
 
     private new Rigidbody rigidbody;
-    private DebuffsManager debuffs;
+    private SEManager SEManager;
     private Transform camHolderTransform;
     private Vector2 input;
     private Vector2 lookInput;
@@ -24,7 +24,7 @@ public class Movement : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
         charController = GetComponent<CharacterController>();
-        debuffs = GetComponent<DebuffsManager>();
+        SEManager = GetComponent<SEManager>();
         camHolderTransform = GetComponentInChildren<Camera>().transform.parent;
     }
 
