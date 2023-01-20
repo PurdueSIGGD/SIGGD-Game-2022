@@ -68,6 +68,8 @@ public class attackManager : MonoBehaviour
 
     private IEnumerator doAttack(enemyAttack attack)
     {
+        Debug.Log(transform.name + " has started an attack windup");
+        
         //windup
         animator.SetTrigger(attack.animTriggerName);
         yield return new WaitForSeconds(attack.attackWindupTime);
@@ -78,9 +80,13 @@ public class attackManager : MonoBehaviour
         //deal with attack type
         if (attack is meleeAttack)
         {
+            Debug.Log(transform.name + " does a melee attack");
+
             //if close enough, kill or apply debuff
-            if (Vector3.SqrMagnitude(toPlayerVector) <= ((meleeAttack)attack).maxRangeToHit)
+            float maxRange = ((meleeAttack)attack).maxRangeToHit;
+            if (Vector3.SqrMagnitude(toPlayerVector) <= maxRange * maxRange)
             {
+                Debug.Log(transform.name + "'s melee attack hit");
                 if (((meleeAttack)attack).killOnHit)
                 {
                     playerTrans.GetComponent<Player>().kill();
@@ -88,9 +94,13 @@ public class attackManager : MonoBehaviour
                 {
                     //apply debuff to the player
                 }
+            } else
+            {
+                Debug.Log(transform.name + "'s melee attack missed");
             }
         } else if (attack is rangedAttack)
         {
+            Debug.Log(transform.name + " does a ranged attack");
             //spawn projectile
             GameObject g = Instantiate(((rangedAttack)attack).projectile, transform.position + Vector3.up * ((rangedAttack)attack).spawnOffset, Quaternion.LookRotation(toPlayerVector - Vector3.up * ((rangedAttack)attack).spawnOffset, Vector3.up));
         }
