@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SpriteLighting
-  m_Shader: {fileID: -6465566751694194690, guid: 54a5722336cb6a94cac45f2e6c7ee14e,
+  m_Name: SpriteEmissive
+  m_Shader: {fileID: -6465566751694194690, guid: 912f87fa3b085504db838a665ff84172,
     type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []

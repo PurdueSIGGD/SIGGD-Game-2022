@@ -19,6 +19,10 @@ public class Player : MonoBehaviour
         // Player Systems
         movement = GetComponent<Movement>();
         debuffsManager = GetComponent<DebuffsManager>();
+
+        //hide/lock cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void FixedUpdate()
