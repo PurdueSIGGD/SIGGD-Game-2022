@@ -10,12 +10,17 @@ public class Movement : MonoBehaviour
     [SerializeField] private float gravity = 9.8f;
     [SerializeField] private float CamRotXSpeed = 0.2f;
     [SerializeField] private float CamRotYSpeed = 0.2f;
+    [SerializeField] private float CrouchSpeed = 0.3f;
+    [SerializeField] private float SprintSpeed = 2.0f;
 
     private DebuffsManager debuffs;
     private Transform camHolderTransform;
     private Vector2 input;
     private Vector2 lookInput;
     private Vector3 velocity;
+    
+    private bool isCrouching = false;
+    private bool isSprinting = false;
 
     private CharacterController charController;
 
@@ -34,6 +39,16 @@ public class Movement : MonoBehaviour
     public void SetLookInput(Vector2 lookInput)
     {
         this.lookInput = lookInput;
+    }
+
+    public void SetCrouch(bool isCrouching)
+    {
+        this.isCrouching = isCrouching;
+    }
+
+    public void SetSprint(bool isSprinting)
+    {
+        this.isSprinting = isSprinting;
     }
 
     private const float GROUND_SNAP = 0.5f;
@@ -64,6 +79,16 @@ public class Movement : MonoBehaviour
         modifiedVelocity = Slow.CalculateVelocity(modifiedVelocity);
         modifiedVelocity = SpeedBoost.CalculateVelocity(modifiedVelocity);
         modifiedVelocity = Ensnared.CalculateVelocity(modifiedVelocity);
+
+        if (isCrouching)
+        {
+            modifiedVelocity = modifiedVelocity * CrouchSpeed;
+        }
+        else if (isSprinting)
+        {
+            modifiedVelocity = modifiedVelocity * SprintSpeed;
+        }
+
         Debug.Log(modifiedVelocity);
         Vector3 move = new Vector3(modifiedVelocity.x, velocity.y, modifiedVelocity.y) * Time.fixedDeltaTime;
         charController.Move(move);

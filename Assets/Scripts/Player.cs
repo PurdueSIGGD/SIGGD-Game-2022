@@ -34,19 +34,28 @@ public class Player : MonoBehaviour
         buffsManager.UpdateBuffs();
     }
 
-    void OnMove(InputValue movementValue)
+    public void OnMove(InputAction.CallbackContext context)
     {
-        movement.SetInput(movementValue.Get<Vector2>());
+        movement.SetInput(context.ReadValue<Vector2>());
     }
 
-    void OnLook(InputValue lookValue)
-    {
-        movement.SetLookInput(lookValue.Get<Vector2>());
-    }
-
-    // test slow debuff
-    void OnFire()
+    public void OnFire()
     {
         /* debuffsManager.AddDebuff(new Slow(3f, 0.5f)); */
+    }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        movement.SetLookInput(context.ReadValue<Vector2>());
+    }
+
+    public void OnCrouch(InputAction.CallbackContext context)
+    {
+        movement.SetCrouch(context.ReadValueAsButton());
+    }
+
+    public void OnSprint(InputAction.CallbackContext context)
+    {
+        movement.SetSprint(context.ReadValueAsButton());
     }
 }
