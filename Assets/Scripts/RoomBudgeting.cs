@@ -21,7 +21,7 @@ public class RoomBudgeting : MonoBehaviour {
     // These lists should all be the same size! The index matters, because each index corresponds to one object. (Use a Map instead?)
     private List<Transform> spawnables = new List<Transform>();
     [SerializeField]
-    private List<int> maximums = new List<int>();
+    private List<int> maximums = new List<int>(); // -1 indicates no maximum
     [SerializeField]
     private List<int> minimums = new List<int>();
 
@@ -34,9 +34,9 @@ public class RoomBudgeting : MonoBehaviour {
         // Placeholder objects are stored in the Prefabs/RoomObjPlaceholders folder for now, with an Attributes script attached to each one
 
         // Make all the serialized lists the same size as the spawnables list if their sizes don't match
-        correctListSizeInt(numSpawned); // Needed here to make sure the list can store the number of each object spawned during the choosing process
-        correctListSizeInt(maximums);
-        correctListSizeInt(minimums);
+        correctListSizeInt(numSpawned, 0); // Needed here to make sure the list can store the number of each object spawned during the choosing process
+        correctListSizeInt(maximums, -1); // Again, -1 indicates no maximum
+        correctListSizeInt(minimums, 0);
         correctMinAndMax(minimums, maximums);
 
         int tempBudget = budget; // Used for spawning the objects because this instance will be deprecated during that, while the original instance persists
@@ -88,7 +88,7 @@ public class RoomBudgeting : MonoBehaviour {
                 toSpawn.Add(spawnables[chosenIndex]);
                 tempBudget -= objWeight;
                 numSpawned[chosenIndex]++;
-                if (numSpawned[chosenIndex] >= maximums[chosenIndex]) {
+                if (numSpawned[chosenIndex] >= maximums[chosenIndex] && maximums[chosenIndex] != -1) {
                     Debug.Log("Maximum spawns (" + maximums[chosenIndex] + ") reached for " + spawnables[chosenIndex].name + ".");
                     removeFromPool(chosenIndex);
                 }
@@ -127,9 +127,9 @@ public class RoomBudgeting : MonoBehaviour {
     /// <returns>
     /// The resized list
     /// </returns>
-    private void correctListSizeInt(List<int> input) {
+    private void correctListSizeInt(List<int> input, int valueToAdd) {
         while (input.Count < spawnables.Count) {
-            input.Add(0);
+            input.Add(valueToAdd);
             Debug.Log("Added an item to a modifier list to equalize its size with that of 'spawnables'.");
         }
         while (input.Count > spawnables.Count) {
