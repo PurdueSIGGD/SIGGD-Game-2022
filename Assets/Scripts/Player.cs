@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(DebuffsManager))]
+[RequireComponent(typeof(BuffsManager))]
 public class Player : MonoBehaviour
 {
     // Player Systems
     private Movement movement;
     private DebuffsManager debuffsManager;
+    private BuffsManager buffsManager;
 
     public Movement Movement => movement;
 
@@ -19,6 +21,7 @@ public class Player : MonoBehaviour
         // Player Systems
         movement = GetComponent<Movement>();
         debuffsManager = GetComponent<DebuffsManager>();
+        buffsManager = GetComponent<BuffsManager>();
 
         //hide/lock cursor
         Cursor.lockState = CursorLockMode.Locked;
@@ -33,6 +36,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         debuffsManager.UpdateDebuffs();
+        buffsManager.UpdateBuffs();
     }
 
     public void kill()
