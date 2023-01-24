@@ -8,12 +8,12 @@ using UnityEngine;
 public class GatesObj : MonoBehaviour
 {
     // Fields
-    private bool locked = false;
-    private bool keyNeeded = false;
+    [SerializeField] private bool locked = false;
+    [SerializeField] private bool keyNeeded = false;
     public Item key;
-    private bool passwordNeeded = false;
-    private string password;
-    private int identity = -1;
+    [SerializeField] private bool passwordNeeded = false;
+    [SerializeField] private string password;
+    [SerializeField] private int identity = -1;
 
     // Constructors
     public GatesObj()
