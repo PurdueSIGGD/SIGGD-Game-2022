@@ -1,14 +1,11 @@
 using UnityEngine;
 
-public class Slow : StatusEffect
+public class Ensnared : StatusEffect
 {
     public static float VelocityScalar { get; private set; }
 
-    private float percentageSlow;
-
-    public Slow(float duration, float percentageSlow) : base(duration)
+    public Ensnared(float duration) : base(duration)
     {
-        this.percentageSlow = percentageSlow;
     }
 
     public static void Reset()
@@ -18,11 +15,7 @@ public class Slow : StatusEffect
 
     public override void ApplyEffect()
     {
-        VelocityScalar -= percentageSlow;
-        if (VelocityScalar < 0.1f)
-        {
-            VelocityScalar = 0.1f;
-        }
+        VelocityScalar = 0f;
     }
 
     public static Vector2 CalculateVelocity(Vector2 velocity)

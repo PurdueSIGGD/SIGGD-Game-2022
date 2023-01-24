@@ -58,10 +58,14 @@ public class Movement : MonoBehaviour
             velocity = Vector3.MoveTowards(velocity, localDir * MaxSpeed + Vector3.up * velocity.y, Acceleration * Time.fixedDeltaTime);
         }
 
+        //   Creates a new move vector with Buffs and Debuffs applied
         //copies the y velocity so that velocity due to gravity is not removed
-        Vector2 debuffedVelocity = debuffs.ApplySlow(new Vector2(velocity.x, velocity.z));
-        //Debug.Log(debuffedVelocity);
-        Vector3 move = new Vector3(debuffedVelocity.x, velocity.y, debuffedVelocity.y) * Time.fixedDeltaTime;
+        Vector2 modifiedVelocity = new Vector2(velocity.x, velocity.z);
+        modifiedVelocity = Slow.CalculateVelocity(modifiedVelocity);
+        modifiedVelocity = SpeedBoost.CalculateVelocity(modifiedVelocity);
+        modifiedVelocity = Ensnared.CalculateVelocity(modifiedVelocity);
+        Debug.Log(modifiedVelocity);
+        Vector3 move = new Vector3(modifiedVelocity.x, velocity.y, modifiedVelocity.y) * Time.fixedDeltaTime;
         charController.Move(move);
 
         { // handle ground snap
