@@ -1,6 +1,8 @@
-public class Slow : Debuff
+using UnityEngine;
+
+public class Slow : StatusEffect
 {
-    public static float DebuffPercent { get; private set; }
+    public static float VelocityScalar { get; private set; }
 
     private float percentageSlow;
 
@@ -11,15 +13,20 @@ public class Slow : Debuff
 
     public static void Reset()
     {
-        DebuffPercent = 1f;
+        VelocityScalar = 1f;
     }
 
-    public override void ApplyDebuff()
+    public override void ApplyEffect()
     {
-        DebuffPercent -= percentageSlow;
-        if (DebuffPercent < 0)
+        VelocityScalar -= percentageSlow;
+        if (VelocityScalar < 0.1f)
         {
-            DebuffPercent = 0;
+            VelocityScalar = 0.1f;
         }
+    }
+
+    public static Vector2 CalculateVelocity(Vector2 velocity)
+    {
+        return VelocityScalar * velocity;
     }
 }
