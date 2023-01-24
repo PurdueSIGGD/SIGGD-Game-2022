@@ -416,18 +416,18 @@ public class ProceduralGenerator : MonoBehaviour
         if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[point[0] - 1, point[1]])) {
             dfsStack.Push(new int[]{point[0] - 1, point[1]});
             count++;
-            if (isVertical == false) isStraight = false;
+            if (!isVertical) isStraight = false;
             isVertical = true;
         }
         if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[point[0], point[1] + 1])) {
             dfsStack.Push(new int[]{point[0], point[1] + 1});
             count++;
-            if (isVertical == true) isStraight = false;
+            if (isVertical) isStraight = false;
         }
         if ((GridPoint.Hallway | GridPoint.Doorway).HasFlag(grid[point[0], point[1] - 1])) {
             dfsStack.Push(new int[]{point[0], point[1] - 1});
             count++;
-            if (isVertical == true) isStraight = false;
+            if (isVertical) isStraight = false;
         }
 
         if (count != 2) isStraight = false;
@@ -484,7 +484,7 @@ public class ProceduralGenerator : MonoBehaviour
         {
             for (int j = 1; j < grid.GetLength(1) - 1; j++)
             {
-                if (grid[i, j] != GridPoint.Hallway) continue;
+                if (grid[i, j] != GridPoint.Hallway) {continue; }
                 GameObject CurrentHallway = Instantiate(HallwayPrefab, new Vector3(i, 0, j) + GridOffset, Quaternion.identity, RoomParent.transform);
                 Vector3 ParentScale = CurrentHallway.transform.localScale;
                 bool[] isSideDestroyed = new bool[4];
@@ -650,7 +650,7 @@ public class ProceduralGenerator : MonoBehaviour
                 bool isValidEdge = true;
                 for (int k = 0; k < rooms.Length; k++)
                 {
-                    if ((k == i) || (k == j)) continue;
+                    if ((k == i) || (k == j)) { continue; }
 
                     if (Vector2.Distance(mid, rooms[k].roomRect.center) < radius)
                     {
@@ -762,7 +762,7 @@ public class ProceduralGenerator : MonoBehaviour
         while (openList.Count > 0) {
             SortedDictionary<double, List<int[]>>.Enumerator dictEnumerator= openList.GetEnumerator();
 
-            if (dictEnumerator.MoveNext() == false) {
+            if (!dictEnumerator.MoveNext()) {
                 Debug.Log("Failed to Enumerate");
                 return;
             }
@@ -831,7 +831,6 @@ public class ProceduralGenerator : MonoBehaviour
             }
         }
         if (!foundDest) Debug.Log("A* Failed to Find Destination");
-        return;
     }
 
     // A Utility Function to check whether given cell (row, col)
@@ -848,11 +847,7 @@ public class ProceduralGenerator : MonoBehaviour
     // blocked or not
     bool isUnBlocked(int row, int col)
     {
-        // Returns true if the cell is not blocked else false
-        if (grid[row, col] == GridPoint.Room)
-            return (false);
-        else
-            return (true);
+        return grid[row, col] != GridPoint.Room;
     }
     
     // A Utility Function to check whether destination cell has
@@ -922,58 +917,6 @@ public class ProceduralGenerator : MonoBehaviour
         }
     }
 
-    private void fixOpenDoors() {
-        for (int i = 0; i < FinalRoomPlan.Length; i++) {
-            Vector3[] roomHallways = FinalRoomPlan[i].getHallways();
-            for (int j = 0; j < roomHallways.Length; j++) {
-                int x = Mathf.RoundToInt(roomHallways[j].x);
-                int y = Mathf.RoundToInt(roomHallways[j].z);
-                int[] xIndices = new int[] {x - 1, x + 1, x, x};
-                int[] yIndices = new int[] {y, y, y - 1, y + 1};
-                Vector3 hallwayPoint = Vector3.positiveInfinity;
-                // Check to see if there's a surrounding hallway
-                for (int k = 0; k < xIndices.Length; k++) {
-                    if (isValid(xIndices[k], yIndices[k])) {
-                        if (grid[xIndices[k], yIndices[k]] == GridPoint.Hallway) {
-                            Vector2[] bounds = GetRoomBounds();
-                            float xMin = bounds[0][0];
-                            float yMin = bounds[1][0];
-                            hallwayPoint = new Vector3(roomHallways[j].x + xIndices[k], 0, roomHallways[j].z + yIndices[k]);
-                        }
-                    }
-                }
-                // If not, we need to fill the hole
-                if (hallwayPoint != Vector3.positiveInfinity) {
-                    // Find the direction in which we need to draw the plane
-                    Vector3 diff = hallwayPoint - roomHallways[j];
-                    // Plane is in y dir
-                    if (diff.x == 0) {
-                        // Place faces
-                        if (diff.y > 0) {
-
-                        // Plane faces
-                        } else {
-
-                        }
-
-                    // Plane is in x dir    
-                    } else if (diff.y == 0) {
-                        // Place faces
-                        if (diff.x > 0) {
-
-                        // Plane faces
-                        } else {
-
-                        }
-                    }
-                    Instantiate(plane);
-                    Debug.Log("gram");
-                    plane.transform.position = roomHallways[j];
-                }
-            }
-        }
-    }
-
     Color getGridColor(GridPoint point) {
         switch(point) {
             case GridPoint.Empty:
@@ -988,9 +931,6 @@ public class ProceduralGenerator : MonoBehaviour
         return Color.black;
     }
 }
-
-
-
 
 #if UNITY_EDITOR
 [CustomEditor (typeof(ProceduralGenerator))]
