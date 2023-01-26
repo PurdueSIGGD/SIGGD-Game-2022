@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(DebuffsManager))]
@@ -21,6 +22,10 @@ public class Player : MonoBehaviour
         movement = GetComponent<Movement>();
         debuffsManager = GetComponent<DebuffsManager>();
         buffsManager = GetComponent<BuffsManager>();
+
+        //hide/lock cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void FixedUpdate()
@@ -32,6 +37,11 @@ public class Player : MonoBehaviour
     {
         debuffsManager.UpdateDebuffs();
         buffsManager.UpdateBuffs();
+    }
+
+    public void kill()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void OnMove(InputValue movementValue)
