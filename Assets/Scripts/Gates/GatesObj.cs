@@ -53,12 +53,12 @@ public class GatesObj : MonoBehaviour
     // returns 3 if the player does not try to open the gate with a key
     // returns 4 if the key incorrect key was inserted
     // returns 5 if the key correct key was inserted
-    public int openObj(Item key)
+    public int openObj(Item key, string userPass)
     {
         if (!locked) return 0;
         if (!keyNeeded)
         {
-            int i = openObj();
+            int i = openObj(userPass);
             if (i == 1) return 1;
             if (i == 2) return 2;
         }
@@ -72,11 +72,8 @@ public class GatesObj : MonoBehaviour
     // returns 1 if the password entered is incorrect
     // returns 2 if the password is correct
 
-    public int openObj()
+    public int openObj(string userPass)
     {
-        // somehow gets password
-        string userPass = null;
-        // userPass = getPass...
         if (!locked) return 0;
         if (!password.Equals(userPass)) return 1;
         return 2;
