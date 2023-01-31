@@ -54,6 +54,4 @@ public class Player : MonoBehaviour
     {
         other.GetComponent<GatesObj>()?.openObj(null, "string");
     }
-
-    
 }

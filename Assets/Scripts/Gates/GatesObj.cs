@@ -7,43 +7,15 @@ using UnityEngine;
 
 public class GatesObj : MonoBehaviour
 {
-    //private void Start()
-    //{
-    //openObj(null, "string");
-    //}
 
     // Fields
     [SerializeField] private bool locked = false;
     [SerializeField] private bool keyNeeded = false;
     public Item key;
     [SerializeField] private bool passwordNeeded = false;
-    [SerializeField] private string password = "none";
+    [SerializeField] private string password;
     [SerializeField] private int identity = -1;
 
-    // Constructors
-    /*
-    public GatesObj()
-    {
-        locked = false;
-        keyNeeded = false;
-        passwordNeeded = false;
-        identity = -1;
-    }
-    public GatesObj(bool locked, bool keyNeeded, Item key, int identity)
-    {
-        this.locked = locked;
-        this.keyNeeded = keyNeeded;
-        this.key = key;
-        this.identity = identity;
-    }
-    public GatesObj(bool locked, bool passwordNeeded, string password, int identity)
-    {
-        this.locked = locked;
-        this.passwordNeeded = passwordNeeded;
-        this.password.Equals(password);
-        this.identity = identity;
-    }
-    */
     // Methods
     public bool isLocked() { return locked; }
     public void setLocked(bool var) { locked = var; }
