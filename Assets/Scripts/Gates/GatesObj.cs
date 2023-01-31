@@ -7,15 +7,21 @@ using UnityEngine;
 
 public class GatesObj : MonoBehaviour
 {
+    //private void Start()
+    //{
+    //openObj(null, "string");
+    //}
+
     // Fields
     [SerializeField] private bool locked = false;
     [SerializeField] private bool keyNeeded = false;
     public Item key;
     [SerializeField] private bool passwordNeeded = false;
-    [SerializeField] private string password;
+    [SerializeField] private string password = "none";
     [SerializeField] private int identity = -1;
 
     // Constructors
+    /*
     public GatesObj()
     {
         locked = false;
@@ -37,7 +43,7 @@ public class GatesObj : MonoBehaviour
         this.password.Equals(password);
         this.identity = identity;
     }
-
+    */
     // Methods
     public bool isLocked() { return locked; }
     public void setLocked(bool var) { locked = var; }
@@ -53,12 +59,12 @@ public class GatesObj : MonoBehaviour
     // returns 3 if the player does not try to open the gate with a key
     // returns 4 if the key incorrect key was inserted
     // returns 5 if the key correct key was inserted
-    public int openObj(Item key, string userPass)
+    public int readObj(Item key, string userPass)
     {
         if (!locked) return 0;
         if (!keyNeeded)
         {
-            int i = openObj(userPass);
+            int i = readObj(userPass);
             if (i == 1) return 1;
             if (i == 2) return 2;
         }
@@ -72,10 +78,21 @@ public class GatesObj : MonoBehaviour
     // returns 1 if the password entered is incorrect
     // returns 2 if the password is correct
 
-    public int openObj(string userPass)
+    public int readObj(string userPass)
     {
         if (!locked) return 0;
         if (!password.Equals(userPass)) return 1;
         return 2;
     }
+
+    public void openObj(Item key, string userPass)
+    {
+        int num = readObj(key, userPass);
+        if (num == 0 || num == 2)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+
 }
