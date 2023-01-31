@@ -115,6 +115,8 @@ public class RoomBudgeting : MonoBehaviour {
         */
 
         spawnObjects(toSpawn, spawns);
+
+        
     }
 
     /// <summary>

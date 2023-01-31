@@ -30,18 +30,6 @@ public class RoomGenerator : MonoBehaviour
         generationPoints = getGenerationPoints();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void generateObstacles(int budget) {
         // TODO: Incorporate budget when making pillars
         for (int i = 0; i < GENERATION_POINT_NUM; i++) {
@@ -55,11 +43,21 @@ public class RoomGenerator : MonoBehaviour
     }
 
     private Transform[] getGenerationPoints() {
-        Transform pt1 = gameObject.transform.Find("Random Spawn 1");
-        Transform pt2 = gameObject.transform.Find("Random Spawn 2");
-        Transform pt3 = gameObject.transform.Find("Random Spawn 3");
-        Transform pt4 = gameObject.transform.Find("Random Spawn 4");
-        return new Transform[GENERATION_POINT_NUM] {pt1, pt2, pt3, pt4};
+        // Get point count
+        int roomPointCount = 0;
+        string objectName = "Random Spawn " + (roomPointCount + 1);
+        while (gameObject.transform.Find(objectName) != null) {
+            roomPointCount++;
+            objectName = "Random Spawn " + (roomPointCount + 1);
+            Debug.Log("In da woop");
+        }
+
+        // Now get the points
+        Transform[] points = new Transform[roomPointCount];
+        for (int i = 1; i <= roomPointCount; i++) {
+            Transform pt = gameObject.transform.Find("Random Spawn " + i);
+        }
+        return points;
     }
 
     public void EditorAwake() {
