@@ -237,7 +237,7 @@ PrefabInstance:
     - target: {fileID: 2339231554921583057, guid: 6dcd489471c074e12ac23453e6194f84,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.450924
+      value: -5.49
       objectReference: {fileID: 0}
     - target: {fileID: 2339231554921583057, guid: 6dcd489471c074e12ac23453e6194f84,
         type: 3}
@@ -394,6 +394,7 @@ GameObject:
   - component: {fileID: 697681569}
   - component: {fileID: 697681568}
   - component: {fileID: 697681567}
+  - component: {fileID: 697681572}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -426,11 +427,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48d87da77aabd244ab6ccc3c9a798c2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  locked: 0
+  locked: 1
   keyNeeded: 0
   key: {fileID: 1766936926}
-  passwordNeeded: 0
-  password: 
+  passwordNeeded: 1
+  password: string
   identity: -1
 --- !u!23 &697681569
 MeshRenderer:
@@ -497,6 +498,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &697681572
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697681566}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &764249504
 GameObject:
   m_ObjectHideFlags: 0
