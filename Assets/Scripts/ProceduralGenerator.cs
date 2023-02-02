@@ -189,9 +189,7 @@ public class ProceduralGenerator : MonoBehaviour
         foreach (Rect rect in rooms)
         {
             GameObject testFloor = Instantiate(floor, new Vector3(rect.center.x, 0, rect.center.y), Quaternion.identity, RoomParent.transform);
-            #if UNITY_EDITOR
-                testFloor.GetComponent<RoomGenerator>().EditorAwake();
-            #endif
+
             // Divide by 10 because the scale of planes is 10. Can be abstracted as a variable if floor is changed
             float standardRoomSize = 8.0f;
             testFloor.transform.localScale = (new Vector3(rect.width, standardRoomSize, rect.height)) / standardRoomSize;
@@ -316,7 +314,7 @@ public class ProceduralGenerator : MonoBehaviour
             }
         }
 
-        GenerateHallwayGrid();
+        // GenerateHallwayGrid();
     }
 
     void GenerateHallwayGrid() {
