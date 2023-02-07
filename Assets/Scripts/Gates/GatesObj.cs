@@ -7,14 +7,13 @@ using UnityEngine;
 
 public class GatesObj : MonoBehaviour
 {
-
     // Fields
-    [SerializeField] private bool locked = false;
-    [SerializeField] private bool keyNeeded = false;
+    public bool locked = false;
+    public bool keyNeeded = false;
     public Item key;
-    [SerializeField] private bool passwordNeeded = false;
-    [SerializeField] private string password;
-    [SerializeField] private int identity = -1;
+    public bool passwordNeeded = false;
+    public string password;
+    public int identity = -1;
 
     // Methods
     public bool isLocked() { return locked; }
