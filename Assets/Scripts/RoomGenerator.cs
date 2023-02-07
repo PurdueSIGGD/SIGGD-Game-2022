@@ -12,7 +12,7 @@ public class RoomGenerator : MonoBehaviour
     private float roomWidth;
     private float roomLength;
 
-    private Transform[] generationPoints;
+    private GameObject[] generationPoints;
 
     // The unique objects to spawn in the rooms
     // Just a GameObject right now but could be an array later
@@ -33,36 +33,17 @@ public class RoomGenerator : MonoBehaviour
         }
         // TODO: Incorporate budget when making pillars
         for (int i = 0; i < generationPoints.Length; i++) {
-            if (Random.Range(0, 2) == 0) { continue; }
-            if (generationPoints[i] == null) { Debug.Log("genP is null for " + i); }
-            Transform point = generationPoints[i];
-
-            // TODO: Uncomment below line and continue next meeting
-            if (pillarObject == null) { Debug.Log("pillar is null"); }
-            if (point == null) { Debug.Log("point is null"); }
-            if (point.transform == null) { Debug.Log("point.transform is null"); }
-            if (point.transform.position == null) { Debug.Log("point.transform.position is null"); }
+            GameObject point = generationPoints[i];
             GameObject pillar = Instantiate(pillarObject, point.transform.position, Quaternion.identity);
-            pillar.transform.SetParent(point);
+            pillar.transform.SetParent(point.transform);
         }
     }
 
     private void readGenerationPoints() {
-        // Get point count
-        int roomPointCount = 0;
-        string objectName = "Random Spawn " + (roomPointCount + 1);
-        while (transform.Find(objectName) != null) {
-            roomPointCount++;
-            objectName = "Random Spawn " + (roomPointCount + 1);
-            Debug.Log("Random gen for " + (roomPointCount + 1));
+        GenerationPoint[] genPoints = FindObjectsOfType<GenerationPoint>();
+        generationPoints = new GameObject[genPoints.Length];
+        for(int i = 0; i < generationPoints.Length; i++) {
+            generationPoints[i] = genPoints[i].gameObject;
         }
-
-        // Now get the points
-        Transform[] points = new Transform[roomPointCount];
-        for (int i = 1; i <= roomPointCount; i++) {
-            Transform pt = gameObject.transform.Find("Random Spawn " + i);
-        }
-        Debug.Log("Total of " + roomPointCount + " points");
-        generationPoints = points;
     }
 }
