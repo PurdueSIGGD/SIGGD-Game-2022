@@ -39,6 +39,11 @@ public abstract class StatusEffect
     {
         return time >= duration;
     }
+
+    public void End()
+    {
+        time = duration;
+    }
     
     public abstract void ApplyEffect();
 }

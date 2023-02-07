@@ -54,8 +54,8 @@ MonoBehaviour:
   currentNumCharges: 1
   isShiny: 0
   description: 
-  speedBoostDuration: 10
-  speedBoostPercentage: 50
+  speedBoostDuration: 8
+  speedBoostPercentage: 30
 --- !u!33 &6763135281201947592
 MeshFilter:
   m_ObjectHideFlags: 0

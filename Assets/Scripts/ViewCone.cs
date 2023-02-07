@@ -19,6 +19,12 @@ public class ViewCone : MonoBehaviour
     // Returns true if the player is visible
     public bool isPlayerVisible()
     {
+
+        if (Invisible.isInvisible())
+        {
+            return false;
+        }
+
         Transform playerTrans = (Transform)Variables.ActiveScene.Get("player");
         //to show what the enemy is doing
         Debug.DrawRay(eyePos.position, eyePos.forward * sightDistance, Color.white);

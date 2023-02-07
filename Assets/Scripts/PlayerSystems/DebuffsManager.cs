@@ -50,7 +50,8 @@ public class DebuffsManager : MonoBehaviour
     {
         foreach (StatusEffect debuff in debuffs)
         {
-            debuff.setTime(debuff.getDuration());
+            //debuff.setTime(debuff.getDuration());
+            debuff.End();
         }
     }
 

@@ -41,7 +41,10 @@ public class Player : MonoBehaviour
 
     public void kill()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        if (!Invincible.isInvincible())
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     void OnMove(InputValue movementValue)

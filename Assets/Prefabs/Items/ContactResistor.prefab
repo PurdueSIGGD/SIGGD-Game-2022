@@ -55,8 +55,9 @@ MonoBehaviour:
   isShiny: 0
   description: 
   immuneDuration: 1
+  invincibleDuration: 1
   speedBoostDuration: 1
-  speedBoostPercentage: 100
+  speedBoostPercentage: 75
 --- !u!33 &6763135281201947592
 MeshFilter:
   m_ObjectHideFlags: 0
