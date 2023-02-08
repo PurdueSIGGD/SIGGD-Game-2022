@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class DoorTrigger : MonoBehaviour
 {
+
+    public GameObject door;
+    public string input;
+
     // Start is called before the first frame update
     void Start()
     {
