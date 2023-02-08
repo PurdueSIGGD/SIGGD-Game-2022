@@ -20,4 +20,9 @@ public class DoorTrigger : MonoBehaviour
     {
         
     }
+
+    public void OnTriggerExit(Collider other)
+    {
+        
+    }
 }
