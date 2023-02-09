@@ -196,8 +196,8 @@ public class ProceduralGenerator : MonoBehaviour
             testFloor.transform.Translate(new Vector3(-0.5f, 0, -0.5f));
 
             // Tell the roomGenerators to generate each room
-            RoomGenerator roomGenerator = testFloor.GetComponent<RoomGenerator>();
-            roomGenerator.generateObstacles(FloorBudget / rooms.Count);
+            // RoomBudgeting roomBudgeting = testFloor.GetComponent<RoomBudgeting>();
+            // roomBudgeting.generateObstacles(FloorBudget / rooms.Count);
 
             if (roomColor != null)
             {

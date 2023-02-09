@@ -15,7 +15,7 @@ actually finding the spawnpoints in the room and actually placing the objects th
 /// </summary>
 public class RoomBudgeting : MonoBehaviour {
 
-    private List<GameObject> spawns;
+    private GameObject[] spawnPoints;
     [SerializeField]
     
     // These lists should all be the same size! The index matters, because each index corresponds to one object. (Use a Map instead?)
@@ -40,13 +40,8 @@ public class RoomBudgeting : MonoBehaviour {
         correctMinAndMax(minimums, maximums);
 
         int tempBudget = budget; // Used for spawning the objects because this instance will be deprecated during that, while the original instance persists
-        spawns = new List<GameObject>();
-        Transform[] roomObjTransforms = transform.GetComponentsInChildren<Transform>(false);
-        foreach (Transform t in roomObjTransforms) {
-            if (t.gameObject.tag.Equals("RoomSpawn")) {
-                spawns.Add(t.gameObject);
-            }
-        }
+
+        readSpawnPoints();
 
         // The objects' transforms to be allowed to spawn in the room should be added to the script's list through the serialized field in the editor.
         List<Transform> toSpawn = new List<Transform>();
@@ -66,9 +61,9 @@ public class RoomBudgeting : MonoBehaviour {
                 i--;
             }
         }
-        while (spawnables.Count > 0 && toSpawn.Count < spawns.Count) {
+        while (spawnables.Count > 0 && toSpawn.Count < spawnPoints.Length) {
             for (int i = 0; i < spawnables.Count; i++) {
-                while (minimums[i] > numSpawned[i] && toSpawn.Count < spawns.Count) {
+                while (minimums[i] > numSpawned[i] && toSpawn.Count < spawnPoints.Length) {
                     if (spawnables[i].gameObject.GetComponent<Attributes>().weight <= tempBudget) {
                         toSpawn.Add(spawnables[i]);
                         tempBudget -= spawnables[i].gameObject.GetComponent<Attributes>().weight;
@@ -114,9 +109,7 @@ public class RoomBudgeting : MonoBehaviour {
             Stamina Refill - 10
         */
 
-        spawnObjects(toSpawn, spawns);
-
-        
+        spawnObjects(toSpawn);     
     }
 
     /// <summary>
@@ -171,35 +164,70 @@ public class RoomBudgeting : MonoBehaviour {
     /// on the floor, depending on their collider. (Spawnpoints must be level with the floor)
     /// </summary>
     /// <param name="toSpawn"></param>
-    /// <param name="spawns"></param>
-    private void spawnObjects(List<Transform> toSpawn, List<GameObject> spawns) {
+    private void spawnObjects(List<Transform> toSpawn) {
         for (int i = 0; i < toSpawn.Count; i++) {
             GameObject spawnedObj = GameObject.Instantiate(toSpawn[i].gameObject);
-            if (spawnedObj.transform.GetComponent<Collider>() is SphereCollider) {
-                spawnedObj.transform.position = new Vector3(
-                    spawns[i].transform.position.x,
-                    spawns[i].transform.position.y + (toSpawn[i].transform.localScale.y *
-                        (toSpawn[i].transform.GetComponent<SphereCollider>().radius)),
-                    spawns[i].transform.position.z);
-                print("Object spawned");
-            } else if (spawnedObj.transform.GetComponent<Collider>() is BoxCollider) {
-                spawnedObj.transform.position = new Vector3(
-                    spawns[i].transform.position.x,
-                    spawns[i].transform.position.y + (toSpawn[i].transform.localScale.y *
-                        (toSpawn[i].transform.GetComponent<BoxCollider>().size.y / 2)),
-                    spawns[i].transform.position.z);
-                print("Object spawned");
-            } else if (spawnedObj.transform.GetComponent<Collider>() is CapsuleCollider) {
-                spawnedObj.transform.position = new Vector3(
-                    spawns[i].transform.position.x,
-                    spawns[i].transform.position.y + (toSpawn[i].transform.localScale.y *
-                        (toSpawn[i].transform.GetComponent<CapsuleCollider>().height / 2)),
-                    spawns[i].transform.position.z);
+            Transform objTransform = toSpawn[i].transform;
+            Transform spTransform = spawnPoints[i].transform;
+            Vector3 spPosition = spTransform.position;
+            bool spawning = true;
+            float heightAdjustment = 0.0f;
+
+            if (objTransform.GetComponent<Collider>() is SphereCollider) {
+                heightAdjustment = objTransform.localScale.y * objTransform.GetComponent<SphereCollider>().radius;
+            } else if (objTransform.GetComponent<Collider>() is BoxCollider) {
+                heightAdjustment = objTransform.localScale.y * (objTransform.GetComponent<BoxCollider>().size.y / 2);
+            } else if (objTransform.GetComponent<Collider>() is CapsuleCollider) {
+                heightAdjustment = objTransform.localScale.y * (objTransform.GetComponent<CapsuleCollider>().height / 2);
+            } else {
+                spawning = false;
+            }
+
+            if (spawning) {
+                spTransform.position = new Vector3(spPosition.x, spPosition.y + heightAdjustment, spTransform.position.z);
                 print("Object spawned");
             } else {
                 print("Error spawning object because its collider can't be handled.");
             }
         }
     }
+
+    private void readSpawnPoints() {
+        GenerationPoint[] genPoints = FindObjectsOfType<GenerationPoint>();
+        spawnPoints = new GameObject[genPoints.Length];
+        for (int i = 0; i < spawnPoints.Length; i++) {
+            spawnPoints[i] = genPoints[i].gameObject;
+        }
+    }
     
 }
+
+/*
+public class RoomGenerator : MonoBehaviour
+{
+
+    // The unique objects to spawn in the rooms
+    // Just a GameObject right now but could be an array later
+    [SerializeField]
+    private GameObject pillarObject;
+
+    [SerializeField]
+    private int pillarCost;
+
+    void Awake() {
+        readGenerationPoints();
+    }
+
+    public void generateObstacles(int budget) {
+        if (generationPoints == null) {
+            readGenerationPoints();
+        }
+        // TODO: Incorporate budget when making pillars
+        for (int i = 0; i < generationPoints.Length; i++) {
+            GameObject point = generationPoints[i];
+            GameObject pillar = Instantiate(pillarObject, point.transform.position, Quaternion.identity);
+            pillar.transform.SetParent(point.transform);
+        }
+    }
+}
+*/
