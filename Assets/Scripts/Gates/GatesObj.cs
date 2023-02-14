@@ -56,6 +56,7 @@ public class GatesObj : MonoBehaviour
         return 2;
     }
 
+    // Opens the gate if conditions are met
     public void openObj(Item key, string userPass)
     {
         int num = readObj(key, userPass);
