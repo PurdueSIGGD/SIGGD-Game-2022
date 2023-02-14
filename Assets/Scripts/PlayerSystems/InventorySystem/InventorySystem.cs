@@ -71,7 +71,9 @@ public class InventorySystem : MonoBehaviour {
         }
 
         // process use
-        if (Keyboard.current.eKey.wasPressedThisFrame)
+        if (Keyboard.current.eKey.wasPressedThisFrame && !Stunned.isStunned) // IF issues remove the stunned check because 
+                                                                                // I wasn't able to check if it worked but it wasn't
+                                                                                // erroring out
         {
             Use();
         }
