@@ -6,7 +6,7 @@ public class DoorTrigger : MonoBehaviour
 {
     public GameObject doorFrame;
     public GameObject door;
-    private float moveSpeed = 2f;
+    private float moveSpeed = 8f;
     private bool isPasswordCorrect = false;
     private bool isDoorOpen = false;
 
@@ -37,11 +37,7 @@ public class DoorTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Activate password panel
-        //GatesObj GatesObj = door.GetComponent<GatesObj>();
-        //GatesObj.openObj(null, "string");
-
-        // for now open door
-        isPasswordCorrect = true;
+        FindObjectOfType<PasswordLogic>().hasEntered(this);
     }
 
     // Activates when player leaves trigger
@@ -49,6 +45,7 @@ public class DoorTrigger : MonoBehaviour
     {
         // Close door frame and deactivate password panel
         isPasswordCorrect = false;
+        FindObjectOfType<PasswordLogic>().hasExited();
     }
 
     // Physically opens door frame

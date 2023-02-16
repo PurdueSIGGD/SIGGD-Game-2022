@@ -14,6 +14,7 @@ public class GatesObj : MonoBehaviour
     public bool passwordNeeded = false;
     public string password;
     public int identity = -1;
+    public GameObject canvas;
 
     // Methods
     public bool isLocked() { return locked; }
@@ -66,5 +67,9 @@ public class GatesObj : MonoBehaviour
         }
     }
 
+    // 
+    public void getTyped()
+    {
 
+    }
 }

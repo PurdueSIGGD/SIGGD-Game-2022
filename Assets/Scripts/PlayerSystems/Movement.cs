@@ -64,7 +64,6 @@ public class Movement : MonoBehaviour
         modifiedVelocity = Slow.CalculateVelocity(modifiedVelocity);
         modifiedVelocity = SpeedBoost.CalculateVelocity(modifiedVelocity);
         modifiedVelocity = Ensnared.CalculateVelocity(modifiedVelocity);
-        Debug.Log(modifiedVelocity);
         Vector3 move = new Vector3(modifiedVelocity.x, velocity.y, modifiedVelocity.y) * Time.fixedDeltaTime;
         charController.Move(move);
 

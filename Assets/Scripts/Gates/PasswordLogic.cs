@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class PasswordLogic : MonoBehaviour
 {
-
     public InputField InputField;
-    public GameObject Door;
+    public DoorTrigger doorTrigger;
+    public GameObject canvas;
 
     // Start is called before the first frame update
     void Start()
@@ -15,11 +15,33 @@ public class PasswordLogic : MonoBehaviour
         InputField.ActivateInputField();
     }
 
-    // Records the password the player inputs
-    public string readInput(string input)
+    private void Update()
     {
-        return input;
+        if (doorTrigger != null)
+        {
+            canvas.SetActive(true);
+        }
+        else
+        {
+            canvas.SetActive(false);
+        }
     }
 
-    
+    // Records the password the player inputs
+    public void readInput(string input)
+    {
+        return;
+    }
+
+    // Sets door trigger as an object when player enters the door trigger
+    public void hasEntered(DoorTrigger doorTrigger)
+    {
+        this.doorTrigger = doorTrigger;
+    }
+
+    // Sets door trigger null when player enters the door trigger
+    public void hasExited()
+    {
+        doorTrigger = null;
+    }
 }
