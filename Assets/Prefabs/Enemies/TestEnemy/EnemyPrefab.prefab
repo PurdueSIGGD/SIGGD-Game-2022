@@ -477,6 +477,7 @@ GameObject:
   - component: {fileID: 4328962375213026358}
   - component: {fileID: 4027488895798388622}
   - component: {fileID: 8734483623397324210}
+  - component: {fileID: 1353171887844272802}
   m_Layer: 10
   m_Name: EnemyPrefab
   m_TagString: Untagged
@@ -681,7 +682,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolPointDist: 13.6
-  patrolPoints: []
+--- !u!114 &1353171887844272802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6086155451986912660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b62fce64c3c09c4ea11879a52e114ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7704486800958165290
 GameObject:
   m_ObjectHideFlags: 0

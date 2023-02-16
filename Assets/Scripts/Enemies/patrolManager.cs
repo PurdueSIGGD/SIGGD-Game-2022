@@ -6,7 +6,6 @@ public class patrolManager : MonoBehaviour
 {
     [SerializeField]
     private float patrolPointDist;
-    [SerializeField]
     private Transform[] patrolPoints;
     private int pointNum;
 
