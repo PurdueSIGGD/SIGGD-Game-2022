@@ -476,6 +476,7 @@ GameObject:
   - component: {fileID: 2819699297777671474}
   - component: {fileID: 4328962375213026358}
   - component: {fileID: 4027488895798388622}
+  - component: {fileID: 8734483623397324210}
   m_Layer: 10
   m_Name: EnemyPrefab
   m_TagString: Untagged
@@ -530,7 +531,8 @@ MonoBehaviour:
       UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"attackManager","value":{"$content":6,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"attackManager,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"audioManager","value":{"$content":7,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"AudioManager,
       Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"isAggro","value":{"$content":false,"$type":"System.Boolean"},"typeHandle":{"Identification":"System.Boolean,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"patrolManager","value":{"$content":8,"$type":"UnityEngine.Object"},"typeHandle":{"Identification":"patrolManager,
+      Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
     _objectReferences:
     - {fileID: 6086155451986912623}
     - {fileID: 173117687384148312}
@@ -540,6 +542,7 @@ MonoBehaviour:
     - {fileID: 1848058762229457566}
     - {fileID: 4328962375213026358}
     - {fileID: 4027488895798388622}
+    - {fileID: 8734483623397324210}
 --- !u!114 &6086155451986912659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -665,6 +668,20 @@ MonoBehaviour:
   - {fileID: 910863468206653602, guid: 37977ca493f9b47408000062f9fc374c, type: 3}
   - {fileID: 910863468206653602, guid: 0a84e4e944c4540438ae41c8e14412aa, type: 3}
   distPerStep: 1.7
+--- !u!114 &8734483623397324210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6086155451986912660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46d9c6cebb4a4e746b6ae4f76d1a7eff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patrolPointDist: 13.6
+  patrolPoints: []
 --- !u!1 &7704486800958165290
 GameObject:
   m_ObjectHideFlags: 0
