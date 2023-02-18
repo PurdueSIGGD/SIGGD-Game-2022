@@ -33,7 +33,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: labyrinth
+  m_Name: small_nathan
   m_Shader: {fileID: -6465566751694194690, guid: 64382155945dcbd4f88079165c76547b,
     type: 3}
   m_ValidKeywords: []
@@ -212,11 +212,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D:
-        m_Texture: {fileID: 2800000, guid: 31feb58d917b3884cb58b82f1ae96fcb, type: 3}
+        m_Texture: {fileID: 2800000, guid: dba4f0b8a95708c4abfa98946ead0b40, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D_1:
-        m_Texture: {fileID: 2800000, guid: 5c3f4895ca40f5249879bb0392074001, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7012b61098622264e8993584197c74ee, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D_10:
@@ -224,23 +224,23 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D_11:
-        m_Texture: {fileID: 2800000, guid: db4fc2173f6a69a44b9269ec32bdf21e, type: 3}
+        m_Texture: {fileID: 2800000, guid: d8625745d5716ad43a6bd1547f34b72f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D_12:
-        m_Texture: {fileID: 2800000, guid: f40cc643871ab6444a6276f8ebd42ca2, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6dd1ded631116854aa9077f635c267d9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D_13:
-        m_Texture: {fileID: 2800000, guid: 9eb1a624f330f6f4582e029bf78398d7, type: 3}
+        m_Texture: {fileID: 2800000, guid: 61da23968a31af147a43c1e718197f37, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D_14:
-        m_Texture: {fileID: 2800000, guid: 913b7a93deaf65b4c88b9e929c77ea73, type: 3}
+        m_Texture: {fileID: 2800000, guid: d48da83347c54254f812bd7e13ebfd45, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D_2:
-        m_Texture: {fileID: 2800000, guid: d48da83347c54254f812bd7e13ebfd45, type: 3}
+        m_Texture: {fileID: 2800000, guid: da66a9cc954de40469103d9329ffcfb6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D_3:
@@ -248,23 +248,23 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D_4:
-        m_Texture: {fileID: 2800000, guid: 4e4572c9f2bc8654ead20aed611dc536, type: 3}
+        m_Texture: {fileID: 2800000, guid: 637e78c370f490046a41f25de20f7bdd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D_5:
-        m_Texture: {fileID: 2800000, guid: 61da23968a31af147a43c1e718197f37, type: 3}
+        m_Texture: {fileID: 2800000, guid: 95c2c6f6df9aa0948945d0c04895f01e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D_6:
-        m_Texture: {fileID: 2800000, guid: a3a6e752a40c87a40b0735fdbc2df09a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8cd9ff3b587c17f45a2979ec585cedbc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D_7:
-        m_Texture: {fileID: 2800000, guid: e53e822f9ea3aa34da060595c2c8994b, type: 3}
+        m_Texture: {fileID: 2800000, guid: f40cc643871ab6444a6276f8ebd42ca2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D_8:
-        m_Texture: {fileID: 2800000, guid: be1ded26b7df4cd4e9be7c532baa001d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5c3f4895ca40f5249879bb0392074001, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D_9:
