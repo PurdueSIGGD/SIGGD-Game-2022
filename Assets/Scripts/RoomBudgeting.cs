@@ -21,16 +21,23 @@ public class RoomBudgeting : MonoBehaviour {
     // These lists should all be the same size! The index matters, because each index corresponds to one object. (Use a Map instead?)
     private List<Transform> spawnables = new List<Transform>();
     [SerializeField]
-    private List<int> maximums = new List<int>(); // -1 indicates no maximum
+    private List<int> maximums; // -1 indicates no maximum
     [SerializeField]
-    private List<int> minimums = new List<int>();
+    private List<int> minimums;
 
     [SerializeField]
     private int budget = 0;
 
-    private List<int> numSpawned = new List<int>();
+    private List<int> numSpawned;
+
+    public RoomBudgeting(int budget) {
+        this.budget = budget;
+    }
 
     void Awake() {
+        maximums = new List<int>();
+        minimums = new List<int>();
+        numSpawned = new List<int>();
         // Placeholder objects are stored in the Prefabs/RoomObjPlaceholders folder for now, with an Attributes script attached to each one
 
         // Make all the serialized lists the same size as the spawnables list if their sizes don't match
@@ -78,6 +85,7 @@ public class RoomBudgeting : MonoBehaviour {
                 }
             }
             int chosenIndex = (int) Random.Range(0, spawnables.Count);
+            Debug.Log("Count: " + spawnables.Count);
             int objWeight = spawnables[chosenIndex].gameObject.GetComponent<Attributes>().weight;
             if (objWeight <= tempBudget) {
                 toSpawn.Add(spawnables[chosenIndex]);
@@ -153,6 +161,7 @@ public class RoomBudgeting : MonoBehaviour {
     /// <param name="index">
     /// </param>
     private void removeFromPool(int index) {
+        Debug.Log("spawnables\t maximums\t numSpawned\t minimums\t" + spawnables.Count + " " + maximums.Count + " " + numSpawned.Count + " " + minimums.Count);
         spawnables.RemoveAt(index);
         maximums.RemoveAt(index);
         numSpawned.RemoveAt(index);
