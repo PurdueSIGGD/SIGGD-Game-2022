@@ -29,6 +29,8 @@ public class Item : MonoBehaviour, IInteractable
     [SerializeField] bool isShiny;
     [SerializeField] string description;
 
+    [SerializeField] public float useDuration = 0f;
+
     // cached fields
     Transform playerTrans;
     //Rigidbody rb;

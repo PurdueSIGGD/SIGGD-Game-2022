@@ -54,6 +54,7 @@ MonoBehaviour:
   currentNumCharges: 1
   isShiny: 0
   description: 
+  useDuration: 1
   immuneDuration: 1
   invincibleDuration: 1
   speedBoostDuration: 1

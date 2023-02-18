@@ -54,6 +54,7 @@ MonoBehaviour:
   currentNumCharges: 1
   isShiny: 0
   description: 
+  useDuration: 5
   invisibilityDuration: 5
 --- !u!33 &6763135281201947592
 MeshFilter:
