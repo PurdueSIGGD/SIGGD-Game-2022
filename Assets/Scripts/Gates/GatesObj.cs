@@ -57,19 +57,21 @@ public class GatesObj : MonoBehaviour
         return 2;
     }
 
-    // Opens the gate if conditions are met
-    public void openObj(Item key, string userPass)
+    // Returns true if the password is correct
+    public bool openObj(Item key)
     {
+        string userPass = getTyped();
         int num = readObj(key, userPass);
         if (num == 0 || num == 2)
         {
-            gameObject.SetActive(false);
+            return true;
         }
+        return false;
     }
 
-    // 
-    public void getTyped()
+    // Gets the password string that the player typed
+    public string getTyped()
     {
-
+        return FindObjectOfType<PasswordLogic>().getInput();
     }
 }

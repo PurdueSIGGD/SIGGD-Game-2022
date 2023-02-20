@@ -9,6 +9,7 @@ public class DoorTrigger : MonoBehaviour
     private float moveSpeed = 8f;
     private bool isPasswordCorrect = false;
     private bool isDoorOpen = false;
+    private Item key = null;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class DoorTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        getPassword();
         if (isPasswordCorrect)
         {
             doorFrame.transform.localPosition = Vector3.MoveTowards(doorFrame.transform.localPosition, 
@@ -37,7 +39,7 @@ public class DoorTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Activate password panel
-        FindObjectOfType<PasswordLogic>().hasEntered(this);
+        FindObjectOfType<PasswordLogic>().hasEntered(door, this);
     }
 
     // Activates when player leaves trigger
@@ -55,6 +57,12 @@ public class DoorTrigger : MonoBehaviour
         {
             doorFrame.transform.position = doorFrame.transform.position + (Vector3.up * moveSpeed) * Time.deltaTime;
         }
+    }
+
+    // Get whether the password entered is correct or not
+    public void getPassword()
+    {
+        isPasswordCorrect = door.GetComponent<GatesObj>().openObj(key);
     }
 
     // testing if door open works

@@ -49,9 +49,4 @@ public class Player : MonoBehaviour
     {
         /* debuffsManager.AddDebuff(new Slow(3f, 0.5f)); */
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        other.GetComponent<GatesObj>()?.openObj(null, "string");
-    }
 }
