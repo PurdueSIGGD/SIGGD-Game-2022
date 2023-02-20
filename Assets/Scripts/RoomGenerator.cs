@@ -5,25 +5,35 @@ using UnityEngine;
 public class RoomGenerator : MonoBehaviour
 {
     private Transform room;
-    private Transform floor;
 
     // The size of a plane of scale 1
-    private const int DEFAULT_PLANE_SIZE = 10;
+    private const float DEFAULT_ROOM_SIZE = 8.0f;
 
-    private float floorWidth;
-    private float floorLength;
+    private const int GENERATION_POINT_NUM = 4;
 
-    // The obstacles to spawn in the rooms
-    public GameObject pillar;
+    private float roomWidth;
+    private float roomLength;
+
+    private Transform[] generationPoints;
+
+    // The unique objects to spawn in the rooms
+    // Just a GameObject right now but could be an array later
+    [SerializeField]
+    private GameObject pillarObject;
+
+    [SerializeField]
+    private int pillarCost;
+
+
+    void Awake() {
+        room = transform;
+        generationPoints = getGenerationPoints();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        room = transform;
-        floor = room.GetChild(0);
-        floorWidth = floor.transform.localScale.x * DEFAULT_PLANE_SIZE;
-        floorLength = floor.transform.localScale.x * DEFAULT_PLANE_SIZE;
 
-        generateObstacles();
     }
 
     // Update is called once per frame
@@ -32,12 +42,28 @@ public class RoomGenerator : MonoBehaviour
         
     }
 
-    private void generateObstacles() {
-        for (int i = 0; i < 5; i++) {
-            float x = Random.Range(-floorLength / 2, floorLength / 2);
-            float z = Random.Range(-floorWidth / 2, floorWidth / 2);
-            Vector3 position = transform.position + new Vector3(x, 0, z);
-            Instantiate(pillar, position, Quaternion.identity);
+    public void generateObstacles(int budget) {
+        // TODO: Incorporate budget when making pillars
+        for (int i = 0; i < GENERATION_POINT_NUM; i++) {
+            if (Random.Range(0, 2) == 0) { continue; }
+            Transform point = generationPoints[i];
+
+            // TODO: Uncomment below line and continue next meeting
+            GameObject pillar = Instantiate(pillarObject, point.transform.position, Quaternion.identity);
+            pillar.transform.SetParent(point);
         }
+    }
+
+    private Transform[] getGenerationPoints() {
+        Transform pt1 = gameObject.transform.Find("Random Spawn 1");
+        Transform pt2 = gameObject.transform.Find("Random Spawn 2");
+        Transform pt3 = gameObject.transform.Find("Random Spawn 3");
+        Transform pt4 = gameObject.transform.Find("Random Spawn 4");
+        return new Transform[GENERATION_POINT_NUM] {pt1, pt2, pt3, pt4};
+    }
+
+    public void EditorAwake() {
+        room = transform;
+        generationPoints = getGenerationPoints();
     }
 }

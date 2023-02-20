@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5237452597032423323}
   - component: {fileID: 5237452597032423324}
   - component: {fileID: 5237452597032423325}
+  - component: {fileID: 2695828203643457277}
   - component: {fileID: 3848619496855986591}
   m_Layer: 0
   m_Name: TestDeployable
@@ -48,6 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe97b462262de7243b7ab63b41dc3c76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layersToTriggerOn:
+    serializedVersion: 2
+    m_Bits: 1024
   timeUntilDestruction: 5
 --- !u!33 &5237452597032423323
 MeshFilter:
@@ -108,6 +112,19 @@ BoxCollider:
   m_GameObject: {fileID: 5237452597032423327}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &2695828203643457277
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5237452597032423327}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}

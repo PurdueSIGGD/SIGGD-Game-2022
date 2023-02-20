@@ -3,26 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DeployedObject : MonoBehaviour
-{
-    // ASSUMES Enemies are on layer "Enemy"
-    const string ENEMY_LAYER_NAME = "Enemy";
-
+{    
+    [Header("Deploy Default Parameters")]
+    [SerializeField] internal LayerMask layersToTriggerOn;
     [SerializeField] float timeUntilDestruction = 5;
 
-    void Start()
+    internal virtual void Start()
     {
         Invoke("destroyDeployable", timeUntilDestruction);
     }
 
-    void Update()
+    internal virtual void Update()
     {
-        
+
     }
 
-    internal virtual void affectEnemy(Collision enemyCollision)
+    internal virtual void onEnemyTrigger(Collider enemyCollider)
     {
         // destroys enemy for testing        
-        Destroy(enemyCollision.gameObject);
+        Destroy(enemyCollider.gameObject);
     }
 
     void destroyDeployable()
@@ -30,10 +29,10 @@ public class DeployedObject : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void OnCollisionEnter(Collision other)
-    {        
+    void OnTriggerEnter(Collider other)
+    {
         // makes sure what has been touched is an enemy
-        if (other != null && other.gameObject.layer == LayerMask.NameToLayer(ENEMY_LAYER_NAME))
-            affectEnemy(other);
+        if (other != null && IInteractable.isLayerInLayerMask(other.gameObject.layer, layersToTriggerOn))
+            onEnemyTrigger(other);
     }
 }
