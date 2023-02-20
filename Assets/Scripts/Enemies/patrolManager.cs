@@ -132,6 +132,7 @@ public class patrolManager : MonoBehaviour
         return ret;
     }
 
+    //currently just gets random one from ones on origional path, could change to simply be random in the surrounding area
     public Vector3 getRandomPatrolPoint()
     {
         if (patrolPoints.Length == 0)
