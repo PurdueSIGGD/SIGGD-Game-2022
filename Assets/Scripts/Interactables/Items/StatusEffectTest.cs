@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StimBoost : Item
+public class StatusEffectTest : Item
 {
     [SerializeField] private float speedBoostDuration = 10f;
     [SerializeField] private float speedBoostPercentage = 35;
