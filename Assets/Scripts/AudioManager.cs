@@ -10,12 +10,21 @@ public class AudioManager : MonoBehaviour
     private float stepMeter = 0;
     [SerializeField]
     private GameObject sightedSound;
+    private float sightedCountdown = 0;
     [SerializeField]
     private GameObject stunSound;
     [SerializeField]
     private GameObject aggroSound;
     [SerializeField]
     private GameObject deaggroSound;
+
+    private void Update()
+    {
+        if (sightedCountdown > 0)
+        {
+            sightedCountdown = Mathf.Max(sightedCountdown - Time.deltaTime, 0.0f);
+        }
+    }
 
     //used to calculate and play footsteps, intended to be called every frame of movement with the current speed
     public void tryStep(float ammount) //ammount is the speed moved at the time
@@ -45,6 +54,10 @@ public class AudioManager : MonoBehaviour
 
     public void playSighted()
     {
-        Instantiate(sightedSound, transform.position, Quaternion.identity);
+        if (sightedCountdown <= 0)
+        {
+            Instantiate(sightedSound, transform.position, Quaternion.identity);
+            sightedCountdown = 1f;   //This stops the sound from repeating too often
+        }
     }
 }
