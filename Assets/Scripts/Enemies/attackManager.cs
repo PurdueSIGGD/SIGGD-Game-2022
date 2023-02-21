@@ -82,6 +82,9 @@ public class attackManager : MonoBehaviour
         {
             Debug.Log(transform.name + " does a melee attack");
 
+            //Create attack audio
+            GameObject a = Instantiate(attack.audioPrefab, transform.position + Vector3.up * 0.85f * 2, Quaternion.identity);
+
             //if close enough, kill or apply debuff
             float maxRange = ((meleeAttack)attack).maxRangeToHit;
             if (Vector3.SqrMagnitude(toPlayerVector) <= maxRange * maxRange)
@@ -103,6 +106,8 @@ public class attackManager : MonoBehaviour
             Debug.Log(transform.name + " does a ranged attack");
             //spawn projectile
             GameObject g = Instantiate(((rangedAttack)attack).projectile, transform.position + Vector3.up * ((rangedAttack)attack).spawnOffset, Quaternion.LookRotation(toPlayerVector - Vector3.up * ((rangedAttack)attack).spawnOffset, Vector3.up));
+            //Create attack audio
+            GameObject a = Instantiate(attack.audioPrefab, transform.position + Vector3.up * ((rangedAttack)attack).spawnOffset, Quaternion.identity);
         }
         
     }
