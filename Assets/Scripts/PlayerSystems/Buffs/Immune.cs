@@ -19,22 +19,15 @@ public class Immune : StatusEffect
     public static void Reset()
     {
         Immunity = false;
-        //VelocityScalar = 1f;
     }
 
     public override void ApplyEffect()
     {
         Immunity = true;
-        //VelocityScalar = 0f;
     }
 
     public static bool isImmune()
     {
         return Immunity;
     }
-
-    /*public static Vector2 CalculateVelocity(Vector2 velocity)
-    {
-        return VelocityScalar * velocity;
-    }*/
 }

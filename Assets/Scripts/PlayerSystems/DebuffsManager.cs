@@ -23,6 +23,7 @@ public class DebuffsManager : MonoBehaviour
     private void ResetDebuffs() {
         Slow.Reset();
         Ensnared.Reset();
+        Stunned.Reset();
     }
 
     public void UpdateDebuffs()
@@ -50,7 +51,8 @@ public class DebuffsManager : MonoBehaviour
     {
         foreach (StatusEffect debuff in debuffs)
         {
-            debuff.setTime(debuff.getDuration());
+            //debuff.setTime(debuff.getDuration());
+            debuff.End();
         }
     }
 

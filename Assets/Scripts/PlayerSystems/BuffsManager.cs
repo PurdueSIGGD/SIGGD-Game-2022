@@ -21,6 +21,8 @@ public class BuffsManager : MonoBehaviour
     {
         SpeedBoost.Reset();
         Immune.Reset();
+        Invincible.Reset();
+        Invisible.Reset();
     }
 
     public void UpdateBuffs()
