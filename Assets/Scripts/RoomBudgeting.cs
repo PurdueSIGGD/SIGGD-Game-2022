@@ -76,8 +76,8 @@ public class RoomBudgeting : MonoBehaviour {
                         tempBudget -= spawnables[i].gameObject.GetComponent<Attributes>().weight;
                         numSpawned[i]++;
                     } else {
-                        Debug.Log("Error: Can't meet the minimum spawns (" + minimums[i] + ") of " + spawnables[i].name + 
-                            " because it exceeds the room's remaining budget!");
+                        // Debug.Log("Error: Can't meet the minimum spawns (" + minimums[i] + ") of " + spawnables[i].name + 
+                        //    " because it exceeds the room's remaining budget!");
                         removeFromPool(i);
                         i--;
                         break;
@@ -85,14 +85,13 @@ public class RoomBudgeting : MonoBehaviour {
                 }
             }
             int chosenIndex = (int) Random.Range(0, spawnables.Count);
-            Debug.Log("Count: " + spawnables.Count);
             int objWeight = spawnables[chosenIndex].gameObject.GetComponent<Attributes>().weight;
             if (objWeight <= tempBudget) {
                 toSpawn.Add(spawnables[chosenIndex]);
                 tempBudget -= objWeight;
                 numSpawned[chosenIndex]++;
                 if (numSpawned[chosenIndex] >= maximums[chosenIndex] && maximums[chosenIndex] != -1) {
-                    Debug.Log("Maximum spawns (" + maximums[chosenIndex] + ") reached for " + spawnables[chosenIndex].name + ".");
+                    // Debug.Log("Maximum spawns (" + maximums[chosenIndex] + ") reached for " + spawnables[chosenIndex].name + ".");
                     removeFromPool(chosenIndex);
                 }
             } else {
@@ -104,8 +103,7 @@ public class RoomBudgeting : MonoBehaviour {
             test += t.name + " (" + t.GetComponent<Attributes>().weight + "), ";
         }
         test += "with " + tempBudget + " budget left over.";
-
-        Debug.Log(test);
+        // Debug.Log(test);
 
         /* Original object weights:
             Easy Enemy - 6
@@ -133,11 +131,11 @@ public class RoomBudgeting : MonoBehaviour {
     private void correctListSizeInt(List<int> input, int valueToAdd) {
         while (input.Count < spawnables.Count) {
             input.Add(valueToAdd);
-            Debug.Log("Added an item to a modifier list to equalize its size with that of 'spawnables'.");
+            // Debug.Log("Added an item to a modifier list to equalize its size with that of 'spawnables'.");
         }
         while (input.Count > spawnables.Count) {
             input.RemoveAt(input.Count - 1);
-            Debug.Log("Removed an item from a modifier list to equalize its size with that of 'spawnables'.");
+            // Debug.Log("Removed an item from a modifier list to equalize its size with that of 'spawnables'.");
         }
     }
 
@@ -161,7 +159,6 @@ public class RoomBudgeting : MonoBehaviour {
     /// <param name="index">
     /// </param>
     private void removeFromPool(int index) {
-        Debug.Log("spawnables\t maximums\t numSpawned\t minimums\t" + spawnables.Count + " " + maximums.Count + " " + numSpawned.Count + " " + minimums.Count);
         spawnables.RemoveAt(index);
         maximums.RemoveAt(index);
         numSpawned.RemoveAt(index);
@@ -176,25 +173,29 @@ public class RoomBudgeting : MonoBehaviour {
     private void spawnObjects(List<Transform> toSpawn) {
         for (int i = 0; i < toSpawn.Count; i++) {
             GameObject spawnedObj = GameObject.Instantiate(toSpawn[i].gameObject);
-            Transform objTransform = toSpawn[i].transform;
-            Transform spTransform = spawnPoints[i].transform;
-            Vector3 spPosition = spTransform.position;
+
+            // Vector3 tempScale = spawnedObj.transform.localScale;
+            // spawnedObj.transform.parent = transform;
+            // spawnedObj.transform.localScale = tempScale;
+
+            Transform objTransform = spawnedObj.transform;
             bool spawning = true;
             float heightAdjustment = 0.0f;
 
-            if (objTransform.GetComponent<Collider>() is SphereCollider) {
+            Collider collider = objTransform.GetComponent<Collider>();
+            if (collider is SphereCollider) {
                 heightAdjustment = objTransform.localScale.y * objTransform.GetComponent<SphereCollider>().radius;
-            } else if (objTransform.GetComponent<Collider>() is BoxCollider) {
+            } else if (collider is BoxCollider) {
                 heightAdjustment = objTransform.localScale.y * (objTransform.GetComponent<BoxCollider>().size.y / 2);
-            } else if (objTransform.GetComponent<Collider>() is CapsuleCollider) {
+            } else if (collider is CapsuleCollider) {
                 heightAdjustment = objTransform.localScale.y * (objTransform.GetComponent<CapsuleCollider>().height / 2);
             } else {
                 spawning = false;
             }
 
             if (spawning) {
-                spTransform.position = new Vector3(spPosition.x, spPosition.y + heightAdjustment, spTransform.position.z);
-                print("Object spawned");
+                spawnedObj.transform.position = spawnPoints[i].transform.position + Vector3.up * heightAdjustment;
+                // print("Object spawned");
             } else {
                 print("Error spawning object because its collider can't be handled.");
             }
@@ -210,33 +211,3 @@ public class RoomBudgeting : MonoBehaviour {
     }
     
 }
-
-/*
-public class RoomGenerator : MonoBehaviour
-{
-
-    // The unique objects to spawn in the rooms
-    // Just a GameObject right now but could be an array later
-    [SerializeField]
-    private GameObject pillarObject;
-
-    [SerializeField]
-    private int pillarCost;
-
-    void Awake() {
-        readGenerationPoints();
-    }
-
-    public void generateObstacles(int budget) {
-        if (generationPoints == null) {
-            readGenerationPoints();
-        }
-        // TODO: Incorporate budget when making pillars
-        for (int i = 0; i < generationPoints.Length; i++) {
-            GameObject point = generationPoints[i];
-            GameObject pillar = Instantiate(pillarObject, point.transform.position, Quaternion.identity);
-            pillar.transform.SetParent(point.transform);
-        }
-    }
-}
-*/

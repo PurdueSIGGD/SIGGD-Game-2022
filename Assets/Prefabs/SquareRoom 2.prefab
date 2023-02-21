@@ -63,7 +63,7 @@ MonoBehaviour:
   - {fileID: 588687413658547346, guid: de2df18c019cec44fb49319f17eb9d6e, type: 3}
   maximums: 
   minimums: 
-  budget: 0
+  budget: 25
 --- !u!1 &1826478761425561981
 GameObject:
   m_ObjectHideFlags: 0
