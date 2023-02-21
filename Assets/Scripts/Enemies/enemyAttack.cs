@@ -9,4 +9,5 @@ public class enemyAttack : ScriptableObject
     public float attackMinumumRange; //Min range to attempt this attack
     public float attackMaximumRange; //Max range to attempt this attack
     public string animTriggerName; //Name of the trigger in the animation tree which corresponds to this attack's animation
+    public GameObject audioPrefab; //Stores the gameobject with an audio source on it to spawn on the attack's beginning
 }
