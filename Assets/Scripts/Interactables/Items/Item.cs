@@ -23,13 +23,15 @@ public class Item : MonoBehaviour, IInteractable
     // serializable fields
     [SerializeField] string itemName;
     [SerializeField] ItemType type = ItemType.GENERAL;
+    [SerializeField] Sprite inventorySprite;
     [SerializeField] int maxStackSize = 1;
     [SerializeField] int currentNumCharges = 1;
     [SerializeField] bool isShiny;
     [SerializeField] string description;
 
     // cached fields
-    Rigidbody rb;
+    Transform playerTrans;
+    //Rigidbody rb;
     Collider col;
     Camera mainCam;
 
@@ -41,7 +43,8 @@ public class Item : MonoBehaviour, IInteractable
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        playerTrans = FindObjectOfType<Player>().gameObject.transform;
+        //rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
         startLocalScale = transform.localScale;
         mainCam = Camera.main;
@@ -63,7 +66,7 @@ public class Item : MonoBehaviour, IInteractable
     }
 
     /// <summary>
-    /// Handles most logic for when the player drops an item.
+    /// Handles most logic for when the player drops an item that's currently in their inventory.
     /// The InventorySystem should remove this item from its inventory
     /// </summary>
     public void Release()
@@ -74,15 +77,8 @@ public class Item : MonoBehaviour, IInteractable
             return;
         }
 
-        // move to cursor pos     
-        RaycastHit hit;
-        /*Vector2Control mouseScreenPosControl = Mouse.current.position;
-        Vector2 mouseScreenPos = new Vector2(mouseScreenPosControl.x.ReadValue(), mouseScreenPosControl.y.ReadValue());
-        Vector3 directionToMousePos = mainCam.transform.position - mainCam.ScreenToWorldPoint(mouseScreenPos);*/
-        if (Physics.Raycast(mainCam.transform.position + mainCam.transform.up, mainCam.transform.forward, out hit, Mathf.Infinity, LayerMask.GetMask("Default")))        
-            transform.position = hit.point + Vector3.up * InventorySystem.ITEM_DROP_HEIGHT;
-        else
-            transform.position = mainCam.transform.position;
+        // move to cursor pos             
+        transform.position = playerTrans.position + playerTrans.forward * 2.5f - playerTrans.up * .3f; //getMouseWorldPosition();
 
         gameObject.SetActive(true);
         transform.parent = null;
@@ -111,7 +107,7 @@ public class Item : MonoBehaviour, IInteractable
 
         if (putInInventory)
         {
-            rb.velocity = rb.angularVelocity = Vector3.zero;            
+            //rb.velocity = rb.angularVelocity = Vector3.zero;            
         }
     }
 
@@ -119,12 +115,12 @@ public class Item : MonoBehaviour, IInteractable
     // or reactivates them if the item is being dropped onto the ground
     void bringToUI(bool toUI)
     {
-        rb.useGravity = !toUI;
+        //rb.useGravity = !toUI;
         col.enabled = !toUI;
     }
 
     /// <summary>
-    /// Handles all logic for when the player uses an item.
+    /// Handles all logic for when the player uses an item.  The InventorySystem should remove this Item, and destroy it if applicable.
     /// </summary>
 
     // can be overridden in subclasses with the "override" keyword
@@ -141,7 +137,7 @@ public class Item : MonoBehaviour, IInteractable
 
     public void DestroyItem()
     {
-        Debug.Log($"destroying {itemName}");
+        //Debug.Log($"destroying {itemName}");
         Destroy(gameObject);
     }
 
@@ -170,10 +166,30 @@ public class Item : MonoBehaviour, IInteractable
         return type.Equals(itemType);
     }
 
-    void OnCollisionEnter(Collision collision)
+    public Sprite getSprite()
     {
+        return inventorySprite;
+    }
+
+    Vector3 getMouseWorldPosition()
+    {
+        /*Vector2Control mouseScreenPosControl = Mouse.current.position;
+        Vector2 mouseScreenPos = new Vector2(mouseScreenPosControl.x.ReadValue(), mouseScreenPosControl.y.ReadValue());
+        Vector3 directionToMousePos = mainCam.transform.position - mainCam.ScreenToWorldPoint(mouseScreenPos);*/
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(mainCam.transform.position + mainCam.transform.up, mainCam.transform.forward, out hit, Mathf.Infinity, LayerMask.GetMask("Default")))
+            return hit.point + Vector3.up * InventorySystem.ITEM_DROP_HEIGHT;
+        else
+            return mainCam.transform.position;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("collision" + other.gameObject.name);
         // ensures this is a valid item to be picked up, and the player is touching this
-        if (collision != null && gameObject != null && !inInventory && collision.gameObject.tag.Equals(PLAYER_TAG))
+        if (other != null && gameObject != null && !inInventory && other.gameObject.tag.Equals(PLAYER_TAG))
             Grab();
     }
 }

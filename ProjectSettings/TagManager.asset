@@ -16,9 +16,9 @@ TagManager:
   - 
   - Character
   - Ground
-  - 
-  - 
-  - 
+  - Enemy
+  - Items
+  - EnemyProjectile
   - 
   - 
   - 

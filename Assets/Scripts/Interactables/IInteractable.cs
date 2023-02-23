@@ -7,4 +7,10 @@ public interface IInteractable
 {
     void Grab();
     void Release();
+
+    public static bool isLayerInLayerMask(int layerToCheck, LayerMask layerMask)
+    {
+        // bitshifting to interpret the layerMask.  Don't worry if this looks confusing.
+        return layerMask.value == (layerMask.value | (1 << layerToCheck));
+    }
 }
