@@ -383,7 +383,8 @@ public class ProceduralGenerator : MonoBehaviour
         foreach (Room finalRoom in rooms)
         {
             Vector3 inPos = new Vector3(Mathf.RoundToInt(finalRoom.roomRect.center.x), finalRoom.yOffset, Mathf.RoundToInt(finalRoom.roomRect.center.y));
-            GameObject testFloor = Instantiate(finalRoom.physicalRoom, inPos, Quaternion.identity, RoomParent.transform);
+            //GameObject testFloor = Instantiate(finalRoom.physicalRoom, inPos, Quaternion.identity, RoomParent.transform);
+            GameObject testFloor = Instantiate(finalRoom.physicalRoom, inPos * 0.85f, Quaternion.identity, RoomParent.transform);
             #if UNITY_EDITOR
                 //testFloor.GetComponent<RoomGenerator>().EditorAwake();
             #endif
@@ -485,7 +486,8 @@ public class ProceduralGenerator : MonoBehaviour
             for (int j = 1; j < grid.GetLength(1) - 1; j++)
             {
                 if (grid[i, j] != GridPoint.Hallway) continue;
-                GameObject CurrentHallway = Instantiate(HallwayPrefab, new Vector3(i, 0, j) + GridOffset, Quaternion.identity, RoomParent.transform);
+                //GameObject CurrentHallway = Instantiate(HallwayPrefab, new Vector3(i, 0, j) + GridOffset, Quaternion.identity, RoomParent.transform);
+                GameObject CurrentHallway = Instantiate(HallwayPrefab, new Vector3(i * 0.85f, 0, j * 0.85f) + GridOffset, Quaternion.identity, RoomParent.transform);
                 Vector3 ParentScale = CurrentHallway.transform.localScale;
                 bool[] isSideDestroyed = new bool[4];
                 // Left
