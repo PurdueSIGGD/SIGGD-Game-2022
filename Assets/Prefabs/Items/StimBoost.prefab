@@ -56,7 +56,7 @@ MonoBehaviour:
   description: 
   useDuration: 8
   speedBoostDuration: 8
-  speedBoostPercentage: 100
+  speedBoostPercentage: 30
 --- !u!33 &6763135281201947592
 MeshFilter:
   m_ObjectHideFlags: 0
