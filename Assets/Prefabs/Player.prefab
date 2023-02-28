@@ -616,6 +616,7 @@ MonoBehaviour:
   gravity: 9.8
   CamRotXSpeed: 0.2
   CamRotYSpeed: 0.2
+  CamRotYRange: 30
 --- !u!114 &8028695752240734996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -700,7 +701,6 @@ GameObject:
   m_Component:
   - component: {fileID: 194816658334529337}
   - component: {fileID: 1350693705424415854}
-  - component: {fileID: 8340560152985082997}
   - component: {fileID: 4443715272030337656}
   m_Layer: 0
   m_Name: OverlayCamera
@@ -767,14 +767,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &8340560152985082997
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5031764314246635314}
-  m_Enabled: 1
 --- !u!114 &4443715272030337656
 MonoBehaviour:
   m_ObjectHideFlags: 0

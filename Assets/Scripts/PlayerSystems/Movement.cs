@@ -11,6 +11,8 @@ public class Movement : MonoBehaviour
     [SerializeField] private float CamRotXSpeed = 0.2f;
     [SerializeField] private float CamRotYSpeed = 0.2f;
 
+    [SerializeField] private float CamRotYRange = 30f;
+
     private DebuffsManager debuffs;
     private Transform camHolderTransform;
     private Vector2 input;
@@ -64,6 +66,7 @@ public class Movement : MonoBehaviour
         modifiedVelocity = Slow.CalculateVelocity(modifiedVelocity);
         modifiedVelocity = SpeedBoost.CalculateVelocity(modifiedVelocity);
         modifiedVelocity = Ensnared.CalculateVelocity(modifiedVelocity);
+
         Vector3 move = new Vector3(modifiedVelocity.x, velocity.y, modifiedVelocity.y) * Time.fixedDeltaTime;
         charController.Move(move);
 
@@ -89,7 +92,9 @@ public class Movement : MonoBehaviour
             transform.Rotate(new Vector3(0, lookInput.x * CamRotXSpeed, 0), Space.World);
             // if statement used to stop camera from going upside down
             float vertRotation = - lookInput.y * CamRotYSpeed;
-            if ((camHolderTransform.localRotation.eulerAngles.x + vertRotation < 90) || camHolderTransform.localRotation.eulerAngles.x + vertRotation > 270) {
+            //if ((camHolderTransform.localRotation.eulerAngles.x + vertRotation < 90) || camHolderTransform.localRotation.eulerAngles.x + vertRotation > 270) {
+            if ((camHolderTransform.localRotation.eulerAngles.x + vertRotation < CamRotYRange) || camHolderTransform.localRotation.eulerAngles.x + vertRotation > 360 - CamRotYRange)
+            {
                 //Debug.Log(camHolderTransform.localRotation.eulerAngles.x);
                 camHolderTransform.Rotate(new Vector3(vertRotation, 0, 0), Space.Self);
             }
