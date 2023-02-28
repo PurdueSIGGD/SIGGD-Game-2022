@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,6 +42,7 @@ public class PasswordLogic : MonoBehaviour
             canvas.SetActive(true);
             InputField.ActivateInputField();
             FindObjectOfType<Player>().lockInputs = true;
+            checkPassword();
         }
     }
 
@@ -56,17 +58,28 @@ public class PasswordLogic : MonoBehaviour
         return input;
     }
 
-    // If the password entered is correct, change the color of the password to green
-    public void passwordCorrect()
-    {
-
-    }
-
-    // If the password entered starts to be incorrect,
+    // Checks if the password entered starts to be incorrect,
     // change the color of the password to red
-    public void passwordIncorrect()
+    public void checkPassword()
     {
+        string password = door.GetComponent<GatesObj>().password;
+        int passwordLength = password.Length;
+        int inputLength;
+        if (input == null) inputLength = 0;
+        else inputLength = input.Length;
 
+        if (inputLength == 0)
+        {
+            PasswordText.color = new Color(255, 255, 255, 255);
+        }
+        else if (inputLength > passwordLength || !input.Equals(password.Substring(0, inputLength)))
+        {
+            PasswordText.color = Color.red;
+        }
+        else
+        {
+            PasswordText.color = new Color(255, 255, 255, 255);
+        }
     }
 
     // Sets door and door trigger as an object when player enters the door trigger
@@ -94,8 +107,20 @@ public class PasswordLogic : MonoBehaviour
 
     public IEnumerator waitUI() 
     {
-        yield return new WaitForSeconds(0.4f);
+        // Changes color of the text to green and deactivates input field and canvas
+        InputField.DeactivateInputField();
+        PasswordText.color = Color.green;
+        yield return new WaitForSeconds(0.1f);
+        PasswordText.color = new Color(255, 255, 255, 255);
+        yield return new WaitForSeconds(0.1f);
+        PasswordText.color = Color.green;
+        yield return new WaitForSeconds(0.1f);
+        PasswordText.color = new Color(255, 255, 255, 255);
+        yield return new WaitForSeconds(0.1f);
+        PasswordText.color = Color.green;
+        yield return new WaitForSeconds(0.2f);
         canvas.SetActive(false);
+        PasswordText.color = new Color(255, 255, 255, 255);
         FindObjectOfType<Player>().lockInputs = false;
         called = false;
     }

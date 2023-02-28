@@ -13,13 +13,6 @@ public class GatesObj : MonoBehaviour
     public bool passwordNeeded = false;
     public string password;
     public int identity = -1;
-    public GameObject canvas;
-
-    // Methods
-    public bool isKeyNeeded() { return keyNeeded; }
-    public void setKeyNeeded(bool var) { keyNeeded = var; }
-    public bool isPasswordNeeded() { return passwordNeeded; }
-    public void setPasswordNeeded(bool var) { passwordNeeded = var; }
 
     // If player tries to open the gate with an item
     // returns 1 if the password entered is incorrect
