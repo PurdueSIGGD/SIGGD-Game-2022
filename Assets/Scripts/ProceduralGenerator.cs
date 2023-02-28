@@ -32,6 +32,8 @@ public class ProceduralGenerator : MonoBehaviour
     [SerializeField]
     private GameObject plane;
 
+    private float scaleMultiplier = 0.85f;
+
     private float inRadius = 10;
 
     private List<Rect> RoomRects;
@@ -78,7 +80,7 @@ public class ProceduralGenerator : MonoBehaviour
 
         public int yOffset;
 
-        public Room(RoomScriptableObject roomObj, int rotation, int rectPointer) {
+        public Room(RoomScriptableObject roomObj, int rotation, int rectPointer, float scaleMultiplier) {
             this.physicalRoom = roomObj.room;
             this.rotation = rotation;
             this.rectPointer = rectPointer;
@@ -254,7 +256,7 @@ public class ProceduralGenerator : MonoBehaviour
                     roomDepth = temp;
                 }
 
-                FinalRoomPlan[remainingFinalRooms] = new Room(roomType, rotation, i);
+                FinalRoomPlan[remainingFinalRooms] = new Room(roomType, rotation, i, scaleMultiplier);
                 RoomRects.Add(new Rect(randomPoint.x - (roomWidth / 2), randomPoint.y - (roomDepth / 2), roomWidth + 0.1f, roomDepth + 0.1f));
             }
         }
@@ -281,7 +283,7 @@ public class ProceduralGenerator : MonoBehaviour
         //Draws the temporary rooms. Unneeded in final design,
         //and currently does not work due to RoomRects randomization changes.
         //DrawRooms(RoomRects.GetRange(0, RoomRects.Count - FinalRoomCount), DefaultFloorMaterial);
-        DrawRooms(FinalRoomPlan, MainRoomMaterial);
+        DrawRooms(FinalRoomPlan);
         DrawHallways();
 
         DrawGizmos = true;
@@ -379,26 +381,17 @@ public class ProceduralGenerator : MonoBehaviour
         }
     } */
 
-    private void DrawRooms(Room[] rooms, Material roomColor) {
+    private void DrawRooms(Room[] rooms) {
         foreach (Room finalRoom in rooms)
         {
             Vector3 inPos = new Vector3(Mathf.RoundToInt(finalRoom.roomRect.center.x), finalRoom.yOffset, Mathf.RoundToInt(finalRoom.roomRect.center.y));
             //GameObject testFloor = Instantiate(finalRoom.physicalRoom, inPos, Quaternion.identity, RoomParent.transform);
-            GameObject testFloor = Instantiate(finalRoom.physicalRoom, inPos * 0.85f, Quaternion.identity, RoomParent.transform);
+            GameObject testFloor = Instantiate(finalRoom.physicalRoom, inPos * scaleMultiplier, Quaternion.identity, RoomParent.transform);
             #if UNITY_EDITOR
                 //testFloor.GetComponent<RoomGenerator>().EditorAwake();
             #endif
 
             testFloor.transform.Rotate(new Vector3(0, 90, 0) * finalRoom.rotation);
-
-            if (roomColor != null)
-            {
-                foreach (Renderer planeRend in testFloor.GetComponentsInChildren<Renderer>())
-                {
-                    planeRend.material = roomColor;
-                }
-            }
-
         }
     }
 
@@ -486,8 +479,9 @@ public class ProceduralGenerator : MonoBehaviour
             for (int j = 1; j < grid.GetLength(1) - 1; j++)
             {
                 if (grid[i, j] != GridPoint.Hallway) continue;
-                //GameObject CurrentHallway = Instantiate(HallwayPrefab, new Vector3(i, 0, j) + GridOffset, Quaternion.identity, RoomParent.transform);
-                GameObject CurrentHallway = Instantiate(HallwayPrefab, new Vector3(i * 0.85f, 0, j * 0.85f) + GridOffset, Quaternion.identity, RoomParent.transform);
+                Vector3 pos = new Vector3(i, 0, j) + GridOffset;
+                //GameObject CurrentHallway = Instantiate(HallwayPrefab, pos, Quaternion.identity, RoomParent.transform);
+                GameObject CurrentHallway = Instantiate(HallwayPrefab, pos * scaleMultiplier, Quaternion.identity, RoomParent.transform);
                 Vector3 ParentScale = CurrentHallway.transform.localScale;
                 bool[] isSideDestroyed = new bool[4];
                 // Left
