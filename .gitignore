@@ -76,3 +76,5 @@ crashlytics-build.properties
 
 # vscode
 .vscode/*
+*.meta
+Assets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers/Editor/PropertyProvider_UnityEngine_Experimental_Rendering_Universal_RenderObjects_RenderObjectsSettings.cs
