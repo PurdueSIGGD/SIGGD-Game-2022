@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Movement))]
@@ -19,6 +20,8 @@ public class Player : MonoBehaviour
 
 
     public Movement Movement => movement;
+
+    public bool lockInputs = false;
 
     void Start()
     {
@@ -44,7 +47,6 @@ public class Player : MonoBehaviour
         correctCameraDistance();
 
         buffsManager.UpdateBuffs();
-
     }
 
     public void kill()
@@ -57,12 +59,22 @@ public class Player : MonoBehaviour
 
     void OnMove(InputValue movementValue)
     {
-        movement.SetInput(movementValue.Get<Vector2>());
+        if (!lockInputs) movement.SetInput(movementValue.Get<Vector2>());
+        else movement.SetInput(Vector2.zero);
     }
 
     void OnLook(InputValue lookValue)
     {
-        movement.SetLookInput(lookValue.Get<Vector2>());
+        if (!lockInputs) movement.SetLookInput(lookValue.Get<Vector2>());
+        else movement.SetLookInput(Vector2.zero);
+    }
+
+    void OnEscape(InputValue escape)
+    {
+        if (lockInputs)
+        {
+            FindObjectOfType<PasswordLogic>().ifEscPressed();
+        }
     }
 
     // test slow debuff
