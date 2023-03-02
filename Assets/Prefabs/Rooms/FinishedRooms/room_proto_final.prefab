@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149473114fa27214ab003464dfb0be03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deletionChance: 0.5
+  deletionChance: 0.25
 --- !u!1 &361355806106446120
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,7 +483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149473114fa27214ab003464dfb0be03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deletionChance: 0.5
+  deletionChance: 0.25
 --- !u!1 &767142578199313204
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,7 +612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149473114fa27214ab003464dfb0be03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deletionChance: 0.5
+  deletionChance: 0.25
 --- !u!1 &1490382633828105105
 GameObject:
   m_ObjectHideFlags: 0
@@ -1005,7 +1005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149473114fa27214ab003464dfb0be03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deletionChance: 0.5
+  deletionChance: 0.25
 --- !u!1 &3630678496516604170
 GameObject:
   m_ObjectHideFlags: 0
@@ -1222,7 +1222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149473114fa27214ab003464dfb0be03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deletionChance: 0.5
+  deletionChance: 0.25
 --- !u!1 &4886106355927436718
 GameObject:
   m_ObjectHideFlags: 0
@@ -1609,7 +1609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149473114fa27214ab003464dfb0be03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deletionChance: 0.5
+  deletionChance: 0.25
 --- !u!1 &7332516907426980828
 GameObject:
   m_ObjectHideFlags: 0
@@ -1738,7 +1738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149473114fa27214ab003464dfb0be03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deletionChance: 0.5
+  deletionChance: 0.25
 --- !u!1 &7482284300043717120
 GameObject:
   m_ObjectHideFlags: 0
@@ -2166,7 +2166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149473114fa27214ab003464dfb0be03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deletionChance: 0.5
+  deletionChance: 0.25
 --- !u!1 &9122700968610310031
 GameObject:
   m_ObjectHideFlags: 0
@@ -2295,4 +2295,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149473114fa27214ab003464dfb0be03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deletionChance: 0.5
+  deletionChance: 0.25
