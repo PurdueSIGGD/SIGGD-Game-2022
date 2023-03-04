@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8822800205777344799}
   - component: {fileID: 3404796003145236099}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 7336500727475562556}
   - component: {fileID: 935272098564757972}
   - component: {fileID: 6132591094390134540}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spot Light (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6592591026431087322}
   - component: {fileID: 2061315308542418760}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 6807489882327821706}
   - component: {fileID: 8024488592272525598}
   - component: {fileID: 6638788971090330430}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,7 +324,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8390124793678166537}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -367,7 +367,7 @@ GameObject:
   - component: {fileID: 5446894494726240761}
   - component: {fileID: 8037012979101856954}
   - component: {fileID: 863081987107931913}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spot Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -496,7 +496,7 @@ GameObject:
   - component: {fileID: 925313098813225449}
   - component: {fileID: 938633243540600579}
   - component: {fileID: 650666877161753259}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spot Light (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -623,7 +623,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6729265774986463240}
   - component: {fileID: 6248383314275303024}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -667,7 +667,7 @@ GameObject:
   m_Component:
   - component: {fileID: 335613838383216681}
   - component: {fileID: 1989826718672066786}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -711,7 +711,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6782756749711171444}
   - component: {fileID: 5879120818965197255}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -755,7 +755,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6900528485338975493}
   - component: {fileID: 4121767581658505827}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -799,7 +799,7 @@ GameObject:
   m_Component:
   - component: {fileID: 563186738581793324}
   - component: {fileID: 5786202784844906797}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SpawnPoint (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -843,7 +843,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5788732266670213634}
   - component: {fileID: 6326897371773906793}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SpawnPoint (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -889,7 +889,7 @@ GameObject:
   - component: {fileID: 1173609226952040547}
   - component: {fileID: 989830772415620068}
   - component: {fileID: 215411982077276106}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spot Light (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1016,7 +1016,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5289125195752678847}
   - component: {fileID: 1529074686831825711}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SpawnPoint (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1060,7 +1060,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7134125722407659610}
   - component: {fileID: 2404333275012079388}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SpawnPoint (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1106,7 +1106,7 @@ GameObject:
   - component: {fileID: 5394084697218294040}
   - component: {fileID: 6588719489470623534}
   - component: {fileID: 90360841750965861}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spot Light (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1233,7 +1233,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1992825880228912309}
   - component: {fileID: 6213621076671768614}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1277,7 +1277,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7885010247521116735}
   - component: {fileID: 3220507576605622336}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1321,7 +1321,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6417881611760556462}
   - component: {fileID: 1586213167759576357}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1365,7 +1365,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9207908811549882123}
   - component: {fileID: 5101067719782080555}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SpawnPoint (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1409,7 +1409,7 @@ GameObject:
   m_Component:
   - component: {fileID: 646145047083253513}
   - component: {fileID: 5257232998457380706}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1452,7 +1452,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6189660610427829362}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SpawnPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1493,7 +1493,7 @@ GameObject:
   - component: {fileID: 3877293001679430005}
   - component: {fileID: 5279254424199915605}
   - component: {fileID: 4842237960355747672}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1622,7 +1622,7 @@ GameObject:
   - component: {fileID: 3413850369496976673}
   - component: {fileID: 5318954148300525960}
   - component: {fileID: 5058075531800650759}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spot Light (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1749,7 +1749,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8637524882705241571}
   - component: {fileID: 5797203133391543052}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SpawnPoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1793,7 +1793,7 @@ GameObject:
   m_Component:
   - component: {fileID: 77456460884238116}
   - component: {fileID: 5400464881820208449}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1836,7 +1836,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1519570386486980716}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1881,7 +1881,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1167391213089609949}
   - component: {fileID: 6761586190397448904}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1924,7 +1924,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9141766919858693528}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: room_proto_final
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1960,7 +1960,7 @@ GameObject:
   m_Component:
   - component: {fileID: 856298405587246633}
   - component: {fileID: 2193841661207249516}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2004,7 +2004,7 @@ GameObject:
   m_Component:
   - component: {fileID: 571473454132637255}
   - component: {fileID: 6221555329167207331}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2050,7 +2050,7 @@ GameObject:
   - component: {fileID: 5433574836462738156}
   - component: {fileID: 1882054658448943837}
   - component: {fileID: 8095288577584693583}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spot Light (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2179,7 +2179,7 @@ GameObject:
   - component: {fileID: 7895229213297812033}
   - component: {fileID: 5990146201365136356}
   - component: {fileID: 4834695574518402314}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spot Light (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

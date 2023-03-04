@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8941470937861435054}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: labyrinth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,10 +120,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: new_ivan_labyrinth_right 1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 607fb5019beef6a49a4d4a9dc78b0ea2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1151388028547126963, guid: 607fb5019beef6a49a4d4a9dc78b0ea2,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.1416667
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 607fb5019beef6a49a4d4a9dc78b0ea2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 607fb5019beef6a49a4d4a9dc78b0ea2, type: 3}
@@ -219,6 +229,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: new_ivan_labyrinth_left 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 424e7b555d6949b41aedeac0bbe46a45,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 424e7b555d6949b41aedeac0bbe46a45,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 424e7b555d6949b41aedeac0bbe46a45, type: 3}

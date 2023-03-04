@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 690630674902288851}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: new_ivan_corridor_flat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4096448185118039277}
   - component: {fileID: 5187599373154703445}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9086762905460837942}
   - component: {fileID: 6737604350113356747}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SpawnPoint (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 1544010083173874337}
   - component: {fileID: 1432638351131490648}
   - component: {fileID: 1459089830800096364}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4871644976802347096}
   - component: {fileID: 5006825299623449928}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +305,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6379604511404006769}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,7 +337,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2684570482650279200}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SpawnPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,7 +376,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2924005058972795099}
   - component: {fileID: 6664308547037166896}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SpawnPoint (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -420,7 +420,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8790333108998586385}
   - component: {fileID: 4805362109156523734}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -464,7 +464,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8314090658437051523}
   - component: {fileID: 8765356972899097820}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SpawnPoint (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +508,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5141850601513524375}
   - component: {fileID: 3013984954536434101}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -552,7 +552,7 @@ GameObject:
   m_Component:
   - component: {fileID: 630746877958817700}
   - component: {fileID: 2566580659390591986}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -596,7 +596,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4826668317442621686}
   - component: {fileID: 4969116418918190965}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SpawnPoint (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -640,7 +640,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2871207615881190060}
   - component: {fileID: 2614344217135189531}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -684,7 +684,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5178183699977144307}
   - component: {fileID: 3689242914920705795}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -728,7 +728,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2339765216711849740}
   - component: {fileID: 836128028181691139}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -772,7 +772,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6888974824179590539}
   - component: {fileID: 6553810938914446607}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SpawnPoint (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -816,7 +816,7 @@ GameObject:
   m_Component:
   - component: {fileID: 257131812725508463}
   - component: {fileID: 1142814087386902533}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -860,7 +860,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8447967902275477023}
   - component: {fileID: 162233903692556672}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -903,7 +903,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 540107042173502566}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -948,7 +948,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5045707488654302635}
   - component: {fileID: 224815710718813695}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SpawnPoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -992,7 +992,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8717345522947680939}
   - component: {fileID: 2041267529570503611}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1036,7 +1036,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5099075764192108052}
   - component: {fileID: 1438737964012403654}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1080,7 +1080,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4248588109107811635}
   - component: {fileID: 3518895551933019964}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1124,7 +1124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7099121016651239591}
   - component: {fileID: 479757173627119365}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PatrolPoint (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1170,7 +1170,7 @@ GameObject:
   - component: {fileID: 2968584219164737985}
   - component: {fileID: 1735924073726616917}
   - component: {fileID: 3128382167869878133}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}

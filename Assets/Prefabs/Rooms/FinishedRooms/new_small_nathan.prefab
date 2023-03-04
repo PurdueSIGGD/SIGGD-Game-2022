@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8000329101131859310}
   - component: {fileID: 6783365309283459578}
   - component: {fileID: 7880833643781204954}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5738143931221167484}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: new_small_nathan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
