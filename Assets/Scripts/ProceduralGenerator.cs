@@ -180,6 +180,7 @@ public class ProceduralGenerator : MonoBehaviour
         GenerateDungeon();
         ClearScene();
         DrawFloor();
+        GetComponent<BakeLevelNav>().BuildNavigation();
     }
 
     //Calls DrawRooms() to visualize the output of the procedural algorithm.
