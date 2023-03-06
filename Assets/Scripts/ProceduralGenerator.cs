@@ -30,7 +30,7 @@ public class ProceduralGenerator : MonoBehaviour
     Material DefaultFloorMaterial, MainRoomMaterial;
 
     [SerializeField]
-    private GameObject plane;
+    private GameObject blockerPlane;
 
     private float scaleMultiplier = 0.85f;
 
@@ -182,6 +182,7 @@ public class ProceduralGenerator : MonoBehaviour
         GenerateDungeon();
         ClearScene();
         DrawFloor();
+        fixOpenDoors();
         GetComponent<BakeLevelNav>().BuildNavigation();
     }
 
@@ -901,8 +902,8 @@ public class ProceduralGenerator : MonoBehaviour
                     Rect room1 = FinalRoomPlan[GabrielEdges[i][0]].roomRect;
                     Rect room2 = FinalRoomPlan[GabrielEdges[i][1]].roomRect;
                     Gizmos.color = Color.blue;
-                    Vector3 vectA = new Vector3(room1.center.x, 0, room1.center.y);
-                    Vector3 vectB = new Vector3(room2.center.x, 0, room2.center.y);
+                    Vector3 vectA = new Vector3(room1.center.x, 0, room1.center.y) * scaleMultiplier;
+                    Vector3 vectB = new Vector3(room2.center.x, 0, room2.center.y) * scaleMultiplier;
                     Gizmos.DrawLine(vectA, vectB);
                 }
             }
@@ -914,7 +915,7 @@ public class ProceduralGenerator : MonoBehaviour
                 for (int i = 0; i < grid.GetLength(0); i++) {
                     for (int j = 0; j < grid.GetLength(1); j++) {
                         Gizmos.color = getGridColor(grid[i, j]);
-                        Gizmos.DrawSphere(new Vector3(xMin + i, 0, yMin + j), 0.3f);
+                        Gizmos.DrawSphere(new Vector3(xMin + i, 0, yMin + j) * scaleMultiplier, 0.3f);
                     }
                 }
             }
@@ -922,52 +923,40 @@ public class ProceduralGenerator : MonoBehaviour
     }
 
     private void fixOpenDoors() {
-        for (int i = 0; i < FinalRoomPlan.Length; i++) {
+        for (int i = 0; i < FinalRoomPlan.Length; i++) {    //For each room
+
             Vector3[] roomHallways = FinalRoomPlan[i].getHallways();
-            for (int j = 0; j < roomHallways.Length; j++) {
+            for (int j = 0; j < roomHallways.Length; j++) {     //For each room's door
+                
+                //Both are relative to the center of the room
                 int x = Mathf.RoundToInt(roomHallways[j].x);
                 int y = Mathf.RoundToInt(roomHallways[j].z);
                 int[] xIndices = new int[] {x - 1, x + 1, x, x};
                 int[] yIndices = new int[] {y, y, y - 1, y + 1};
                 Vector3 hallwayPoint = Vector3.positiveInfinity;
+
                 // Check to see if there's a surrounding hallway
-                for (int k = 0; k < xIndices.Length; k++) {
-                    if (isValid(xIndices[k], yIndices[k])) {
-                        if (grid[xIndices[k], yIndices[k]] == GridPoint.Hallway) {
-                            Vector2[] bounds = GetRoomBounds();
-                            float xMin = bounds[0][0];
-                            float yMin = bounds[1][0];
-                            hallwayPoint = new Vector3(roomHallways[j].x + xIndices[k], 0, roomHallways[j].z + yIndices[k]);
+                for (int k = 0; k < xIndices.Length; k++) {     //For adjacent points
+                    int mapx = xIndices[k] + FinalRoomPlan[i].gridX;
+                    int mapy = yIndices[k] + FinalRoomPlan[i].gridY;
+                    if (isValid(mapx, mapy)) {    //If position exists
+                        if (grid[mapx, mapy] == GridPoint.Empty) {  //If point is empty, must be filled
+                            hallwayPoint = new Vector3(xIndices[k], 0, yIndices[k]);
+                            break;
                         }
                     }
                 }
+
                 // If not, we need to fill the hole
-                if (hallwayPoint != Vector3.positiveInfinity) {
+                if (hallwayPoint.magnitude != float.PositiveInfinity) {
                     // Find the direction in which we need to draw the plane
-                    Vector3 diff = hallwayPoint - roomHallways[j];
-                    // Plane is in y dir
-                    if (diff.x == 0) {
-                        // Place faces
-                        if (diff.y > 0) {
+                    Vector3 diff = hallwayPoint - new Vector3(roomHallways[j].x, 0, roomHallways[j].z);
 
-                        // Plane faces
-                        } else {
+                    Vector2[] GridBounds = GetRoomBounds();
+                    Vector3 GridOffset = new Vector3(GridBounds[0][0], 0, GridBounds[1][0]);
 
-                        }
-
-                    // Plane is in x dir    
-                    } else if (diff.y == 0) {
-                        // Place faces
-                        if (diff.x > 0) {
-
-                        // Plane faces
-                        } else {
-
-                        }
-                    }
-                    Instantiate(plane);
-                    Debug.Log("gram");
-                    plane.transform.position = roomHallways[j];
+                    Vector3 pos = hallwayPoint + new Vector3(FinalRoomPlan[i].gridX, 0, FinalRoomPlan[i].gridY) + GridOffset;
+                    Instantiate(blockerPlane, pos * scaleMultiplier, Quaternion.LookRotation(diff, Vector3.up), RoomParent.transform);
                 }
             }
         }
