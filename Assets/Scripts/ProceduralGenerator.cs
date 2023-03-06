@@ -41,6 +41,8 @@ public class ProceduralGenerator : MonoBehaviour
     private GameObject RoomParent;
 
     private List<int[]> GabrielEdges;
+    [SerializeField]
+    private bool DoDebug = false;
     private bool DrawGizmos;
     private int gridPadding = 3;
 
@@ -890,7 +892,7 @@ public class ProceduralGenerator : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        if (DrawGizmos)
+        if (DrawGizmos && DoDebug)
         {
             if (GabrielEdges != null) {
                 // Direct connections from room to room
