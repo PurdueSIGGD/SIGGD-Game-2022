@@ -615,8 +615,8 @@ MonoBehaviour:
   Friction: 50
   Acceleration: 40
   gravity: 9.8
-  CamRotXSpeed: 0.2
-  CamRotYSpeed: 0.2
+  CamRotXSpeed: 0.1
+  CamRotYSpeed: 0.1
   CamRotYRange: 30
 --- !u!114 &8028695752240734996
 MonoBehaviour:

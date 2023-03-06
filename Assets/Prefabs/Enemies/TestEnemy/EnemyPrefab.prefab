@@ -580,7 +580,7 @@ MonoBehaviour:
   eyePos: {fileID: 6086155451611839868}
   layersToCheck:
     serializedVersion: 2
-    m_Bits: 769
+    m_Bits: 777
 --- !u!95 &173117687384148312
 Animator:
   serializedVersion: 4
@@ -692,6 +692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolPointDist: 13.6
+  maxPoints: 8
 --- !u!1 &7704486800958165290
 GameObject:
   m_ObjectHideFlags: 0

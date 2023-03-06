@@ -3746,7 +3746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149473114fa27214ab003464dfb0be03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deletionChance: 0.95
+  deletionChance: 0.9
 --- !u!114 &528460866899205092
 MonoBehaviour:
   m_ObjectHideFlags: 0

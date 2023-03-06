@@ -49,6 +49,8 @@ public class ProceduralGenerator : MonoBehaviour
     private bool DrawGizmos;
     private int gridPadding = 3;
 
+    private PatrolPoint[] patrolPoints;
+
     [System.Flags]
     public enum GridPoint
     {
@@ -187,6 +189,8 @@ public class ProceduralGenerator : MonoBehaviour
         DrawFloor();
         fixOpenDoors();
         GetComponent<BakeLevelNav>().BuildNavigation();
+        SetPatrolPoints();
+        WakeEnemies();
         //sets the player to be in the level for testing (remove later)
         if (SetPlayerPosRandom)
         {
@@ -201,9 +205,17 @@ public class ProceduralGenerator : MonoBehaviour
         }
     }
 
-    //Calls DrawRooms() to visualize the output of the procedural algorithm.
-    void Start()
+    private void SetPatrolPoints()
     {
+        patrolPoints = GetComponentsInChildren<PatrolPoint>();
+    }
+
+    private void WakeEnemies()
+    {
+        foreach (patrolManager pm in FindObjectsOfType<patrolManager>())
+        {
+            pm.WakeEnemy(patrolPoints);
+        }
     }
 
     //Uniformly generates a psuedo-random point in a circle of radius maxRadius.
