@@ -15,5 +15,5 @@ MonoBehaviour:
   room: {fileID: 8472894021166464802, guid: ad441725f5264264c9df07fd58f08b3b, type: 3}
   dimensions: {x: 24, y: 10, z: 24}
   hallways:
-  - {x: 17, y: 2, z: 0}
-  - {x: 8, y: 2, z: 24}
+  - {x: 17, y: -2, z: 0}
+  - {x: 8, y: -2, z: 24}
