@@ -612,7 +612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a348237189ede4daba0aa8c756a7a342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxSpeed: 8
+  MaxSpeed: 5
   Friction: 50
   Acceleration: 40
   gravity: 9.8
