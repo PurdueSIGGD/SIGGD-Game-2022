@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.VisualScripting;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -43,6 +44,8 @@ public class ProceduralGenerator : MonoBehaviour
     private List<int[]> GabrielEdges;
     [SerializeField]
     private bool DoDebug = false;
+    [SerializeField]
+    private bool SetPlayerPosRandom = true;
     private bool DrawGizmos;
     private int gridPadding = 3;
 
@@ -184,6 +187,18 @@ public class ProceduralGenerator : MonoBehaviour
         DrawFloor();
         fixOpenDoors();
         GetComponent<BakeLevelNav>().BuildNavigation();
+        //sets the player to be in the level for testing (remove later)
+        if (SetPlayerPosRandom)
+        {
+            Transform playerTrans = (Transform)Variables.ActiveScene.Get("player");
+            CharacterController CharC = playerTrans.GetComponent<CharacterController>();
+            //can only teleport player if turn off the character controller
+            CharC.enabled = false;
+            Vector2[] GridBounds = GetRoomBounds();
+            Vector3 GridOffset = new Vector3(GridBounds[0][0], 0, GridBounds[1][0]);
+            playerTrans.position = (new Vector3(FinalRoomPlan[0].gridX, 1, FinalRoomPlan[0].gridY) + GridOffset) * scaleMultiplier;
+            CharC.enabled = true;
+        }
     }
 
     //Calls DrawRooms() to visualize the output of the procedural algorithm.
