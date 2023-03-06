@@ -200,7 +200,9 @@ public class ProceduralGenerator : MonoBehaviour
             CharC.enabled = false;
             Vector2[] GridBounds = GetRoomBounds();
             Vector3 GridOffset = new Vector3(GridBounds[0][0], 0, GridBounds[1][0]);
-            playerTrans.position = (new Vector3(FinalRoomPlan[0].gridX, 1, FinalRoomPlan[0].gridY) + GridOffset) * scaleMultiplier;
+            Vector3 RoomCornerPosition = new Vector3(FinalRoomPlan[0].gridX, 1, FinalRoomPlan[0].gridY);
+            Vector3 RoomMiddleOffset = new Vector3(8, 0, 8);
+            playerTrans.position = (RoomMiddleOffset + RoomCornerPosition + GridOffset) * scaleMultiplier;
             CharC.enabled = true;
         }
     }
