@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 7336500727475562556}
   - component: {fileID: 935272098564757972}
   - component: {fileID: 6132591094390134540}
+  - component: {fileID: 6017003025847774006}
   m_Layer: 3
   m_Name: Spot Light (7)
   m_TagString: Untagged
@@ -173,6 +174,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deletionChance: 0.25
+--- !u!114 &6017003025847774006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326940204722318633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d47c85d4510abc9428e24e5c2b65de80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flickerChance: 0.25
+  hz: 0.25
+  hzOffset: 0.1
+  offChance: 0.25
 --- !u!1 &361355806106446120
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,6 +384,7 @@ GameObject:
   - component: {fileID: 5446894494726240761}
   - component: {fileID: 8037012979101856954}
   - component: {fileID: 863081987107931913}
+  - component: {fileID: 6771853571382132556}
   m_Layer: 3
   m_Name: Spot Light (1)
   m_TagString: Untagged
@@ -484,6 +502,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deletionChance: 0.25
+--- !u!114 &6771853571382132556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730230414314484390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d47c85d4510abc9428e24e5c2b65de80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flickerChance: 0.25
+  hz: 0.25
+  hzOffset: 0.1
+  offChance: 0.25
 --- !u!1 &767142578199313204
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,6 +530,7 @@ GameObject:
   - component: {fileID: 925313098813225449}
   - component: {fileID: 938633243540600579}
   - component: {fileID: 650666877161753259}
+  - component: {fileID: 6501113794144729440}
   m_Layer: 3
   m_Name: Spot Light (5)
   m_TagString: Untagged
@@ -613,6 +648,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deletionChance: 0.25
+--- !u!114 &6501113794144729440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767142578199313204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d47c85d4510abc9428e24e5c2b65de80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flickerChance: 0.25
+  hz: 0.25
+  hzOffset: 0.1
+  offChance: 0.25
 --- !u!1 &1490382633828105105
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,6 +940,7 @@ GameObject:
   - component: {fileID: 1173609226952040547}
   - component: {fileID: 989830772415620068}
   - component: {fileID: 215411982077276106}
+  - component: {fileID: 8250522778514927405}
   m_Layer: 3
   m_Name: Spot Light (2)
   m_TagString: Untagged
@@ -1006,6 +1058,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deletionChance: 0.25
+--- !u!114 &8250522778514927405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3332718140772456780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d47c85d4510abc9428e24e5c2b65de80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flickerChance: 0.25
+  hz: 0.25
+  hzOffset: 0.1
+  offChance: 0.25
 --- !u!1 &3630678496516604170
 GameObject:
   m_ObjectHideFlags: 0
@@ -1106,6 +1174,7 @@ GameObject:
   - component: {fileID: 5394084697218294040}
   - component: {fileID: 6588719489470623534}
   - component: {fileID: 90360841750965861}
+  - component: {fileID: 1077783303508368377}
   m_Layer: 3
   m_Name: Spot Light (3)
   m_TagString: Untagged
@@ -1223,6 +1292,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deletionChance: 0.25
+--- !u!114 &1077783303508368377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4859690893607758161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d47c85d4510abc9428e24e5c2b65de80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flickerChance: 0.25
+  hz: 0.25
+  hzOffset: 0.1
+  offChance: 0.25
 --- !u!1 &4886106355927436718
 GameObject:
   m_ObjectHideFlags: 0
@@ -1493,6 +1578,7 @@ GameObject:
   - component: {fileID: 3877293001679430005}
   - component: {fileID: 5279254424199915605}
   - component: {fileID: 4842237960355747672}
+  - component: {fileID: 5737476315738479751}
   m_Layer: 3
   m_Name: Spot Light
   m_TagString: Untagged
@@ -1610,6 +1696,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deletionChance: 0.25
+--- !u!114 &5737476315738479751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6823251695708120906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d47c85d4510abc9428e24e5c2b65de80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flickerChance: 0.25
+  hz: 0.25
+  hzOffset: 0.1
+  offChance: 0.25
 --- !u!1 &7332516907426980828
 GameObject:
   m_ObjectHideFlags: 0
@@ -1622,6 +1724,7 @@ GameObject:
   - component: {fileID: 3413850369496976673}
   - component: {fileID: 5318954148300525960}
   - component: {fileID: 5058075531800650759}
+  - component: {fileID: 7223002496193705358}
   m_Layer: 3
   m_Name: Spot Light (6)
   m_TagString: Untagged
@@ -1739,6 +1842,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deletionChance: 0.25
+--- !u!114 &7223002496193705358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7332516907426980828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d47c85d4510abc9428e24e5c2b65de80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flickerChance: 0.25
+  hz: 0.25
+  hzOffset: 0.1
+  offChance: 0.25
 --- !u!1 &7359704335148657424
 GameObject:
   m_ObjectHideFlags: 0
@@ -2149,6 +2268,7 @@ GameObject:
   - component: {fileID: 5433574836462738156}
   - component: {fileID: 1882054658448943837}
   - component: {fileID: 8095288577584693583}
+  - component: {fileID: 7943238098688281211}
   m_Layer: 3
   m_Name: Spot Light (8)
   m_TagString: Untagged
@@ -2266,6 +2386,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deletionChance: 0.25
+--- !u!114 &7943238098688281211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8940284755732928473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d47c85d4510abc9428e24e5c2b65de80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flickerChance: 0.25
+  hz: 0.25
+  hzOffset: 0.1
+  offChance: 0.25
 --- !u!1 &9096874814910068533
 GameObject:
   m_ObjectHideFlags: 0
@@ -2375,6 +2511,7 @@ GameObject:
   - component: {fileID: 7895229213297812033}
   - component: {fileID: 5990146201365136356}
   - component: {fileID: 4834695574518402314}
+  - component: {fileID: 5327947752139308436}
   m_Layer: 3
   m_Name: Spot Light (4)
   m_TagString: Untagged
@@ -2492,3 +2629,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deletionChance: 0.25
+--- !u!114 &5327947752139308436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9122700968610310031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d47c85d4510abc9428e24e5c2b65de80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flickerChance: 0.25
+  hz: 0.25
+  hzOffset: 0.1
+  offChance: 0.25

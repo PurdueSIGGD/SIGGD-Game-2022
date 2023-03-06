@@ -14,13 +14,13 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 0, g: 0, b: 0, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0.05
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.08134566, g: 0.085549586, b: 0.09433961, a: 1}
+  m_AmbientSkyColor: {r: 0.047058824, g: 0.047058824, b: 0.047058824, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -335,6 +335,7 @@ MonoBehaviour:
     type: 2}
   MainRoomMaterial: {fileID: 2100000, guid: 9c4ec128f1645944fb15148abfc47ec8, type: 2}
   plane: {fileID: 0}
+  DoDebug: 0
   FloorRooms:
   - {fileID: 11400000, guid: 139b2601d78567d468a0c22fbb03a44f, type: 2}
   - {fileID: 11400000, guid: c995c34d77acdee4391b445173e905ee, type: 2}
