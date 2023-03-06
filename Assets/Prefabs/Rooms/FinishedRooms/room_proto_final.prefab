@@ -97,7 +97,7 @@ Light:
   m_InnerSpotAngle: 18.236345
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -189,7 +189,7 @@ MonoBehaviour:
   flickerChance: 0.25
   hz: 0.25
   hzOffset: 0.1
-  offChance: 0.25
+  offChance: 0.1
 --- !u!1 &361355806106446120
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,7 +425,7 @@ Light:
   m_InnerSpotAngle: 28.933552
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -517,7 +517,7 @@ MonoBehaviour:
   flickerChance: 0.25
   hz: 0.25
   hzOffset: 0.1
-  offChance: 0.25
+  offChance: 0.1
 --- !u!1 &767142578199313204
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,7 +571,7 @@ Light:
   m_InnerSpotAngle: 36.065025
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -663,7 +663,7 @@ MonoBehaviour:
   flickerChance: 0.25
   hz: 0.25
   hzOffset: 0.1
-  offChance: 0.25
+  offChance: 0.1
 --- !u!1 &1490382633828105105
 GameObject:
   m_ObjectHideFlags: 0
@@ -981,7 +981,7 @@ Light:
   m_InnerSpotAngle: 14.6706085
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -1073,7 +1073,7 @@ MonoBehaviour:
   flickerChance: 0.25
   hz: 0.25
   hzOffset: 0.1
-  offChance: 0.25
+  offChance: 0.1
 --- !u!1 &3630678496516604170
 GameObject:
   m_ObjectHideFlags: 0
@@ -1215,7 +1215,7 @@ Light:
   m_InnerSpotAngle: 36.065025
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -1307,7 +1307,7 @@ MonoBehaviour:
   flickerChance: 0.25
   hz: 0.25
   hzOffset: 0.1
-  offChance: 0.25
+  offChance: 0.1
 --- !u!1 &4886106355927436718
 GameObject:
   m_ObjectHideFlags: 0
@@ -1619,7 +1619,7 @@ Light:
   m_InnerSpotAngle: 36.065025
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -1711,7 +1711,7 @@ MonoBehaviour:
   flickerChance: 0.25
   hz: 0.25
   hzOffset: 0.1
-  offChance: 0.25
+  offChance: 0.1
 --- !u!1 &7332516907426980828
 GameObject:
   m_ObjectHideFlags: 0
@@ -1765,7 +1765,7 @@ Light:
   m_InnerSpotAngle: 36.065025
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -1857,7 +1857,7 @@ MonoBehaviour:
   flickerChance: 0.25
   hz: 0.25
   hzOffset: 0.1
-  offChance: 0.25
+  offChance: 0.1
 --- !u!1 &7359704335148657424
 GameObject:
   m_ObjectHideFlags: 0
@@ -2309,7 +2309,7 @@ Light:
   m_InnerSpotAngle: 0
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -2401,7 +2401,7 @@ MonoBehaviour:
   flickerChance: 0.25
   hz: 0.25
   hzOffset: 0.1
-  offChance: 0.25
+  offChance: 0.1
 --- !u!1 &9096874814910068533
 GameObject:
   m_ObjectHideFlags: 0
@@ -2552,7 +2552,7 @@ Light:
   m_InnerSpotAngle: 36.065025
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -2644,4 +2644,4 @@ MonoBehaviour:
   flickerChance: 0.25
   hz: 0.25
   hzOffset: 0.1
-  offChance: 0.25
+  offChance: 0.1

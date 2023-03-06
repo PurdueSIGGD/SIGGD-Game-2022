@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 143117452}
   - component: {fileID: 143117451}
   m_Layer: 0
-  m_Name: VisualScripting SceneVariables (1)
+  m_Name: VisualScripting SceneVariables
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
