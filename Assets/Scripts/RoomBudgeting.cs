@@ -174,10 +174,6 @@ public class RoomBudgeting : MonoBehaviour {
         for (int i = 0; i < toSpawn.Count; i++) {
             GameObject spawnedObj = GameObject.Instantiate(toSpawn[i].gameObject);
 
-            // Vector3 tempScale = spawnedObj.transform.localScale;
-            // spawnedObj.transform.parent = transform;
-            // spawnedObj.transform.localScale = tempScale;
-
             Transform objTransform = spawnedObj.transform;
             bool spawning = true;
             float heightAdjustment = 0.0f;
@@ -194,8 +190,11 @@ public class RoomBudgeting : MonoBehaviour {
             }
 
             if (spawning) {
-                spawnedObj.transform.position = spawnPoints[i].transform.position + Vector3.up * heightAdjustment;
-                // print("Object spawned");
+                Transform pointT = spawnPoints[i].transform;
+                //objTransform.SetParent(pointT);
+                objTransform.position = pointT.localPosition + pointT.parent.transform.position;
+                //objTransform.localScale = pointT.localScale;
+                print("Object spawned");
             } else {
                 print("Error spawning object because its collider can't be handled.");
             }

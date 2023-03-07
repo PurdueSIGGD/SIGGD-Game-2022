@@ -43508,7 +43508,7 @@ MonoBehaviour:
   MaxRoomDepth: 10
   TileSize: 2
   MinRoomSeparation: 1
-  FloorBudget: 0
+  FloorBudget: 50
   RoundToTileSize: 1
   floor: {fileID: 556802070665314663, guid: 6b78b48d381ee8a488f4f1e859793cfa, type: 3}
   DefaultFloorMaterial: {fileID: 2100000, guid: ae627514e28ffb24f9e761d6c0511d0f,
