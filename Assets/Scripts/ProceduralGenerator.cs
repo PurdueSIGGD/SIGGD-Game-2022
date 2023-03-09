@@ -205,7 +205,7 @@ public class ProceduralGenerator : MonoBehaviour
             CharacterController CharC = playerTrans.GetComponent<CharacterController>();
             //can only teleport player if turn off the character controller
             CharC.enabled = false;
-            playerTrans.position = FindObjectOfType<PlayerSpawnPoint>().transform.position;
+            playerTrans.position = FindObjectOfType<PlayerSpawnPoint>().transform.position + Vector3.up*0.85f;
             CharC.enabled = true;
         }
     }
@@ -257,6 +257,8 @@ public class ProceduralGenerator : MonoBehaviour
         FinalRoomPlan = new Room[FinalRoomCount];
         int remainingFinalRooms = FinalRoomCount;
         int remainingNormRooms = TotalRoomCount - FinalRoomCount;
+        bool spawnedStart = false;
+        bool spawnedLast = false;
         for (int i = 0; i < TotalRoomCount; i++)
         {
             if (Random.Range(0, remainingNormRooms + remainingFinalRooms) < remainingNormRooms)
@@ -281,7 +283,19 @@ public class ProceduralGenerator : MonoBehaviour
                 remainingFinalRooms--;
                 Vector2 randomPoint = getRandomPointInCircle(inRadius);
 
-                RoomScriptableObject roomType = FloorRooms[Random.Range(0, FloorRooms.Length)];
+                RoomScriptableObject roomType;
+                if (!spawnedStart)
+                {
+                    roomType = StartRoom;
+                    spawnedStart = true;
+                } else if (!spawnedLast)
+                {
+                    roomType = EndRoom;
+                    spawnedLast = true;
+                } else
+                {
+                    roomType = FloorRooms[Random.Range(0, FloorRooms.Length)];
+                }
                 int rotation = Random.Range(0, 4);
                 float roomWidth = (int)roomType.dimensions.x + MinRoomSeparation;
                 float roomDepth = (int)roomType.dimensions.z + MinRoomSeparation;
