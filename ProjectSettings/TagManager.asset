@@ -10,16 +10,16 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - CanNavmesh
   - Water
   - UI
   - 
   - 
   - Character
   - Ground
-  - 
-  - 
-  - 
+  - Enemy
+  - Items
+  - EnemyProjectile
   - 
   - 
   - 

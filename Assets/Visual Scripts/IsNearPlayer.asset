@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e66c6366d904e98bc83428217d4fd7, type: 3}
+  m_Name: IsNearPlayer
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"graph":{"variables":{"Kind":"Flow","collection":{"$content":[],"$version":"A"},"$version":"A"},"controlInputDefinitions":[],"controlOutputDefinitions":[],"valueInputDefinitions":[{"hasDefaultValue":false,"defaultValue":{"$content":0.0,"$type":"System.Single"},"_type":"System.Single","key":"Max
+      Distance","label":"Max Distance","summary":"Max distance the player can be
+      away and still return true","hideLabel":false}],"valueOutputDefinitions":[{"_type":"System.Boolean","key":"isNear","label":"isNear","summary":"The
+      player is nearer than the input value","hideLabel":false}],"title":"Is Near
+      Player","summary":"Returns true or false depending on the distance to the player
+      compared to the input value","pan":{"x":-15.54442,"y":23.15576},"zoom":0.7100002,"elements":[{"defaultValues":{},"position":{"x":-82.0,"y":125.0},"guid":"cceaa9c6-e117-4b54-a3dd-fa827f54016b","$version":"A","$type":"Unity.VisualScripting.Vector3Distance","$id":"11"},{"type":"UnityEngine.Transform","instance":true,"static":false,"defaultValues":{"target":null},"position":{"x":-477.0,"y":-387.0},"guid":"4377f9eb-a505-4a56-a021-ad2b011e92e3","$version":"A","$type":"Unity.VisualScripting.Expose","$id":"13"},{"defaultValues":{},"position":{"x":-620.0,"y":-268.0},"guid":"b8cc04ae-3af3-4df3-93bd-518a2bac1e01","$version":"A","$type":"Unity.VisualScripting.This","$id":"15"},{"numeric":true,"defaultValues":{"b":{"$content":0.0,"$type":"System.Single"}},"position":{"x":94.0,"y":116.0},"guid":"96165631-de68-4f93-b6fd-1b0b9a60493e","$version":"A","$type":"Unity.VisualScripting.LessOrEqual","$id":"17"},{"defaultValues":{},"position":{"x":-812.0,"y":-14.0},"guid":"90920e34-b36b-4ab9-8972-e9ca9a790185","$version":"A","$type":"Unity.VisualScripting.GraphInput","$id":"19"},{"defaultValues":{},"position":{"x":283.0,"y":131.0},"guid":"f3349da7-3a91-4fa6-b5b3-319da5d1d053","$version":"A","$type":"Unity.VisualScripting.GraphOutput","$id":"21"},{"nest":{"source":"Macro","macro":0,"embed":null},"defaultValues":{},"position":{"x":-415.0,"y":255.0},"guid":"87058218-d187-427d-bbca-da5256b24197","$version":"A","$type":"Unity.VisualScripting.SubgraphUnit","$id":"23"},{"sourceUnit":{"$ref":"11"},"sourceKey":"distance","destinationUnit":{"$ref":"17"},"destinationKey":"a","guid":"60c72278-54e6-48fc-949e-5483d8f75ceb","$type":"Unity.VisualScripting.ValueConnection"},{"sourceUnit":{"$ref":"15"},"sourceKey":"self","destinationUnit":{"$ref":"13"},"destinationKey":"target","guid":"1871bd58-ec42-4f94-bc9a-9e0c065e93b2","$type":"Unity.VisualScripting.ValueConnection"},{"sourceUnit":{"$ref":"19"},"sourceKey":"Max
+      Distance","destinationUnit":{"$ref":"17"},"destinationKey":"b","guid":"00896323-7edb-4a94-a166-0c6b40fff276","$type":"Unity.VisualScripting.ValueConnection"},{"sourceUnit":{"$ref":"17"},"sourceKey":"comparison","destinationUnit":{"$ref":"21"},"destinationKey":"isNear","guid":"a1fb8174-cbcf-438a-abbc-a21db9f5dbca","$type":"Unity.VisualScripting.ValueConnection"},{"sourceUnit":{"$ref":"23"},"sourceKey":"playerPos","destinationUnit":{"$ref":"11"},"destinationKey":"b","guid":"d412de13-bf01-47f7-ad62-bae1d14b6aa9","$type":"Unity.VisualScripting.ValueConnection"},{"sourceUnit":{"$ref":"13"},"sourceKey":"position","destinationUnit":{"$ref":"11"},"destinationKey":"a","guid":"3a415a5e-0d41-4ffe-a855-b4198ccb3ab0","$type":"Unity.VisualScripting.ValueConnection"}],"$version":"A"}}'
+    _objectReferences:
+    - {fileID: 11400000, guid: 73cf173aa0df5fa49b459ae3d04104c5, type: 2}
