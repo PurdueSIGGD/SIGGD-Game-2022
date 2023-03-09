@@ -1,26 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class patrolManager : MonoBehaviour
 {
     [SerializeField]
     private float patrolPointDist;
+    [SerializeField]
+    private int maxPoints;
     private Transform[] patrolPoints;
     private int pointNum;
 
     //this sets up the patrol points for an enemy by creating a path from the nearby points
-    private void Start()
+    public void WakeEnemy(PatrolPoint[] points)
     {
         //add nearby all points to the list
         List<Transform> closePoints = new List<Transform>();
-        foreach (PatrolPoint pp in FindObjectsOfType<PatrolPoint>())
+        foreach (PatrolPoint pp in points)
         {
             //check if within the range
             if (Vector3.SqrMagnitude(pp.transform.position - transform.position) <= patrolPointDist * patrolPointDist)
             {
                 closePoints.Add(pp.transform);
             }
+        }
+
+        //sorts the list
+        closePoints = closePoints.OrderBy(p => Vector3.Distance(p.position, transform.position)).ToList();
+
+        //remove extra points
+        for (int i = closePoints.Count - 1; i >= maxPoints; i--)
+        {
+            closePoints.RemoveAt(i);
         }
 
         //order the points by TSP
@@ -121,7 +133,7 @@ public class patrolManager : MonoBehaviour
 
     public Vector3 getNextPatrolPoint()
     {
-        if (patrolPoints.Length == 0)
+        if (patrolPoints == null || patrolPoints.Length == 0)
         {
             Debug.Log("No patrol points assigned to " + transform.name + ": This will cause slowdown");
             return transform.position;
