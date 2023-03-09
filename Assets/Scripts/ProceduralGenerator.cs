@@ -175,7 +175,14 @@ public class ProceduralGenerator : MonoBehaviour
     }
 
     [SerializeField]
-    RoomScriptableObject[] FloorRooms;
+    private RoomScriptableObject[] FloorRooms;
+
+    [SerializeField]
+    private RoomScriptableObject StartRoom;
+    private bool CreatedStart;
+    [SerializeField]
+    private RoomScriptableObject EndRoom;
+    private bool CreatedEnd;
 
 
     public GridPoint[,] grid;
