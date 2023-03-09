@@ -190,10 +190,9 @@ public class RoomBudgeting : MonoBehaviour {
             }
 
             if (spawning) {
-                Transform pointT = spawnPoints[i].transform;
-                //objTransform.SetParent(pointT);
-                objTransform.position = pointT.localPosition + pointT.parent.transform.position;
-                //objTransform.localScale = pointT.localScale;
+                //objTransform.position = new Vector3(pointPos.x * roomScale.x, heightAdjustment, pointPos.z * roomScale.z) + roomPos;
+                objTransform.SetParent(spawnPoints[i].transform);
+                objTransform.position = spawnPoints[i].transform.position;
                 print("Object spawned");
             } else {
                 print("Error spawning object because its collider can't be handled.");

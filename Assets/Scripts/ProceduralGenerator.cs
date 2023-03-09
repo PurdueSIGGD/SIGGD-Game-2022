@@ -205,7 +205,7 @@ public class ProceduralGenerator : MonoBehaviour
             CharacterController CharC = playerTrans.GetComponent<CharacterController>();
             //can only teleport player if turn off the character controller
             CharC.enabled = false;
-            playerTrans.position = FindObjectOfType<PlayerSpawnPoint>().transform.position;
+            //playerTrans.position = FindObjectOfType<PlayerSpawnPoint>().transform.position;
             CharC.enabled = true;
         }
     }
@@ -394,15 +394,17 @@ public class ProceduralGenerator : MonoBehaviour
         foreach (Rect rect in rooms)
         {
             GameObject testFloor = Instantiate(floor, new Vector3(rect.center.x, 0, rect.center.y), Quaternion.identity, RoomParent.transform);
-            
+            #if UNITY_EDITOR
+                testFloor.GetComponent<RoomGenerator>().EditorAwake();
+            #endif
             // Divide by 10 because the scale of planes is 10. Can be abstracted as a variable if floor is changed
             float standardRoomSize = 8.0f;
             testFloor.transform.localScale = (new Vector3(rect.width, standardRoomSize, rect.height)) / standardRoomSize;
             // testFloor.transform.Translate(new Vector3(-0.5f, 0, -0.5f));
 
             // Tell the roomGenerators to generate each room
-            // RoomBudgeting roomBudgeting = testFloor.GetComponent<RoomBudgeting>();
-            // roomBudgeting.generateObstacles(FloorBudget / rooms.Count);
+            RoomGenerator roomGenerator = testFloor.GetComponent<RoomGenerator>();
+            roomGenerator.generateObstacles(FloorBudget / rooms.Count);
 
             if (roomColor != null)
             {
@@ -752,7 +754,7 @@ public class ProceduralGenerator : MonoBehaviour
             }
         }
 
-        // GenerateHallwayGrid();
+        GenerateHallwayGrid();
     }
 
     void GenerateHallwayGrid() {
