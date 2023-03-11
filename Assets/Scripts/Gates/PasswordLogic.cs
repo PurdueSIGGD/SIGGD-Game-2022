@@ -21,6 +21,8 @@ public class PasswordLogic : MonoBehaviour
         if (doorTrigger == null)
         {
             canvas.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             InputField.text = "";
             FindObjectOfType<Player>().lockInputs = false;
         }
@@ -41,6 +43,8 @@ public class PasswordLogic : MonoBehaviour
         {
             canvas.SetActive(true);
             InputField.ActivateInputField();
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
             FindObjectOfType<Player>().lockInputs = true;
             checkPassword();
         }
