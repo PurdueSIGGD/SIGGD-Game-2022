@@ -677,7 +677,7 @@ MonoBehaviour:
   - {fileID: 910863468206653602, guid: 06f5f7ecd7a61a94d9718a720f50cea7, type: 3}
   - {fileID: 910863468206653602, guid: 583523b13641c484faaadaaf18e8dcaf, type: 3}
   - {fileID: 910863468206653602, guid: 7bafcb5552447b84f96403a227d830c4, type: 3}
-  distPerStep: 1.7
+  distPerStep: 3.4
   sightedSound: {fileID: 910863468206653602, guid: 8e5796feec7ea4a4095cf7e652bdc6f7,
     type: 3}
   stunSound: {fileID: 910863468206653602, guid: 0309a5b09b6e085479f1dfa7023fb4d8,

@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bef9cf795a290b744a60444fd431d559, type: 3}
-  m_Name: ivan_corridor_final
+  m_Name: labyrinth_final
   m_EditorClassIdentifier: 
-  room: {fileID: 206686591097918313, guid: ba9276412f1c6a84286abb7d6ee2e82c, type: 3}
-  dimensions: {x: 32, y: 8, z: 32}
+  room: {fileID: 8941470937861435053, guid: 83be5f4f1245fca4e88a790a84c4577e, type: 3}
+  dimensions: {x: 64, y: 16, z: 32}
   hallways:
-  - {x: 32, y: 2, z: 29}
-  - {x: 3, y: 2, z: 0}
+  - {x: 0, y: 0, z: 16}
+  - {x: 59, y: 0, z: 0}
+  - {x: 64, y: 0, z: 16}
