@@ -39,21 +39,18 @@ public class InventorySystem : MonoBehaviour {
 
 
     void Awake() {
-        instance = this;
+        //instance = this;
 
         // Grabs all children InventorySlots to base the inventory array on the InventoryCanvas prefab
         // ASSUMES that all slots are ordered in the hierarchy top->bottom = left->right in the HUD
-        inventory = GetComponentsInChildren<InventorySlot>();
+        //inventory = GetComponentsInChildren<InventorySlot>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
         // ensures items in scene can actually be picked up while testing
-        SubscribeToItemsInScene();
-
-        // sets the first inventory slot to be selected
-        inventory[selectedSlotNum].setSelected(true);
+        //SubscribeToItemsInScene();
     }
 
     // Update is called once per frame
@@ -381,13 +378,22 @@ public class InventorySystem : MonoBehaviour {
     /// Once Rooms are implemented and spawn the items,
     /// the inventory system will subscribe itself to the spawned items' onPickup events.
     /// </summary>
-    void SubscribeToItemsInScene()
+    public void SubscribeToItemsInScene()
     {
+        instance = this;
+
+        // Grabs all children InventorySlots to base the inventory array on the InventoryCanvas prefab
+        // ASSUMES that all slots are ordered in the hierarchy top->bottom = left->right in the HUD
+        inventory = GetComponentsInChildren<InventorySlot>();
+
         // gets all items in scene
         Item[] allItems = FindObjectsOfType<Item>();
 
         // registers Add() to every item in the scene
         foreach (Item item in allItems)
             item.OnGrab += Add;
+
+        // sets the first inventory slot to be selected
+        inventory[selectedSlotNum].setSelected(true);
     }
 }

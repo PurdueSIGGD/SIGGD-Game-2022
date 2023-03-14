@@ -580,7 +580,7 @@ MonoBehaviour:
   eyePos: {fileID: 6086155451611839868}
   layersToCheck:
     serializedVersion: 2
-    m_Bits: 769
+    m_Bits: 777
 --- !u!95 &173117687384148312
 Animator:
   serializedVersion: 4
@@ -670,7 +670,14 @@ MonoBehaviour:
   - {fileID: 910863468206653602, guid: 7f5f8d3f87bae684ebcc4c4bc9508e37, type: 3}
   - {fileID: 910863468206653602, guid: 37977ca493f9b47408000062f9fc374c, type: 3}
   - {fileID: 910863468206653602, guid: 0a84e4e944c4540438ae41c8e14412aa, type: 3}
-  distPerStep: 1.7
+  - {fileID: 910863468206653602, guid: 14082bb28d07ddd4a9f68c958975253c, type: 3}
+  - {fileID: 910863468206653602, guid: 65ac3498bf548824f87d2700a048a741, type: 3}
+  - {fileID: 910863468206653602, guid: 1e15d3a770939d44a99cbbe7047c1205, type: 3}
+  - {fileID: 910863468206653602, guid: 7a27e87641aef0745ae2bc0804c1144f, type: 3}
+  - {fileID: 910863468206653602, guid: 06f5f7ecd7a61a94d9718a720f50cea7, type: 3}
+  - {fileID: 910863468206653602, guid: 583523b13641c484faaadaaf18e8dcaf, type: 3}
+  - {fileID: 910863468206653602, guid: 7bafcb5552447b84f96403a227d830c4, type: 3}
+  distPerStep: 3.4
   sightedSound: {fileID: 910863468206653602, guid: 8e5796feec7ea4a4095cf7e652bdc6f7,
     type: 3}
   stunSound: {fileID: 910863468206653602, guid: 0309a5b09b6e085479f1dfa7023fb4d8,
@@ -692,6 +699,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolPointDist: 13.6
+  maxPoints: 8
 --- !u!1 &7704486800958165290
 GameObject:
   m_ObjectHideFlags: 0

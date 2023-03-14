@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - CinemachineTarget
+  - DoorBlocker
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - CanNavmesh
   - Water
   - UI
   - 

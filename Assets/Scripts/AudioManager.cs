@@ -18,6 +18,11 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private GameObject deaggroSound;
 
+    private void Start()
+    {
+        stepMeter = Random.value * distPerStep;
+    }
+
     private void Update()
     {
         if (sightedCountdown > 0)

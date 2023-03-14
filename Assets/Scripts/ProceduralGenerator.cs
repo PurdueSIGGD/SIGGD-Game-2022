@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.VisualScripting;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -30,7 +31,9 @@ public class ProceduralGenerator : MonoBehaviour
     Material DefaultFloorMaterial, MainRoomMaterial;
 
     [SerializeField]
-    private GameObject plane;
+    private GameObject blockerPlane;
+
+    private float scaleMultiplier = 0.85f;
 
     private float inRadius = 10;
 
@@ -39,8 +42,12 @@ public class ProceduralGenerator : MonoBehaviour
     private GameObject RoomParent;
 
     private List<int[]> GabrielEdges;
+    [SerializeField]
+    private bool DoDebug = false;
     private bool DrawGizmos;
     private int gridPadding = 3;
+
+    private PatrolPoint[] patrolPoints;
 
     [System.Flags]
     public enum GridPoint
@@ -78,7 +85,7 @@ public class ProceduralGenerator : MonoBehaviour
 
         public int yOffset;
 
-        public Room(RoomScriptableObject roomObj, int rotation, int rectPointer) {
+        public Room(RoomScriptableObject roomObj, int rotation, int rectPointer, float scaleMultiplier) {
             this.physicalRoom = roomObj.room;
             this.rotation = rotation;
             this.rectPointer = rectPointer;
@@ -129,7 +136,8 @@ public class ProceduralGenerator : MonoBehaviour
             this.gridY = yPos;
 
             for (int i = 0; i < hallways.Length; i++) {
-                grid[xPos + Mathf.RoundToInt(hallways[i].x), yPos + Mathf.RoundToInt(hallways[i].z)] = GridPoint.Doorway;
+                Vector3 hallPoint = hallways[i];
+                grid[xPos + Mathf.RoundToInt(hallPoint.x), yPos + Mathf.RoundToInt(hallPoint.z)] = GridPoint.Doorway;
             }
         }
 
@@ -166,7 +174,14 @@ public class ProceduralGenerator : MonoBehaviour
     }
 
     [SerializeField]
-    RoomScriptableObject[] FloorRooms;
+    private RoomScriptableObject[] FloorRooms;
+
+    [SerializeField]
+    private RoomScriptableObject StartRoom;
+    private bool CreatedStart;
+    [SerializeField]
+    private RoomScriptableObject EndRoom;
+    private bool CreatedEnd;
 
 
     public GridPoint[,] grid;
@@ -175,14 +190,69 @@ public class ProceduralGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        //Generate layout
         GenerateDungeon();
+
+        //remove any prior objects
         ClearScene();
+
+        //spawn the room
         DrawFloor();
+
+        //Block off open doors
+        fixOpenDoors();
+
+        //Make the end room have correct number of doors
+        foreach (RemoveIfDoorNear rm in FindObjectsOfType<RemoveIfDoorNear>())
+        {
+            rm.ClearWrongDoors();
+        }
+        
+        //sets the player to be at the spawn point
+        PlayerSpawnPoint psp = FindObjectOfType<PlayerSpawnPoint>();
+        psp.spawn();
+
+        //builds navigation
+        GetComponent<BakeLevelNav>().BuildNavigation();
+
+        //Records all of the patrol points
+        SetPatrolPoints();
+
+        //Debug.LogError("Before spawn items");
+
+        //Randomly spawns items and enemies
+        itemSetup();
+
+        //Debug.LogError("Before Wake Enemies items");
+
+        //Start the enemy patrols
+        WakeEnemies();
+
+        //Debug.LogError("After Wake Enemies items");
     }
 
-    //Calls DrawRooms() to visualize the output of the procedural algorithm.
-    void Start()
+    private void itemSetup()
     {
+        foreach (DumbSpawner spawner in FindObjectsOfType<DumbSpawner>())
+        {
+            spawner.dumbSpawn();
+        }
+        //Debug.LogError("Before subscribe");
+        FindObjectOfType<InventorySystem>().SubscribeToItemsInScene();
+    }
+
+    private void SetPatrolPoints()
+    {
+        patrolPoints = GetComponentsInChildren<PatrolPoint>();
+    }
+
+    private void WakeEnemies()
+    {
+        foreach (patrolManager pm in FindObjectsOfType<patrolManager>())
+        {
+            pm.WakeEnemy(patrolPoints);
+            CustomEvent.Trigger(pm.gameObject, "wakeUp");
+        }
     }
 
     //Uniformly generates a psuedo-random point in a circle of radius maxRadius.
@@ -219,6 +289,8 @@ public class ProceduralGenerator : MonoBehaviour
         FinalRoomPlan = new Room[FinalRoomCount];
         int remainingFinalRooms = FinalRoomCount;
         int remainingNormRooms = TotalRoomCount - FinalRoomCount;
+        bool spawnedStart = false;
+        bool spawnedLast = false;
         for (int i = 0; i < TotalRoomCount; i++)
         {
             if (Random.Range(0, remainingNormRooms + remainingFinalRooms) < remainingNormRooms)
@@ -243,7 +315,19 @@ public class ProceduralGenerator : MonoBehaviour
                 remainingFinalRooms--;
                 Vector2 randomPoint = getRandomPointInCircle(inRadius);
 
-                RoomScriptableObject roomType = FloorRooms[Random.Range(0, FloorRooms.Length)];
+                RoomScriptableObject roomType;
+                if (!spawnedStart)
+                {
+                    roomType = StartRoom;
+                    spawnedStart = true;
+                } else if (!spawnedLast)
+                {
+                    roomType = EndRoom;
+                    spawnedLast = true;
+                } else
+                {
+                    roomType = FloorRooms[Random.Range(0, FloorRooms.Length)];
+                }
                 int rotation = Random.Range(0, 4);
                 float roomWidth = (int)roomType.dimensions.x + MinRoomSeparation;
                 float roomDepth = (int)roomType.dimensions.z + MinRoomSeparation;
@@ -254,7 +338,7 @@ public class ProceduralGenerator : MonoBehaviour
                     roomDepth = temp;
                 }
 
-                FinalRoomPlan[remainingFinalRooms] = new Room(roomType, rotation, i);
+                FinalRoomPlan[remainingFinalRooms] = new Room(roomType, rotation, i, scaleMultiplier);
                 RoomRects.Add(new Rect(randomPoint.x - (roomWidth / 2), randomPoint.y - (roomDepth / 2), roomWidth + 0.1f, roomDepth + 0.1f));
             }
         }
@@ -281,7 +365,7 @@ public class ProceduralGenerator : MonoBehaviour
         //Draws the temporary rooms. Unneeded in final design,
         //and currently does not work due to RoomRects randomization changes.
         //DrawRooms(RoomRects.GetRange(0, RoomRects.Count - FinalRoomCount), DefaultFloorMaterial);
-        DrawRooms(FinalRoomPlan, MainRoomMaterial);
+        DrawRooms(FinalRoomPlan);
         DrawHallways();
 
         DrawGizmos = true;
@@ -379,25 +463,17 @@ public class ProceduralGenerator : MonoBehaviour
         }
     } */
 
-    private void DrawRooms(Room[] rooms, Material roomColor) {
+    private void DrawRooms(Room[] rooms) {
         foreach (Room finalRoom in rooms)
         {
             Vector3 inPos = new Vector3(Mathf.RoundToInt(finalRoom.roomRect.center.x), finalRoom.yOffset, Mathf.RoundToInt(finalRoom.roomRect.center.y));
-            GameObject testFloor = Instantiate(finalRoom.physicalRoom, inPos, Quaternion.identity, RoomParent.transform);
+            //GameObject testFloor = Instantiate(finalRoom.physicalRoom, inPos, Quaternion.identity, RoomParent.transform);
+            GameObject testFloor = Instantiate(finalRoom.physicalRoom, inPos * scaleMultiplier, Quaternion.identity, RoomParent.transform);
             #if UNITY_EDITOR
                 //testFloor.GetComponent<RoomGenerator>().EditorAwake();
             #endif
 
             testFloor.transform.Rotate(new Vector3(0, 90, 0) * finalRoom.rotation);
-
-            if (roomColor != null)
-            {
-                foreach (Renderer planeRend in testFloor.GetComponentsInChildren<Renderer>())
-                {
-                    planeRend.material = roomColor;
-                }
-            }
-
         }
     }
 
@@ -485,7 +561,9 @@ public class ProceduralGenerator : MonoBehaviour
             for (int j = 1; j < grid.GetLength(1) - 1; j++)
             {
                 if (grid[i, j] != GridPoint.Hallway) continue;
-                GameObject CurrentHallway = Instantiate(HallwayPrefab, new Vector3(i, 0, j) + GridOffset, Quaternion.identity, RoomParent.transform);
+                Vector3 pos = new Vector3(i, 0, j) + GridOffset;
+                //GameObject CurrentHallway = Instantiate(HallwayPrefab, pos, Quaternion.identity, RoomParent.transform);
+                GameObject CurrentHallway = Instantiate(HallwayPrefab, pos * scaleMultiplier, Quaternion.identity, RoomParent.transform);
                 Vector3 ParentScale = CurrentHallway.transform.localScale;
                 bool[] isSideDestroyed = new bool[4];
                 // Left
@@ -893,7 +971,7 @@ public class ProceduralGenerator : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        if (DrawGizmos)
+        if (DrawGizmos && DoDebug)
         {
             if (GabrielEdges != null) {
                 // Direct connections from room to room
@@ -902,8 +980,8 @@ public class ProceduralGenerator : MonoBehaviour
                     Rect room1 = FinalRoomPlan[GabrielEdges[i][0]].roomRect;
                     Rect room2 = FinalRoomPlan[GabrielEdges[i][1]].roomRect;
                     Gizmos.color = Color.blue;
-                    Vector3 vectA = new Vector3(room1.center.x, 0, room1.center.y);
-                    Vector3 vectB = new Vector3(room2.center.x, 0, room2.center.y);
+                    Vector3 vectA = new Vector3(room1.center.x, 0, room1.center.y) * scaleMultiplier;
+                    Vector3 vectB = new Vector3(room2.center.x, 0, room2.center.y) * scaleMultiplier;
                     Gizmos.DrawLine(vectA, vectB);
                 }
             }
@@ -915,7 +993,7 @@ public class ProceduralGenerator : MonoBehaviour
                 for (int i = 0; i < grid.GetLength(0); i++) {
                     for (int j = 0; j < grid.GetLength(1); j++) {
                         Gizmos.color = getGridColor(grid[i, j]);
-                        Gizmos.DrawSphere(new Vector3(xMin + i, 0, yMin + j), 0.3f);
+                        Gizmos.DrawSphere(new Vector3(xMin + i, 0, yMin + j) * scaleMultiplier, 0.3f);
                     }
                 }
             }
@@ -923,52 +1001,40 @@ public class ProceduralGenerator : MonoBehaviour
     }
 
     private void fixOpenDoors() {
-        for (int i = 0; i < FinalRoomPlan.Length; i++) {
+        for (int i = 0; i < FinalRoomPlan.Length; i++) {    //For each room
+
             Vector3[] roomHallways = FinalRoomPlan[i].getHallways();
-            for (int j = 0; j < roomHallways.Length; j++) {
+            for (int j = 0; j < roomHallways.Length; j++) {     //For each room's door
+                
+                //Both are relative to the center of the room
                 int x = Mathf.RoundToInt(roomHallways[j].x);
                 int y = Mathf.RoundToInt(roomHallways[j].z);
                 int[] xIndices = new int[] {x - 1, x + 1, x, x};
                 int[] yIndices = new int[] {y, y, y - 1, y + 1};
                 Vector3 hallwayPoint = Vector3.positiveInfinity;
+
                 // Check to see if there's a surrounding hallway
-                for (int k = 0; k < xIndices.Length; k++) {
-                    if (isValid(xIndices[k], yIndices[k])) {
-                        if (grid[xIndices[k], yIndices[k]] == GridPoint.Hallway) {
-                            Vector2[] bounds = GetRoomBounds();
-                            float xMin = bounds[0][0];
-                            float yMin = bounds[1][0];
-                            hallwayPoint = new Vector3(roomHallways[j].x + xIndices[k], 0, roomHallways[j].z + yIndices[k]);
+                for (int k = 0; k < xIndices.Length; k++) {     //For adjacent points
+                    int mapx = xIndices[k] + FinalRoomPlan[i].gridX;
+                    int mapy = yIndices[k] + FinalRoomPlan[i].gridY;
+                    if (isValid(mapx, mapy)) {    //If position exists
+                        if (grid[mapx, mapy] == GridPoint.Empty) {  //If point is empty, must be filled
+                            hallwayPoint = new Vector3(xIndices[k], 0, yIndices[k]);
+                            break;
                         }
                     }
                 }
+
                 // If not, we need to fill the hole
-                if (hallwayPoint != Vector3.positiveInfinity) {
+                if (hallwayPoint.magnitude != float.PositiveInfinity) {
                     // Find the direction in which we need to draw the plane
-                    Vector3 diff = hallwayPoint - roomHallways[j];
-                    // Plane is in y dir
-                    if (diff.x == 0) {
-                        // Place faces
-                        if (diff.y > 0) {
+                    Vector3 diff = hallwayPoint - new Vector3(roomHallways[j].x, 0, roomHallways[j].z);
 
-                        // Plane faces
-                        } else {
+                    Vector2[] GridBounds = GetRoomBounds();
+                    Vector3 GridOffset = new Vector3(GridBounds[0][0], 0, GridBounds[1][0]);
 
-                        }
-
-                    // Plane is in x dir    
-                    } else if (diff.y == 0) {
-                        // Place faces
-                        if (diff.x > 0) {
-
-                        // Plane faces
-                        } else {
-
-                        }
-                    }
-                    Instantiate(plane);
-                    Debug.Log("gram");
-                    plane.transform.position = roomHallways[j];
+                    Vector3 pos = hallwayPoint + new Vector3(FinalRoomPlan[i].gridX, 0, FinalRoomPlan[i].gridY) + GridOffset;
+                    Instantiate(blockerPlane, pos * scaleMultiplier, Quaternion.LookRotation(diff, Vector3.up), RoomParent.transform);
                 }
             }
         }
