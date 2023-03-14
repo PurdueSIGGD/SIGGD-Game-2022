@@ -49,11 +49,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Ammo
   type: 0
-  inventorySprite: {fileID: 0}
+  inventorySprite: {fileID: 21300000, guid: a8cf8279c8d94284faeb276af47159c2, type: 3}
   maxStackSize: 7
   currentNumCharges: 1
   isShiny: 0
   description: 
+  useDuration: 0
   objectToDeploy: {fileID: 1721840539210694629, guid: 3407bbb6964d28d43ad0cab0cc7cbed3,
     type: 3}
 --- !u!33 &8921928657805700723

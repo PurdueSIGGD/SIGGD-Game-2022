@@ -49,11 +49,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Key
   type: 2
-  inventorySprite: {fileID: 21300000, guid: 637e78c370f490046a41f25de20f7bdd, type: 3}
+  inventorySprite: {fileID: 21300000, guid: 4eef7c4592b62184cbac92f57f2b57c8, type: 3}
   maxStackSize: 1
   currentNumCharges: 1
   isShiny: 0
   description: 
+  useDuration: 0
 --- !u!33 &3953836916633628935
 MeshFilter:
   m_ObjectHideFlags: 0

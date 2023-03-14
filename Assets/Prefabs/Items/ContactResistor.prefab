@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Contact Resistor
   type: 1
-  inventorySprite: {fileID: 21300000, guid: f95d85c7d27b4a8488d6520e1547c164, type: 3}
+  inventorySprite: {fileID: 21300000, guid: c480971c731a00041a73486d441d0fb5, type: 3}
   maxStackSize: 1
   currentNumCharges: 1
   isShiny: 0
