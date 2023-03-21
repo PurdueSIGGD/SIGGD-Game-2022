@@ -5,7 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - CinemachineTarget
-  - RoomSpawn
+  - DoorBlocker
   layers:
   - Default
   - TransparentFX

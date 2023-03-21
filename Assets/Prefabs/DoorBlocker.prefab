@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1472186052404107543}
   m_Layer: 3
   m_Name: BlockerPlane
-  m_TagString: Untagged
+  m_TagString: DoorBlocker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

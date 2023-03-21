@@ -44,8 +44,6 @@ public class ProceduralGenerator : MonoBehaviour
     private List<int[]> GabrielEdges;
     [SerializeField]
     private bool DoDebug = false;
-    [SerializeField]
-    private bool SetPlayerPosRandom = true;
     private bool DrawGizmos;
     private int gridPadding = 3;
 
@@ -138,7 +136,8 @@ public class ProceduralGenerator : MonoBehaviour
             this.gridY = yPos;
 
             for (int i = 0; i < hallways.Length; i++) {
-                grid[xPos + Mathf.RoundToInt(hallways[i].x), yPos + Mathf.RoundToInt(hallways[i].z)] = GridPoint.Doorway;
+                Vector3 hallPoint = hallways[i];
+                grid[xPos + Mathf.RoundToInt(hallPoint.x), yPos + Mathf.RoundToInt(hallPoint.z)] = GridPoint.Doorway;
             }
         }
 
@@ -191,23 +190,55 @@ public class ProceduralGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        //Generate layout
         GenerateDungeon();
+
+        //remove any prior objects
         ClearScene();
+
+        //spawn the room
         DrawFloor();
+
+        //Block off open doors
         fixOpenDoors();
-        GetComponent<BakeLevelNav>().BuildNavigation();
-        SetPatrolPoints();
-        WakeEnemies();
-        //sets the player to be in the level for testing (remove later)
-        if (SetPlayerPosRandom)
+
+        //Make the end room have correct number of doors
+        foreach (RemoveIfDoorNear rm in FindObjectsOfType<RemoveIfDoorNear>())
         {
-            Transform playerTrans = (Transform)Variables.ActiveScene.Get("player");
-            CharacterController CharC = playerTrans.GetComponent<CharacterController>();
-            //can only teleport player if turn off the character controller
-            CharC.enabled = false;
-            //playerTrans.position = FindObjectOfType<PlayerSpawnPoint>().transform.position;
-            CharC.enabled = true;
+            rm.ClearWrongDoors();
         }
+        
+        //sets the player to be at the spawn point
+        PlayerSpawnPoint psp = FindObjectOfType<PlayerSpawnPoint>();
+        psp.spawn();
+
+        //builds navigation
+        GetComponent<BakeLevelNav>().BuildNavigation();
+
+        //Records all of the patrol points
+        SetPatrolPoints();
+
+        //Debug.LogError("Before spawn items");
+
+        //Randomly spawns items and enemies
+        itemSetup();
+
+        //Debug.LogError("Before Wake Enemies items");
+
+        //Start the enemy patrols
+        WakeEnemies();
+
+        //Debug.LogError("After Wake Enemies items");
+    }
+
+    private void itemSetup()
+    {
+        foreach (DumbSpawner spawner in FindObjectsOfType<DumbSpawner>())
+        {
+            spawner.dumbSpawn();
+        }
+        //Debug.LogError("Before subscribe");
+        FindObjectOfType<InventorySystem>().SubscribeToItemsInScene();
     }
 
     private void SetPatrolPoints()
@@ -220,6 +251,7 @@ public class ProceduralGenerator : MonoBehaviour
         foreach (patrolManager pm in FindObjectsOfType<patrolManager>())
         {
             pm.WakeEnemy(patrolPoints);
+            CustomEvent.Trigger(pm.gameObject, "wakeUp");
         }
     }
 
@@ -257,6 +289,8 @@ public class ProceduralGenerator : MonoBehaviour
         FinalRoomPlan = new Room[FinalRoomCount];
         int remainingFinalRooms = FinalRoomCount;
         int remainingNormRooms = TotalRoomCount - FinalRoomCount;
+        bool spawnedStart = false;
+        bool spawnedLast = false;
         for (int i = 0; i < TotalRoomCount; i++)
         {
             if (Random.Range(0, remainingNormRooms + remainingFinalRooms) < remainingNormRooms)
@@ -281,7 +315,19 @@ public class ProceduralGenerator : MonoBehaviour
                 remainingFinalRooms--;
                 Vector2 randomPoint = getRandomPointInCircle(inRadius);
 
-                RoomScriptableObject roomType = FloorRooms[Random.Range(0, FloorRooms.Length)];
+                RoomScriptableObject roomType;
+                if (!spawnedStart)
+                {
+                    roomType = StartRoom;
+                    spawnedStart = true;
+                } else if (!spawnedLast)
+                {
+                    roomType = EndRoom;
+                    spawnedLast = true;
+                } else
+                {
+                    roomType = FloorRooms[Random.Range(0, FloorRooms.Length)];
+                }
                 int rotation = Random.Range(0, 4);
                 float roomWidth = (int)roomType.dimensions.x + MinRoomSeparation;
                 float roomDepth = (int)roomType.dimensions.z + MinRoomSeparation;
