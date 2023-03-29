@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class InventorySystem : MonoBehaviour {
 
@@ -29,7 +31,7 @@ public class InventorySystem : MonoBehaviour {
     private InventorySlot[] inventory;
 
     // the index of the current selected slot
-    private int selectedSlotNum = 0;
+    private int selectedSlotNum = 1;
     private bool chooseLock = false;
     private Item chooseItem = null;
 
@@ -63,31 +65,31 @@ public class InventorySystem : MonoBehaviour {
             new Slow(0, 0); //Put this here just in case (Kyle)
         }
         // process drop
-        if (Keyboard.current.qKey.wasPressedThisFrame)
+        /*if (Keyboard.current.qKey.wasPressedThisFrame)
         {
             Drop(false);
             if (chooseItem != null) {
                 Add(chooseItem);
                 chooseItem = null;
             }
-        }
+        }*/
 
         // process use
-        if (Keyboard.current.eKey.wasPressedThisFrame && !Stunned.isStunned) // IF issues remove the stunned check because 
+        /*if (Keyboard.current.eKey.wasPressedThisFrame && !Stunned.isStunned) // IF issues remove the stunned check because 
                                                                                 // I wasn't able to check if it worked but it wasn't
                                                                                 // erroring out
         {
             Use();
-        }
+        }*/
 
         // get rid of the item that would have overflowed the inventory
-        if (Keyboard.current.rKey.wasPressedThisFrame)
+        /*if (Keyboard.current.rKey.wasPressedThisFrame)
         {
             if (chooseItem != null) {
                 Drop(chooseItem); //2nd drop to manage dropping an item not in the inventory
                 chooseItem = null;
             }
-        }
+        }*/
 
         // End player stun and change the chooseLock variable
         if (chooseLock && chooseItem == null)
@@ -107,6 +109,7 @@ public class InventorySystem : MonoBehaviour {
             // changes the selected slot accordingly
             // scrolling up selects right slot, scrolling down selects right slot
             selectedSlotNum = (selectedSlotNum + inventory.Length + slotChange) % inventory.Length;
+            selectedSlotNum = (selectedSlotNum == 0) ? 3 : ((selectedSlotNum == 4) ? 1 : selectedSlotNum);
             inventory[prevSelectedSlotNum].setSelected(false);
             inventory[selectedSlotNum].setSelected(true);
         }
@@ -125,6 +128,7 @@ public class InventorySystem : MonoBehaviour {
                 inventory[i].setCurDuration(-1f);
                 inventory[i].setUseDuration(0f);
                 Item droppedItem = Drop(inventory[i], true);
+                droppedItem.End();
                 droppedItem.DestroyItem();
             }
         }
@@ -146,6 +150,9 @@ public class InventorySystem : MonoBehaviour {
         } */
 
     }
+
+
+    
 
     private int CalculateEmptySlots(ItemType type) {
         int slots = 0;
@@ -196,6 +203,26 @@ public class InventorySystem : MonoBehaviour {
             Choose(item);
     }
 
+
+    public void isFiring()
+    {
+        if (Stunned.isStunned)
+        {
+            return;
+        }
+        UseStunGun();
+    }
+
+    public void isSecondaryFiring()
+    {
+        if (Stunned.isStunned)
+        {
+            return;
+        }
+        Use();
+    }
+
+
     /// <summary>
     /// Uses the item in the currently selected inventory slot.  If the current slot is not the Stun Gun, the item is destroyed and removed from the inventory.
     /// </summary>
@@ -218,7 +245,7 @@ public class InventorySystem : MonoBehaviour {
             return;
 
         // uses the stun gun ammo
-        inventory[selectedSlotNum].useStackItem();
+        inventory[0].useStackItem();
     }
 
     // For Using items other than the Stun Gun Ammo

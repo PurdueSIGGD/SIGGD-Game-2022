@@ -52,6 +52,16 @@ public class Item : MonoBehaviour, IInteractable
         mainCam = Camera.main;
     }
 
+
+    void Update()
+    {
+        if ((mainCam != null) && (!inInventory))
+        {
+            transform.LookAt(mainCam.transform.position);
+        }
+    }
+
+
     /// <summary>
     /// Handles all logic for when the player picks up an item.
     /// </summary>
@@ -193,6 +203,12 @@ public class Item : MonoBehaviour, IInteractable
         // ensures this is a valid item to be picked up, and the player is touching this
         if (other != null && gameObject != null && !inInventory && other.gameObject.tag.Equals(PLAYER_TAG))
             Grab();
+    }
+
+
+    public virtual void End()
+    {
+        Debug.Log("ENDITEM");
     }
 }
 
