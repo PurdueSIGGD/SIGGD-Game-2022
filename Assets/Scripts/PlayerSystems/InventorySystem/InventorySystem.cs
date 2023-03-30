@@ -34,11 +34,9 @@ public class InventorySystem : MonoBehaviour {
     private int selectedSlotNum = 1;
     private bool chooseLock = false;
     private Item chooseItem = null;
-
-
     //private float[] useduration = { 0f, 0f, 0f, 0f, 0f };
     //private float[] curDuration = { -1f, -1f, -1f, -1f, -1f };
-
+    private Animator animator;
 
     void Awake() {
         //instance = this;
@@ -53,6 +51,9 @@ public class InventorySystem : MonoBehaviour {
     {
         // ensures items in scene can actually be picked up while testing
         //SubscribeToItemsInScene();
+
+        // gets the animator on the player
+        animator = transform.parent.GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -246,6 +247,8 @@ public class InventorySystem : MonoBehaviour {
 
         // uses the stun gun ammo
         inventory[0].useStackItem();
+        // plays animation
+        animator.SetTrigger("Shoot");
     }
 
     // For Using items other than the Stun Gun Ammo
@@ -292,6 +295,9 @@ public class InventorySystem : MonoBehaviour {
 
         // uses the item
         droppedItem.Use();
+
+        // plays animation
+        animator.SetTrigger("Use");
 
         // destroys dropped item        
         droppedItem.DestroyItem(); */
