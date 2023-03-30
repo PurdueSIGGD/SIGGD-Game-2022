@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5ee17f6a1fd812e4ebcf6374de78056c
+guid: c046e4867ace9174b800d2a03d8c8f72
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 0
@@ -47,11 +47,11 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 40.8
+  spritePixelsToUnits: 48
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
-  alphaUsage: 0
-  alphaIsTransparency: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -105,55 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: glitch_mouse_sprite_sheet_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 42
-        width: 42
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5b8d4ba23213f8141b702e65482c88fc
-      internalID: 90339611
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: glitch_mouse_sprite_sheet_1
-      rect:
-        serializedVersion: 2
-        x: 42
-        y: 42
-        width: 42
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5856163f17450744687275c280126012
-      internalID: 193114742
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: glitch_mouse_sprite_sheet_2
+      name: RightIdleAndWalk_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 42
-        height: 42
+        width: 128
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 732e484a58f951c4588088518376a86e
-      internalID: -2139753233
+      spriteID: a16c44c44fc155347b12d2332d37a1d9
+      internalID: -1783948969
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: glitch_mouse_sprite_sheet_3
+      name: RightIdleAndWalk_1
       rect:
         serializedVersion: 2
-        x: 42
+        x: 128
         y: 0
-        width: 42
-        height: 42
+        width: 128
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,8 +140,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f72cfbb99b65ed74b8d91318e7c4c7ca
-      internalID: 854065227
+      spriteID: 20406988c61595944b622aa0723b685c
+      internalID: -629604379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RightIdleAndWalk_2
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 128
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ea87f24e39275541a18f3f567fcd400
+      internalID: 524340429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RightIdleAndWalk_3
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 128
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c765ff634069b0544a5935dc8567cdcc
+      internalID: 872323780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RightIdleAndWalk_4
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 128
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 994668ce1bef98e4cbbda41e2dcccb65
+      internalID: -194592726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RightIdleAndWalk_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 128
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2220b093c6b75094ba6b0350caed3a4f
+      internalID: -2096354851
       vertices: []
       indices: 
       edges: []
@@ -191,7 +233,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: de1b6600b72160341bc790b531a8a7ab
     internalID: 0
     vertices: []
     indices: 
@@ -199,10 +241,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      glitch_mouse_sprite_sheet_2: -2139753233
-      glitch_mouse_sprite_sheet_3: 854065227
-      glitch_mouse_sprite_sheet_1: 193114742
-      glitch_mouse_sprite_sheet_0: 90339611
+      RightIdleAndWalk_1: -629604379
+      RightIdleAndWalk_5: -2096354851
+      RightIdleAndWalk_2: 524340429
+      RightIdleAndWalk_0: -1783948969
+      RightIdleAndWalk_3: 872323780
+      RightIdleAndWalk_4: -194592726
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
