@@ -108,7 +108,6 @@ public class PasswordLogic : MonoBehaviour
         hasExited();
     }
 
-
     public IEnumerator waitUI() 
     {
         // Changes color of the text to green and deactivates input field and canvas
