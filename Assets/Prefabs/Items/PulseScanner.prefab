@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6755927282950771678}
   - component: {fileID: 4802620772777379802}
   m_Layer: 11
-  m_Name: PulseSanner
+  m_Name: PulseScanner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
