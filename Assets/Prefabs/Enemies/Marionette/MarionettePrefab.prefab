@@ -428,7 +428,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8190565324798013273}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -476,7 +476,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1404996163, guid: 9ba90c55fd73f614fa70beab9ed6dd6a, type: 3}
+  m_Sprite: {fileID: 754688994, guid: 76dbcad91b6225647b490e89a269e5f9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -650,7 +650,7 @@ Animator:
   m_GameObject: {fileID: 8911404103632459327}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7c9d939f46ff28542abb0b36cee30e0a, type: 2}
+  m_Controller: {fileID: 22100000, guid: 25c2c522f74426241a328e45e1312cfc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -671,9 +671,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.425
-  m_Height: 1.7
+  m_Height: 2.55
   m_Direction: 1
-  m_Center: {x: 0, y: 0.85, z: 0}
+  m_Center: {x: 0, y: 1.275, z: 0}
 --- !u!195 &647499513072774809
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -682,7 +682,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8911404103632459327}
   m_Enabled: 1
-  m_AgentTypeID: 0
+  m_AgentTypeID: -1372625422
   m_Radius: 0.425
   m_Speed: 2
   m_Acceleration: 8
@@ -692,7 +692,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1.7
+  m_Height: 2.55
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -796,7 +796,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.7}
+  m_AnchoredPosition: {x: 0, y: 3.4}
   m_SizeDelta: {x: 0.85, y: 0.85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7171782872337299749
