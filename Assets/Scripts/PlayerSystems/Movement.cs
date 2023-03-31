@@ -21,11 +21,14 @@ public class Movement : MonoBehaviour
 
     private CharacterController charController;
 
+    private Animator animator;
+
     void Start()
     {
         charController = GetComponent<CharacterController>();
         debuffs = GetComponent<DebuffsManager>();
         camHolderTransform = GetComponentInChildren<Camera>().transform.parent;
+        animator = GetComponentInChildren<Animator>();
     }
 
     public void SetInput(Vector2 input)
@@ -83,6 +86,8 @@ public class Movement : MonoBehaviour
         } else {
             velocity += Vector3.down * gravity * Time.deltaTime;
         }
+
+        animator.SetFloat("MoveSpeed", velocity.magnitude);
 
         //Rotation
 

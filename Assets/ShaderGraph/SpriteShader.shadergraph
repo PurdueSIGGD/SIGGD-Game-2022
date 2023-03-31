@@ -95,7 +95,7 @@
                 "m_Node": {
                     "m_Id": "ffc57a92ed8545259e9ae2b5343c0dd2"
                 },
-                "m_SlotId": 1
+                "m_SlotId": 0
             }
         },
         {
@@ -165,7 +165,7 @@
                 "m_Node": {
                     "m_Id": "ffc57a92ed8545259e9ae2b5343c0dd2"
                 },
-                "m_SlotId": 0
+                "m_SlotId": 1
             }
         },
         {
@@ -1440,11 +1440,11 @@
         "m_Id": "a48b9a6efbe742aab09bcf55775c1291"
     },
     "m_AllowMaterialOverride": false,
-    "m_SurfaceType": 0,
+    "m_SurfaceType": 1,
     "m_ZTestMode": 4,
     "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
-    "m_RenderFace": 2,
+    "m_RenderFace": 1,
     "m_AlphaClip": true,
     "m_CastShadows": true,
     "m_ReceiveShadows": true,
