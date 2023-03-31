@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -314,10 +314,13 @@ MonoBehaviour:
   DefaultFloorMaterial: {fileID: 2100000, guid: ae627514e28ffb24f9e761d6c0511d0f,
     type: 2}
   MainRoomMaterial: {fileID: 2100000, guid: 9c4ec128f1645944fb15148abfc47ec8, type: 2}
-  plane: {fileID: 0}
+  blockerPlane: {fileID: 0}
+  DoDebug: 0
   FloorRooms:
   - {fileID: 11400000, guid: 71b023b45850cc945ab9ffb08a482fd1, type: 2}
   - {fileID: 11400000, guid: a348e267203ed294f8468801dc055ceb, type: 2}
+  StartRoom: {fileID: 11400000, guid: 7fbfde37802b5ee4b8f993c078cdc309, type: 2}
+  EndRoom: {fileID: 11400000, guid: 9e824bda7912e1344bba0a0294998cda, type: 2}
 --- !u!4 &1020557253
 Transform:
   m_ObjectHideFlags: 0
