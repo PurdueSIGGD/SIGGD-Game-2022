@@ -647,8 +647,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d9c6cebb4a4e746b6ae4f76d1a7eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrolPointDist: 24
-  maxPoints: 16
+  patrolPointDist: 13.6
+  maxPoints: 8
 --- !u!212 &5251574865301494412
 SpriteRenderer:
   m_ObjectHideFlags: 0

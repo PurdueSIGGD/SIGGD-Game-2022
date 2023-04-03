@@ -39,19 +39,20 @@ public class ViewCone : MonoBehaviour
             {
                 return false;
             }
+            RaycastHit hit;
+            if (Physics.Raycast(eyePos.position, playerPosCorrected - eyePos.position, out hit, sightDistance, layersToCheck))
+            {
+                //player is only seen if it is the thing hit by the ray
+                Debug.DrawRay(eyePos.position, hit.point - eyePos.position, Color.red);
+                return (hit.transform == playerTrans);
+            }
+            else
+            {
+                Debug.DrawRay(eyePos.position, playerPosCorrected - eyePos.position);
+            }
         }
 
-        RaycastHit hit;
-        if (Physics.Raycast(eyePos.position, playerPosCorrected - eyePos.position, out hit, sightDistance, layersToCheck))
-        {
-            //player is only seen if it is the thing hit by the ray
-            Debug.DrawRay(eyePos.position, hit.point - eyePos.position, Color.red);
-            return (hit.transform == playerTrans);
-        } else
-        {
-            Debug.DrawRay(eyePos.position, playerPosCorrected - eyePos.position);
-        }
-        //if ray does not hit anything, not seen
+        //if ray does not hit anything or outside of distance, not seen
         return false;
     }
 }

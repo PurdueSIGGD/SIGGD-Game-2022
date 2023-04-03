@@ -218,17 +218,17 @@ public class ProceduralGenerator : MonoBehaviour
         //Records all of the patrol points
         SetPatrolPoints();
 
-        //Debug.LogError("Before spawn items");
+        Debug.LogError("Before spawn items");
 
         //Randomly spawns items and enemies
         itemSetup();
 
-        //Debug.LogError("Before Wake Enemies items");
+        Debug.LogError("Before Wake Enemies items");
 
         //Start the enemy patrols
         WakeEnemies();
 
-        //Debug.LogError("After Wake Enemies items");
+        Debug.LogError("After Wake Enemies items");
     }
 
     private void itemSetup()

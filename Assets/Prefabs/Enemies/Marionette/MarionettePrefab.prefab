@@ -758,7 +758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolPointDist: 13.6
-  maxPoints: 8
+  maxPoints: 4
 --- !u!1 &8933916436216308674
 GameObject:
   m_ObjectHideFlags: 0
