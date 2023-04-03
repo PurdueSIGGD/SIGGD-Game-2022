@@ -8,8 +8,11 @@ public class PasswordLogic : MonoBehaviour
 {
     public InputField InputField;
     public Text PasswordText;
+    public Text GivenPassword;
     public GameObject canvas;
+    public Image tape;
     private GameObject door;
+    private string password;
     private DoorTrigger doorTrigger;
     private string input;
     private Item key = null;
@@ -41,7 +44,10 @@ public class PasswordLogic : MonoBehaviour
         // Else set canvas to active (for first time touching door)
         else
         {
+            password = door.GetComponent<GatesObj>().password;
+            GivenPassword.text = "     Password:     " + password;
             canvas.SetActive(true);
+            if (door.GetComponent<GatesObj>().passwordGiven) { tape.enabled = false; }
             InputField.ActivateInputField();
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
@@ -66,7 +72,6 @@ public class PasswordLogic : MonoBehaviour
     // change the color of the password to red
     public void checkPassword()
     {
-        string password = door.GetComponent<GatesObj>().password;
         int passwordLength = password.Length;
         int inputLength;
         if (input == null) inputLength = 0;
@@ -107,7 +112,6 @@ public class PasswordLogic : MonoBehaviour
         FindObjectOfType<Player>().lockInputs = false;
         hasExited();
     }
-
 
     public IEnumerator waitUI() 
     {

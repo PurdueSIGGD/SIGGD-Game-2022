@@ -11,6 +11,7 @@ public class GatesObj : MonoBehaviour
     public bool keyNeeded = false;
     public Item key;
     public bool passwordNeeded = false;
+    public bool passwordGiven = true;
     public string password;
     public int identity = -1;
 
