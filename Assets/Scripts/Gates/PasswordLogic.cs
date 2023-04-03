@@ -45,13 +45,9 @@ public class PasswordLogic : MonoBehaviour
         else
         {
             password = door.GetComponent<GatesObj>().password;
-            GivenPassword.text = "Password:     " + password;
+            GivenPassword.text = "     Password:     " + password;
             canvas.SetActive(true);
-            if (door.GetComponent<GatesObj>().passwordGiven)
-            {
-                tape.enabled = false;
-                Debug.Log("hi");
-            }
+            if (door.GetComponent<GatesObj>().passwordGiven) { tape.enabled = false; }
             InputField.ActivateInputField();
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
