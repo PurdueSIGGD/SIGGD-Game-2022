@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b716aa8254e12ca458416615ae75e525, type: 3}
+  m_Name: MouseExplode
+  m_EditorClassIdentifier: 
+  attackWindupTime: 0.9
+  attackCooldownTime: 0.0375
+  attackMinumumRange: 0
+  attackMaximumRange: 3.4
+  animTriggerName: Attack
+  audioPrefab: {fileID: 910863468206653602, guid: bcaf8ac088162034d9a9894b977c7de4,
+    type: 3}
+  spawnOffset: 0
+  projectile: {fileID: 4297707038890221988, guid: 3d930726119fbce4fbffe07f5a309074,
+    type: 3}

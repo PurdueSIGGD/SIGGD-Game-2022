@@ -536,6 +536,7 @@ GameObject:
   - component: {fileID: 1427188813785907101}
   - component: {fileID: 1745557438341354533}
   - component: {fileID: 6263075955763594777}
+  - component: {fileID: -7493200829969434586}
   m_Layer: 10
   m_Name: MarionettePrefab
   m_TagString: Untagged
@@ -711,8 +712,10 @@ MonoBehaviour:
   attackTuples:
   - attack: {fileID: 11400000, guid: 89ffefd1bb8202b4992b7e07c59432d2, type: 2}
     weight: 1
+    dieOnAttack: 0
   - attack: {fileID: 11400000, guid: 2beae50a9e343cd49a4f15a4ba0dc70b, type: 2}
     weight: 2
+    dieOnAttack: 0
 --- !u!114 &1745557438341354533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -758,7 +761,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolPointDist: 13.6
-  maxPoints: 4
+  maxPoints: 8
+--- !u!114 &-7493200829969434586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8911404103632459327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d5c584f3ab243e46a743aaf48ce7055, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8933916436216308674
 GameObject:
   m_ObjectHideFlags: 0

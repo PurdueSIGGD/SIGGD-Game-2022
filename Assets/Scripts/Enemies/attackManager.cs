@@ -9,6 +9,7 @@ public class attackTuple
 {
     public enemyAttack attack;
     public float weight; // if multiple attacks can be used at once, this skews the randomness towards one or another
+    public bool dieOnAttack;
 }
 
 public class attackManager : MonoBehaviour
@@ -51,12 +52,18 @@ public class attackManager : MonoBehaviour
         float sum = 0;
         foreach (var attackTuple in validAttacks)
         {
-            if (sum + attackTuple.weight > result)
+            if (sum + attackTuple.weight >= result)
             {
                 //this is in range
                 //do attack
                 IEnumerator coroutine = doAttack(attackTuple.attack);
                 StartCoroutine(coroutine);
+
+                if (attackTuple.dieOnAttack)
+                {
+                    Destroy(gameObject, attackTuple.attack.attackWindupTime + attackTuple.attack.attackCooldownTime);
+                }
+
                 return attackTuple.attack.attackWindupTime + attackTuple.attack.attackCooldownTime;
             }
             sum += attackTuple.weight;

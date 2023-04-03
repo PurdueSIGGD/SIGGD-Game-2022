@@ -426,6 +426,7 @@ GameObject:
   - component: {fileID: 3852566600686161980}
   - component: {fileID: 8909401761519370752}
   - component: {fileID: 5251574865301494412}
+  - component: {fileID: 1453413237891116981}
   m_Layer: 10
   m_Name: MousePrefab
   m_TagString: Untagged
@@ -523,8 +524,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 439ca907b2faa8342b9ddc059019d10b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewAngle: 50
-  sightDistance: 27.2
+  viewAngle: 70
+  sightDistance: 13.6
   nearDistance: 1.7
   eyePos: {fileID: 6261636280915528398}
   layersToCheck:
@@ -599,10 +600,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackTuples:
-  - attack: {fileID: 11400000, guid: 89ffefd1bb8202b4992b7e07c59432d2, type: 2}
+  - attack: {fileID: 11400000, guid: 212eb135a74ed8f429444f68516bc6b5, type: 2}
     weight: 1
-  - attack: {fileID: 11400000, guid: 2beae50a9e343cd49a4f15a4ba0dc70b, type: 2}
-    weight: 2
+    dieOnAttack: 1
+  - attack: {fileID: 11400000, guid: 212eb135a74ed8f429444f68516bc6b5, type: 2}
+    weight: 1
+    dieOnAttack: 1
 --- !u!114 &3852566600686161980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,7 +650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d9c6cebb4a4e746b6ae4f76d1a7eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrolPointDist: 13.6
+  patrolPointDist: 20.4
   maxPoints: 8
 --- !u!212 &5251574865301494412
 SpriteRenderer:
@@ -701,6 +704,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1453413237891116981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6261636282363335206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d5c584f3ab243e46a743aaf48ce7055, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6693716910849780544
 GameObject:
   m_ObjectHideFlags: 0
