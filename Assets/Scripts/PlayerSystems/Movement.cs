@@ -5,6 +5,7 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     [SerializeField] private float MaxSpeed = 10;
+    [SerializeField] private float MaxSprintSpeed = 12.5f;
     [SerializeField] private float Friction = 100;
     [SerializeField] private float Acceleration = 100;
     [SerializeField] private float gravity = 9.8f;
@@ -18,6 +19,8 @@ public class Movement : MonoBehaviour
     private Vector2 input;
     private Vector2 lookInput;
     private Vector3 velocity;
+    private Vector3 targetMoveDir;
+    private bool isSprinting = false;
 
     private CharacterController charController;
 
@@ -41,6 +44,11 @@ public class Movement : MonoBehaviour
         this.lookInput = lookInput;
     }
 
+    public void SetSprint(bool isSprinting)
+    {
+        this.isSprinting = isSprinting;
+    }
+
     private const float GROUND_SNAP = 0.5f;
 
 
@@ -60,7 +68,12 @@ public class Movement : MonoBehaviour
             Vector3 localDir = transform.forward * input.y + transform.right * input.x;
             //corrects the 3dDir to be a 2d vector
             // Vector2 corrInput = new Vector2(localDir.x, localDir.z);
-            velocity = Vector3.MoveTowards(velocity, localDir * MaxSpeed + Vector3.up * velocity.y, Acceleration * Time.fixedDeltaTime);
+            if (isSprinting) {
+                targetMoveDir = localDir * MaxSprintSpeed + Vector3.up * velocity.y;
+            } else {
+                targetMoveDir = localDir * MaxSpeed + Vector3.up * velocity.y;
+            }
+            velocity = Vector3.MoveTowards(velocity, targetMoveDir, Acceleration * Time.fixedDeltaTime);
         }
 
         //   Creates a new move vector with Buffs and Debuffs applied
@@ -105,5 +118,4 @@ public class Movement : MonoBehaviour
             }
         }
     }
-
 }
