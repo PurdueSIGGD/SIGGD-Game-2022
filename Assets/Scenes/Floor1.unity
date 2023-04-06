@@ -932,7 +932,12 @@ PrefabInstance:
     - target: {fileID: 6299116096705303048, guid: 6dcd489471c074e12ac23453e6194f84,
         type: 3}
       propertyPath: MaxSprintSpeed
-      value: 7
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6299116096705303048, guid: 6dcd489471c074e12ac23453e6194f84,
+        type: 3}
+      propertyPath: DefaultStaminaRegen
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7017222567063860818, guid: 6dcd489471c074e12ac23453e6194f84,
         type: 3}
