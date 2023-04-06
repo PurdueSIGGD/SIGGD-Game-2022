@@ -464,12 +464,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
-    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"PARAM_StunMultiplier","value":{"$content":1.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"PARAM_DeAggroTime","value":{"$content":4.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"PARAM_DetectionTime","value":{"$content":1.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"PARAM_PatrolSpeed","value":{"$content":2.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"PARAM_SearchSpeed","value":{"$content":3.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"PARAM_AggroSpeed","value":{"$content":4.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
+    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"PARAM_StunMultiplier","value":{"$content":2.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"PARAM_DeAggroTime","value":{"$content":3.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"PARAM_DetectionTime","value":{"$content":0.5,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"PARAM_PatrolSpeed","value":{"$content":1.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"PARAM_SearchSpeed","value":{"$content":2.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"PARAM_AggroSpeed","value":{"$content":3.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"PlayerLastKnownPos","value":{"x":0.0,"y":0.0,"z":0.0,"$type":"UnityEngine.Vector3"},"typeHandle":{"Identification":"UnityEngine.Vector3,
       UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"TimeSincePlayerLastSeen","value":{"$content":0.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"TimeViewingPlayer","value":{"$content":0.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
@@ -579,7 +579,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.85
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -619,25 +619,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   footsteps:
-  - {fileID: 910863468206653602, guid: 7f5f8d3f87bae684ebcc4c4bc9508e37, type: 3}
-  - {fileID: 910863468206653602, guid: 37977ca493f9b47408000062f9fc374c, type: 3}
-  - {fileID: 910863468206653602, guid: 0a84e4e944c4540438ae41c8e14412aa, type: 3}
-  - {fileID: 910863468206653602, guid: 14082bb28d07ddd4a9f68c958975253c, type: 3}
-  - {fileID: 910863468206653602, guid: 65ac3498bf548824f87d2700a048a741, type: 3}
-  - {fileID: 910863468206653602, guid: 1e15d3a770939d44a99cbbe7047c1205, type: 3}
-  - {fileID: 910863468206653602, guid: 7a27e87641aef0745ae2bc0804c1144f, type: 3}
-  - {fileID: 910863468206653602, guid: 06f5f7ecd7a61a94d9718a720f50cea7, type: 3}
-  - {fileID: 910863468206653602, guid: 583523b13641c484faaadaaf18e8dcaf, type: 3}
-  - {fileID: 910863468206653602, guid: 7bafcb5552447b84f96403a227d830c4, type: 3}
+  - {fileID: 910863468206653602, guid: 6ad987b02fc245b40943103e94a10ca6, type: 3}
   distPerStep: 3.4
-  sightedSound: {fileID: 910863468206653602, guid: 8e5796feec7ea4a4095cf7e652bdc6f7,
+  sightedSound: {fileID: 910863468206653602, guid: 06350269cc8f69341b75c7e6cbbae726,
     type: 3}
-  stunSound: {fileID: 910863468206653602, guid: 0309a5b09b6e085479f1dfa7023fb4d8,
+  stunSound: {fileID: 910863468206653602, guid: 2a4a7877e5c31024dae71897cfa11735,
     type: 3}
-  aggroSound: {fileID: 910863468206653602, guid: 77af3ffbb31c983449f2098d0dbd7480,
+  aggroSound: {fileID: 910863468206653602, guid: 72098c89683f1ae46ac70569db2a620b,
     type: 3}
-  deaggroSound: {fileID: 910863468206653602, guid: 1956cf98834c08c4ea3f4a22614ec2fb,
-    type: 3}
+  deaggroSound: {fileID: 0}
 --- !u!114 &8909401761519370752
 MonoBehaviour:
   m_ObjectHideFlags: 0

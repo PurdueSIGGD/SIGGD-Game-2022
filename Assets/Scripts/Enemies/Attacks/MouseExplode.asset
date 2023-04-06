@@ -17,7 +17,7 @@ MonoBehaviour:
   attackMinumumRange: 0
   attackMaximumRange: 3.4
   animTriggerName: Attack
-  audioPrefab: {fileID: 910863468206653602, guid: bcaf8ac088162034d9a9894b977c7de4,
+  audioPrefab: {fileID: 910863468206653602, guid: b16af69295cbb8e408413a64c3c13f56,
     type: 3}
   spawnOffset: 0
   projectile: {fileID: 4297707038890221988, guid: 3d930726119fbce4fbffe07f5a309074,

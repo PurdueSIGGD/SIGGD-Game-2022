@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 516635258824562885}
   - component: {fileID: 8755440553007905315}
   - component: {fileID: 6137652388756591628}
+  - component: {fileID: 2810278239800333752}
   m_Layer: 0
   m_Name: MousePuddlePrefab
   m_TagString: Untagged
@@ -116,6 +117,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyTime: 5
+--- !u!114 &2810278239800333752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4297707038890221988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db1fcff4016d8374b814adcdb3d671d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8284378731727091437
 GameObject:
   m_ObjectHideFlags: 0

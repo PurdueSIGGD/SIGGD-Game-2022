@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 910863468206653613}
   - component: {fileID: -8218916498149462557}
   m_Layer: 0
-  m_Name: Floor1Music
+  m_Name: MarionetteHit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,13 +42,12 @@ AudioSource:
   m_GameObject: {fileID: 910863468206653602}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: 16ce3b68cfcf1774dbe7c4b1238000eb,
-    type: 2}
-  m_audioClip: {fileID: 8300000, guid: eb23a839cd580784cb8800710a661b72, type: 3}
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: ba46b0bcde87c194c96197ad3ef426a8, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 1
-  Loop: 1
+  m_Pitch: 1.5
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -90,7 +89,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

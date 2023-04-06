@@ -32,13 +32,8 @@ public class ViewCone : MonoBehaviour
         Vector3 playerPosCorrected = playerTrans.position + Vector3.up * 0.425f; //makes enemies try to look "eye-to-eye" rather than at the torso
 
         //if player is close enough, can "see" outside of the normal angle, othersize check if the angle is correct
-        if (Vector3.Distance(eyePos.position, playerPosCorrected) > nearDistance)
+        if (Vector3.Distance(eyePos.position, playerPosCorrected) > nearDistance || Vector3.Angle(eyePos.forward, playerPosCorrected - eyePos.position) > viewAngle)
         {
-            //if player outside angle of cone, not seen
-            if (Vector3.Angle(eyePos.forward, playerPosCorrected - eyePos.position) > viewAngle)
-            {
-                return false;
-            }
             RaycastHit hit;
             if (Physics.Raycast(eyePos.position, playerPosCorrected - eyePos.position, out hit, sightDistance, layersToCheck))
             {
