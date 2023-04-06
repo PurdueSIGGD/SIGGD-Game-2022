@@ -314,11 +314,14 @@ MonoBehaviour:
   DefaultFloorMaterial: {fileID: 2100000, guid: ae627514e28ffb24f9e761d6c0511d0f,
     type: 2}
   MainRoomMaterial: {fileID: 2100000, guid: 9c4ec128f1645944fb15148abfc47ec8, type: 2}
-  blockerPlane: {fileID: 0}
+  blockerPlane: {fileID: 1472186053438231085, guid: bac1dd06347e46942abadc6d87ea3b7b,
+    type: 3}
   DoDebug: 0
   FloorRooms:
-  - {fileID: 11400000, guid: 71b023b45850cc945ab9ffb08a482fd1, type: 2}
-  - {fileID: 11400000, guid: a348e267203ed294f8468801dc055ceb, type: 2}
+  - {fileID: 11400000, guid: 5d31f514b6d56174dadafe3916d69c4a, type: 2}
+  - {fileID: 11400000, guid: c995c34d77acdee4391b445173e905ee, type: 2}
+  - {fileID: 11400000, guid: 2e09efff0e0ba33499e12967c953c774, type: 2}
+  - {fileID: 11400000, guid: 139b2601d78567d468a0c22fbb03a44f, type: 2}
   StartRoom: {fileID: 11400000, guid: 7fbfde37802b5ee4b8f993c078cdc309, type: 2}
   EndRoom: {fileID: 11400000, guid: 9e824bda7912e1344bba0a0294998cda, type: 2}
 --- !u!4 &1020557253

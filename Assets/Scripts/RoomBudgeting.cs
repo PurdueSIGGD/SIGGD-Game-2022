@@ -26,11 +26,13 @@ public class RoomBudgeting : MonoBehaviour {
     private List<int> minimums;
 
     [SerializeField]
-    private int budget = 0;
+    private int budget = 3;
 
     private List<int> numSpawned;
 
-    public RoomBudgeting(int budget) {
+    public RoomBudgeting() { }
+
+    public void SetBudget(int budget) {
         this.budget = budget;
     }
 

@@ -233,10 +233,16 @@ public class ProceduralGenerator : MonoBehaviour
 
     private void itemSetup()
     {
+        foreach (Room room in FinalRoomPlan) {
+            RoomBudgeting budgeting = room.physicalRoom.GetComponent<RoomBudgeting>();
+            budgeting.SetBudget(50);
+        }
+        /*
         foreach (DumbSpawner spawner in FindObjectsOfType<DumbSpawner>())
         {
             spawner.dumbSpawn();
         }
+        */
         //Debug.LogError("Before subscribe");
         FindObjectOfType<InventorySystem>().SubscribeToItemsInScene();
     }
