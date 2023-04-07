@@ -1353,7 +1353,7 @@ MonoBehaviour:
   - {fileID: 6434444098801802559, guid: 0bb7f23edac6fec45855c8f3a72e5361, type: 3}
   maximums: 
   minimums: 
-  budget: 0
+  budget: 25
 --- !u!1 &5610717267111146463
 GameObject:
   m_ObjectHideFlags: 0

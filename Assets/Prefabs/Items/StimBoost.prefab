@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6763135281201947592}
   - component: {fileID: 6755927282950771678}
   - component: {fileID: 4802620772777379802}
+  - component: {fileID: -3781910292916097045}
   m_Layer: 11
   m_Name: StimBoost
   m_TagString: Untagged
@@ -119,3 +120,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-3781910292916097045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090515544576324914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90fb7676d27e80240bc24533f3c7c089, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 15
+  type: 

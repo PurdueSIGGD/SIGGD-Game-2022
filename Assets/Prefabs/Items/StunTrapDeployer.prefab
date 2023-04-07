@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8049574511570680724}
   - component: {fileID: 8047737902507477890}
   - component: {fileID: 8127019098896834438}
+  - component: {fileID: -5166465131147433487}
   m_Layer: 11
   m_Name: StunTrapDeployer
   m_TagString: Untagged
@@ -119,3 +120,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-5166465131147433487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8415972064746417518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90fb7676d27e80240bc24533f3c7c089, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 25
+  type: 

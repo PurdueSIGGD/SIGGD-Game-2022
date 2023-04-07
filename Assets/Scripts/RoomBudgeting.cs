@@ -26,7 +26,7 @@ public class RoomBudgeting : MonoBehaviour {
     private List<int> minimums;
 
     [SerializeField]
-    private int budget = 3;
+    private int budget = 0;
 
     private List<int> numSpawned;
 
@@ -70,6 +70,7 @@ public class RoomBudgeting : MonoBehaviour {
                 i--;
             }
         }
+        Debug.Log("sc = " + spawnables.Count + "\t tsc" + toSpawn.Count + "spl \t" + spawnPoints.Length);
         while (spawnables.Count > 0 && toSpawn.Count < spawnPoints.Length) {
             for (int i = 0; i < spawnables.Count; i++) {
                 while (minimums[i] > numSpawned[i] && toSpawn.Count < spawnPoints.Length) {
@@ -105,18 +106,8 @@ public class RoomBudgeting : MonoBehaviour {
             test += t.name + " (" + t.GetComponent<Attributes>().weight + "), ";
         }
         test += "with " + tempBudget + " budget left over.";
-        // Debug.Log(test);
-
-        /* Original object weights:
-            Easy Enemy - 6
-            Medium Enemy - 13
-            Hard Enemy - 28
-            Weak Weapon - 15
-            Strong Weapon - 30
-            Key - 45
-            Stamina Refill - 10
-        */
-
+        Debug.Log(test);
+        
         spawnObjects(toSpawn);     
     }
 
@@ -203,7 +194,7 @@ public class RoomBudgeting : MonoBehaviour {
     }
 
     private void readSpawnPoints() {
-        GenerationPoint[] genPoints = FindObjectsOfType<GenerationPoint>();
+        DumbSpawner[] genPoints = FindObjectsOfType<DumbSpawner>();
         spawnPoints = new GameObject[genPoints.Length];
         for (int i = 0; i < spawnPoints.Length; i++) {
             spawnPoints[i] = genPoints[i].gameObject;
