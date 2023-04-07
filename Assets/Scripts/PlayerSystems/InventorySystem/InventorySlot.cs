@@ -17,8 +17,12 @@ public class InventorySlot : MonoBehaviour
     [SerializeField] Image background;
     [SerializeField] Image itemImage;
     [SerializeField] TextMeshProUGUI stackText;
+    [SerializeField] TextMeshProUGUI durationText;
 
     [SerializeField] Color selectedColor = Color.white;
+
+    float useDuration = 0f;
+    float curDuration = -1f;
 
     // if the slot has an item (or stack of items in it)
     public bool hasStack { get { return stack.Count > 0; } }
@@ -29,7 +33,7 @@ public class InventorySlot : MonoBehaviour
 
 
     bool isSelected;
-    List<Item> stack;
+    public List<Item> stack;
     
     Color unselectedColor; // set to InventorySystem prefab's slot border colors
 
@@ -37,6 +41,7 @@ public class InventorySlot : MonoBehaviour
     {
         stack = new List<Item>();
         updateStackText();
+        updateDurationText();
 
         unselectedColor = border.color;
         setHighlight(false);
@@ -157,6 +162,17 @@ public class InventorySlot : MonoBehaviour
             stackText.text = getNumCharges().ToString();
     }
 
+    public void updateDurationText()
+    {
+        if (durationText == null)
+            return;
+
+        if (curDuration == -1f)
+            durationText.text = "";
+        else
+            durationText.text = Mathf.Ceil(curDuration).ToString();
+    }
+
     // selects or unselects this inventory slot (will be controlled by InventorySystem)
     public void setSelected(bool selected)
     {
@@ -209,4 +225,27 @@ public class InventorySlot : MonoBehaviour
     {
         return unselectedColor;
     }
+
+    public float getUseDuration()
+    {
+        return useDuration;
+    }
+
+    public void setUseDuration(float useDuration)
+    {
+        this.useDuration = useDuration;
+        updateDurationText();
+    }
+
+    public float getCurDuration()
+    {
+        return curDuration;
+    }
+
+    public void setCurDuration(float curDuration)
+    {
+        this.curDuration = curDuration;
+        updateDurationText();
+    }
+
 }
