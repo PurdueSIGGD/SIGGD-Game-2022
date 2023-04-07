@@ -112,6 +112,13 @@ public class InventorySystem : MonoBehaviour {
         }
     }
 
+    // key getter
+    public bool getKey()
+    {
+        //Debug.Log(inventory.Length);
+        return true;
+    }
+
     private int CalculateEmptySlots(ItemType type) {
         int slots = 0;
         for (int i = 0; i < inventory.Length; i++)
