@@ -15,7 +15,6 @@ public class PasswordLogic : MonoBehaviour
     private string password;
     private DoorTrigger doorTrigger;
     private string input;
-    private Item key = null;
     private bool called = false;
 
     private void Update()

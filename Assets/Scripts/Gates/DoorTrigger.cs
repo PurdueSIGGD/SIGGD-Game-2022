@@ -9,14 +9,7 @@ public class DoorTrigger : MonoBehaviour
     public GameObject door;
     private float moveSpeed = 8f;
     private bool isPasswordCorrect = false;
-    private bool isDoorOpen = false;
     private bool isPlayerNextToDoor = false;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -26,13 +19,11 @@ public class DoorTrigger : MonoBehaviour
         {
             doorFrame.transform.localPosition = Vector3.MoveTowards(doorFrame.transform.localPosition, 
                 new Vector3(0, 3.5f, 0), moveSpeed * Time.deltaTime);
-            isDoorOpen = true;
         }
         else if (!isPasswordCorrect)
         {
             doorFrame.transform.localPosition = Vector3.MoveTowards(doorFrame.transform.localPosition,
                 new Vector3(0, 0, 0), moveSpeed * Time.deltaTime);
-            isDoorOpen = false;
         }
     }
 
