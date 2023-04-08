@@ -32,7 +32,7 @@ public class PasswordLogic : MonoBehaviour
 
         // Else if the password entered by the player is correct, take the canvas out of view
         // Entered Textfield should not be empty yet at this point
-        else if (door != null && door.GetComponent<GatesObj>().openObj(key))
+        else if (door != null && door.GetComponent<GatesObj>().openObj())
         {
             if (!called)
             {

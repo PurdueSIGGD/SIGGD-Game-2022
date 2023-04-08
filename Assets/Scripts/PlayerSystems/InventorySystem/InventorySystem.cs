@@ -155,8 +155,7 @@ public class InventorySystem : MonoBehaviour {
     // key getter
     public bool getKey()
     {
-        //Debug.Log(inventory.Length);
-        return true;
+        return inventory[4].hasStack;
     }    
 
     private int CalculateEmptySlots(ItemType type) {

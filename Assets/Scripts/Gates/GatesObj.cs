@@ -29,11 +29,11 @@ public class GatesObj : MonoBehaviour
     }
 
     // Returns true if the password is correct
-    public bool openObj(Item key)
+    public bool openObj()
     {
         string userPass = getTyped();
         int num = readObj(userPass);
-        if (num == 2)
+        if (num == 2 || num == 3)
         {
             return true;
         }
