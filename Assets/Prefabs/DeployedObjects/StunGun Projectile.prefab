@@ -117,8 +117,8 @@ MonoBehaviour:
   terrainLayers:
     serializedVersion: 2
     m_Bits: 521
-  speed: 30
-  radius: 0.5
+  speed: 25
+  radius: 0.75
   maxDistance: 20
   stunTime: 4
 --- !u!54 &-8292653859083117910
