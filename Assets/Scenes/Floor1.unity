@@ -254,6 +254,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 910863468206653613, guid: 704692a960e0fca428e4c155522ebf5b,
+        type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 704692a960e0fca428e4c155522ebf5b, type: 3}
 --- !u!1 &499678992
@@ -689,8 +694,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6c42de4e52f448439e0a1675b8d84b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FinalRoomCount: 10
-  TotalRoomCount: 11
+  FinalRoomCount: 9
+  TotalRoomCount: 10
   MinRoomWidth: 15
   MinRoomDepth: 15
   MaxRoomWidth: 96
