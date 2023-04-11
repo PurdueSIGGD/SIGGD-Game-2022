@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class AudioRecorder : Item
 {
-    
+    public override void Use()
+    {
+        
+    }
 }
