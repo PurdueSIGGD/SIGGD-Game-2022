@@ -235,7 +235,6 @@ public class ProceduralGenerator : MonoBehaviour
     {
         foreach (Room room in FinalRoomPlan) {
             RoomBudgeting budgeting = room.physicalRoom.GetComponent<RoomBudgeting>();
-            budgeting.SetBudget(50);
         }
         /*
         foreach (DumbSpawner spawner in FindObjectsOfType<DumbSpawner>())

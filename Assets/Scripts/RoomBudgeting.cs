@@ -15,7 +15,7 @@ actually finding the spawnpoints in the room and actually placing the objects th
 /// </summary>
 public class RoomBudgeting : MonoBehaviour {
 
-    private GameObject[] spawnPoints;
+    private List<GameObject> spawnPoints;
     [SerializeField]
     
     // These lists should all be the same size! The index matters, because each index corresponds to one object. (Use a Map instead?)
@@ -70,10 +70,9 @@ public class RoomBudgeting : MonoBehaviour {
                 i--;
             }
         }
-        Debug.Log("sc = " + spawnables.Count + "\t tsc" + toSpawn.Count + "spl \t" + spawnPoints.Length);
-        while (spawnables.Count > 0 && toSpawn.Count < spawnPoints.Length) {
+        while (spawnables.Count > 0 && toSpawn.Count < spawnPoints.Count) {
             for (int i = 0; i < spawnables.Count; i++) {
-                while (minimums[i] > numSpawned[i] && toSpawn.Count < spawnPoints.Length) {
+                while (minimums[i] > numSpawned[i] && toSpawn.Count < spawnPoints.Count) {
                     if (spawnables[i].gameObject.GetComponent<Attributes>().weight <= tempBudget) {
                         toSpawn.Add(spawnables[i]);
                         tempBudget -= spawnables[i].gameObject.GetComponent<Attributes>().weight;
@@ -164,8 +163,8 @@ public class RoomBudgeting : MonoBehaviour {
     /// </summary>
     /// <param name="toSpawn"></param>
     private void spawnObjects(List<Transform> toSpawn) {
-        for (int i = 0; i < toSpawn.Count; i++) {
-            GameObject spawnedObj = GameObject.Instantiate(toSpawn[i].gameObject);
+        while (toSpawn.Count > 0) {
+            GameObject spawnedObj = GameObject.Instantiate(toSpawn[0].gameObject);
 
             Transform objTransform = spawnedObj.transform;
             bool spawning = true;
@@ -183,9 +182,12 @@ public class RoomBudgeting : MonoBehaviour {
             }
 
             if (spawning) {
+                int randIndex = (int) Random.Range(0, spawnPoints.Count);
                 //objTransform.position = new Vector3(pointPos.x * roomScale.x, heightAdjustment, pointPos.z * roomScale.z) + roomPos;
-                objTransform.SetParent(spawnPoints[i].transform);
-                objTransform.position = spawnPoints[i].transform.position;
+                objTransform.position = spawnPoints[randIndex].transform.position;
+                objTransform.SetParent(spawnPoints[randIndex].transform);
+                spawnPoints.RemoveAt(randIndex);
+                toSpawn.RemoveAt(0);
                 print("Object spawned");
             } else {
                 print("Error spawning object because its collider can't be handled.");
@@ -195,9 +197,9 @@ public class RoomBudgeting : MonoBehaviour {
 
     private void readSpawnPoints() {
         DumbSpawner[] genPoints = FindObjectsOfType<DumbSpawner>();
-        spawnPoints = new GameObject[genPoints.Length];
-        for (int i = 0; i < spawnPoints.Length; i++) {
-            spawnPoints[i] = genPoints[i].gameObject;
+        spawnPoints = new List<GameObject>();
+        for (int i = 0; i < genPoints.GetLength(0); i++) {
+            spawnPoints.Add(genPoints[i].gameObject);
         }
     }
     
