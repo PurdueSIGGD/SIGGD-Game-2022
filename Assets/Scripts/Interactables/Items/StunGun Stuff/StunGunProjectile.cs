@@ -13,6 +13,7 @@ public class StunGunProjectile : MonoBehaviour
     [SerializeField] float speed = 5;
     [SerializeField] float radius = .5f;
     [SerializeField] float maxDistance = 30;
+    [SerializeField] float stunTime = 4;
 
     InventorySystem inventorySystem;
     Transform stunGunShootPos;
@@ -72,7 +73,7 @@ public class StunGunProjectile : MonoBehaviour
 
     void hitEnemy(Collision collision)
     {
-        CustomEvent.Trigger(collision.gameObject, "stun");
+        CustomEvent.Trigger(collision.gameObject, "stun", stunTime);
         //destroy(collision.gameObject);
         InventorySystem.instance.decrementStunGunAmmo();
 
@@ -98,10 +99,23 @@ public class StunGunProjectile : MonoBehaviour
         if (collision == null || returningToPlayer)
             return;
 
+        //temporary replacement as commented code was not working
+        if (collision.gameObject.layer == 10)
+        {
+            Debug.Log("Hit Enemy: " + collision.transform.name);
+            hitEnemy(collision);
+        } else
+        {
+            Debug.Log("Hit Terrain: " + collision.transform.name);
+            hitTerrain();
+        }
+
+        /*
         int collisionLayer = collision.gameObject.layer;        
         if (IInteractable.isLayerInLayerMask(collisionLayer, enemyLayers))
             hitEnemy(collision);
         else if (IInteractable.isLayerInLayerMask(collisionLayer, terrainLayers))
             hitTerrain();
+        */
     }
 }

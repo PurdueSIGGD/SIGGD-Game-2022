@@ -116,10 +116,11 @@ MonoBehaviour:
     m_Bits: 1024
   terrainLayers:
     serializedVersion: 2
-    m_Bits: 513
-  speed: 30
-  radius: 0.5
+    m_Bits: 521
+  speed: 25
+  radius: 0.75
   maxDistance: 20
+  stunTime: 4
 --- !u!54 &-8292653859083117910
 Rigidbody:
   m_ObjectHideFlags: 0

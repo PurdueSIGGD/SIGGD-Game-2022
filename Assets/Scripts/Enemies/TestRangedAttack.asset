@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b716aa8254e12ca458416615ae75e525, type: 3}
+  m_Name: TestRangedAttack
+  m_EditorClassIdentifier: 
+  attackWindupTime: 0.125
+  attackCooldownTime: 0.875
+  attackMinumumRange: 5.1
+  attackMaximumRange: 13.6
+  animTriggerName: Attack
+  audioPrefab: {fileID: 910863468206653602, guid: bcaf8ac088162034d9a9894b977c7de4,
+    type: 3}
+  spawnOffset: 0.85
+  projectile: {fileID: 5758211847436028501, guid: 2e8764701d078194ca2925f421e3be8e,
+    type: 3}
