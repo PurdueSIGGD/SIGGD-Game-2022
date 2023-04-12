@@ -235,7 +235,7 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _PalleteLength: 25
+    - _PalleteLength: 32
     - _Parallax: 0.005
     - _Pixels_Voxel: 8
     - _QueueControl: 0
