@@ -25,16 +25,17 @@ public class RoomBudgeting : MonoBehaviour {
 
     private List<Transform> toSpawn;
 
-    void Awake() {
+    [SerializeField]
+    private GameObject key;
+
+    public void Go(bool keyRoom) {
         if (spawnables.Count == 0) { return; }
 
         int tempBudget = budget; // Used for spawning the objects because this instance will be deprecated during that, while the original instance persists
 
         // Read in the room's spawn points
         Transform pointObject = transform.Find("SpawnPoints");
-        Debug.Log("Null?: " + pointObject == null);
         DumbSpawner[] genPoints = pointObject.GetComponentsInChildren<DumbSpawner>();
-        Debug.Log(genPoints.Length);
         spawnPoints = new List<GameObject>();
         for (int i = 0; i < genPoints.GetLength(0); i++) {
             spawnPoints.Add(genPoints[i].gameObject);
@@ -51,6 +52,11 @@ public class RoomBudgeting : MonoBehaviour {
 
         // The objects' transforms to be allowed to spawn in the room should be added to the script's list through the serialized field in the editor.
         toSpawn = new List<Transform>();
+
+        // Case where the room needs to spawn a key
+        if (keyRoom) {
+            toSpawn.Add(key.transform);
+        }
 
         while (tempBudget >= lowestBudget) {
             // Try to spawn a random item

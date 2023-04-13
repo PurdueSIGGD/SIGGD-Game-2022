@@ -447,7 +447,8 @@ MonoBehaviour:
   - {fileID: 2679986429069081301, guid: a402c3f7f3b04db4d870b5560922969e, type: 3}
   - {fileID: 1684231496078385801, guid: 39d226338756c754a85540e36d6572e8, type: 3}
   - {fileID: 6434444098801802559, guid: 0bb7f23edac6fec45855c8f3a72e5361, type: 3}
-  budget: 0
+  budget: 50
+  key: {fileID: 0}
 --- !u!1 &7913666036486512616
 GameObject:
   m_ObjectHideFlags: 0

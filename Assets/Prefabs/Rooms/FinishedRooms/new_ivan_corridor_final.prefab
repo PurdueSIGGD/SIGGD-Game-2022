@@ -347,13 +347,11 @@ MonoBehaviour:
   - {fileID: 2679986429069081301, guid: 2b049abd2216bec49af086e6f16fdcf5, type: 3}
   - {fileID: 7723828559710091573, guid: 257fc7662c800b74c93a52cca09623fe, type: 3}
   - {fileID: 2679986429069081301, guid: 8d1414a439a4d114db8ba80c1f7adf3c, type: 3}
-  - {fileID: 5635299989882562586, guid: 209b44f527e10804092f1cac6aaeadab, type: 3}
   - {fileID: 2679986429069081301, guid: a402c3f7f3b04db4d870b5560922969e, type: 3}
   - {fileID: 1684231496078385801, guid: 39d226338756c754a85540e36d6572e8, type: 3}
   - {fileID: 6434444098801802559, guid: 0bb7f23edac6fec45855c8f3a72e5361, type: 3}
-  maximums: 
-  minimums: 
   budget: 50
+  key: {fileID: 3287776043236239357, guid: 209b44f527e10804092f1cac6aaeadab, type: 3}
 --- !u!1 &341214520117568133
 GameObject:
   m_ObjectHideFlags: 0
