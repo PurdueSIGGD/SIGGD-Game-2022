@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6ff2b19d706e5740b1ca0e79dc7d0ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: Audio Recorder
   type: 1
   inventorySprite: {fileID: 0}
   maxStackSize: 1
@@ -119,6 +119,8 @@ MonoBehaviour:
   isShiny: 0
   description: 
   useDuration: 0
+  audioLogs:
+  - {fileID: 0}
 --- !u!1 &8147279006735883956
 GameObject:
   m_ObjectHideFlags: 0
