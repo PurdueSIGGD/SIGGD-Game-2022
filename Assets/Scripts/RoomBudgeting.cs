@@ -85,10 +85,10 @@ public class RoomBudgeting : MonoBehaviour {
     /// <param name="toSpawn"></param>
     private void spawnObjects(List<Transform> toSpawn) {
         while (toSpawn.Count > 0) {
-            GameObject spawnedObj = GameObject.Instantiate(toSpawn[0].gameObject);
+            int randIndex = (int) Random.Range(0, spawnPoints.Count);
+            GameObject spawnedObj = GameObject.Instantiate(toSpawn[0].gameObject, spawnPoints[randIndex].transform);
 
             Transform objTransform = spawnedObj.transform;
-            bool spawning = true;
             float heightAdjustment = 0.0f;
             Collider collider = objTransform.GetComponent<Collider>();
             if (collider is SphereCollider) {
@@ -97,22 +97,12 @@ public class RoomBudgeting : MonoBehaviour {
                 heightAdjustment = objTransform.localScale.y * (objTransform.GetComponent<BoxCollider>().size.y / 2);
             } else if (collider is CapsuleCollider) {
                 heightAdjustment = objTransform.localScale.y * (objTransform.GetComponent<CapsuleCollider>().height / 2);
-            } else {
-                spawning = false;
             }
 
-            if (spawning) {
-                int randIndex = (int) Random.Range(0, spawnPoints.Count);
-                //objTransform.position = new Vector3(pointPos.x * roomScale.x, heightAdjustment, pointPos.z * roomScale.z) + roomPos;
-                objTransform.position = spawnPoints[randIndex].transform.position;
-                objTransform.SetParent(spawnPoints[randIndex].transform);
-                spawnPoints.RemoveAt(randIndex);
-                toSpawn.RemoveAt(0);
-                print("Object spawned");
-            } else {
-                print("Error spawning object because its collider can't be handled.");
-            }
-            Debug.Log("Woooop 2");
+            //objTransform.position = new Vector3(pointPos.x * roomScale.x, heightAdjustment, pointPos.z * roomScale.z) + roomPos;
+            objTransform.position = spawnPoints[randIndex].transform.position;
+            spawnPoints.RemoveAt(randIndex);
+            toSpawn.RemoveAt(0);
         }
     }
 }
