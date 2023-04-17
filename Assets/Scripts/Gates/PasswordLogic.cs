@@ -6,12 +6,16 @@ using UnityEngine.UI;
 
 public class PasswordLogic : MonoBehaviour
 {
-    public InputField InputField;
+    public int activeGateBreaker = 1;
+    public bool openDoorWithGateCrasher = false;
+
+    public InputField inputField;
     public Text passwordText;
     public Text psudoPasswordText;
     public Text givenPassword;
     public GameObject canvas;
     public GameObject gateCrasherText;
+    public GameObject inputPassword;
     public GameObject psudoPassword;
     public Image tape;
     public Item gateCrasher;
@@ -20,10 +24,8 @@ public class PasswordLogic : MonoBehaviour
     private DoorTrigger doorTrigger;
     private string password;
     private string input;
-    private int activeGateBreaker = 0;
     private bool called = false;
-
-    bool testing = false;
+    private bool isDoorOpen = false;
 
     private void Update()
     {
@@ -33,43 +35,67 @@ public class PasswordLogic : MonoBehaviour
             canvas.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            InputField.text = "";
+            inputField.text = "";
+            openDoorWithGateCrasher = false;
             FindObjectOfType<Player>().lockInputs = false;
         }
 
-        // If the door need a key or if there are no gate breakers active
-        // the door will open normally via key or password
-        else if (door.GetComponent<GatesObj>().keyNeeded || activeGateBreaker == 0) {
-
-            // If the password entered by the player is correct, take the canvas out of view
-            // Entered Textfield should not be empty yet at this point
-            if (door != null && door.GetComponent<GatesObj>().openObj())
+        // If the door is not open, function normally, or else, don't do anything
+        else if (!isDoorOpen)
+        {
+            // If the door need a key or if there are no gate breakers active
+            // the door will open normally via key or password
+            if (door.GetComponent<GatesObj>().keyNeeded || activeGateBreaker == 0)
             {
-                if (!called)
+                // If the password entered by the player is correct, take the canvas out of view
+                // Entered Textfield should not be empty yet at this point
+                if (door != null && door.GetComponent<GatesObj>().openObj())
                 {
-                    StartCoroutine("waitUI");
-                    called = true;
+                    if (!called)
+                    {
+                        StartCoroutine("waitUI");
+                        called = true;
+                    }
+                }
+
+                // Else set canvas to active (for first time touching door)
+                else
+                {
+                    password = door.GetComponent<GatesObj>().password;
+                    givenPassword.text = "     Password:     " + password;
+                    canvas.SetActive(true);
+                    psudoPassword.SetActive(false);
+                    inputPassword.SetActive(true);
+                    if (door.GetComponent<GatesObj>().passwordGiven) { tape.enabled = false; }
+                    inputField.ActivateInputField();
+                    Cursor.lockState = CursorLockMode.Confined;
+                    Cursor.visible = true;
+                    FindObjectOfType<Player>().lockInputs = true;
+                    checkPassword();
                 }
             }
 
-            // Else set canvas to active (for first time touching door)
+            // Otherwise, automatically enters password and open door;
+            // then, inform the gate breaker script that the procedure has been completed
+            // to decrement the active gate breaker
             else
             {
+                //activeGateBreaker--;
+
                 password = door.GetComponent<GatesObj>().password;
-                givenPassword.text = "     Password:     " + password;
                 canvas.SetActive(true);
                 if (door.GetComponent<GatesObj>().passwordGiven) { tape.enabled = false; }
-                InputField.ActivateInputField();
+                inputPassword.SetActive(false);
+                psudoPassword.SetActive(true);
                 Cursor.lockState = CursorLockMode.Confined;
                 Cursor.visible = true;
                 FindObjectOfType<Player>().lockInputs = true;
-                checkPassword();
+                if (!called)
+                {
+                    StartCoroutine("gateBreakerWaitUI");
+                    called = true;
+                }
             }
-        }
-
-        else
-        {
-            
         }
     }
 
@@ -77,7 +103,10 @@ public class PasswordLogic : MonoBehaviour
     [ContextMenu("checking UI")]
     public void testingUI()
     {
-        
+        inputPassword.SetActive(false);
+        psudoPassword.SetActive(true);
+        StartCoroutine("gateBreakerWaitUI");
+        called = false;
     }
 
     // Records the password the player inputs
@@ -122,14 +151,15 @@ public class PasswordLogic : MonoBehaviour
         this.doorTrigger = doorTrigger;
     }
 
-    // Sets door and door trigger null when player enters the door trigger
+    // Sets door and door trigger null when player exits the door trigger
     public void hasExited()
     {
         doorTrigger = null;
         door = null;
+        isDoorOpen = false;
     }
 
-    // if "esc" is pressed, the canvas is disabled
+    // If "esc" is pressed, the canvas is disabled
     public void ifEscPressed()
     {
         canvas.SetActive(false);
@@ -137,19 +167,11 @@ public class PasswordLogic : MonoBehaviour
         hasExited();
     }
 
-    // if "right mouse button" is clicked and if the player has the gate breaker, the door will open
-    public void ifRightClick()
-    {
-        // checks if player has the gate crasher
-        // if the player has the gate crasher, use function is activated
-        //if ()
-        //gateCrasherText.SetActive(false);
-    }
-
+    // The delay for when the password is correct and blinking green
     public IEnumerator waitUI() 
     {
         // Changes color of the text to green and deactivates input field and canvas
-        InputField.DeactivateInputField();
+        inputField.DeactivateInputField();
         passwordText.color = Color.green;
         yield return new WaitForSeconds(0.1f);
         passwordText.color = new Color(255, 255, 255, 255);
@@ -164,5 +186,34 @@ public class PasswordLogic : MonoBehaviour
         passwordText.color = new Color(255, 255, 255, 255);
         FindObjectOfType<Player>().lockInputs = false;
         called = false;
+        isDoorOpen = true;
+    }
+
+    // The delay for when the gate breaker is used and password blinks green
+    public IEnumerator gateBreakerWaitUI()
+    {
+        // Changes text to hidden password, color of the text to green, and deactivates canvas
+        for (int i = 0; i < password.Length; i++)
+        {
+            psudoPasswordText.text += "*";
+            yield return new WaitForSeconds(0.03f);
+        }
+        openDoorWithGateCrasher = true;
+        psudoPasswordText.color = Color.green;
+        yield return new WaitForSeconds(0.1f);
+        psudoPasswordText.color = new Color(255, 255, 255, 255);
+        yield return new WaitForSeconds(0.1f);
+        psudoPasswordText.color = Color.green;
+        yield return new WaitForSeconds(0.1f);
+        psudoPasswordText.color = new Color(255, 255, 255, 255);
+        yield return new WaitForSeconds(0.1f);
+        psudoPasswordText.color = Color.green;
+        yield return new WaitForSeconds(0.2f);
+        canvas.SetActive(false);
+        psudoPasswordText.color = new Color(255, 255, 255, 255);
+        psudoPasswordText.text = "";
+        FindObjectOfType<Player>().lockInputs = false;
+        called = false;
+        isDoorOpen = true;
     }
 }

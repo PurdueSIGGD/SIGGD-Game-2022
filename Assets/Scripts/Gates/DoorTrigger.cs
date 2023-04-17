@@ -56,14 +56,6 @@ public class DoorTrigger : MonoBehaviour
     // Get whether the password entered is correct or not
     public void getPassword()
     {
-        isPasswordCorrect = door.GetComponent<GatesObj>().openObj();
-    }
-
-    // testing if door open works
-    [ContextMenu("Change 'isPassword Correct'")]
-    public void testPass()
-    {
-        if (isPasswordCorrect) isPasswordCorrect = false;
-        if (!isPasswordCorrect) isPasswordCorrect = true;
+        isPasswordCorrect = door.GetComponent<GatesObj>().openObj() || FindObjectOfType<PasswordLogic>().openDoorWithGateCrasher;
     }
 }
