@@ -6,6 +6,11 @@ public class GateCrasher : Item
 {
     public override void Use()
     {
+        FindObjectOfType<PasswordLogic>().activeGateBreaker++;
+    }
 
+    public override void End()
+    {
+        FindObjectOfType<PasswordLogic>().activeGateBreaker--;
     }
 }

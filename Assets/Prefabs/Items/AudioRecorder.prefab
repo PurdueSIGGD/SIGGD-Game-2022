@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2679986429069081301}
+  - component: {fileID: 3124333632994722190}
   - component: {fileID: 6763135281201947592}
   - component: {fileID: 6755927282950771678}
   - component: {fileID: 4802620772777379802}
-  - component: {fileID: 3124333632994722190}
   m_Layer: 11
   m_Name: AudioRecorder
   m_TagString: Untagged
@@ -36,6 +36,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3124333632994722190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090515544576324914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6ff2b19d706e5740b1ca0e79dc7d0ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: Audio Recorder
+  type: 1
+  inventorySprite: {fileID: 0}
+  maxStackSize: 1
+  currentNumCharges: 1
+  isShiny: 0
+  description: 
+  useDuration: 0
+  audioLogs:
+  - {fileID: 0}
+  KGBLog1: {fileID: 0}
+  KGBLog2: {fileID: 0}
+  KGBLog3: {fileID: 0}
+  useAudio: 0
 --- !u!33 &6763135281201947592
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -99,28 +125,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3124333632994722190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5090515544576324914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6ff2b19d706e5740b1ca0e79dc7d0ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: Audio Recorder
-  type: 1
-  inventorySprite: {fileID: 0}
-  maxStackSize: 1
-  currentNumCharges: 1
-  isShiny: 0
-  description: 
-  useDuration: 0
-  audioLogs:
-  - {fileID: 0}
 --- !u!1 &8147279006735883956
 GameObject:
   m_ObjectHideFlags: 0

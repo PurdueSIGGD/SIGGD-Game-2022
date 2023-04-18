@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PasswordLogic : MonoBehaviour
 {
-    public int activeGateBreaker = 1;
+    public int activeGateBreaker = 0;
     public bool openDoorWithGateCrasher = false;
 
     public InputField inputField;
@@ -80,8 +80,6 @@ public class PasswordLogic : MonoBehaviour
             // to decrement the active gate breaker
             else
             {
-                //activeGateBreaker--;
-
                 password = door.GetComponent<GatesObj>().password;
                 canvas.SetActive(true);
                 if (door.GetComponent<GatesObj>().passwordGiven) { tape.enabled = false; }
