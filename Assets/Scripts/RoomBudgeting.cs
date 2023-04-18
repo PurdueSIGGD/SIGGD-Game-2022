@@ -18,18 +18,18 @@ public class RoomBudgeting : MonoBehaviour {
     private List<GameObject> spawnPoints;
     
     [SerializeField]
-    private List<Transform> spawnables = new List<Transform>();
+    private GameObject[] spawnables;
 
     [SerializeField]
     private int budget = 0;
 
-    private List<Transform> toSpawn;
+    private List<GameObject> toSpawn;
 
     [SerializeField]
     private GameObject key;
 
     public void Go(bool keyRoom) {
-        if (spawnables.Count == 0) { return; }
+        if (spawnables.Length == 0) { return; }
 
         int tempBudget = budget; // Used for spawning the objects because this instance will be deprecated during that, while the original instance persists
 
@@ -43,7 +43,7 @@ public class RoomBudgeting : MonoBehaviour {
 
         // Find lowest budget
         int lowestBudget = 9999;
-        for (int i = 0; i < spawnables.Count; i++) {
+        for (int i = 0; i < spawnables.Length; i++) {
             int w = spawnables[i].gameObject.GetComponent<Attributes>().weight;
             if (w < lowestBudget) {
                 lowestBudget = w;
@@ -51,16 +51,16 @@ public class RoomBudgeting : MonoBehaviour {
         }
 
         // The objects' transforms to be allowed to spawn in the room should be added to the script's list through the serialized field in the editor.
-        toSpawn = new List<Transform>();
+        toSpawn = new List<GameObject>();
 
         // Case where the room needs to spawn a key
         if (keyRoom) {
-            toSpawn.Add(key.transform);
+            toSpawn.Add(key);
         }
 
         while (tempBudget >= lowestBudget) {
             // Try to spawn a random item
-            int randIndex = (int) Random.Range(0, spawnables.Count);
+            int randIndex = (int) Random.Range(0, spawnables.Length);
             int w = spawnables[randIndex].gameObject.GetComponent<Attributes>().weight;
             if (tempBudget >= w) {
                 toSpawn.Add(spawnables[randIndex]);
@@ -69,7 +69,7 @@ public class RoomBudgeting : MonoBehaviour {
         }
 
         string debugText = "With a budget of " + budget + ", spawned these objects: ";
-        foreach (Transform t in toSpawn) {
+        foreach (GameObject t in toSpawn) {
             debugText += t.name + " (" + t.GetComponent<Attributes>().weight + "), ";
         }
         debugText += "with " + tempBudget + " budget left over.";
@@ -83,10 +83,11 @@ public class RoomBudgeting : MonoBehaviour {
     /// on the floor, depending on their collider. (Spawnpoints must be level with the floor)
     /// </summary>
     /// <param name="toSpawn"></param>
-    private void spawnObjects(List<Transform> toSpawn) {
+    private void spawnObjects(List<GameObject> toSpawn) {
         while (toSpawn.Count > 0) {
+            if (spawnPoints.Count == 0) { return; }
             int randIndex = (int) Random.Range(0, spawnPoints.Count);
-            GameObject spawnedObj = GameObject.Instantiate(toSpawn[0].gameObject, spawnPoints[randIndex].transform);
+            GameObject spawnedObj = Instantiate(toSpawn[0].gameObject, spawnPoints[randIndex].transform.position, Quaternion.identity);
 
             Transform objTransform = spawnedObj.transform;
             float heightAdjustment = 0.0f;

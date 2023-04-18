@@ -235,8 +235,8 @@ public class ProceduralGenerator : MonoBehaviour
     {
         int counter = 0;
         int randIndex = (int) Random.Range(0, FinalRoomPlan.GetLength(0));
-        foreach (Room room in FinalRoomPlan) {
-            RoomBudgeting budgeting = room.physicalRoom.GetComponent<RoomBudgeting>();
+        foreach (RoomBudgeting budgeting in FindObjectsOfType<RoomBudgeting>()) {
+            //RoomBudgeting budgeting = room.physicalRoom.GetComponent<RoomBudgeting>();
             if (budgeting == null) { continue; }
             
             budgeting.Go(randIndex == counter);
