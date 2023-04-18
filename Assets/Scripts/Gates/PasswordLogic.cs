@@ -171,15 +171,7 @@ public class PasswordLogic : MonoBehaviour
         // Changes color of the text to green and deactivates input field and canvas
         inputField.DeactivateInputField();
         passwordText.color = Color.green;
-        yield return new WaitForSeconds(0.1f);
-        passwordText.color = new Color(255, 255, 255, 255);
-        yield return new WaitForSeconds(0.1f);
-        passwordText.color = Color.green;
-        yield return new WaitForSeconds(0.1f);
-        passwordText.color = new Color(255, 255, 255, 255);
-        yield return new WaitForSeconds(0.1f);
-        passwordText.color = Color.green;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.25f);
         canvas.SetActive(false);
         passwordText.color = new Color(255, 255, 255, 255);
         FindObjectOfType<Player>().lockInputs = false;
@@ -198,15 +190,7 @@ public class PasswordLogic : MonoBehaviour
         }
         openDoorWithGateCrasher = true;
         psudoPasswordText.color = Color.green;
-        yield return new WaitForSeconds(0.1f);
-        psudoPasswordText.color = new Color(255, 255, 255, 255);
-        yield return new WaitForSeconds(0.1f);
-        psudoPasswordText.color = Color.green;
-        yield return new WaitForSeconds(0.1f);
-        psudoPasswordText.color = new Color(255, 255, 255, 255);
-        yield return new WaitForSeconds(0.1f);
-        psudoPasswordText.color = Color.green;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.25f);
         canvas.SetActive(false);
         psudoPasswordText.color = new Color(255, 255, 255, 255);
         psudoPasswordText.text = "";
