@@ -152,8 +152,11 @@ public class InventorySystem : MonoBehaviour {
 
     }
 
-
-    
+    // key getter
+    public bool getKey()
+    {
+        return inventory[4].hasStack;
+    }    
 
     private int CalculateEmptySlots(ItemType type) {
         int slots = 0;
