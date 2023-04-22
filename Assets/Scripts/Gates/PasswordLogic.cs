@@ -97,16 +97,6 @@ public class PasswordLogic : MonoBehaviour
         }
     }
 
-    //testing 
-    [ContextMenu("checking UI")]
-    public void testingUI()
-    {
-        inputPassword.SetActive(false);
-        psudoPassword.SetActive(true);
-        StartCoroutine("gateBreakerWaitUI");
-        called = false;
-    }
-
     // Records the password the player inputs
     public void readInput(string input)
     {
