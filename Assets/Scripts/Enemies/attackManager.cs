@@ -18,7 +18,7 @@ public class attackManager : MonoBehaviour
     private attackTuple[] attackTuples;
     private Animator animator;
 
-    private void Start()
+    public void Start()
     {
         animator = GetComponent<Animator>();
     }
@@ -73,7 +73,7 @@ public class attackManager : MonoBehaviour
         return 0;
     }
 
-    private IEnumerator doAttack(enemyAttack attack)
+    public IEnumerator doAttack(enemyAttack attack)
     {
         Debug.Log(transform.name + " has started an attack windup");
         

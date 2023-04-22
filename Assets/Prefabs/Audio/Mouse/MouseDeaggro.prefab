@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 910863468206653613}
   - component: {fileID: -8218916498149462557}
   m_Layer: 0
-  m_Name: MarionetteSighted
+  m_Name: MouseDeaggro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,10 +43,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 93492c424e498da49b38e914d9b1d68f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d1762a61625ca454a9de48b4ebda2950, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 1.5
   Loop: 0
   Mute: 0
   Spatialize: 0

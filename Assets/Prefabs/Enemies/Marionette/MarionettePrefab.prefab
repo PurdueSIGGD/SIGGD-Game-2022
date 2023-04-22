@@ -710,11 +710,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackTuples:
-  - attack: {fileID: 11400000, guid: 89ffefd1bb8202b4992b7e07c59432d2, type: 2}
+  - attack: {fileID: 11400000, guid: 99d00f02069616746ad420ebc9a8a132, type: 2}
     weight: 1
-    dieOnAttack: 0
-  - attack: {fileID: 11400000, guid: 2beae50a9e343cd49a4f15a4ba0dc70b, type: 2}
-    weight: 2
     dieOnAttack: 0
 --- !u!114 &1745557438341354533
 MonoBehaviour:
@@ -729,24 +726,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   footsteps:
-  - {fileID: 910863468206653602, guid: 7f5f8d3f87bae684ebcc4c4bc9508e37, type: 3}
-  - {fileID: 910863468206653602, guid: 37977ca493f9b47408000062f9fc374c, type: 3}
-  - {fileID: 910863468206653602, guid: 0a84e4e944c4540438ae41c8e14412aa, type: 3}
-  - {fileID: 910863468206653602, guid: 14082bb28d07ddd4a9f68c958975253c, type: 3}
-  - {fileID: 910863468206653602, guid: 65ac3498bf548824f87d2700a048a741, type: 3}
-  - {fileID: 910863468206653602, guid: 1e15d3a770939d44a99cbbe7047c1205, type: 3}
-  - {fileID: 910863468206653602, guid: 7a27e87641aef0745ae2bc0804c1144f, type: 3}
-  - {fileID: 910863468206653602, guid: 06f5f7ecd7a61a94d9718a720f50cea7, type: 3}
-  - {fileID: 910863468206653602, guid: 583523b13641c484faaadaaf18e8dcaf, type: 3}
-  - {fileID: 910863468206653602, guid: 7bafcb5552447b84f96403a227d830c4, type: 3}
+  - {fileID: 910863468206653602, guid: b988b8efbf24969439a23d1f9dfdd43e, type: 3}
   distPerStep: 3.4
-  sightedSound: {fileID: 910863468206653602, guid: 8e5796feec7ea4a4095cf7e652bdc6f7,
+  sightedSound: {fileID: 910863468206653602, guid: 3521ae06b3c76b245a219dbcd83d69d6,
     type: 3}
-  stunSound: {fileID: 910863468206653602, guid: 0309a5b09b6e085479f1dfa7023fb4d8,
+  stunSound: {fileID: 910863468206653602, guid: e0e64a7f10a35fa46a7d12ea2e05a320,
     type: 3}
-  aggroSound: {fileID: 910863468206653602, guid: 77af3ffbb31c983449f2098d0dbd7480,
+  aggroSound: {fileID: 910863468206653602, guid: 66804f217942fca4ba668b5453a96f00,
     type: 3}
-  deaggroSound: {fileID: 910863468206653602, guid: 1956cf98834c08c4ea3f4a22614ec2fb,
+  deaggroSound: {fileID: 910863468206653602, guid: e0f8a7a8f8344104284b04063bd23bfd,
     type: 3}
 --- !u!114 &6263075955763594777
 MonoBehaviour:
