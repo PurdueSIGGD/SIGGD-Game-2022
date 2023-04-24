@@ -1,20 +1,22 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class patrolManager : MonoBehaviour
 {
     [SerializeField]
     private float patrolPointDist;
-    private Transform[] patrolPoints;
+    [SerializeField]
+    private int maxPoints;
+    private Transform[] patrolPoints = null;
     private int pointNum;
 
     //this sets up the patrol points for an enemy by creating a path from the nearby points
-    private void Start()
+    public void WakeEnemy(PatrolPoint[] points)
     {
         //add nearby all points to the list
         List<Transform> closePoints = new List<Transform>();
-        foreach (PatrolPoint pp in FindObjectsOfType<PatrolPoint>())
+        foreach (PatrolPoint pp in points)
         {
             //check if within the range
             if (Vector3.SqrMagnitude(pp.transform.position - transform.position) <= patrolPointDist * patrolPointDist)
@@ -22,6 +24,19 @@ public class patrolManager : MonoBehaviour
                 closePoints.Add(pp.transform);
             }
         }
+
+        //sorts the list
+        closePoints = closePoints.OrderBy(p => Vector3.Distance(p.position, transform.position)).ToList();
+
+        //remove extra points
+        int finalPoint = closePoints.Count;
+        int lastGoodPoint = Mathf.Max(0, Mathf.Min(maxPoints - 1, finalPoint));
+        for (int i = 1; i < finalPoint - lastGoodPoint; i++)
+        {
+            closePoints.RemoveAt(closePoints.Count - 1);
+        }
+
+        //print(closePoints.Count + " out of " + maxPoints);
 
         //order the points by TSP
         patrolPoints = sortTSP(closePoints);
@@ -121,10 +136,11 @@ public class patrolManager : MonoBehaviour
 
     public Vector3 getNextPatrolPoint()
     {
-        if (patrolPoints.Length == 0)
+        if (patrolPoints == null || patrolPoints.Length == 0)
         {
-            Debug.Log("No patrol points assigned to " + transform.name + ": This will cause slowdown");
-            return transform.position;
+            //Debug.Log("No patrol points assigned to " + transform.name + ": This will cause slowdown");
+            //This will create jittery movement to avoid an infinite loop
+            return transform.position + Vector3.Cross(Vector3.up, Random.insideUnitSphere*0.1f);
         }
 
         Vector3 ret = patrolPoints[pointNum].position;

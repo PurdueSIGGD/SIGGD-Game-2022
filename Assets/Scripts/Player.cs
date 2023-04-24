@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Movement))]
@@ -19,6 +20,8 @@ public class Player : MonoBehaviour
 
 
     public Movement Movement => movement;
+
+    public bool lockInputs = false;
 
     void Start()
     {
@@ -44,7 +47,6 @@ public class Player : MonoBehaviour
         correctCameraDistance();
 
         buffsManager.UpdateBuffs();
-
     }
 
     public void kill()
@@ -57,19 +59,46 @@ public class Player : MonoBehaviour
 
     void OnMove(InputValue movementValue)
     {
-        movement.SetInput(movementValue.Get<Vector2>());
+        if (!lockInputs) movement.SetInput(movementValue.Get<Vector2>());
+        else movement.SetInput(Vector2.zero);
     }
 
     void OnLook(InputValue lookValue)
     {
-        movement.SetLookInput(lookValue.Get<Vector2>());
+        if (!lockInputs) movement.SetLookInput(lookValue.Get<Vector2>());
+        else movement.SetLookInput(Vector2.zero);
     }
 
-    // test slow debuff
-    void OnFire()
+    void OnEscape(InputValue escape)
     {
+        if (lockInputs)
+        {
+            FindObjectOfType<PasswordLogic>().ifEscPressed();
+        }
+    }
+
+
+
+    // test slow debuff
+    void OnFire(InputValue fire)
+    {
+        if (!lockInputs)
+        {
+            FindObjectOfType<InventorySystem>().isFiring();
+        }
         /* debuffsManager.AddDebuff(new Slow(3f, 0.5f)); */
     }
+
+
+    void OnSecondaryFire(InputValue secFire)
+    {
+        if (!lockInputs)
+        {
+            FindObjectOfType<InventorySystem>().isSecondaryFiring();
+        }
+        /* debuffsManager.AddDebuff(new Slow(3f, 0.5f)); */
+    }
+
 
     [SerializeField] private float angleSpread;
     [SerializeField] private float maxCameraCastDist;

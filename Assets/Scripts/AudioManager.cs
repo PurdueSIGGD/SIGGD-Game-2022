@@ -18,6 +18,11 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private GameObject deaggroSound;
 
+    private void Start()
+    {
+        stepMeter = Random.value * distPerStep;
+    }
+
     private void Update()
     {
         if (sightedCountdown > 0)
@@ -44,7 +49,10 @@ public class AudioManager : MonoBehaviour
 
     public void playDeAggro()
     {
-        Instantiate(deaggroSound, transform.position, Quaternion.identity);
+        if (deaggroSound != null)
+        {
+            Instantiate(deaggroSound, transform.position, Quaternion.identity);
+        }
     }
 
     public void playStun()
