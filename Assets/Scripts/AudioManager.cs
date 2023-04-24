@@ -49,7 +49,10 @@ public class AudioManager : MonoBehaviour
 
     public void playDeAggro()
     {
-        Instantiate(deaggroSound, transform.position, Quaternion.identity);
+        if (deaggroSound != null)
+        {
+            Instantiate(deaggroSound, transform.position, Quaternion.identity);
+        }
     }
 
     public void playStun()

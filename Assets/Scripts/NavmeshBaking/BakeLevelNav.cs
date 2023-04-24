@@ -5,12 +5,16 @@ using UnityEngine;
 
 public class BakeLevelNav : MonoBehaviour
 {
-    public NavMeshSurface surface;
-
+    [SerializeField]
+    private NavMeshSurface[] surfaces;
+    
     // Use this for initialization
     public void BuildNavigation()
     {
         //Even though this is simple, leaving as a seperate script in case I need to expand later
-        surface.BuildNavMesh();
+        foreach(NavMeshSurface surface in surfaces)
+        {
+            surface.BuildNavMesh();
+        }
     }
 }

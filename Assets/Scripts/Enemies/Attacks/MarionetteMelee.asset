@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b716aa8254e12ca458416615ae75e525, type: 3}
+  m_Name: MarionetteMelee
+  m_EditorClassIdentifier: 
+  attackWindupTime: 0.5
+  attackCooldownTime: 1.5
+  attackMinumumRange: 0
+  attackMaximumRange: 13.6
+  animTriggerName: Attack
+  audioPrefab: {fileID: 910863468206653602, guid: b16af69295cbb8e408413a64c3c13f56,
+    type: 3}
+  spawnOffset: 0
+  projectile: {fileID: 5758211847436028501, guid: b3d25d32ae1eefc40be2f5d569bb0f55,
+    type: 3}

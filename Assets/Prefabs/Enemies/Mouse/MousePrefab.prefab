@@ -425,6 +425,8 @@ GameObject:
   - component: {fileID: 4503603469706394500}
   - component: {fileID: 3852566600686161980}
   - component: {fileID: 8909401761519370752}
+  - component: {fileID: 5251574865301494412}
+  - component: {fileID: 1453413237891116981}
   m_Layer: 10
   m_Name: MousePrefab
   m_TagString: Untagged
@@ -462,12 +464,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
-    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"PARAM_StunMultiplier","value":{"$content":1.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"PARAM_DeAggroTime","value":{"$content":4.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"PARAM_DetectionTime","value":{"$content":1.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"PARAM_PatrolSpeed","value":{"$content":2.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"PARAM_SearchSpeed","value":{"$content":3.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"PARAM_AggroSpeed","value":{"$content":4.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
+    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"PARAM_StunMultiplier","value":{"$content":2.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"PARAM_DeAggroTime","value":{"$content":3.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"PARAM_DetectionTime","value":{"$content":0.5,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"PARAM_PatrolSpeed","value":{"$content":1.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"PARAM_SearchSpeed","value":{"$content":2.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
+      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"PARAM_AggroSpeed","value":{"$content":3.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"PlayerLastKnownPos","value":{"x":0.0,"y":0.0,"z":0.0,"$type":"UnityEngine.Vector3"},"typeHandle":{"Identification":"UnityEngine.Vector3,
       UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$version":"A"},"$version":"A"},{"name":"TimeSincePlayerLastSeen","value":{"$content":0.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
       mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"},{"name":"TimeViewingPlayer","value":{"$content":0.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
@@ -522,8 +524,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 439ca907b2faa8342b9ddc059019d10b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewAngle: 50
-  sightDistance: 27.2
+  viewAngle: 70
+  sightDistance: 13.6
   nearDistance: 1.7
   eyePos: {fileID: 6261636280915528398}
   layersToCheck:
@@ -559,10 +561,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.425
-  m_Height: 1.7
+  m_Radius: 0.2125
+  m_Height: 0.85
   m_Direction: 1
-  m_Center: {x: 0, y: 0.85, z: 0}
+  m_Center: {x: 0, y: 0.425, z: 0}
 --- !u!195 &2716240899062278784
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -571,17 +573,17 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6261636282363335206}
   m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.425
+  m_AgentTypeID: 1479372276
+  m_Radius: 0.2125
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.85
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1.7
+  m_Height: 0.85
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -598,10 +600,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackTuples:
-  - attack: {fileID: 11400000, guid: 89ffefd1bb8202b4992b7e07c59432d2, type: 2}
+  - attack: {fileID: 11400000, guid: 212eb135a74ed8f429444f68516bc6b5, type: 2}
     weight: 1
-  - attack: {fileID: 11400000, guid: 2beae50a9e343cd49a4f15a4ba0dc70b, type: 2}
-    weight: 2
+    dieOnAttack: 1
+  - attack: {fileID: 11400000, guid: 212eb135a74ed8f429444f68516bc6b5, type: 2}
+    weight: 1
+    dieOnAttack: 1
 --- !u!114 &3852566600686161980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -615,25 +619,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   footsteps:
-  - {fileID: 910863468206653602, guid: 7f5f8d3f87bae684ebcc4c4bc9508e37, type: 3}
-  - {fileID: 910863468206653602, guid: 37977ca493f9b47408000062f9fc374c, type: 3}
-  - {fileID: 910863468206653602, guid: 0a84e4e944c4540438ae41c8e14412aa, type: 3}
-  - {fileID: 910863468206653602, guid: 14082bb28d07ddd4a9f68c958975253c, type: 3}
-  - {fileID: 910863468206653602, guid: 65ac3498bf548824f87d2700a048a741, type: 3}
-  - {fileID: 910863468206653602, guid: 1e15d3a770939d44a99cbbe7047c1205, type: 3}
-  - {fileID: 910863468206653602, guid: 7a27e87641aef0745ae2bc0804c1144f, type: 3}
-  - {fileID: 910863468206653602, guid: 06f5f7ecd7a61a94d9718a720f50cea7, type: 3}
-  - {fileID: 910863468206653602, guid: 583523b13641c484faaadaaf18e8dcaf, type: 3}
-  - {fileID: 910863468206653602, guid: 7bafcb5552447b84f96403a227d830c4, type: 3}
+  - {fileID: 910863468206653602, guid: 6ad987b02fc245b40943103e94a10ca6, type: 3}
   distPerStep: 3.4
-  sightedSound: {fileID: 910863468206653602, guid: 8e5796feec7ea4a4095cf7e652bdc6f7,
+  sightedSound: {fileID: 910863468206653602, guid: 06350269cc8f69341b75c7e6cbbae726,
     type: 3}
-  stunSound: {fileID: 910863468206653602, guid: 0309a5b09b6e085479f1dfa7023fb4d8,
+  stunSound: {fileID: 910863468206653602, guid: 2a4a7877e5c31024dae71897cfa11735,
     type: 3}
-  aggroSound: {fileID: 910863468206653602, guid: 77af3ffbb31c983449f2098d0dbd7480,
+  aggroSound: {fileID: 910863468206653602, guid: 72098c89683f1ae46ac70569db2a620b,
     type: 3}
-  deaggroSound: {fileID: 910863468206653602, guid: 1956cf98834c08c4ea3f4a22614ec2fb,
-    type: 3}
+  deaggroSound: {fileID: 0}
 --- !u!114 &8909401761519370752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -646,8 +640,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d9c6cebb4a4e746b6ae4f76d1a7eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrolPointDist: 24
-  maxPoints: 16
+  patrolPointDist: 20.4
+  maxPoints: 8
+--- !u!212 &5251574865301494412
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6261636282363335206}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.875, y: 0.875}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &1453413237891116981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6261636282363335206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d5c584f3ab243e46a743aaf48ce7055, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6693716910849780544
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,8 +6,44 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Floor1.unity
-    guid: 5d63e09073b657c4b904047b8c518a02
+    path: Assets/Scenes/Levels/Main Menu.unity
+    guid: c2a084411aca72745af0dc4104ad055d
+  - enabled: 1
+    path: Assets/Scenes/Levels/Intro Cutscene.unity
+    guid: d928e7673d0fa504397f07183193f8df
+  - enabled: 1
+    path: Assets/Scenes/Levels/L1-F1.unity
+    guid: f02fd13a5975cbc45ad9332e23884940
+  - enabled: 1
+    path: Assets/Scenes/Levels/L1-F2.unity
+    guid: 8e68772717ad96941a96ca9f0b98f5d7
+  - enabled: 1
+    path: Assets/Scenes/Levels/L1-F3.unity
+    guid: c0227b994cb14c340b4633a10303e82d
+  - enabled: 1
+    path: Assets/Scenes/Levels/L2-F1.unity
+    guid: 64998a187bdecd845a9b52dd5ceb0bcf
+  - enabled: 1
+    path: Assets/Scenes/Levels/L2-F2.unity
+    guid: 7b4f4d88d7ec5be4b8146f36ab0af580
+  - enabled: 1
+    path: Assets/Scenes/Levels/L2-F3.unity
+    guid: c097afd7b280a7842ade429a42b94125
+  - enabled: 1
+    path: Assets/Scenes/Levels/L2-Boss.unity
+    guid: d691c22e91003f244a0a77e5879869b7
+  - enabled: 1
+    path: Assets/Scenes/Levels/L3-F1.unity
+    guid: 5292104272eb549499444a7590501000
+  - enabled: 1
+    path: Assets/Scenes/Levels/L3-F2.unity
+    guid: 96b8d108c1fbf694ba9788ac048fab20
+  - enabled: 1
+    path: Assets/Scenes/Levels/L3-F3.unity
+    guid: e05247c44b045dc4880752b99bc6926d
+  - enabled: 1
+    path: Assets/Scenes/Levels/L3-Boss.unity
+    guid: a685d4fb135b35c4abac383875248962
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7,
       type: 2}
