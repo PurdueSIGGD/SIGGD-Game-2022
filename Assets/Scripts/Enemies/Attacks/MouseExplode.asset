@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b716aa8254e12ca458416615ae75e525, type: 3}
   m_Name: MouseExplode
   m_EditorClassIdentifier: 
-  attackWindupTime: 0.9
+  attackWindupTime: 0.8
   attackCooldownTime: 0.0375
   attackMinumumRange: 0
   attackMaximumRange: 3.4
