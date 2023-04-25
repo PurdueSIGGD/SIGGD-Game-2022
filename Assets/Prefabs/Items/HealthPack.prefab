@@ -55,6 +55,8 @@ MonoBehaviour:
   currentNumCharges: 1
   isShiny: 0
   description: 
+  useDuration: 0
+  weight: 0
   healAmount: 1
   impactSlowDuration: 0.8
   impactSlowPercentage: 90
@@ -135,5 +137,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90fb7676d27e80240bc24533f3c7c089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 20
+  weight: 15
   type: 

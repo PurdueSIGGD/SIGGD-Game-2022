@@ -31,6 +31,7 @@ public class Item : MonoBehaviour, IInteractable
 
     [SerializeField] public float useDuration = 0f;
 
+
     // cached fields
     Transform playerTrans;
     //Rigidbody rb;

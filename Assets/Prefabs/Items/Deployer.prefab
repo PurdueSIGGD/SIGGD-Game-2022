@@ -55,6 +55,8 @@ MonoBehaviour:
   currentNumCharges: 1
   isShiny: 0
   description: 
+  useDuration: 0
+  weight: 20
   objectToDeploy: {fileID: 5237452597032423327, guid: 9a2ecabb86874bf48850d3ffa2ec3647,
     type: 3}
 --- !u!33 &1430684422284959784

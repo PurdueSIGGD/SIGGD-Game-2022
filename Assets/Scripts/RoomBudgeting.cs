@@ -58,6 +58,8 @@ public class RoomBudgeting : MonoBehaviour {
             toSpawn.Add(key);
         }
 
+        int tempCount = 0;
+        Debug.Log("lowest: " + lowestBudget);
         while (tempBudget >= lowestBudget) {
             // Try to spawn a random item
             int randIndex = (int) Random.Range(0, spawnables.Length);
@@ -65,6 +67,10 @@ public class RoomBudgeting : MonoBehaviour {
             if (tempBudget >= w) {
                 toSpawn.Add(spawnables[randIndex]);
                 tempBudget -= w;
+            }   
+            Debug.Log("woop");
+            if (tempCount++ == 100) {
+                break;
             }
         }
 
