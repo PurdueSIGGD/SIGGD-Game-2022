@@ -32,6 +32,7 @@ public class PasswordLogic : MonoBehaviour
         // If the doorTrigger is not set to anything, leave the canvas and textfield blank
         if (doorTrigger == null)
         {
+            inputField.DeactivateInputField();
             canvas.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -67,7 +68,7 @@ public class PasswordLogic : MonoBehaviour
                     psudoPassword.SetActive(false);
                     inputPassword.SetActive(true);
                     if (door.GetComponent<GatesObj>().passwordGiven) { tape.enabled = false; }
-                    inputField.ActivateInputField();
+                    //inputField.ActivateInputField();
                     Cursor.lockState = CursorLockMode.Confined;
                     Cursor.visible = true;
                     FindObjectOfType<Player>().lockInputs = true;
@@ -153,6 +154,12 @@ public class PasswordLogic : MonoBehaviour
         canvas.SetActive(false);
         FindObjectOfType<Player>().lockInputs = false;
         hasExited();
+    }
+
+    // When WASD is released, the input field is activated
+    public void ifWASDReleased()
+    {
+        inputField.ActivateInputField();
     }
 
     // The delay for when the password is correct and blinking green
