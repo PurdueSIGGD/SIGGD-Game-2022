@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CinemachineTarget
   - DoorBlocker
+  - Enemy
   layers:
   - Default
   - TransparentFX
