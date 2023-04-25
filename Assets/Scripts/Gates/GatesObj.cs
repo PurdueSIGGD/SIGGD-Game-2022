@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /** Creates gate objects (interactable, non-item objects) such as doors, chests, or levers  
  */
@@ -16,8 +17,13 @@ public class GatesObj : MonoBehaviour
 
     public void Start()
     {
-        // Sets up password of each door
-        int floor = 1;
+        // Sets up password of each door based on the floor
+        int floor = 0;
+        int activeScene = SceneManager.GetActiveScene().buildIndex;
+        if (activeScene < 5) floor = 1;
+        if (activeScene > 4 && activeScene < 9) floor = 2;
+        if (activeScene < 8) floor = 3;
+
         for (int i = 0; i < floor + 2; i++)
         {
             password += glyphs[Random.Range(0, glyphs.Length - 1)];

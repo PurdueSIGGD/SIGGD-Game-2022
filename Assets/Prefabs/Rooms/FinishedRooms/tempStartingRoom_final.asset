@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bef9cf795a290b744a60444fd431d559, type: 3}
-  m_Name: tempStartingRoom_final 1
+  m_Name: tempStartingRoom_final
   m_EditorClassIdentifier: 
   room: {fileID: 5707382502519527457, guid: 88e1bd70e3c8cb54c985397514e79a8b, type: 3}
   dimensions: {x: 6, y: 6, z: 6}
