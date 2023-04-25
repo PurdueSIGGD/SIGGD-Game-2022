@@ -10,6 +10,12 @@ public class DumbSpawner : MonoBehaviour
     // Start is called before the first frame update
     public void dumbSpawn()
     {
-        Instantiate(items[Random.Range(0, items.Length)], transform.position + Vector3.up*0.85f, Quaternion.identity);
+        GameObject toInstantiate = items[Random.Range(0, items.Length)];
+        float offset = 0f;
+        if (!toInstantiate.GetComponent<patrolManager>())
+        {
+            offset = 0.425f;
+        }
+        Instantiate(toInstantiate, transform.position + Vector3.up * offset, Quaternion.identity);
     }
 }

@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.05
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.047058824, g: 0.047058824, b: 0.047058824, a: 1}
+  m_AmbientSkyColor: {r: 0.09411765, g: 0.09411765, b: 0.09411765, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -671,8 +671,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1809290373}
   - component: {fileID: 1809290372}
-  - component: {fileID: 1809290374}
   - component: {fileID: 1809290375}
+  - component: {fileID: 1809290374}
+  - component: {fileID: 1809290377}
+  - component: {fileID: 1809290376}
   m_Layer: 0
   m_Name: Procedural Controller
   m_TagString: Untagged
@@ -692,8 +694,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6c42de4e52f448439e0a1675b8d84b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FinalRoomCount: 2
-  TotalRoomCount: 3
+  FinalRoomCount: 9
+  TotalRoomCount: 10
   MinRoomWidth: 15
   MinRoomDepth: 15
   MaxRoomWidth: 96
@@ -776,7 +778,70 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02d737275406dd143884b5d917ad4459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  surface: {fileID: 1809290374}
+  surfaces:
+  - {fileID: 1809290374}
+  - {fileID: 1809290377}
+  - {fileID: 1809290376}
+--- !u!114 &1809290376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809290371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 1479372276
+  m_CollectObjects: 2
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.094444446
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 0}
+  m_BuildHeightMesh: 0
+--- !u!114 &1809290377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809290371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: -1372625422
+  m_CollectObjects: 2
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.14166667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 0}
+  m_BuildHeightMesh: 0
 --- !u!1001 &2013438540
 PrefabInstance:
   m_ObjectHideFlags: 0
