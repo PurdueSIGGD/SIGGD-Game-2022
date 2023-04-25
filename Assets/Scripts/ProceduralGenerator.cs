@@ -233,21 +233,20 @@ public class ProceduralGenerator : MonoBehaviour
 
     private void itemSetup()
     {
+        // Make sure we select a room which isn't the starting room
+        RoomBudgeting[] rb = FindObjectsOfType<RoomBudgeting>();
+        int randIndex;
+        do {
+            randIndex = (int) Random.Range(0, rb.GetLength(0));
+        } while (rb[randIndex].IsStartingRoom());
+
         int counter = 0;
-        int randIndex = (int) Random.Range(0, FinalRoomPlan.GetLength(0));
         foreach (RoomBudgeting budgeting in FindObjectsOfType<RoomBudgeting>()) {
-            //RoomBudgeting budgeting = room.physicalRoom.GetComponent<RoomBudgeting>();
             if (budgeting == null) { continue; }
             
             budgeting.Go(randIndex == counter);
             counter++;
         }
-        /*
-        foreach (DumbSpawner spawner in FindObjectsOfType<DumbSpawner>())
-        {
-            spawner.dumbSpawn();
-        }
-        */
         //Debug.LogError("Before subscribe");
         FindObjectOfType<InventorySystem>().SubscribeToItemsInScene();
     }

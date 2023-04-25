@@ -87,7 +87,8 @@ public class RoomBudgeting : MonoBehaviour {
         while (toSpawn.Count > 0) {
             if (spawnPoints.Count == 0) { return; }
             int randIndex = (int) Random.Range(0, spawnPoints.Count);
-            GameObject spawnedObj = Instantiate(toSpawn[0].gameObject, spawnPoints[randIndex].transform.position, Quaternion.identity);
+            GameObject spawnedObj = Instantiate(toSpawn[0].gameObject, spawnPoints[randIndex].transform);
+            //Instantiate(toSpawn[0].gameObject, spawnPoints[randIndex].transform.position, Quaternion.identity);
 
             Transform objTransform = spawnedObj.transform;
             float heightAdjustment = 0.0f;
@@ -100,10 +101,15 @@ public class RoomBudgeting : MonoBehaviour {
                 heightAdjustment = objTransform.localScale.y * (objTransform.GetComponent<CapsuleCollider>().height / 2);
             }
 
-            //objTransform.position = new Vector3(pointPos.x * roomScale.x, heightAdjustment, pointPos.z * roomScale.z) + roomPos;
-            objTransform.position = spawnPoints[randIndex].transform.position;
+            //objTransform.parent = spawnPoints[randIndex].transform;
+            objTransform.position = spawnPoints[randIndex].transform.position + Vector3.up * heightAdjustment;
             spawnPoints.RemoveAt(randIndex);
             toSpawn.RemoveAt(0);
         }
+    }
+
+    // Assumption: the starting room's key is not set because it should never spawn keys
+    public bool IsStartingRoom() {
+        return key == null;
     }
 }
