@@ -32,26 +32,22 @@ public class ViewCone : MonoBehaviour
         Vector3 playerPosCorrected = playerTrans.position + Vector3.up * 0.425f; //makes enemies try to look "eye-to-eye" rather than at the torso
 
         //if player is close enough, can "see" outside of the normal angle, othersize check if the angle is correct
-        if (Vector3.Distance(eyePos.position, playerPosCorrected) > nearDistance)
+        if (Vector3.Distance(eyePos.position, playerPosCorrected) > nearDistance || Vector3.Angle(eyePos.forward, playerPosCorrected - eyePos.position) > viewAngle)
         {
-            //if player outside angle of cone, not seen
-            if (Vector3.Angle(eyePos.forward, playerPosCorrected - eyePos.position) > viewAngle)
+            RaycastHit hit;
+            if (Physics.Raycast(eyePos.position, playerPosCorrected - eyePos.position, out hit, sightDistance, layersToCheck))
             {
-                return false;
+                //player is only seen if it is the thing hit by the ray
+                Debug.DrawRay(eyePos.position, hit.point - eyePos.position, Color.red);
+                return (hit.transform == playerTrans);
+            }
+            else
+            {
+                Debug.DrawRay(eyePos.position, playerPosCorrected - eyePos.position);
             }
         }
 
-        RaycastHit hit;
-        if (Physics.Raycast(eyePos.position, playerPosCorrected - eyePos.position, out hit, sightDistance, layersToCheck))
-        {
-            //player is only seen if it is the thing hit by the ray
-            Debug.DrawRay(eyePos.position, hit.point - eyePos.position, Color.red);
-            return (hit.transform == playerTrans);
-        } else
-        {
-            Debug.DrawRay(eyePos.position, playerPosCorrected - eyePos.position);
-        }
-        //if ray does not hit anything, not seen
+        //if ray does not hit anything or outside of distance, not seen
         return false;
     }
 }

@@ -1,4 +1,4 @@
-public abstract class StatusEffect
+public class StatusEffect
 {
     private float duration;
     private float time;
@@ -45,5 +45,8 @@ public abstract class StatusEffect
         time = duration;
     }
     
-    public abstract void ApplyEffect();
+    public virtual void ApplyEffect()
+    {
+        //does nothing, as it is overwritten by child classes
+    }
 }
