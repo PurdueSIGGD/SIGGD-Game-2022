@@ -77,11 +77,36 @@ public class Player : MonoBehaviour
         }
     }
 
+
+
     // test slow debuff
-    void OnFire()
+    void OnFire(InputValue fire)
     {
+        if (!lockInputs)
+        {
+            FindObjectOfType<InventorySystem>().isFiring();
+        }
         /* debuffsManager.AddDebuff(new Slow(3f, 0.5f)); */
     }
+
+
+    void OnSecondaryFire(InputValue secFire)
+    {
+        if (!lockInputs)
+        {
+            FindObjectOfType<InventorySystem>().isSecondaryFiring();
+        }
+        /* debuffsManager.AddDebuff(new Slow(3f, 0.5f)); */
+    }
+
+    void OnSprint(InputValue sprint) {
+        if (sprint.Get<float>() != 0) {
+            movement.SetSprint(true);
+        } else {
+            movement.SetSprint(false);
+        }
+    }
+
 
     [SerializeField] private float angleSpread;
     [SerializeField] private float maxCameraCastDist;

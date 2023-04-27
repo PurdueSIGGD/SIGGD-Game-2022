@@ -15,7 +15,6 @@ public class PasswordLogic : MonoBehaviour
     private string password;
     private DoorTrigger doorTrigger;
     private string input;
-    private Item key = null;
     private bool called = false;
 
     private void Update()
@@ -32,7 +31,7 @@ public class PasswordLogic : MonoBehaviour
 
         // Else if the password entered by the player is correct, take the canvas out of view
         // Entered Textfield should not be empty yet at this point
-        else if (door != null && door.GetComponent<GatesObj>().openObj(key))
+        else if (door != null && door.GetComponent<GatesObj>().openObj())
         {
             if (!called)
             {
