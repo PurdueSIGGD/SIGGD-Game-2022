@@ -100,6 +100,15 @@ public class Player : MonoBehaviour
     }
 
 
+    void OnDropItem(InputValue dropItem)
+    {
+        if (!lockInputs)
+        {
+            FindObjectOfType<InventorySystem>().isPressingDrop();
+        }
+    }
+
+
     [SerializeField] private float angleSpread;
     [SerializeField] private float maxCameraCastDist;
 
