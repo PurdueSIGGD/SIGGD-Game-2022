@@ -99,6 +99,14 @@ public class Player : MonoBehaviour
         /* debuffsManager.AddDebuff(new Slow(3f, 0.5f)); */
     }
 
+    void OnSprint(InputValue sprint) {
+        if (sprint.Get<float>() != 0) {
+            movement.SetSprint(true);
+        } else {
+            movement.SetSprint(false);
+        }
+    }
+
 
     void OnDropItem(InputValue dropItem)
     {

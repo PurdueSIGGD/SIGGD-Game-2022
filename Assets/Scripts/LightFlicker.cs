@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LightFlicker : MonoBehaviour
@@ -14,6 +15,8 @@ public class LightFlicker : MonoBehaviour
     private float hzOffset = 0.1f; //This is to top too many calculations taking place on one frame
     [SerializeField]
     private float offChance = 0.25f;
+    private Transform player;
+    private bool off = false;
     
     // Start is called before the first frame update
     void Start()
@@ -25,6 +28,24 @@ public class LightFlicker : MonoBehaviour
             IEnumerator coroutine = flickerer();
             StartCoroutine(coroutine);
         }
+        player = (Transform)Variables.ActiveScene.Get("player");
+    }
+
+    private void Update()
+    {
+        //this recuces the overall active lights in the scene to increase the shadow res of the nearby ones
+        float cullDist = 32.0f;
+        if (!off)
+        {
+            if (Vector3.SqrMagnitude(transform.position - player.position) > cullDist * cullDist)
+            {
+                lightSource.enabled = false;
+            }
+            else
+            {
+                lightSource.enabled = true;
+            }
+        }
     }
 
     private IEnumerator flickerer()
@@ -34,11 +55,13 @@ public class LightFlicker : MonoBehaviour
             //choose on or off
             if (Random.value < offChance)
             {
-                lightSource.intensity = 0;
+                lightSource.enabled = false;
+                off = true;
             }
             else
             {
-                lightSource.intensity = intensity;
+                lightSource.enabled = true;
+                off = false;
             }
             //wait
             yield return new WaitForSeconds(hz + Random.value * hzOffset);

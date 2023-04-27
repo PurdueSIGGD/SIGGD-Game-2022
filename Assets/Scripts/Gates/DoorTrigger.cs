@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class DoorTrigger : MonoBehaviour
@@ -8,30 +9,21 @@ public class DoorTrigger : MonoBehaviour
     public GameObject door;
     private float moveSpeed = 8f;
     private bool isPasswordCorrect = false;
-    private bool isDoorOpen = false;
-    private Item key = null;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private bool isPlayerNextToDoor = false;
 
     // Update is called once per frame
     void Update()
     {
-        getPassword();
+        if (isPlayerNextToDoor) getPassword();
         if (isPasswordCorrect)
         {
             doorFrame.transform.localPosition = Vector3.MoveTowards(doorFrame.transform.localPosition, 
                 new Vector3(0, 3.5f, 0), moveSpeed * Time.deltaTime);
-            isDoorOpen = true;
         }
         else if (!isPasswordCorrect)
         {
             doorFrame.transform.localPosition = Vector3.MoveTowards(doorFrame.transform.localPosition,
                 new Vector3(0, 0, 0), moveSpeed * Time.deltaTime);
-            isDoorOpen = false;
         }
     }
 
@@ -39,7 +31,8 @@ public class DoorTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Activate password panel
-        FindObjectOfType<PasswordLogic>().hasEntered(door, this);
+        if (!door.GetComponent<GatesObj>().keyNeeded) FindObjectOfType<PasswordLogic>().hasEntered(door, this);
+        isPlayerNextToDoor = true;
     }
 
     // Activates when player leaves trigger
@@ -48,6 +41,7 @@ public class DoorTrigger : MonoBehaviour
         // Close door frame and deactivate password panel
         isPasswordCorrect = false;
         FindObjectOfType<PasswordLogic>().hasExited();
+        isPlayerNextToDoor = false;
     }
 
     // Physically opens door frame
@@ -62,7 +56,7 @@ public class DoorTrigger : MonoBehaviour
     // Get whether the password entered is correct or not
     public void getPassword()
     {
-        isPasswordCorrect = door.GetComponent<GatesObj>().openObj(key);
+        isPasswordCorrect = door.GetComponent<GatesObj>().openObj();
     }
 
     // testing if door open works

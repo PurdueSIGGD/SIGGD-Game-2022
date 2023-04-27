@@ -12,12 +12,16 @@ public class projectile : MonoBehaviour
     //[SerializeField]
     //private Debuff debuff; //Does not do anything right now, will implement later
     private Rigidbody rb;
+
+    [SerializeField]
+    private Transform playerTrans;
     
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.velocity = transform.forward * speed;
+        playerTrans = (Transform)Variables.ActiveScene.Get("player");
     }
 
     // Update is called once per frame
@@ -28,8 +32,6 @@ public class projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Transform playerTrans = (Transform)Variables.ActiveScene.Get("player");
-
         //if close enough, kill or apply debuff
         if (other.transform == playerTrans)
         {
