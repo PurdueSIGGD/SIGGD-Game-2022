@@ -32,6 +32,7 @@ public class Item : MonoBehaviour, IInteractable
     [SerializeField] public float useDuration = 0f;
     [SerializeField] public GameObject useSound;
 
+
     // cached fields
     Transform playerTrans;
     //Rigidbody rb;
