@@ -30,6 +30,7 @@ public class Item : MonoBehaviour, IInteractable
     [SerializeField] string description;
 
     [SerializeField] public float useDuration = 0f;
+    [SerializeField] public GameObject useSound;
 
     // cached fields
     Transform playerTrans;
@@ -139,6 +140,10 @@ public class Item : MonoBehaviour, IInteractable
     // base.Use() can be used then to call this from subclass
     public virtual void Use() {
         // the base Item class cannot be used
+        /* if (useSound != null) {
+            Instantiate(useSound, transform.position, Quaternion.identity);
+            Debug.Log("SOUND FOUND");
+        } */
         Debug.Log($"{itemName} was activated");
     }
 

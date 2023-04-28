@@ -69,6 +69,7 @@ MonoBehaviour:
   stackText: {fileID: 1477910552360471751}
   durationText: {fileID: 0}
   selectedColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedBackgroundColor: {r: 1, g: 1, b: 1, a: 1}
   stack: []
 --- !u!114 &2758627796467263149
 MonoBehaviour:
@@ -83,7 +84,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
+  m_Color: {r: 0.54901963, g: 0.54901963, b: 0.54901963, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -246,6 +247,7 @@ MonoBehaviour:
   stackText: {fileID: 2248288707829397705}
   durationText: {fileID: 4861720711238112919}
   selectedColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedBackgroundColor: {r: 0.30701315, g: 0.38183856, b: 0.41509432, a: 1}
   stack: []
 --- !u!114 &7074706190467894506
 MonoBehaviour:
@@ -347,6 +349,7 @@ MonoBehaviour:
   stackText: {fileID: 6549030569762731248}
   durationText: {fileID: 3951602038442071031}
   selectedColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedBackgroundColor: {r: 0.30588236, g: 0.38039216, b: 0.41568628, a: 1}
   stack: []
 --- !u!114 &1481732911894731820
 MonoBehaviour:
@@ -448,6 +451,7 @@ MonoBehaviour:
   stackText: {fileID: 6753394004592650748}
   durationText: {fileID: 5364733039900649887}
   selectedColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedBackgroundColor: {r: 0.30588236, g: 0.38039216, b: 0.41568628, a: 1}
   stack: []
 --- !u!114 &6849041287433691708
 MonoBehaviour:
@@ -661,6 +665,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasNotReCapturedProjectile: 0
   slotHolder: {fileID: 1860287262080920809}
+  shotSound: {fileID: 910863468206653602, guid: 21bab827e0057b147a7fc54df192602c,
+    type: 3}
+  cartridgeSound: {fileID: 910863468206653602, guid: f834e1b6ca5ea0744a6e786eee959364,
+    type: 3}
 --- !u!1 &2153547111282682594
 GameObject:
   m_ObjectHideFlags: 0
@@ -2484,6 +2492,7 @@ MonoBehaviour:
   stackText: {fileID: 4536311809696241613}
   durationText: {fileID: 0}
   selectedColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedBackgroundColor: {r: 1, g: 1, b: 1, a: 1}
   stack: []
 --- !u!114 &7797889604044652191
 MonoBehaviour:
@@ -2498,7 +2507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
+  m_Color: {r: 0.54901963, g: 0.54901963, b: 0.54901963, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

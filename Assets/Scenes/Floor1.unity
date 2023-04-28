@@ -199,6 +199,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor1Music
       objectReference: {fileID: 0}
+    - target: {fileID: 910863468206653602, guid: 704692a960e0fca428e4c155522ebf5b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 910863468206653612, guid: 704692a960e0fca428e4c155522ebf5b,
         type: 3}
       propertyPath: m_RootOrder
@@ -252,11 +257,6 @@ PrefabInstance:
     - target: {fileID: 910863468206653612, guid: 704692a960e0fca428e4c155522ebf5b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 910863468206653613, guid: 704692a960e0fca428e4c155522ebf5b,
-        type: 3}
-      propertyPath: Loop
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -849,6 +849,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 103269590774622908, guid: 6dcd489471c074e12ac23453e6194f84,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 1497019026207631543, guid: 6dcd489471c074e12ac23453e6194f84,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -993,6 +998,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6299116096705303048, guid: 6dcd489471c074e12ac23453e6194f84,
+        type: 3}
+      propertyPath: MaxSprintSpeed
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6299116096705303048, guid: 6dcd489471c074e12ac23453e6194f84,
+        type: 3}
+      propertyPath: DefaultStaminaRegen
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7017222567063860818, guid: 6dcd489471c074e12ac23453e6194f84,
         type: 3}

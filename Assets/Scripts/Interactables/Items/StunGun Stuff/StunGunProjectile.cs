@@ -12,6 +12,7 @@ public class StunGunProjectile : MonoBehaviour
     [Header("Projectile Parameters")]
     [SerializeField] float speed = 5;
     [SerializeField] float radius = .5f;
+    [SerializeField] float terrainRadiusMultiplyer = 0.01f;
     [SerializeField] float maxDistance = 30;
     [SerializeField] float stunTime = 4;
 
@@ -38,6 +39,7 @@ public class StunGunProjectile : MonoBehaviour
         // scales the projectile according to the radius field, if improperly sized
         if (transform.localScale.x != radius)
             transform.localScale = Vector3.one * radius;
+        transform.GetChild(1).localScale = Vector3.one * terrainRadiusMultiplyer;
 
         // lets the inventory track that there is a Stun Gun Projectile out
         inventorySystem.hasNotReCapturedProjectile = true;
@@ -62,7 +64,12 @@ public class StunGunProjectile : MonoBehaviour
 
         // start returning to player if traveled too far
         if (Vector3.Distance(transform.position, startPos) > maxDistance)
+        {
+            //InventorySystem.instance.decrementStunGunAmmo();
             startReturningToPlayer();
+            destroyProjectile();
+        }
+        
     }
 
     void startReturningToPlayer()
@@ -71,11 +78,11 @@ public class StunGunProjectile : MonoBehaviour
         col.enabled = false;
     }
 
-    void hitEnemy(Collision collision)
+    public void hitEnemy(Collider collision)
     {
         CustomEvent.Trigger(collision.gameObject, "stun", stunTime);
         //destroy(collision.gameObject);
-        InventorySystem.instance.decrementStunGunAmmo();
+        //InventorySystem.instance.decrementStunGunAmmo();
 
         startReturningToPlayer();
 
@@ -88,23 +95,43 @@ public class StunGunProjectile : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void hitTerrain()
+    public void hitTerrain()
     {
+        //InventorySystem.instance.decrementStunGunAmmo();
+
         startReturningToPlayer();
+
+        destroyProjectile();
     }
 
-    void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         // collider should be disabled when returning to player, so this case should never occur
         if (collision == null || returningToPlayer)
             return;
 
         //temporary replacement as commented code was not working
-        if (collision.gameObject.layer == 10)
+        if ((collision.gameObject.layer == 10) &&
+            (collision.transform != (Transform)Variables.ActiveScene.Get("player")))
         {
             Debug.Log("Hit Enemy: " + collision.transform.name);
             hitEnemy(collision);
-        } else
+        }
+    }
+
+    /* void OnCollisionEnter(Collision collision)
+    {
+        // collider should be disabled when returning to player, so this case should never occur
+        if (collision == null || returningToPlayer)
+            return;
+
+        //temporary replacement as commented code was not working
+        if ((collision.gameObject.layer == 10) &&
+            (collision.transform != (Transform)Variables.ActiveScene.Get("player")))
+        {
+            Debug.Log("Hit Enemy: " + collision.transform.name);
+            hitEnemy(collision);
+        } *//*else
         {
             Debug.Log("Hit Terrain: " + collision.transform.name);
             hitTerrain();
@@ -116,6 +143,6 @@ public class StunGunProjectile : MonoBehaviour
             hitEnemy(collision);
         else if (IInteractable.isLayerInLayerMask(collisionLayer, terrainLayers))
             hitTerrain();
-        */
-    }
+        
+    } */
 }
