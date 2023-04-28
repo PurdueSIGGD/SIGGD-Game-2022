@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6763135281201947592}
   - component: {fileID: 6755927282950771678}
   - component: {fileID: 4802620772777379802}
+  - component: {fileID: -4333200222916735921}
   m_Layer: 11
   m_Name: ContactResistor
   m_TagString: Untagged
@@ -56,6 +57,7 @@ MonoBehaviour:
   isShiny: 0
   description: 
   useDuration: 1
+  useSound: {fileID: 910863468206653602, guid: bae5d892f3917384b8619cbcbd7715ff, type: 3}
   immuneDuration: 1
   invincibleDuration: 1
   speedBoostDuration: 1
@@ -123,6 +125,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-4333200222916735921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090515544576324914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90fb7676d27e80240bc24533f3c7c089, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 20
+  type: 
 --- !u!1 &8787933081144724966
 GameObject:
   m_ObjectHideFlags: 0

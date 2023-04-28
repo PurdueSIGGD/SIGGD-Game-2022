@@ -5,8 +5,13 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     [SerializeField] private float MaxSpeed = 10;
+    [SerializeField] private float MaxSprintSpeed = 12.5f;
+    [SerializeField] private float MaxStamina = 100f;
+    [SerializeField] private float DefaultStaminaRegen = 33.33f;
+    [SerializeField] private float SprintStaminaUse = 50f;
     [SerializeField] private float Friction = 100;
     [SerializeField] private float Acceleration = 100;
+    [SerializeField] private float SprintAcceleration = 175;
     [SerializeField] private float gravity = 9.8f;
     [SerializeField] private float CamRotXSpeed = 0.2f;
     [SerializeField] private float CamRotYSpeed = 0.2f;
@@ -18,6 +23,10 @@ public class Movement : MonoBehaviour
     private Vector2 input;
     private Vector2 lookInput;
     private Vector3 velocity;
+    private float stamina;
+    private Vector3 targetMoveDir;
+    private bool isSprinting = false;
+    private bool isStaminaLocked = false;
 
     private CharacterController charController;
 
@@ -29,6 +38,8 @@ public class Movement : MonoBehaviour
         debuffs = GetComponent<DebuffsManager>();
         camHolderTransform = GetComponentInChildren<Camera>().transform.parent;
         animator = GetComponentInChildren<Animator>();
+
+        stamina = MaxStamina;
     }
 
     public void SetInput(Vector2 input)
@@ -46,12 +57,28 @@ public class Movement : MonoBehaviour
         this.lookInput = lookInput;
     }
 
+    public void SetSprint(bool isSprinting)
+    {
+        this.isSprinting = isSprinting;
+    }
+
     private const float GROUND_SNAP = 0.5f;
 
 
 
     public void MovePlayer()
     {
+        // Stamina
+        if (stamina < 0) {
+            stamina = 0;
+            isStaminaLocked = true;
+        } else if (stamina >= MaxStamina) {
+            stamina = MaxStamina;
+            isStaminaLocked = false;
+        } else {
+            stamina += DefaultStaminaRegen * Time.fixedDeltaTime;
+        }
+
         // Movement
         if (input.Equals(Vector2.zero))
         {
@@ -65,7 +92,13 @@ public class Movement : MonoBehaviour
             Vector3 localDir = transform.forward * input.y + transform.right * input.x;
             //corrects the 3dDir to be a 2d vector
             // Vector2 corrInput = new Vector2(localDir.x, localDir.z);
-            velocity = Vector3.MoveTowards(velocity, localDir * MaxSpeed + Vector3.up * velocity.y, Acceleration * Time.fixedDeltaTime);
+            if (isSprinting && stamina > 0 && !isStaminaLocked) {
+                targetMoveDir = localDir * MaxSprintSpeed + Vector3.up * velocity.y;
+                stamina -= (DefaultStaminaRegen + SprintStaminaUse) * Time.fixedDeltaTime;
+            } else {
+                targetMoveDir = localDir * MaxSpeed + Vector3.up * velocity.y;
+            }
+            velocity = Vector3.MoveTowards(velocity, targetMoveDir, Acceleration * Time.fixedDeltaTime);
         }
 
         //   Creates a new move vector with Buffs and Debuffs applied
@@ -110,5 +143,4 @@ public class Movement : MonoBehaviour
             }
         }
     }
-
 }

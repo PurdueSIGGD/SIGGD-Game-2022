@@ -59,14 +59,7 @@ public class Player : MonoBehaviour
 
     void OnMove(InputValue movementValue)
     {
-        if (movement.GetInput() != movementValue.Get<Vector2>())
-        {
-            FindObjectOfType<PasswordLogic>().ifWASDReleased();
-        }
-        if (!lockInputs)
-        {
-            movement.SetInput(movementValue.Get<Vector2>());
-        }
+        if (!lockInputs) movement.SetInput(movementValue.Get<Vector2>());
         else movement.SetInput(Vector2.zero);
     }
 
@@ -84,6 +77,8 @@ public class Player : MonoBehaviour
         }
     }
 
+
+
     // test slow debuff
     void OnFire(InputValue fire)
     {
@@ -94,6 +89,7 @@ public class Player : MonoBehaviour
         /* debuffsManager.AddDebuff(new Slow(3f, 0.5f)); */
     }
 
+
     void OnSecondaryFire(InputValue secFire)
     {
         if (!lockInputs)
@@ -102,6 +98,24 @@ public class Player : MonoBehaviour
         }
         /* debuffsManager.AddDebuff(new Slow(3f, 0.5f)); */
     }
+
+    void OnSprint(InputValue sprint) {
+        if (sprint.Get<float>() != 0) {
+            movement.SetSprint(true);
+        } else {
+            movement.SetSprint(false);
+        }
+    }
+
+
+    void OnDropItem(InputValue dropItem)
+    {
+        if (!lockInputs)
+        {
+            FindObjectOfType<InventorySystem>().isPressingDrop();
+        }
+    }
+
 
     [SerializeField] private float angleSpread;
     [SerializeField] private float maxCameraCastDist;

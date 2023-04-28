@@ -140,6 +140,7 @@ MonoBehaviour:
   isShiny: 0
   description: 
   useDuration: 0
+  weight: 0
 --- !u!33 &3953836916633628935
 MeshFilter:
   m_ObjectHideFlags: 0
