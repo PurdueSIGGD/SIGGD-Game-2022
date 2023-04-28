@@ -716,7 +716,7 @@ MonoBehaviour:
   FloorRooms:
   - {fileID: 11400000, guid: c4591daca22425845bd35e5a6ce47b48, type: 2}
   - {fileID: 11400000, guid: 91aa607b9e5ce354d9480e3b779ada01, type: 2}
-  - {fileID: 11400000, guid: d543a12d00be19448928e789b98b4592, type: 2}
+  - {fileID: 11400000, guid: 7e764b56dec561a4a90034890072381b, type: 2}
   StartRoom: {fileID: 11400000, guid: 06fdd8be2fd7296459ab5ce477b1f9d3, type: 2}
   EndRoom: {fileID: 11400000, guid: 9e824bda7912e1344bba0a0294998cda, type: 2}
 --- !u!4 &1809290373

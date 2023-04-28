@@ -854,7 +854,6 @@ MonoBehaviour:
   - {fileID: 5090515544576324914, guid: b2ae56bfd47ba4c458b7ae9d2eba5e48, type: 3}
   enemySpawnables:
   - {fileID: 6261636282363335206, guid: cec0e2be033fcf343a6c752cdc5f316f, type: 3}
-  - {fileID: 8911404103632459327, guid: e31b447247d55eb4caa672ddfa385522, type: 3}
   budget: 20
   enemyBudget: 20
   key: {fileID: 3287776043236239357, guid: 209b44f527e10804092f1cac6aaeadab, type: 3}
