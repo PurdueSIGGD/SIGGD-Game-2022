@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8921928657805700723}
   - component: {fileID: 8920387852663021157}
   - component: {fileID: 2741132432678243773}
+  - component: {fileID: 3787076034985657740}
   m_Layer: 11
   m_Name: Ammo
   m_TagString: Untagged
@@ -51,11 +52,12 @@ MonoBehaviour:
   itemName: Ammo
   type: 0
   inventorySprite: {fileID: 21300000, guid: a8cf8279c8d94284faeb276af47159c2, type: 3}
-  maxStackSize: 7
+  maxStackSize: 3
   currentNumCharges: 1
   isShiny: 0
   description: 
   useDuration: 0
+  weight: 15
   objectToDeploy: {fileID: 1721840539210694629, guid: 3407bbb6964d28d43ad0cab0cc7cbed3,
     type: 3}
 --- !u!33 &8921928657805700723
@@ -122,6 +124,20 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &3787076034985657740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6966876786177456265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90fb7676d27e80240bc24533f3c7c089, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 15
+  type: 
 --- !u!1 &7571262137277900164
 GameObject:
   m_ObjectHideFlags: 0
