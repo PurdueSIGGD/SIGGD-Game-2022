@@ -31,17 +31,23 @@ public class DoorTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Activate password panel
-        if (!door.GetComponent<GatesObj>().keyNeeded) FindObjectOfType<PasswordLogic>().hasEntered(door, this);
-        isPlayerNextToDoor = true;
+        if (other.tag == "Player")
+        {
+            if (!door.GetComponent<GatesObj>().keyNeeded) FindObjectOfType<PasswordLogic>().hasEntered(door, this);
+            isPlayerNextToDoor = true;
+        }
     }
 
     // Activates when player leaves trigger
     public void OnTriggerExit(Collider other)
     {
         // Close door frame and deactivate password panel
-        isPasswordCorrect = false;
-        FindObjectOfType<PasswordLogic>().hasExited();
-        isPlayerNextToDoor = false;
+        if (other.tag == "Player")
+        {
+            isPasswordCorrect = false;
+            FindObjectOfType<PasswordLogic>().hasExited();
+            isPlayerNextToDoor = false;
+        }
     }
 
     // Physically opens door frame
@@ -56,14 +62,6 @@ public class DoorTrigger : MonoBehaviour
     // Get whether the password entered is correct or not
     public void getPassword()
     {
-        isPasswordCorrect = door.GetComponent<GatesObj>().openObj();
-    }
-
-    // testing if door open works
-    [ContextMenu("Change 'isPassword Correct'")]
-    public void testPass()
-    {
-        if (isPasswordCorrect) isPasswordCorrect = false;
-        if (!isPasswordCorrect) isPasswordCorrect = true;
+        isPasswordCorrect = door.GetComponent<GatesObj>().openObj() || FindObjectOfType<PasswordLogic>().openDoorWithGateCrasher;
     }
 }
