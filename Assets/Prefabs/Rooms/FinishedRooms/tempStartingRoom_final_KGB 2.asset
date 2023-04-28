@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef9cf795a290b744a60444fd431d559, type: 3}
   m_Name: tempStartingRoom_final_KGB 2
   m_EditorClassIdentifier: 
-  room: {fileID: 5707382502519527457, guid: 1469444c48eab89459faaac366440a82, type: 3}
+  room: {fileID: 5707382502519527457, guid: 88e1bd70e3c8cb54c985397514e79a8b, type: 3}
   dimensions: {x: 6, y: 6, z: 6}
   hallways:
   - {x: 0, y: -1, z: 3}

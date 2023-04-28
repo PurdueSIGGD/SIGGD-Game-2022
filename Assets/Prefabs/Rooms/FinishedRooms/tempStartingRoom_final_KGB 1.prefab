@@ -347,7 +347,7 @@ Transform:
   - {fileID: 7170981924787572106}
   - {fileID: 7756961284814767816}
   - {fileID: 6526697378012850595}
-  - {fileID: 5076115315118580565}
+  - {fileID: 6130334075445806142}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -583,7 +583,7 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5211960267056586408}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &7151930103391820160
+--- !u!1001 &8080138508966837995
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -645,26 +645,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3124333632994722190, guid: da61dc90bc2e169409f7e17ed032ae65,
-        type: 3}
-      propertyPath: useAudio
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5090515544576324914, guid: da61dc90bc2e169409f7e17ed032ae65,
         type: 3}
       propertyPath: m_Name
-      value: AudioRecorder
+      value: AudioRecorderKGB1
       objectReference: {fileID: 0}
-    - target: {fileID: 7202014868844755149, guid: da61dc90bc2e169409f7e17ed032ae65,
-        type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: d10429271fda2af43bddd260cdede297, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da61dc90bc2e169409f7e17ed032ae65, type: 3}
---- !u!4 &5076115315118580565 stripped
+--- !u!4 &6130334075445806142 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2679986429069081301, guid: da61dc90bc2e169409f7e17ed032ae65,
     type: 3}
-  m_PrefabInstance: {fileID: 7151930103391820160}
+  m_PrefabInstance: {fileID: 8080138508966837995}
   m_PrefabAsset: {fileID: 0}
