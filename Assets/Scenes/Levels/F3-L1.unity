@@ -438,6 +438,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 910863468206653613, guid: 704692a960e0fca428e4c155522ebf5b,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: fb6cd5ea30669fe4582d867c9de0079f, type: 3}
     - target: {fileID: 5881801705751782652, guid: 704692a960e0fca428e4c155522ebf5b,
         type: 3}
       propertyPath: destroyIndex

@@ -620,8 +620,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6c42de4e52f448439e0a1675b8d84b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FinalRoomCount: 0
-  TotalRoomCount: 0
+  FinalRoomCount: 1
+  TotalRoomCount: 1
   MinRoomWidth: 15
   MinRoomDepth: 15
   MaxRoomWidth: 96
