@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: lobby
   m_EditorClassIdentifier: 
   room: {fileID: 7271532928989112982, guid: 93c6751a19c35024da0d8141c552b15c, type: 3}
-  dimensions: {x: 64, y: 16, z: 32}
+  dimensions: {x: 36, y: 16, z: 42}
   hallways:
-  - {x: 0, y: 0, z: 16}
-  - {x: 59, y: 0, z: 0}
-  - {x: 64, y: 0, z: 16}
+  - {x: 36, y: 6, z: 9}

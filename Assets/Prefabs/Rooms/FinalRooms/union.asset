@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: union
   m_EditorClassIdentifier: 
   room: {fileID: 7984245374713970443, guid: beba1f0bf3f42134e8053542fcaa0386, type: 3}
-  dimensions: {x: 64, y: 16, z: 32}
+  dimensions: {x: 36, y: 16, z: 42}
   hallways:
-  - {x: 0, y: 0, z: 16}
-  - {x: 59, y: 0, z: 0}
-  - {x: 64, y: 0, z: 16}
+  - {x: 0, y: 0, z: 12}
+  - {x: 60, y: 0, z: 0}

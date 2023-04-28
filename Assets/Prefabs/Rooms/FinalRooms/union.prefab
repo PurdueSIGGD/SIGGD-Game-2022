@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &2794677954219723039
 Transform:
@@ -82,7 +82,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7984245374023489166
 Transform:
@@ -166,7 +166,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7984245374089596747
 Transform:
@@ -250,7 +250,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7984245374212217145
 Transform:
@@ -334,7 +334,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7984245374251443308
 Transform:
@@ -418,7 +418,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7984245374398432136
 Transform:
@@ -502,7 +502,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7984245374543178376
 Transform:
@@ -586,7 +586,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7984245374615519653
 Transform:
@@ -670,7 +670,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7984245374713970442
 Transform:
@@ -705,9 +705,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 526c5edfcb072b64392b613b4d8ffc1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnables: []
-  budget: 0
-  key: {fileID: 0}
+  spawnables:
+  - {fileID: 6966876786177456265, guid: ffa59d6d5d0b8594fa9da49af58b9ba5, type: 3}
+  - {fileID: 5090515544576324914, guid: 7de24a0f319ea024285dc819cccaa530, type: 3}
+  - {fileID: 5090515544576324914, guid: 2b049abd2216bec49af086e6f16fdcf5, type: 3}
+  - {fileID: 5090515544576324914, guid: a402c3f7f3b04db4d870b5560922969e, type: 3}
+  - {fileID: 5090515544576324914, guid: b2ae56bfd47ba4c458b7ae9d2eba5e48, type: 3}
+  enemySpawnables:
+  - {fileID: 6261636282363335206, guid: cec0e2be033fcf343a6c752cdc5f316f, type: 3}
+  - {fileID: 8911404103632459327, guid: e31b447247d55eb4caa672ddfa385522, type: 3}
+  budget: 70
+  enemyBudget: 70
+  key: {fileID: 3287776043236239357, guid: 209b44f527e10804092f1cac6aaeadab, type: 3}
 --- !u!1 &7984245374867318236
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,7 +732,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7984245374867318239
 Transform:
@@ -807,7 +816,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7984245374883355199
 Transform:
@@ -891,7 +900,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7984245374944183161
 Transform:
@@ -974,7 +983,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7984245375088347290
 Transform:
@@ -1023,7 +1032,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7984245375168438416
 Transform:
@@ -1107,7 +1116,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7984245375266595085
 Transform:
@@ -1191,7 +1200,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7984245375480803399
 Transform:
@@ -1275,7 +1284,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7984245375502039771
 Transform:
@@ -1359,7 +1368,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7984245375675612614
 Transform:
@@ -1443,7 +1452,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7984245375715519383
 Transform:
@@ -1527,7 +1536,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7984245375805098436
 Transform:
@@ -1663,6 +1672,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Big Room Light (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 7047131580524310652, guid: 21d058eb1348bdb41abf849136e84953,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21d058eb1348bdb41abf849136e84953, type: 3}
 --- !u!4 &2479302929320118187 stripped
@@ -1737,6 +1751,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Big Room Light (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047131580524310652, guid: 21d058eb1348bdb41abf849136e84953,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21d058eb1348bdb41abf849136e84953, type: 3}
@@ -1813,6 +1832,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bright Big Room Light (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6429556051351740847, guid: 758ee1370cad2174e98a31ada929e8c0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 758ee1370cad2174e98a31ada929e8c0, type: 3}
 --- !u!4 &1161958167832946430 stripped
@@ -1887,6 +1911,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Big Room Light (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047131580524310652, guid: 21d058eb1348bdb41abf849136e84953,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21d058eb1348bdb41abf849136e84953, type: 3}
@@ -1963,6 +1992,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Big Room Light (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 7047131580524310652, guid: 21d058eb1348bdb41abf849136e84953,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21d058eb1348bdb41abf849136e84953, type: 3}
 --- !u!4 &3226643106277087683 stripped
@@ -2037,6 +2071,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Big Room Light (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047131580524310652, guid: 21d058eb1348bdb41abf849136e84953,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21d058eb1348bdb41abf849136e84953, type: 3}
@@ -2113,6 +2152,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Big Room Light (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7047131580524310652, guid: 21d058eb1348bdb41abf849136e84953,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21d058eb1348bdb41abf849136e84953, type: 3}
 --- !u!4 &3616223547959162262 stripped
@@ -2132,6 +2176,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Desk Light (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 674304298262294123, guid: 554879e1c7b37bf42b37057f503e5415,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5336578134733927832, guid: 554879e1c7b37bf42b37057f503e5415,
         type: 3}
@@ -2263,6 +2312,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Big Room Light (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 7047131580524310652, guid: 21d058eb1348bdb41abf849136e84953,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21d058eb1348bdb41abf849136e84953, type: 3}
 --- !u!4 &3911701630958967834 stripped
@@ -2337,6 +2391,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Big Room Light (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047131580524310652, guid: 21d058eb1348bdb41abf849136e84953,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21d058eb1348bdb41abf849136e84953, type: 3}
@@ -2413,6 +2472,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bright Big Room Light (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6429556051351740847, guid: 758ee1370cad2174e98a31ada929e8c0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 758ee1370cad2174e98a31ada929e8c0, type: 3}
 --- !u!4 &4478559320501068011 stripped
@@ -2488,6 +2552,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Big Room Light (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 7047131580524310652, guid: 21d058eb1348bdb41abf849136e84953,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21d058eb1348bdb41abf849136e84953, type: 3}
 --- !u!4 &713814738669919619 stripped
@@ -2507,6 +2576,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Desk Light (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 674304298262294123, guid: 554879e1c7b37bf42b37057f503e5415,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5336578134733927832, guid: 554879e1c7b37bf42b37057f503e5415,
         type: 3}
@@ -2638,6 +2712,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Big Room Light (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 7047131580524310652, guid: 21d058eb1348bdb41abf849136e84953,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21d058eb1348bdb41abf849136e84953, type: 3}
 --- !u!4 &989945933357903532 stripped
@@ -2713,6 +2792,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Big Room Light (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 7047131580524310652, guid: 21d058eb1348bdb41abf849136e84953,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21d058eb1348bdb41abf849136e84953, type: 3}
 --- !u!4 &1364135360040085571 stripped
@@ -2732,6 +2816,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Desk Light (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 674304298262294123, guid: 554879e1c7b37bf42b37057f503e5415,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5336578134733927832, guid: 554879e1c7b37bf42b37057f503e5415,
         type: 3}
@@ -2863,6 +2952,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Big Room Light (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 7047131580524310652, guid: 21d058eb1348bdb41abf849136e84953,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21d058eb1348bdb41abf849136e84953, type: 3}
 --- !u!4 &1256071163172569268 stripped
@@ -2882,6 +2976,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Desk Light (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 674304298262294123, guid: 554879e1c7b37bf42b37057f503e5415,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5336578134733927832, guid: 554879e1c7b37bf42b37057f503e5415,
         type: 3}
@@ -3013,6 +3112,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Big Room Light (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 7047131580524310652, guid: 21d058eb1348bdb41abf849136e84953,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21d058eb1348bdb41abf849136e84953, type: 3}
 --- !u!4 &7197575254133793806 stripped
@@ -3087,6 +3191,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Big Room Light (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047131580524310652, guid: 21d058eb1348bdb41abf849136e84953,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21d058eb1348bdb41abf849136e84953, type: 3}
@@ -3163,6 +3272,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Big Room Light (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7047131580524310652, guid: 21d058eb1348bdb41abf849136e84953,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21d058eb1348bdb41abf849136e84953, type: 3}
 --- !u!4 &7345302434859012819 stripped
@@ -3237,6 +3351,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Big Room Light (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047131580524310652, guid: 21d058eb1348bdb41abf849136e84953,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21d058eb1348bdb41abf849136e84953, type: 3}
@@ -3313,6 +3432,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bright Big Room Light (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6429556051351740847, guid: 758ee1370cad2174e98a31ada929e8c0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 758ee1370cad2174e98a31ada929e8c0, type: 3}
 --- !u!4 &5393262858627566002 stripped
@@ -3387,6 +3511,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bright Big Room Light (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6429556051351740847, guid: 758ee1370cad2174e98a31ada929e8c0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 758ee1370cad2174e98a31ada929e8c0, type: 3}
@@ -3463,6 +3592,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bright Big Room Light (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 6429556051351740847, guid: 758ee1370cad2174e98a31ada929e8c0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 758ee1370cad2174e98a31ada929e8c0, type: 3}
 --- !u!4 &5136868081114737159 stripped
@@ -3537,6 +3671,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Big Room Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047131580524310652, guid: 21d058eb1348bdb41abf849136e84953,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21d058eb1348bdb41abf849136e84953, type: 3}
@@ -3613,6 +3752,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Big Room Light (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7047131580524310652, guid: 21d058eb1348bdb41abf849136e84953,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21d058eb1348bdb41abf849136e84953, type: 3}
 --- !u!4 &9036151833167582545 stripped
@@ -3687,6 +3831,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Big Room Light (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047131580524310652, guid: 21d058eb1348bdb41abf849136e84953,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21d058eb1348bdb41abf849136e84953, type: 3}
@@ -3763,6 +3912,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Big Room Light (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 7047131580524310652, guid: 21d058eb1348bdb41abf849136e84953,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21d058eb1348bdb41abf849136e84953, type: 3}
 --- !u!4 &5126361343463329570 stripped
@@ -3838,6 +3992,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bright Big Room Light (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6429556051351740847, guid: 758ee1370cad2174e98a31ada929e8c0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 758ee1370cad2174e98a31ada929e8c0, type: 3}
 --- !u!4 &8318882746632153487 stripped
@@ -3857,6 +4016,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Desk Light (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 674304298262294123, guid: 554879e1c7b37bf42b37057f503e5415,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5336578134733927832, guid: 554879e1c7b37bf42b37057f503e5415,
         type: 3}
@@ -3932,6 +4096,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Desk Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 674304298262294123, guid: 554879e1c7b37bf42b37057f503e5415,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5336578134733927832, guid: 554879e1c7b37bf42b37057f503e5415,
         type: 3}
@@ -4083,6 +4252,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: unionD_roof
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: efeb9110cdf82a64ea45d82c2ede4267,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: efeb9110cdf82a64ea45d82c2ede4267,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: efeb9110cdf82a64ea45d82c2ede4267,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: efeb9110cdf82a64ea45d82c2ede4267,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: efeb9110cdf82a64ea45d82c2ede4267, type: 3}
 --- !u!4 &7586038285891080594 stripped
@@ -4177,6 +4366,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: unionA_roof
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4c05960e76e990547a6594d272aef88c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4c05960e76e990547a6594d272aef88c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 4c05960e76e990547a6594d272aef88c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 4c05960e76e990547a6594d272aef88c,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c05960e76e990547a6594d272aef88c, type: 3}
@@ -4273,6 +4482,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: unionB_roof
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a3553fe4f6f9b7a4aaa57ef2625d17c6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a3553fe4f6f9b7a4aaa57ef2625d17c6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: a3553fe4f6f9b7a4aaa57ef2625d17c6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: a3553fe4f6f9b7a4aaa57ef2625d17c6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3553fe4f6f9b7a4aaa57ef2625d17c6, type: 3}
 --- !u!4 &7586038285336859115 stripped
@@ -4368,6 +4597,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: unionC_roof
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dda5edfd20d2e794b9bb512db2f52954,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: dda5edfd20d2e794b9bb512db2f52954,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: dda5edfd20d2e794b9bb512db2f52954,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: dda5edfd20d2e794b9bb512db2f52954,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dda5edfd20d2e794b9bb512db2f52954, type: 3}
 --- !u!4 &7586038284992095458 stripped
@@ -4443,6 +4692,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bright Big Room Light (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6429556051351740847, guid: 758ee1370cad2174e98a31ada929e8c0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 758ee1370cad2174e98a31ada929e8c0, type: 3}
 --- !u!4 &8054860398257224821 stripped
@@ -4462,6 +4716,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Desk Light (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 674304298262294123, guid: 554879e1c7b37bf42b37057f503e5415,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5336578134733927832, guid: 554879e1c7b37bf42b37057f503e5415,
         type: 3}
@@ -4593,6 +4852,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bright Big Room Light
       objectReference: {fileID: 0}
+    - target: {fileID: 6429556051351740847, guid: 758ee1370cad2174e98a31ada929e8c0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 758ee1370cad2174e98a31ada929e8c0, type: 3}
 --- !u!4 &6993848709448766387 stripped
@@ -4667,6 +4931,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Big Room Light (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047131580524310652, guid: 21d058eb1348bdb41abf849136e84953,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21d058eb1348bdb41abf849136e84953, type: 3}

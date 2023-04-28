@@ -9,13 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2679986429069081301}
-  - component: {fileID: -1229588670923292713}
+  - component: {fileID: -8445667583619462764}
   - component: {fileID: 6763135281201947592}
   - component: {fileID: 6755927282950771678}
   - component: {fileID: 4802620772777379802}
-  - component: {fileID: -4126575795365134413}
+  - component: {fileID: 4959086344754352815}
   m_Layer: 11
-  m_Name: PulseScanner
+  m_Name: Cloaker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,11 +33,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1196622341837637506}
+  - {fileID: 2417078055466789765}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-1229588670923292713
+--- !u!114 &-8445667583619462764
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,19 +46,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 5090515544576324914}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff1380bc324dd6243871bdacba526ef6, type: 3}
+  m_Script: {fileID: 11500000, guid: fc2a8cca1c128b3489a1ba56ffd5170b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Pulse Scanner
+  itemName: Cloaker
   type: 1
-  inventorySprite: {fileID: 21300000, guid: a0efad3eb4897914d9e0097666265f66, type: 3}
+  inventorySprite: {fileID: 21300000, guid: ad99bf8b32e17cd4ab3677adfdd27079, type: 3}
   maxStackSize: 1
   currentNumCharges: 1
   isShiny: 0
   description: 
-  useDuration: 10
-  useSound: {fileID: 910863468206653602, guid: b8bc0eef4664bb2409f932851b55a402, type: 3}
-  scanDuration: 10
+  useDuration: 5
+  useSound: {fileID: 910863468206653602, guid: bae5d892f3917384b8619cbcbd7715ff, type: 3}
+  invisibilityDuration: 5
 --- !u!33 &6763135281201947592
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -122,7 +122,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-4126575795365134413
+--- !u!114 &4959086344754352815
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,9 +134,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90fb7676d27e80240bc24533f3c7c089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 20
+  weight: 15
   type: 
---- !u!1 &9144747619161882920
+--- !u!1 &6056346686968799008
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,8 +144,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1196622341837637506}
-  - component: {fileID: 3785356075406322163}
+  - component: {fileID: 2417078055466789765}
+  - component: {fileID: 6737222643669824092}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -153,13 +153,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1196622341837637506
+--- !u!4 &2417078055466789765
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9144747619161882920}
+  m_GameObject: {fileID: 6056346686968799008}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -168,13 +168,13 @@ Transform:
   m_Father: {fileID: 2679986429069081301}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!212 &3785356075406322163
+--- !u!212 &6737222643669824092
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9144747619161882920}
+  m_GameObject: {fileID: 6056346686968799008}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -209,7 +209,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a0efad3eb4897914d9e0097666265f66, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ad99bf8b32e17cd4ab3677adfdd27079, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 6194962119063771826}
   - component: {fileID: 7268061136408231462}
   - component: {fileID: 6314140850492666886}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &9020642321132037112
 Transform:
@@ -112,7 +112,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &6049195042427753264
 Transform:
@@ -180,7 +180,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7451687883544825352
 Transform:
@@ -278,7 +278,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &9115756992586312950
 Transform:
@@ -375,7 +375,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1125375389690810821
 Transform:
@@ -473,7 +473,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &3557057778199493146
 Transform:
@@ -571,7 +571,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &6537466630976291083
 Transform:
@@ -669,7 +669,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &2545770105506778208
 Transform:
@@ -767,7 +767,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8278455574995846460
 Transform:
@@ -862,7 +862,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &3463085189541242886
 Transform:
@@ -902,7 +902,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606932513919194
 Transform:
@@ -986,7 +986,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606932522126084
 Transform:
@@ -1070,7 +1070,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606932630543121
 Transform:
@@ -1154,7 +1154,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606932663603957
 Transform:
@@ -1238,7 +1238,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606932760104033
 Transform:
@@ -1322,7 +1322,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606932790899729
 Transform:
@@ -1406,7 +1406,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606932797429631
 Transform:
@@ -1490,7 +1490,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606932823007608
 Transform:
@@ -1574,7 +1574,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606932840915236
 Transform:
@@ -1658,7 +1658,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606932896747294
 Transform:
@@ -1742,7 +1742,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606932903636977
 Transform:
@@ -1826,7 +1826,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606933223271771
 Transform:
@@ -1910,7 +1910,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606933249163818
 Transform:
@@ -1994,7 +1994,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606933276386995
 Transform:
@@ -2078,7 +2078,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606933319637977
 Transform:
@@ -2162,7 +2162,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606933369460402
 Transform:
@@ -2246,7 +2246,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606933421710977
 Transform:
@@ -2330,7 +2330,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606933611948889
 Transform:
@@ -2414,7 +2414,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606933668560824
 Transform:
@@ -2497,7 +2497,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606933768916190
 Transform:
@@ -2556,7 +2556,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606933854481123
 Transform:
@@ -2640,7 +2640,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606933876650966
 Transform:
@@ -2724,7 +2724,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606934006688205
 Transform:
@@ -2808,7 +2808,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606934091995778
 Transform:
@@ -2892,7 +2892,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606934135121799
 Transform:
@@ -2976,7 +2976,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606934187794382
 Transform:
@@ -3060,7 +3060,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606934231876938
 Transform:
@@ -3144,7 +3144,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8274606934253528533
 Transform:
@@ -3230,7 +3230,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &2198207762127968078
 Transform:
@@ -3324,7 +3324,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &8457749480800981664
 Transform:
@@ -3356,6 +3356,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Room Light (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
@@ -3432,6 +3437,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room Light (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
       propertyPath: m_RootOrder
@@ -3506,6 +3516,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Room Light (26)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
@@ -3582,6 +3597,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room Light (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
       propertyPath: m_RootOrder
@@ -3656,6 +3676,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Room Light (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
@@ -3732,6 +3757,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room Light (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
       propertyPath: m_RootOrder
@@ -3806,6 +3836,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Room Light (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
@@ -3882,6 +3917,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room Light (28)
       objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
       propertyPath: m_RootOrder
@@ -3956,6 +3996,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Room Light (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
@@ -4032,6 +4077,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room Light (29)
       objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
       propertyPath: m_RootOrder
@@ -4106,6 +4156,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Room Light (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
@@ -4182,6 +4237,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room Light (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
       propertyPath: m_RootOrder
@@ -4256,6 +4316,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Desk Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 674304298262294123, guid: 554879e1c7b37bf42b37057f503e5415,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5336578134733927832, guid: 554879e1c7b37bf42b37057f503e5415,
         type: 3}
@@ -4332,6 +4397,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room Light (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
       propertyPath: m_RootOrder
@@ -4406,6 +4476,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Room Light (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
@@ -4482,6 +4557,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room Light (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
       propertyPath: m_RootOrder
@@ -4556,6 +4636,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Room Light (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
@@ -4687,6 +4772,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bright Big Room Light
       objectReference: {fileID: 0}
+    - target: {fileID: 6429556051351740847, guid: 758ee1370cad2174e98a31ada929e8c0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 758ee1370cad2174e98a31ada929e8c0, type: 3}
 --- !u!4 &2845424417585057380 stripped
@@ -4706,6 +4796,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Room Light (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
@@ -4782,6 +4877,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room Light (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
       propertyPath: m_RootOrder
@@ -4856,6 +4956,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Room Light (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
@@ -4932,6 +5037,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room Light (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
       propertyPath: m_RootOrder
@@ -5006,6 +5116,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Room Light (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
@@ -5082,6 +5197,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room Light (30)
       objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
       propertyPath: m_RootOrder
@@ -5156,6 +5276,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Room Light (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
@@ -5232,6 +5357,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room Light (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
       propertyPath: m_RootOrder
@@ -5306,6 +5436,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Room Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
@@ -5382,6 +5517,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room Light (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
       propertyPath: m_RootOrder
@@ -5456,6 +5596,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Room Light (31)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
@@ -5532,6 +5677,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room Light (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
       propertyPath: m_RootOrder
@@ -5606,6 +5756,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Room Light (32)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
@@ -5682,6 +5837,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room Light (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
       propertyPath: m_RootOrder
@@ -5757,6 +5917,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room Light (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}
       propertyPath: m_RootOrder
@@ -5831,6 +5996,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Room Light (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3302734002773111674, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7962754151643539593, guid: eb1b8054c2f2bba4e9531a9f7ac7e7b0,
         type: 3}

@@ -245,6 +245,7 @@ public class ProceduralGenerator : MonoBehaviour
             if (budgeting == null) { continue; }
             
             budgeting.Go(randIndex == counter);
+            budgeting.EnemyGo();
             counter++;
         }
         //Debug.LogError("Before subscribe");

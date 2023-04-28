@@ -645,9 +645,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a348237189ede4daba0aa8c756a7a342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxSpeed: 5
+  MaxSpeed: 3.5
+  MaxSprintSpeed: 6
+  MaxStamina: 100
+  DefaultStaminaRegen: 33.33
+  SprintStaminaUse: 50
   Friction: 50
   Acceleration: 40
+  SprintAcceleration: 175
   gravity: 9.8
   CamRotXSpeed: 0.1
   CamRotYSpeed: 0.1
