@@ -29,7 +29,7 @@ public class RoomBudgeting : MonoBehaviour {
     private GameObject key;
 
     public void Go(bool keyRoom) {
-        if (spawnables.Length == 0) { return; }
+        if (spawnables == null || spawnables.Length == 0) { return; }
 
         int tempBudget = budget; // Used for spawning the objects because this instance will be deprecated during that, while the original instance persists
 
@@ -44,7 +44,13 @@ public class RoomBudgeting : MonoBehaviour {
         // Find lowest budget
         int lowestBudget = 9999;
         for (int i = 0; i < spawnables.Length; i++) {
-            int w = spawnables[i].gameObject.GetComponent<Attributes>().weight;
+            GameObject g = spawnables[i].gameObject;
+            Attributes attributes = g.GetComponent<Attributes>();
+            if (attributes == null)
+            {
+                continue;
+            }
+            int w = attributes.weight;
             if (w < lowestBudget) {
                 lowestBudget = w;
             }
@@ -63,7 +69,13 @@ public class RoomBudgeting : MonoBehaviour {
         while (tempBudget >= lowestBudget) {
             // Try to spawn a random item
             int randIndex = (int) Random.Range(0, spawnables.Length);
-            int w = spawnables[randIndex].gameObject.GetComponent<Attributes>().weight;
+            GameObject g = spawnables[randIndex].gameObject;
+            Attributes attributes = g.GetComponent<Attributes>();
+            if (attributes == null)
+            {
+                continue;
+            }
+            int w = attributes.weight;
             if (tempBudget >= w) {
                 toSpawn.Add(spawnables[randIndex]);
                 tempBudget -= w;
@@ -76,7 +88,13 @@ public class RoomBudgeting : MonoBehaviour {
 
         string debugText = "With a budget of " + budget + ", spawned these objects: ";
         foreach (GameObject t in toSpawn) {
-            debugText += t.name + " (" + t.GetComponent<Attributes>().weight + "), ";
+            Attributes attributes = t.GetComponent<Attributes>();
+            int w = 0;
+            if (attributes != null)
+            {
+                w = attributes.weight;
+            }
+            debugText += t.name + " (" + w + "), ";
         }
         debugText += "with " + tempBudget + " budget left over.";
         Debug.Log(debugText);
