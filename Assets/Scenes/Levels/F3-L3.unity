@@ -694,8 +694,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6c42de4e52f448439e0a1675b8d84b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FinalRoomCount: 8
-  TotalRoomCount: 9
+  FinalRoomCount: 6
+  TotalRoomCount: 7
   MinRoomWidth: 15
   MinRoomDepth: 15
   MaxRoomWidth: 96
@@ -704,20 +704,20 @@ MonoBehaviour:
   MinRoomSeparation: 2
   FloorBudget: 0
   RoundToTileSize: 1
-  HallwayPrefab: {fileID: 4587997001071933141, guid: 79c2b47ca1348dd44a138ac29be1428a,
+  HallwayPrefab: {fileID: 4587997001071933141, guid: 375d1d05726c68c40bc4112ed3ae2b5e,
     type: 3}
   floor: {fileID: 556802070665314663, guid: 6b78b48d381ee8a488f4f1e859793cfa, type: 3}
   DefaultFloorMaterial: {fileID: 2100000, guid: ae627514e28ffb24f9e761d6c0511d0f,
     type: 2}
   MainRoomMaterial: {fileID: 2100000, guid: 9c4ec128f1645944fb15148abfc47ec8, type: 2}
-  blockerPlane: {fileID: 1472186053438231085, guid: bac1dd06347e46942abadc6d87ea3b7b,
+  blockerPlane: {fileID: 1472186053438231085, guid: 32ac0e3eadf60c041befbf0b016f0b93,
     type: 3}
   DoDebug: 0
   FloorRooms:
-  - {fileID: 11400000, guid: 139b2601d78567d468a0c22fbb03a44f, type: 2}
-  - {fileID: 11400000, guid: 2e09efff0e0ba33499e12967c953c774, type: 2}
-  - {fileID: 11400000, guid: c995c34d77acdee4391b445173e905ee, type: 2}
-  - {fileID: 11400000, guid: 5d31f514b6d56174dadafe3916d69c4a, type: 2}
+  - {fileID: 11400000, guid: 7e764b56dec561a4a90034890072381b, type: 2}
+  - {fileID: 11400000, guid: c4591daca22425845bd35e5a6ce47b48, type: 2}
+  - {fileID: 11400000, guid: d543a12d00be19448928e789b98b4592, type: 2}
+  - {fileID: 11400000, guid: 934edd758b99f4e4d8d544c999435fb4, type: 2}
   StartRoom: {fileID: 11400000, guid: 7fbfde37802b5ee4b8f993c078cdc309, type: 2}
   EndRoom: {fileID: 11400000, guid: 9e824bda7912e1344bba0a0294998cda, type: 2}
 --- !u!4 &1809290373

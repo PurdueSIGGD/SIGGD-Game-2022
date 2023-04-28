@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: small_nathan
   m_EditorClassIdentifier: 
   room: {fileID: 4974386210015341689, guid: 2009661b08234f34ebbe48c62e9fffe1, type: 3}
-  dimensions: {x: 16, y: 5, z: 16}
+  dimensions: {x: 17, y: 5, z: 16}
   hallways:
-  - {x: 0, y: 0, z: 3}
-  - {x: 16, y: 0, z: 3}
-  - {x: 11, y: 0, z: 16}
+  - {x: 0, y: 1, z: 3}
+  - {x: 17, y: 1, z: 3}
+  - {x: 11, y: 1, z: 16}
