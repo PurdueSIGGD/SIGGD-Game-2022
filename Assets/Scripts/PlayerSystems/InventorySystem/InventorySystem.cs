@@ -27,6 +27,8 @@ public class InventorySystem : MonoBehaviour {
     public bool hasNotReCapturedProjectile;
 
     [SerializeField] private GameObject slotHolder;
+    [SerializeField] GameObject shotSound;
+    [SerializeField] GameObject cartridgeSound;
 
     private InventorySlot[] inventory;
 
@@ -226,6 +228,16 @@ public class InventorySystem : MonoBehaviour {
         Use();
     }
 
+    public void isPressingDrop()
+    {
+        Drop(false);
+        if (chooseItem != null)
+        {
+            Add(chooseItem);
+            chooseItem = null;
+        }
+    }
+
 
     /// <summary>
     /// Uses the item in the currently selected inventory slot.  If the current slot is not the Stun Gun, the item is destroyed and removed from the inventory.
@@ -250,8 +262,21 @@ public class InventorySystem : MonoBehaviour {
 
         // uses the stun gun ammo
         inventory[0].useStackItem();
+
+        if (!inventory[0].hasStack)
+            return;
+
+        decrementStunGunAmmo();
         // plays animation
         animator.SetTrigger("Shoot");
+        StartCoroutine(PlayShootSound());
+    }
+
+    IEnumerator PlayShootSound()
+    {
+        Instantiate(shotSound, transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(1f);
+        Instantiate(cartridgeSound, transform.position, Quaternion.identity);
     }
 
     // For Using items other than the Stun Gun Ammo

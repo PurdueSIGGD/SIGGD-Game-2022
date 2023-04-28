@@ -20,6 +20,7 @@ public class InventorySlot : MonoBehaviour
     [SerializeField] TextMeshProUGUI durationText;
 
     [SerializeField] Color selectedColor = Color.white;
+    [SerializeField] Color selectedBackgroundColor = Color.white;
 
     float useDuration = 0f;
     float curDuration = -1f;
@@ -36,6 +37,7 @@ public class InventorySlot : MonoBehaviour
     public List<Item> stack;
     
     Color unselectedColor; // set to InventorySystem prefab's slot border colors
+    Color unselectedBackgroundColor;
 
     void Awake()
     {
@@ -44,6 +46,7 @@ public class InventorySlot : MonoBehaviour
         updateDurationText();
 
         unselectedColor = border.color;
+        unselectedBackgroundColor = background.color;
         setHighlight(false);
     }
 
@@ -219,11 +222,17 @@ public class InventorySlot : MonoBehaviour
     void setHighlight(bool highlight)
     {
         border.color = highlight ? selectedColor : getUnselectedColor();
+        background.color = highlight ? selectedBackgroundColor: getUnselectedBackgroundColor();
     }
 
     Color getUnselectedColor()
     {
         return unselectedColor;
+    }
+
+    Color getUnselectedBackgroundColor()
+    {
+        return unselectedBackgroundColor;
     }
 
     public float getUseDuration()

@@ -13,6 +13,13 @@ public class ContactResistor : Item
 
     public override void Use()
     {
+
+        if (useSound != null)
+        {
+            Instantiate(useSound, transform.position, Quaternion.identity);
+            Debug.Log("SOUND FOUND");
+        }
+
         BuffsManager buffsManager = GameObject.Find("Player").GetComponent<BuffsManager>();
         if (buffsManager != null)
         {
