@@ -123,6 +123,135 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &424918646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 424918648}
+  - component: {fileID: 424918647}
+  m_Layer: 0
+  m_Name: Music
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &424918647
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424918646}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 16ce3b68cfcf1774dbe7c4b1238000eb,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 2cf64a6d9c20bbb408863c9b9b366460, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &424918648
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424918646}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -10.788734, y: 40.799126, z: -4.8209615}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &717496829
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,7 +376,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -3000}
+  m_AnchoredPosition: {x: 0, y: -5000}
   m_SizeDelta: {x: 0, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &846464366
@@ -384,8 +513,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -3000}
-  m_SizeDelta: {x: 0, y: 4500}
+  m_AnchoredPosition: {x: 0, y: -5500}
+  m_SizeDelta: {x: 0, y: 9500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1144043615
 MonoBehaviour:
@@ -410,16 +539,27 @@ MonoBehaviour:
   m_text: 'Purdue SIGGD 2022-2023:
 
 
+    Aiden
+
     Aj Jones
+
+    Alejandro Sandoval
+
+    Andrew
+    Choi
 
     Andrew Hanlon
 
+    Andrew Lui
+
     Andy Sharpe
 
-    Andy
-    Sliwa
+    Andy Sliwa
 
-    Annie Hwang
+    Annie
+
+    Annie
+    Hwang
 
     Ashley Parker
 
@@ -427,8 +567,12 @@ MonoBehaviour:
 
     Bryce Liebenauer
 
-    Alejandro
-    Sandoval
+    Cassandra
+
+    Christine
+    Yuan
+
+    Even Wasser
 
     Ivan Yang
 
@@ -436,26 +580,67 @@ MonoBehaviour:
 
     Jared Brown (JaredTheBro)
 
-    Kyle
-    Phillips
+    Joseph
+    White
+
+    Karen
+
+    Kyle Phillips
 
     Nathan Whitacre
 
     Neel Chatterjee
 
-    Nicole Tomaszewski
+    Nicole
+    Tomaszewski
 
-    Ray
-    Wallace
+    Noah Henson
+
+    Presto
+
+    Ray Wallace
 
     Ryan Davitt
 
+    Sam
+    Schafer
+
+    Seb
+
     Wallace Gazaway
 
+    Yifan
 
 
-    and a special thanks to
-    all playtesters'
+
+    Voice actors:
+
+
+
+    Andrew
+    Hanlon (Nikolay)
+
+    Ashley Corbin (Lt. Lawrence Allen)
+
+    Nathan Whitac
+    (Comrade Lisitsyna)
+
+    Nicole Tomaszewski (Svetlana Vyronov)
+
+    Ray Wallace
+    (The Investigator)
+
+    Ryan Davitt (Various voices)
+
+    Sam Schafer (Comrade
+    Volkov, Various voices)
+
+    Stefano Parducci (Pavel Vyronov & The Interrogator)
+
+
+
+    and
+    a special thanks to all playtesters'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -544,9 +729,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21ba2ea081b30844e9e7a0923c61de23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  length: 6500
-  stopLength: 3000
-  speed: 60
+  length: 11500
+  stopLength: 5000
+  speed: 188
 --- !u!1 &1367783832
 GameObject:
   m_ObjectHideFlags: 0

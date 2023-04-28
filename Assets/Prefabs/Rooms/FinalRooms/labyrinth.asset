@@ -16,5 +16,5 @@ MonoBehaviour:
   dimensions: {x: 64, y: 16, z: 32}
   hallways:
   - {x: 0, y: 0, z: 16}
-  - {x: 59, y: 0, z: 0}
-  - {x: 64, y: 0, z: 16}
+  - {x: 64, y: 0, z: 0}
+  - {x: 63, y: 0, z: 16}
