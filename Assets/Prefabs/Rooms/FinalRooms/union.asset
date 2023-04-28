@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef9cf795a290b744a60444fd431d559, type: 3}
   m_Name: union
   m_EditorClassIdentifier: 
-  room: {fileID: 9084929211563722778, guid: 8af1e76486de2d04198870d04db49e05, type: 3}
+  room: {fileID: 7984245374713970443, guid: beba1f0bf3f42134e8053542fcaa0386, type: 3}
   dimensions: {x: 64, y: 16, z: 32}
   hallways:
   - {x: 0, y: 0, z: 16}
