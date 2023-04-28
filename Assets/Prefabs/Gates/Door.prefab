@@ -203,9 +203,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48d87da77aabd244ab6ccc3c9a798c2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  locked: 1
   keyNeeded: 0
-  key: {fileID: 0}
-  passwordNeeded: 1
-  password: string
-  identity: -1
+  passwordGiven: 1
+  password: 

@@ -47,6 +47,11 @@ public class Movement : MonoBehaviour
         this.input = input;
     }
 
+    public Vector2 GetInput()
+    {
+        return this.input;
+    }
+
     public void SetLookInput(Vector2 lookInput)
     {
         this.lookInput = lookInput;
