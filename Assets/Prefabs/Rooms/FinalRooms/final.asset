@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   room: {fileID: 733755355895765608, guid: 334b6e9b8a97a6548813d24358c6b07f, type: 3}
   dimensions: {x: 64, y: 8, z: 64}
-  hallways: []
+  hallways:
+  - {x: 0, y: 0, z: 0}

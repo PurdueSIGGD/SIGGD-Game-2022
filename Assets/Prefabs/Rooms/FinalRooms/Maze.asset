@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bef9cf795a290b744a60444fd431d559, type: 3}
-  m_Name: small_nathan
+  m_Name: Maze
   m_EditorClassIdentifier: 
-  room: {fileID: 4974386210015341689, guid: 2009661b08234f34ebbe48c62e9fffe1, type: 3}
-  dimensions: {x: 17, y: 5, z: 16}
+  room: {fileID: 9084929211563722778, guid: 8af1e76486de2d04198870d04db49e05, type: 3}
+  dimensions: {x: 64, y: 8, z: 64}
   hallways:
-  - {x: 17, y: 1, z: 3}
-  - {x: 11, y: 1, z: 16}
+  - {x: 0, y: 0, z: 0}

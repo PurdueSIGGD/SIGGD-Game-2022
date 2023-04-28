@@ -67,7 +67,7 @@ public class RoomBudgeting : MonoBehaviour {
         toSpawn = new List<GameObject>();
 
         // Case where the room needs to spawn a key
-        if (keyRoom) {
+        if (keyRoom && key != null) {
             toSpawn.Add(key);
         }
 

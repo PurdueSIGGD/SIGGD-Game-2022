@@ -620,8 +620,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6c42de4e52f448439e0a1675b8d84b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FinalRoomCount: 1
-  TotalRoomCount: 1
+  FinalRoomCount: 2
+  TotalRoomCount: 2
   MinRoomWidth: 15
   MinRoomDepth: 15
   MaxRoomWidth: 96
@@ -640,7 +640,7 @@ MonoBehaviour:
     type: 3}
   DoDebug: 0
   FloorRooms: []
-  StartRoom: {fileID: 11400000, guid: 7fbfde37802b5ee4b8f993c078cdc309, type: 2}
+  StartRoom: {fileID: 11400000, guid: 829047f719a46ff43b5aec20c96c648f, type: 2}
   EndRoom: {fileID: 11400000, guid: 9e824bda7912e1344bba0a0294998cda, type: 2}
 --- !u!4 &1809290373
 Transform:
