@@ -13,6 +13,13 @@ public class PulseScanner : Item
 
     public override void Use()
     {
+
+        if (useSound != null)
+        {
+            Instantiate(useSound, transform.position, Quaternion.identity);
+            Debug.Log("SOUND FOUND");
+        }
+
         Debug.Log("SCAN USING");
         active_count++;
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -20,6 +27,7 @@ public class PulseScanner : Item
 
         if (active_count == 1)
         {
+            Debug.Log("SCAN: We're GOING FOR IT!!!!!");
             foreach (GameObject enemy in enemies)
             {
                 enemy.transform.GetChild(1).GetChild(1).gameObject.SetActive(true);

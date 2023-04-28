@@ -51,11 +51,12 @@ MonoBehaviour:
   itemName: Stim Boost
   type: 1
   inventorySprite: {fileID: 21300000, guid: 27c1aa28b5d3e88488942b85f031fe02, type: 3}
-  maxStackSize: 2
+  maxStackSize: 1
   currentNumCharges: 1
   isShiny: 0
   description: 
   useDuration: 8
+  useSound: {fileID: 910863468206653602, guid: bae5d892f3917384b8619cbcbd7715ff, type: 3}
   speedBoostDuration: 8
   speedBoostPercentage: 30
 --- !u!33 &6763135281201947592

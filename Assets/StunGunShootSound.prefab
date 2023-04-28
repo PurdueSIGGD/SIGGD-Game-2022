@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 910863468206653612}
   - component: {fileID: 910863468206653613}
-  - component: {fileID: -8218916498149462557}
+  - component: {fileID: 7375657518866328913}
   m_Layer: 0
-  m_Name: SightedSound
+  m_Name: StunGunShootSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 668bf55c59401a94b817c83f4dbac68c, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 26f45f21016b1c54f9d6e7a80b261095, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -129,7 +129,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-8218916498149462557
+--- !u!114 &7375657518866328913
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -138,6 +138,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 910863468206653602}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33042b7a2377ce04795d606e634789a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 163a0a4164637b24da78b6996217bb7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
