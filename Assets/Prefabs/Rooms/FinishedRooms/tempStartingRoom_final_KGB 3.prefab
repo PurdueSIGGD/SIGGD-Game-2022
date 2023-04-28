@@ -648,7 +648,7 @@ PrefabInstance:
     - target: {fileID: 3124333632994722190, guid: da61dc90bc2e169409f7e17ed032ae65,
         type: 3}
       propertyPath: useAudio
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5090515544576324914, guid: da61dc90bc2e169409f7e17ed032ae65,
         type: 3}

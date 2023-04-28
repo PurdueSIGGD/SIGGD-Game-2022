@@ -62,7 +62,6 @@ public class Player : MonoBehaviour
         if (movement.GetInput() != movementValue.Get<Vector2>())
         {
             FindObjectOfType<PasswordLogic>().ifWASDReleased();
-            Debug.Log("WASD change");
         }
         if (!lockInputs)
         {

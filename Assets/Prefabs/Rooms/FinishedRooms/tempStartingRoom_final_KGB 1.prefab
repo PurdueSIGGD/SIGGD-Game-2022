@@ -598,12 +598,12 @@ PrefabInstance:
     - target: {fileID: 2679986429069081301, guid: da61dc90bc2e169409f7e17ed032ae65,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.2
       objectReference: {fileID: 0}
     - target: {fileID: 2679986429069081301, guid: da61dc90bc2e169409f7e17ed032ae65,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2679986429069081301, guid: da61dc90bc2e169409f7e17ed032ae65,
         type: 3}
@@ -648,13 +648,18 @@ PrefabInstance:
     - target: {fileID: 3124333632994722190, guid: da61dc90bc2e169409f7e17ed032ae65,
         type: 3}
       propertyPath: useAudio
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5090515544576324914, guid: da61dc90bc2e169409f7e17ed032ae65,
         type: 3}
       propertyPath: m_Name
       value: AudioRecorder
       objectReference: {fileID: 0}
+    - target: {fileID: 7202014868844755149, guid: da61dc90bc2e169409f7e17ed032ae65,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: d10429271fda2af43bddd260cdede297, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da61dc90bc2e169409f7e17ed032ae65, type: 3}
 --- !u!4 &5076115315118580565 stripped
