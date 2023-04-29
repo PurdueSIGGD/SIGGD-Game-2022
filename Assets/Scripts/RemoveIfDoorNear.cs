@@ -11,7 +11,7 @@ public class RemoveIfDoorNear : MonoBehaviour
         {
             if (Vector3.SqrMagnitude(g.transform.position - transform.position) <= 0.85f * 0.85f)
             {
-                Destroy(gameObject);
+                Destroy(GetComponent<GatesObj>());
                 break;
             }
         }

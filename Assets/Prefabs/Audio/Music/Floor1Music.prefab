@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 910863468206653612}
   - component: {fileID: 910863468206653613}
-  - component: {fileID: -8218916498149462557}
+  - component: {fileID: 5881801705751782652}
   m_Layer: 0
   m_Name: Floor1Music
   m_TagString: Untagged
@@ -130,7 +130,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-8218916498149462557
+--- !u!114 &5881801705751782652
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,6 +139,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 910863468206653602}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33042b7a2377ce04795d606e634789a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 916e7018f2026234087a6431eebc3bcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyIndex: 5

@@ -16,14 +16,21 @@ actually finding the spawnpoints in the room and actually placing the objects th
 public class RoomBudgeting : MonoBehaviour {
 
     private List<GameObject> spawnPoints;
-    
+    private List<GameObject> enemySpawnPoints;
+
     [SerializeField]
     private GameObject[] spawnables;
+    [SerializeField]
+    private GameObject[] enemySpawnables;
 
     [SerializeField]
     private int budget = 0;
 
+    [SerializeField]
+    private int enemyBudget = 0;
+
     private List<GameObject> toSpawn;
+    private List<GameObject> enemiesToSpawn;
 
     [SerializeField]
     private GameObject key;
@@ -60,7 +67,7 @@ public class RoomBudgeting : MonoBehaviour {
         toSpawn = new List<GameObject>();
 
         // Case where the room needs to spawn a key
-        if (keyRoom) {
+        if (keyRoom && key != null) {
             toSpawn.Add(key);
         }
 
@@ -98,9 +105,88 @@ public class RoomBudgeting : MonoBehaviour {
         }
         debugText += "with " + tempBudget + " budget left over.";
         Debug.Log(debugText);
-        
+
         spawnObjects(toSpawn);     
     }
+
+    public void EnemyGo()
+    {
+        if (enemySpawnables == null || enemySpawnables.Length == 0) { return; }
+
+        int tempBudget = enemyBudget; // Used for spawning the objects because this instance will be deprecated during that, while the original instance persists
+
+        // Read in the room's spawn points
+        Transform pointObject = transform.Find("PatrolPoints");
+        PatrolPoint[] genPoints = pointObject.GetComponentsInChildren<PatrolPoint>();
+        enemySpawnPoints = new List<GameObject>();
+        for (int i = 0; i < genPoints.GetLength(0); i++)
+        {
+            enemySpawnPoints.Add(genPoints[i].gameObject);
+        }
+
+        // Find lowest budget
+        int lowestBudget = 9999;
+        for (int i = 0; i < enemySpawnables.Length; i++)
+        {
+            GameObject g = enemySpawnables[i].gameObject;
+            Attributes attributes = g.GetComponent<Attributes>();
+            if (attributes == null)
+            {
+                continue;
+            }
+            int w = attributes.weight;
+            if (w < lowestBudget)
+            {
+                lowestBudget = w;
+            }
+        }
+
+        // The objects' transforms to be allowed to spawn in the room should be added to the script's list through the serialized field in the editor.
+        enemiesToSpawn = new List<GameObject>();
+
+
+        int tempCount = 0;
+        Debug.Log("lowest: " + lowestBudget);
+        while (tempBudget >= lowestBudget)
+        {
+            // Try to spawn a random item
+            int randIndex = (int)Random.Range(0, enemySpawnables.Length);
+            GameObject g = enemySpawnables[randIndex].gameObject;
+            Attributes attributes = g.GetComponent<Attributes>();
+            if (attributes == null)
+            {
+                continue;
+            }
+            int w = attributes.weight;
+            if (tempBudget >= w)
+            {
+                enemiesToSpawn.Add(enemySpawnables[randIndex]);
+                tempBudget -= w;
+            }
+            Debug.Log("woop");
+            if (tempCount++ == 100)
+            {
+                break;
+            }
+        }
+
+        string debugText = "With a budget of " + enemyBudget + ", spawned these enemies: ";
+        foreach (GameObject t in toSpawn)
+        {
+            Attributes attributes = t.GetComponent<Attributes>();
+            int w = 0;
+            if (attributes != null)
+            {
+                w = attributes.weight;
+            }
+            debugText += t.name + " (" + w + "), ";
+        }
+        debugText += "with " + tempBudget + " budget left over.";
+        Debug.Log(debugText);
+
+        spawnEnemyObjects(enemiesToSpawn);
+    }
+
 
     /// <summary>
     /// Spawns the chosen objects at the available spawnpoints, making sure not to spawn them in the floor but instead sitting
@@ -129,6 +215,28 @@ public class RoomBudgeting : MonoBehaviour {
             objTransform.position = spawnPoints[randIndex].transform.position + Vector3.up * heightAdjustment;
             spawnPoints.RemoveAt(randIndex);
             toSpawn.RemoveAt(0);
+        }
+    }
+
+    private void spawnEnemyObjects(List<GameObject> enemiesToSpawn)
+    {
+        while (enemiesToSpawn.Count > 0)
+        {
+            if (enemySpawnPoints.Count == 0) { return; }
+            int randIndex = (int)Random.Range(0, enemySpawnPoints.Count);
+            Vector3 spawnPos = enemySpawnPoints[randIndex].transform.position;
+            Vector3 roundedPoint = new Vector3(spawnPos.x, Mathf.Round(spawnPos.y / 0.85f) * 0.85f, spawnPos.z);
+            GameObject spawnedObj = Instantiate(enemiesToSpawn[0].gameObject, roundedPoint, Quaternion.identity);
+            //Instantiate(enemiesToSpawn[0].gameObject, enemySpawnPoints[randIndex].transform.position, Quaternion.identity);
+
+            Transform objTransform = spawnedObj.transform;
+            float heightAdjustment = 0;
+                //objTransform.localScale.y * (objTransform.GetComponent<CapsuleCollider>().height / 2);
+
+            //objTransform.parent = enemySpawnPoints[randIndex].transform;
+            objTransform.position = enemySpawnPoints[randIndex].transform.position + Vector3.up * heightAdjustment;
+            enemySpawnPoints.RemoveAt(randIndex);
+            enemiesToSpawn.RemoveAt(0);
         }
     }
 

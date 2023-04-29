@@ -12,6 +12,7 @@ public class PlayerSpawnPoint : MonoBehaviour
         //can only teleport player if turn off the character controller
         CharC.enabled = false;
         playerTrans.position = transform.position + Vector3.up * 0.85f;
+        playerTrans.rotation = Quaternion.LookRotation(transform.forward, Vector3.up);
         CharC.enabled = true;
     }
 }

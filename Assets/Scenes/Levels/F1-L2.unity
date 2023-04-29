@@ -187,80 +187,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &166524420
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 910863468206653602, guid: 704692a960e0fca428e4c155522ebf5b,
-        type: 3}
-      propertyPath: m_Name
-      value: Floor1Music
-      objectReference: {fileID: 0}
-    - target: {fileID: 910863468206653612, guid: 704692a960e0fca428e4c155522ebf5b,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 910863468206653612, guid: 704692a960e0fca428e4c155522ebf5b,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 910863468206653612, guid: 704692a960e0fca428e4c155522ebf5b,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 910863468206653612, guid: 704692a960e0fca428e4c155522ebf5b,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 910863468206653612, guid: 704692a960e0fca428e4c155522ebf5b,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 910863468206653612, guid: 704692a960e0fca428e4c155522ebf5b,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 910863468206653612, guid: 704692a960e0fca428e4c155522ebf5b,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 910863468206653612, guid: 704692a960e0fca428e4c155522ebf5b,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 910863468206653612, guid: 704692a960e0fca428e4c155522ebf5b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 910863468206653612, guid: 704692a960e0fca428e4c155522ebf5b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 910863468206653612, guid: 704692a960e0fca428e4c155522ebf5b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 910863468206653613, guid: 704692a960e0fca428e4c155522ebf5b,
-        type: 3}
-      propertyPath: Loop
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 704692a960e0fca428e4c155522ebf5b, type: 3}
 --- !u!1 &499678992
 GameObject:
   m_ObjectHideFlags: 0
@@ -369,7 +295,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &769799661
 GameObject:
@@ -544,7 +470,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1468051183
 GameObject:
@@ -592,7 +518,7 @@ PrefabInstance:
     - target: {fileID: 5307289701283449466, guid: e56b7ab7e40c2b94897a63544f91dbc6,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5307289701283449466, guid: e56b7ab7e40c2b94897a63544f91dbc6,
         type: 3}
@@ -694,8 +620,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6c42de4e52f448439e0a1675b8d84b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FinalRoomCount: 9
-  TotalRoomCount: 10
+  FinalRoomCount: 4
+  TotalRoomCount: 5
   MinRoomWidth: 15
   MinRoomDepth: 15
   MaxRoomWidth: 96
@@ -714,10 +640,8 @@ MonoBehaviour:
     type: 3}
   DoDebug: 0
   FloorRooms:
-  - {fileID: 11400000, guid: 139b2601d78567d468a0c22fbb03a44f, type: 2}
-  - {fileID: 11400000, guid: 2e09efff0e0ba33499e12967c953c774, type: 2}
-  - {fileID: 11400000, guid: c995c34d77acdee4391b445173e905ee, type: 2}
-  - {fileID: 11400000, guid: 5d31f514b6d56174dadafe3916d69c4a, type: 2}
+  - {fileID: 11400000, guid: 91aa607b9e5ce354d9480e3b779ada01, type: 2}
+  - {fileID: 11400000, guid: c4591daca22425845bd35e5a6ce47b48, type: 2}
   StartRoom: {fileID: 11400000, guid: 7fbfde37802b5ee4b8f993c078cdc309, type: 2}
   EndRoom: {fileID: 11400000, guid: 9e824bda7912e1344bba0a0294998cda, type: 2}
 --- !u!4 &1809290373

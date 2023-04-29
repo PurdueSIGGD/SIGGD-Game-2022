@@ -44,6 +44,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/F3-Boss.unity
     guid: a685d4fb135b35c4abac383875248962
+  - enabled: 1
+    path: Assets/Scenes/Levels/Credits.unity
+    guid: 983da335e65a84242b5b7198a0830172
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7,
       type: 2}
