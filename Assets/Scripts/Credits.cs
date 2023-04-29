@@ -21,7 +21,7 @@ public class Credits : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rectTransform.anchoredPosition.y < stopLength)
+        if (rectTransform != null && rectTransform.anchoredPosition.y < stopLength)
         {
             rectTransform.anchoredPosition += Vector2.up * (length / speed) * Time.deltaTime;
         }

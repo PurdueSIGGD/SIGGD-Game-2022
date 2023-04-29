@@ -493,9 +493,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 439ca907b2faa8342b9ddc059019d10b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewAngle: 50
+  viewAngle: 90
   sightDistance: 27.2
-  nearDistance: 1.7
+  nearDistance: 3.4
   eyePos: {fileID: 5787582080072684923}
   layersToCheck:
     serializedVersion: 2
@@ -571,9 +571,6 @@ MonoBehaviour:
   attackTuples:
   - attack: {fileID: 11400000, guid: 89ffefd1bb8202b4992b7e07c59432d2, type: 2}
     weight: 1
-    dieOnAttack: 0
-  - attack: {fileID: 11400000, guid: 2beae50a9e343cd49a4f15a4ba0dc70b, type: 2}
-    weight: 2
     dieOnAttack: 0
 --- !u!114 &3729898378065334153
 MonoBehaviour:
